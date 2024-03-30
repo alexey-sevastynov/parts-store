@@ -1,0 +1,42 @@
+{
+  "parser": "@typescript-eslint/parser", // Using TypeScript parser for code analysis
+  "plugins": ["@typescript-eslint/eslint-plugin"], // Including TypeScript ESLint plugin
+  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"], // Extending configuration with additional rules from Next.js and TypeScript ESLint, also including Prettier rules
+  "rules": { // Configuring rules
+    "prettier/prettier": [ // Prettier rules
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": "error", // Error on detecting unused variables in TypeScript
+    "@typescript-eslint/no-explicit-any": "error", // Error on explicit use of 'any' type in TypeScript
+    "@typescript-eslint/quotes": [ // Using single quotes in TypeScript, allowing template literals without escaping
+      "error",
+      "single",
+      {
+      "avoidEscape": true,
+      "allowTemplateLiterals": true
+    }
+  ],
+  "no-trailing-space": [2, {"skipBlankLines": false}], // Disallowing trailing spaces except for blank lines
+  "no-multiple-enpty-lines": ["error", {"max":1, "maxBOF": 1}], // Maximum allowed consecutive empty lines - 1, both at the beginning and the end of the file
+  "object-curly-spacing": ["error", "always"], // Spaces inside curly braces in objects are required
+  "coma-spacing": [2, {"before": false, "after": true}], // Space after comma, but not before it
+  "arrow-spacing": ["error", {"before": false, "after": true}], // Space after arrow function, but not before it
+  "space-infix-ops": ["error",{"int32Hint": false}], // Spaces around infix operators (e.g., +, -, *, /) are not recommended
+  "space-after-keywords": "off", // Spaces after keywords are turned off
+  "keyword-spacing": [2, {"before": true, "after": true}], // Spaces before and after keywords
+  "react/jsx-indent": [2, 2, {"indentLogicalExpressions": true}], // JSX indentation - 2 spaces, also considering logical expressions indentation
+  "arrow-body-style": ["error", "as-needed"], // Arrow function body is wrapped in curly braces only when necessary
+  "padded-blocks": ["error", "never"], // Extra blank lines in code blocks are not allowed
+  "semi": ["error", "never"], // Semicolons at the end of statements are not allowed
+  "max-len": ["error", {"code": 120}], // Maximum line length is 120 characters
+  "indent": ["error", 2], // Using 2-space indentation
+  "react/self-closing-comp": ["error", { // JSX components should be self-closing
+    "component": true,
+    "html": true
+  }],
+  "react/jsx-tag-spacing": ["error", {"beforeSelfClossing": "always"}] // Space before self-closing JSX tags
+  }
+}
