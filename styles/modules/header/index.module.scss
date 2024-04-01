@@ -7,6 +7,15 @@
   align-items: center;
 }
 
+@mixin animation-hover-btn {
+  @include btn-border-and-padding;
+  @include display-flex;
+
+  &:hover {
+    background-color: $grafit;
+  }
+}
+
 .header {
   position: relative;
   height: $height-header;
@@ -16,12 +25,7 @@
 
   &__burger {
     &_btn {
-      @include btn-border-and-padding;
-      @include display-flex;
-
-      &:hover {
-        background-color: $grafit;
-      }
+      @include animation-hover-btn;
     }
   }
 
@@ -29,31 +33,21 @@
     position: absolute;
     top: 6px;
     left: 60px;
-
-    &_img {
-      width: auto;
-      height: auto;
-    }
   }
 
   &__inventory {
-    padding-left: 210px;
+    padding-left: 200px;
     height: 100%;
 
     @include display-flex;
 
-    gap: 35px;
+    gap: 25px;
 
     &_category,
     &_auto {
       height: max-content;
 
-      @include btn-border-and-padding;
-      @include btn-hover(background-color);
-
-      &:hover {
-        background-color: $grafit;
-      }
+      @include animation-hover-btn;
     }
 
     &_sale {
@@ -62,10 +56,13 @@
 
       width: 113px;
 
-      color: $white-font;
       display: flex;
       justify-content: center;
       align-items: center;
+
+      & a {
+        color: $white-font;
+      }
     }
   }
 }

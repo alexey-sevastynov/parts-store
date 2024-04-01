@@ -1,11 +1,10 @@
 import Styles from '@/styles/modules/header/index.module.scss';
 
-import Image from 'next/image';
-import Link from 'next/link';
-
 import { RxHamburgerMenu } from 'react-icons/rx';
 
-import LinkIconDescription from '@/components/elements/LinkIconDescription';
+import Logotype from '@/components/elements/Logotype';
+
+import Inventory from './Inventory';
 
 const Header = () => {
   return (
@@ -17,39 +16,10 @@ const Header = () => {
       </div>
 
       <div className={Styles.header__logo}>
-        <Image
-          className={Styles.header__logo_img}
-          src={'/img/logo.svg'}
-          alt='logo'
-          width={100}
-          height={91}
-          priority
-        />
+        <Logotype className={Styles.header__logo_img} />
       </div>
 
-      <div className={Styles.header__inventory}>
-        <LinkIconDescription
-          className={Styles.header__inventory_category}
-          imageName='catalog'
-          href={'/catalog'}
-          color='light'
-        >
-          Catalog
-        </LinkIconDescription>
-
-        <LinkIconDescription
-          className={Styles.header__inventory_auto}
-          imageName='auto'
-          href={'/auto'}
-          color='light'
-        >
-          Auto
-        </LinkIconDescription>
-
-        <Link className={Styles.header__inventory_sale} href={'/sale'}>
-          Sale
-        </Link>
-      </div>
+      <Inventory />
     </header>
   );
 };
