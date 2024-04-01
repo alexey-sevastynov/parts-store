@@ -11,6 +11,8 @@
   @include btn-border-and-padding;
   @include display-flex;
 
+  @include btn-hover(background, ease-in);
+
   &:hover {
     background-color: $grafit;
   }
@@ -44,6 +46,13 @@
     gap: 25px;
 
     &_category,
+    &_auto,
+    &_sale {
+      cursor: pointer;
+      @include forbid-select-text;
+    }
+
+    &_category,
     &_auto {
       height: max-content;
 
@@ -59,6 +68,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      @include btn-hover(background, ease-in);
+
+      &:hover {
+        background-color: $red-hover;
+      }
+
+      &:active {
+        background-color: $red-active;
+      }
 
       & a {
         color: $white-font;

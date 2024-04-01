@@ -2,10 +2,25 @@
 
 // header module
 @mixin btn-hover($transition-property, $transition-timing-function: ease) {
-  transition: $transition-property 0.2s $transition-timing-function;
+  transition: $transition-property 0.3s $transition-timing-function;
 }
 
 @mixin btn-border-and-padding {
   padding: 10px;
   border-radius: 4px;
+}
+
+@mixin forbid-select-text {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+  -khtml-user-select: none;
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently not supported by any browser */
 }
