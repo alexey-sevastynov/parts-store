@@ -1,0 +1,71 @@
+@import '../../../app/globalStyles/variables/colors.scss';
+@import '../../../app/globalStyles/variables/blocks.scss';
+@import '../../../app/globalStyles/base/mixins.scss';
+
+@mixin display-flex {
+  display: flex;
+  align-items: center;
+}
+
+.header {
+  position: relative;
+  height: $height-header;
+  width: 100%;
+
+  @include display-flex;
+
+  &__burger {
+    &_btn {
+      @include btn-border-and-padding;
+      @include display-flex;
+
+      &:hover {
+        background-color: $grafit;
+      }
+    }
+  }
+
+  &__logo {
+    position: absolute;
+    top: 6px;
+    left: 60px;
+
+    &_img {
+      width: auto;
+      height: auto;
+    }
+  }
+
+  &__inventory {
+    padding-left: 210px;
+    height: 100%;
+
+    @include display-flex;
+
+    gap: 35px;
+
+    &_category,
+    &_auto {
+      height: max-content;
+
+      @include btn-border-and-padding;
+      @include btn-hover(background-color);
+
+      &:hover {
+        background-color: $grafit;
+      }
+    }
+
+    &_sale {
+      background-color: $red;
+      height: 100%;
+
+      width: 113px;
+
+      color: $white-font;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

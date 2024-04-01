@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { Montserrat } from '@/utils/customFonts';
 
 import './globalStyles/global.scss';
+import PagesLayout from '@/components/layouts/PagesLayout';
 
 export const metadata: Metadata = {
   title: 'Parts Wave',
@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${Montserrat.variable}`}>{children}</body>
+      <PagesLayout>{children}</PagesLayout>
     </html>
   );
 }

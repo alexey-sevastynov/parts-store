@@ -5,3 +5,17 @@
 // variables
 @import './variables/fonts.scss';
 @import './variables/colors.scss';
+@import './variables/breakpoints.scss';
+@import './variables/blocks.scss';
+
+.container {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header-wrapper {
+  width: 100%;
+  height: $height-header;
+  background-color: $black;
+}

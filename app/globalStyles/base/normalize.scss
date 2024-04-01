@@ -28,6 +28,14 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+svg {
+  color: $white-icon;
+}
+
+a {
+  color: $black-font;
+}
+
 main {
   display: block;
 }

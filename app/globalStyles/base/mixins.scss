@@ -1,0 +1,9 @@
+// header module
+@mixin btn-hover($transition-property, $transition-timing-function: ease) {
+  transition: $transition-property 0.2s $transition-timing-function;
+}
+
+@mixin btn-border-and-padding {
+  padding: 10px;
+  border-radius: 4px;
+}
