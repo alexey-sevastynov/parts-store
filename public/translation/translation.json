@@ -1,0 +1,25 @@
+{
+  "en": {
+    "header": {
+      "catalog": "Catalog",
+      "auto": "Auto",
+      "sale": "Sale"
+    }
+  },
+
+  "ua": {
+    "header": {
+      "catalog": "Каталог",
+      "auto": "Авто",
+      "sale": "Акції"
+    }
+  },
+
+  "ru": {
+    "header": {
+      "catalog": "Каталог",
+      "auto": "Авто",
+      "sale": "Акции"
+    }
+  }
+}
