@@ -24,6 +24,8 @@
     &_btn {
       @include animation-hover-btn;
     }
+
+    flex-grow: 0;
   }
 
   &__logo {
@@ -34,6 +36,7 @@
 
   &__inventory {
     height: 100%;
+    flex-grow: 0;
     &_list {
       padding-left: 200px;
       height: 100%;
@@ -77,6 +80,26 @@
 
         & a {
           color: $white-font;
+        }
+      }
+    }
+  }
+
+  & .headerIconPanel {
+    display: flex;
+    flex-grow: 1;
+    gap: 36px;
+
+    justify-content: end;
+
+    &__navigate {
+      &_list {
+        display: flex;
+        gap: 36px;
+
+        & li {
+          cursor: pointer;
+          @include animation-hover-btn;
         }
       }
     }
