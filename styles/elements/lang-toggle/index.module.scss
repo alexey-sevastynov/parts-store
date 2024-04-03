@@ -56,6 +56,10 @@
       background-repeat: no-repeat;
       background-position: center center;
     }
+
+    & label {
+      cursor: pointer;
+    }
   }
 
   input[type='radio'] {

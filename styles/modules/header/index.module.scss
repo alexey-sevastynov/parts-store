@@ -33,48 +33,51 @@
   }
 
   &__inventory {
-    padding-left: 200px;
     height: 100%;
-
-    @include display-flex;
-
-    gap: 25px;
-
-    &_category,
-    &_auto,
-    &_sale {
-      cursor: pointer;
-      @include forbid-select-text;
-    }
-
-    &_category,
-    &_auto {
-      height: max-content;
-
-      @include animation-hover-btn;
-    }
-
-    &_sale {
-      background-color: $red;
+    &_list {
+      padding-left: 200px;
       height: 100%;
 
-      width: 113px;
+      @include display-flex;
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      @include btn-hover(background, ease-in);
+      gap: 25px;
 
-      &:hover {
-        background-color: $red-hover;
+      &_category,
+      &_auto,
+      &_sale {
+        cursor: pointer;
+        @include forbid-select-text;
       }
 
-      &:active {
-        background-color: $red-active;
+      &_category,
+      &_auto {
+        height: max-content;
+
+        @include animation-hover-btn;
       }
 
-      & a {
-        color: $white-font;
+      &_sale {
+        background-color: $red;
+        height: 100%;
+
+        width: 113px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include btn-hover(background, ease-in);
+
+        &:hover {
+          background-color: $red-hover;
+        }
+
+        &:active {
+          background-color: $red-active;
+        }
+
+        & a {
+          color: $white-font;
+        }
       }
     }
   }

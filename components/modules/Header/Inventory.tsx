@@ -15,31 +15,33 @@ const Inventory = () => {
   const [isActiveSaleLink, setIsActiveSaleLink] = React.useState<boolean>(true);
 
   return (
-    <ul className={Styles.header__inventory}>
-      <li className={Styles.header__inventory_category}>
-        <LinkIconDescription
-          imageName='catalog'
-          href={'/catalog'}
-          color='light'
-        >
-          {translations[lang].header.catalog}
-        </LinkIconDescription>
-      </li>
-
-      {isActiveAutoLink && (
-        <li className={Styles.header__inventory_auto}>
-          <LinkIconDescription imageName='auto' href={'/auto'} color='light'>
-            {translations[lang].header.auto}
+    <nav className={Styles.header__inventory}>
+      <ul className={Styles.header__inventory_list}>
+        <li className={Styles.header__inventory_list_category}>
+          <LinkIconDescription
+            imageName='catalog'
+            href={'/catalog'}
+            color='light'
+          >
+            {translations[lang].header.catalog}
           </LinkIconDescription>
         </li>
-      )}
 
-      {isActiveSaleLink && (
-        <li className={Styles.header__inventory_sale}>
-          <Link href={'/sale'}> {translations[lang].header.sale}</Link>
-        </li>
-      )}
-    </ul>
+        {isActiveAutoLink && (
+          <li className={Styles.header__inventory_list_auto}>
+            <LinkIconDescription imageName='auto' href={'/auto'} color='light'>
+              {translations[lang].header.auto}
+            </LinkIconDescription>
+          </li>
+        )}
+
+        {isActiveSaleLink && (
+          <li className={Styles.header__inventory_list_sale}>
+            <Link href={'/sale'}> {translations[lang].header.sale}</Link>
+          </li>
+        )}
+      </ul>
+    </nav>
   );
 };
 
