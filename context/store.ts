@@ -13,9 +13,11 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { modalsReducer } from './features/modals/modals';
 
 const rootReducer = combineReducers({
   translation: translationReducer,
+  modals: modalsReducer,
 });
 
 export const persistConfig = {

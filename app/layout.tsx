@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 
 import './globalStyles/global.scss';
 import PagesLayout from '@/components/layouts/PagesLayout';
+import Providers from '@/components/layouts/Providers';
+import { Montserrat } from '@/utils/customFonts';
 
 export const metadata: Metadata = {
   title: 'Parts Wave',
@@ -13,5 +15,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <PagesLayout>{children}</PagesLayout>;
+  return (
+    <html lang='ua'>
+      <body className={`${Montserrat.variable}`}>
+        <Providers>
+          <PagesLayout>{children}</PagesLayout>
+        </Providers>
+      </body>
+    </html>
+  );
 }

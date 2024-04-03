@@ -1,20 +1,22 @@
-import { Montserrat } from '@/utils/customFonts';
+'use client';
 
+import { useAppSelector } from '@/context/hooks';
 import Layout from './Layout';
-import Providers from './Providers';
 
 const PagesLayout = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <html lang='ua'>
-      <body className={`${Montserrat.variable}`}>
-        <Providers>
-          <Layout>{children}</Layout>
+  const isOpenDropDownLang = useAppSelector(
+    (state) => state.modals.isOpenDropDownLang
+  );
 
-          {/* background, when the language drop-down window is open */}
-          <div className='lang-popup-overlay overlay-active' />
-        </Providers>
-      </body>
-    </html>
+  return (
+    <>
+      <Layout>{children}</Layout>
+
+      {/* background, when the language drop-down window is open */}
+      <div
+        className={`lang-popup-overlay ${isOpenDropDownLang ? 'overlay-active' : ''}`}
+      />
+    </>
   );
 };
 
