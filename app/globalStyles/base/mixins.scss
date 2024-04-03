@@ -24,3 +24,8 @@
   user-select: none;
   /* Non-prefixed version, currently not supported by any browser */
 }
+
+@mixin display-flex {
+  display: flex;
+  align-items: center;
+}

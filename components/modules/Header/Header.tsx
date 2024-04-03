@@ -5,6 +5,7 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 import Logotype from '@/components/elements/Logotype';
 
 import Inventory from './Inventory';
+import HeaderIconPanel from './HeaderIconPanel';
 
 const Header = () => {
   return (
@@ -14,12 +15,11 @@ const Header = () => {
           <RxHamburgerMenu className={Styles.header__logo_btn_icon} size={24} />
         </button>
       </div>
-
       <div className={Styles.header__logo}>
         <Logotype className={Styles.header__logo_img} />
       </div>
-
       <Inventory />
+      <HeaderIconPanel />
     </header>
   );
 };

@@ -1,25 +1,43 @@
 {
   "en": {
+    "common": {
+      "ua": "Ukraine",
+      "en": "English",
+      "ru": "Rusian"
+    },
     "header": {
       "catalog": "Catalog",
       "auto": "Auto",
-      "sale": "Sale"
+      "sale": "Sale",
+      "changeLanguage": "Change language"
     }
   },
 
   "ua": {
+    "common": {
+      "ua": "Українська",
+      "en": "Англійська",
+      "ru": "Російська"
+    },
     "header": {
       "catalog": "Каталог",
       "auto": "Авто",
-      "sale": "Акції"
+      "sale": "Акції",
+      "changeLanguage": "Змінити мову"
     }
   },
 
   "ru": {
+    "common": {
+      "ua": "Украинский",
+      "en": "Английский",
+      "ru": "Русский"
+    },
     "header": {
       "catalog": "Каталог",
       "auto": "Авто",
-      "sale": "Акции"
+      "sale": "Акции",
+      "changeLanguage": "Изменить язык"
     }
   }
 }

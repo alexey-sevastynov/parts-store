@@ -3,3 +3,5 @@ export enum AllowedLangs {
   ru = 'ru',
   ua = 'ua',
 }
+
+export const defaultLang = AllowedLangs.ua;

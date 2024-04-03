@@ -1,0 +1,93 @@
+.langToggle {
+  position: relative;
+  @include display-flex;
+  gap: 7px;
+
+  &__select {
+    cursor: pointer;
+
+    @include display-flex;
+    gap: 5px;
+
+    &_text {
+      color: $white-font;
+    }
+  }
+
+  &__popup {
+    box-sizing: border-box;
+    position: absolute;
+    width: 190px;
+    height: 110px;
+    border-radius: $border-radius-popup;
+
+    background-color: $white;
+
+    top: $top-popup-header;
+    right: $right-popup-header;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    padding: 12px;
+
+    &_title {
+      font-size: $font-m;
+      font-weight: $weight-medium;
+    }
+
+    &_close {
+      position: absolute;
+      right: 9px;
+      top: 9px;
+
+      cursor: pointer;
+    }
+
+    &_arrow {
+      position: absolute;
+      top: -8.4px;
+      right: 36.4px;
+      width: 12px;
+      height: 10px;
+      background-image: url(/img/arrow-up-popup.svg);
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+  }
+
+  input[type='radio'] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid $grafit;
+    outline: none;
+    cursor: pointer;
+    margin-right: 8px;
+  }
+  input[type='radio']:checked {
+    position: relative;
+  }
+
+  input[type='radio']:checked::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    background-color: $orange;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 100%;
+    transition: background-color 0.9s ease;
+  }
+
+  label {
+    font-size: $font-m;
+  }
+}

@@ -2,11 +2,6 @@
 @import '../../../app/globalStyles/variables/blocks.scss';
 @import '../../../app/globalStyles/base/mixins.scss';
 
-@mixin display-flex {
-  display: flex;
-  align-items: center;
-}
-
 @mixin animation-hover-btn {
   @include btn-border-and-padding;
   @include display-flex;

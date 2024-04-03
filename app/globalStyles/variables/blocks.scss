@@ -1,3 +1,7 @@
 // Header module
 
 $height-header: 80px;
+$top-popup-header: calc($height-header - 20px);
+$right-popup-header: -40px;
+
+$border-radius-popup: 7px;

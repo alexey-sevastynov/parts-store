@@ -5,11 +5,13 @@ import Providers from './Providers';
 
 const PagesLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang='en'>
+    <html lang='ua'>
       <body className={`${Montserrat.variable}`}>
         <Providers>
           <Layout>{children}</Layout>
-          {/* modal windows here */}
+
+          {/* background, when the language drop-down window is open */}
+          <div className='lang-popup-overlay overlay-active' />
         </Providers>
       </body>
     </html>

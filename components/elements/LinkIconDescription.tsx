@@ -1,4 +1,4 @@
-import Styles from '@/styles/elements/link-icon-description/index.module.scss';
+import Styles from '@/styles/elements/index.module.scss';
 
 import Link from 'next/link';
 import Image from 'next/image';

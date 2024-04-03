@@ -1,0 +1,12 @@
+//variable style
+@import '../../app/globalStyles/variables/colors.scss';
+@import '../../app/globalStyles/variables/breakpoints.scss';
+@import '../../app/globalStyles/variables/blocks.scss';
+@import '../../app/globalStyles/variables/fonts.scss';
+
+//base style
+@import '../../app/globalStyles/base/mixins.scss';
+
+//element components
+@import '../elements/lang-toggle/index.module.scss';
+@import '../elements/link-icon-description/index.module.scss';
