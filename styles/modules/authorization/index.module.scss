@@ -1,0 +1,176 @@
+@import '../../../app/globalStyles/variables/colors.scss';
+@import '../../../app/globalStyles/variables/blocks.scss';
+@import '../../../app/globalStyles/base/mixins.scss';
+@import '../../../app/globalStyles/variables/fonts.scss';
+
+$width-column: 267px;
+$height-input: 40px;
+$padding-input: 0px 5px;
+
+$border-radius-input: 7px;
+
+@mixin input {
+  font-size: $font-l;
+  width: 100%;
+  height: $height-input;
+
+  padding: $padding-input;
+  border-radius: $border-radius-input;
+  border-color: $grey;
+
+  &:focus {
+    outline: none;
+    border: 1px solid orange;
+  }
+}
+
+.authorization {
+  min-width: 600px;
+  & .signUp {
+    &__head {
+      @include display-flex;
+
+      justify-content: space-between;
+
+      border-bottom: 1px solid $grey;
+      padding-bottom: 10px;
+
+      &_title {
+        font-size: $font-m;
+      }
+
+      &_close {
+        @include display-flex;
+      }
+    }
+
+    &__main {
+      position: relative;
+      margin-top: 10px;
+
+      display: flex;
+      justify-content: space-between;
+      &_left,
+      &_right {
+        max-width: $width-column;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      &_left {
+        &_link {
+          color: $orange;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        & .firstName,
+        .lastName,
+        .phone,
+        .email,
+        .password {
+          display: flex;
+          flex-direction: column;
+
+          &__label {
+            font-size: $font-m;
+            padding-bottom: 10px;
+          }
+
+          &__input {
+            @include input;
+          }
+
+          & .password {
+            &__input {
+              padding: 0;
+              display: flex;
+              justify-content: space-between;
+
+              align-items: start;
+              &_field {
+                @include input;
+                width: 229px;
+              }
+              &_button {
+                &_visible {
+                  margin-top: 11px;
+                  &:hover {
+                    color: $orange;
+                  }
+                }
+
+                &_hide {
+                  margin-top: 7px;
+                }
+              }
+            }
+          }
+
+          &__error {
+            padding-top: 5px;
+            font-size: $font-s;
+            color: $red;
+          }
+        }
+      }
+
+      &_middle {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+
+        height: 100%;
+
+        &_line {
+          width: 1px;
+          height: 100%;
+          background-color: $grey;
+        }
+
+        &_text {
+          font-size: $font-m;
+          color: $black-font;
+        }
+      }
+      &_right {
+        width: 100%;
+
+        &_title {
+          font-size: $font-m;
+          color: $black-font;
+          text-align: center;
+        }
+
+        & .buttonSocialFusion {
+          width: 100%;
+
+          height: $height-input;
+
+          padding: $padding-input;
+          border-radius: $border-radius-input;
+          border: 1px solid $grey;
+          border-color: $grey;
+
+          @include display-flex;
+          justify-content: center;
+          gap: 10px;
+
+          @include btn-hover(background, ease-in);
+
+          &:hover {
+            background-color: $grey;
+          }
+        }
+      }
+    }
+  }
+}

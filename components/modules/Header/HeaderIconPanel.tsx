@@ -7,6 +7,7 @@ import { BiSolidCarGarage } from 'react-icons/bi';
 import { MdFavorite } from 'react-icons/md';
 import { PiShoppingCartSimpleFill } from 'react-icons/pi';
 import { FaUserLarge } from 'react-icons/fa6';
+import DropDownAuth from './DropDownAuth';
 
 const HeaderIconPanel = () => {
   const sizeIcon = 25;
@@ -30,10 +31,12 @@ const HeaderIconPanel = () => {
               <PiShoppingCartSimpleFill size={sizeIcon} />
             </Link>
           </li>
-          <li>
+          <li className={Styles.headerIconPanel__navigate_list_auth}>
             <Link href='/auth'>
               <FaUserLarge size={sizeIcon} />
             </Link>
+
+            <DropDownAuth />
           </li>
         </ul>
       </nav>

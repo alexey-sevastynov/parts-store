@@ -1,7 +1,10 @@
 // Header module
 
 $height-header: 80px;
-$top-popup-header: calc($height-header - 20px);
-$right-popup-header: -40px;
 
-$border-radius-popup: 7px;
+$top-drop-down-language: $height-header;
+$right-drop-down-language: -40px;
+$right-drop-down-icon-link: -21px;
+
+$border-radius-drop-down: 7px;
+$padding-drop-down: 10px;

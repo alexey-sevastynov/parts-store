@@ -10,6 +10,38 @@
       "auto": "Auto",
       "sale": "Sale",
       "changeLanguage": "Change language"
+    },
+    "authorization": {
+      "sign_up": "Sign Up",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "phone_number": "Phone number",
+      "email": "Email",
+      "make_password": "Make up a password",
+
+      "agree": "By registering, you agree to the terms and conditions",
+      "privacy_policy": "provisions on the processing and protection of personal data",
+      "and": "and",
+      "user_agreement": "user agreement",
+
+      "check_in": "Check In",
+      "registered": "I'm already registered",
+
+      "or": "or",
+      "log_in_as_user": "Log in as a user"
+    },
+    "validation": {
+      "invalid_value": "Invalid value!",
+      "requiredFirstName": "Enter your first name!",
+      "requiredLastName": "Enter your last name!",
+      "invalid_phone": "Invalid phone!",
+      "required_email": "Enter your email!",
+      "invalid_email": "Invalid email!",
+      "min_2": "Min 2 characters!",
+      "max_15": "Max 15 characters!",
+      "required_password": "Enter your password!",
+      "min_4": "Min 4 characters!",
+      "max_20": "Max 20 characters!"
     }
   },
 
@@ -24,6 +56,38 @@
       "auto": "Авто",
       "sale": "Акції",
       "changeLanguage": "Змінити мову"
+    },
+    "authorization": {
+      "sign_up": "Зареєструватися",
+      "first_name": "Ім'я",
+      "last_name": "Прізвище",
+      "phone_number": "Номер телефону",
+      "email": "Ел. пошта",
+      "make_password": "Придумайте пароль",
+
+      "agree": "Реєструючись, ви погоджуєтеся з умовами",
+      "privacy_policy": "положення про обробку і захист персональних даних",
+      "and": "та",
+      "user_agreement": "угодою користувача",
+
+      "check_in": "Зареєструватися",
+      "registered": "Я вже зареєструваний",
+
+      "or": "або",
+      "log_in_as_user": "Увійдіть як користувач"
+    },
+    "validation": {
+      "invalid_value": "Невірне значення!",
+      "requiredFirstName": "Введіть своє ім'я!",
+      "requiredLastName": "Введіть своє прізвище!",
+      "invalid_phone": "Неправильний телефон!",
+      "required_email": "Введіть свою електронну адресу!",
+      "invalid_email": "Неправильна адреса електронної пошти!",
+      "min_2": "Мінімум 2 символи!",
+      "max_15": "Не більше 15 символів!",
+      "required_password": "Введіть свій пароль!",
+      "min_4": "Мінімум 4 символи!",
+      "max_20": "Не більше 20 символів!"
     }
   },
 
@@ -38,6 +102,38 @@
       "auto": "Авто",
       "sale": "Акции",
       "changeLanguage": "Изменить язык"
+    },
+    "authorization": {
+      "sign_up": "Зарегистрироваться",
+      "first_name": "Имя",
+      "last_name": "Фамилия",
+      "phone_number": "Номер телефону",
+      "email": "Эл. почта",
+      "make_password": "Придумайте пароль",
+
+      "agree": "Регистрируясь, вы соглашаетесь с условиями",
+      "privacy_policy": "положение об обработке и защите персональных данных",
+      "and": "и",
+      "user_agreement": "пользовательским соглашением",
+
+      "check_in": "Зарегистрироваться",
+      "registered": "Я уже зарегистрирован",
+
+      "or": "или",
+      "log_in_as_user": "Войдите как пользователь"
+    },
+    "validation": {
+      "invalid_value": "Неверное значение!",
+      "requiredFirstName": "Введите своё имя!",
+      "requiredLastName": "Введите свою фамилию!",
+      "invalid_phone": "Неправильный телефон!",
+      "required_email": "Введите свой адрес электронной почты!",
+      "invalid_email": "Неправильный адрес электронной почты!",
+      "min_2": "Минимум 2 символа!",
+      "max_15": "Не более 15 символов!",
+      "required_password": "Введите свой пароль!",
+      "min_4": "Минимум 4 символа!",
+      "max_20": "Не более 20 символов!"
     }
   }
 }

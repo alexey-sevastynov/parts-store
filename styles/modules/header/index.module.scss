@@ -98,10 +98,35 @@
         gap: 36px;
 
         & li {
-          cursor: pointer;
           @include animation-hover-btn;
         }
+
+        &_auth {
+          position: relative;
+        }
       }
+    }
+  }
+
+  & .dropDownAuth {
+    padding: $padding-drop-down;
+    position: absolute;
+
+    box-sizing: border-box;
+    position: absolute;
+    width: max-content;
+    height: max-content;
+    border-radius: $border-radius-drop-down;
+
+    background-color: $white;
+
+    top: $top-drop-down-language;
+    right: $right-drop-down-icon-link;
+
+    z-index: 10;
+
+    &__arrow {
+      @include arrow-background-drop-down;
     }
   }
 }

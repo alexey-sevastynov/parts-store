@@ -14,3 +14,5 @@ export interface ILgotypeProps extends Omit<ImageProps, 'src' | 'alt'> {
   src?: string;
   alt?: string;
 }
+
+export type ParagraphSize = 'xl' | 'lg' | 'md' | 'sm';

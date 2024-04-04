@@ -16,6 +16,11 @@ const PagesLayout = ({ children }: { children: React.ReactNode }) => {
       <div
         className={`lang-popup-overlay ${isOpenDropDownLang ? 'overlay-active' : ''}`}
       />
+
+      {/* background, when the authorization drop-down window is open */}
+      <div
+        className={`authorization-popup-overlay ${true ? 'overlay-active' : ''}`}
+      />
     </>
   );
 };

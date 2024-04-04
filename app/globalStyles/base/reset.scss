@@ -136,3 +136,10 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+input {
+  border: 1px solid;
+  box-shadow: none;
+
+  box-sizing: border-box;
+}
