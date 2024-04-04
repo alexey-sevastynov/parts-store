@@ -6,8 +6,8 @@ import SignIn from './SignIn';
 const Authorization = () => {
   return (
     <section className={Styles.authorization}>
-      <SignUp />
-      {/* <SignIn /> */}
+      {/* <SignUp /> */}
+      <SignIn />
     </section>
   );
 };

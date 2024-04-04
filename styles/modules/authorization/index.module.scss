@@ -26,7 +26,8 @@ $border-radius-input: 7px;
 
 .authorization {
   min-width: 600px;
-  & .signUp {
+  & .signUp,
+  .signIn {
     &__head {
       @include display-flex;
 

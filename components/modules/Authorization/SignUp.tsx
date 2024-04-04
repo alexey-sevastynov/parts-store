@@ -79,7 +79,7 @@ const SignUp = () => {
               {translations[lang].authorization.check_in}
             </Button>
 
-            <button className='btn-md-transparent'>
+            <button className='btn-md-transparent' type='button'>
               {translations[lang].authorization.registered}
             </button>
           </div>
