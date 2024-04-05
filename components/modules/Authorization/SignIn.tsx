@@ -10,11 +10,18 @@ import { IInputs } from '@/types/authorization';
 
 import { Button } from '@/components/elements/Button';
 
+import {
+  closeDropDownAuth,
+  openWindowSignUp,
+} from '@/context/features/modals/modals';
+
 import InputEmail from './InputEmail';
 import InputPassword from './InputPassword';
 import ButtonSocialFusion from './ButtonSocialFusion';
+import { useAppDispatch } from '@/context/hooks';
 
 const SignIn = () => {
+  const dispatch = useAppDispatch();
   const { lang, translations } = useLang();
 
   const {
@@ -39,7 +46,11 @@ const SignIn = () => {
         <h2 className={Styles.signIn__head_title}>
           {translations[lang].authorization.sign_in}
         </h2>
-        <button className={Styles.signIn__head_close} type='button'>
+        <button
+          className={Styles.signIn__head_close}
+          type='button'
+          onClick={() => dispatch(closeDropDownAuth())}
+        >
           <IoMdClose color={COLORS.blackIcon} />
         </button>
       </div>
@@ -55,7 +66,11 @@ const SignIn = () => {
               {translations[lang].authorization.sign_in}
             </Button>
 
-            <button className='btn-md-transparent' type='button'>
+            <button
+              className='btn-md-transparent'
+              type='button'
+              onClick={() => dispatch(openWindowSignUp())}
+            >
               {translations[lang].authorization.sign_up}
             </button>
           </div>

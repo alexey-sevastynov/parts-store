@@ -9,6 +9,13 @@ import { COLORS } from '@/constants/colors';
 import { IoMdClose } from 'react-icons/io';
 import { IInputs } from '@/types/authorization';
 
+import { useAppDispatch } from '@/context/hooks';
+
+import {
+  closeDropDownAuth,
+  openWindowSignIn,
+} from '@/context/features/modals/modals';
+
 import InputFirstName from './InputFirstName';
 import InputLastName from './InputLastName';
 import InputPhone from './InputPhone';
@@ -19,6 +26,8 @@ import { Button } from '@/components/elements/Button';
 import ButtonSocialFusion from './ButtonSocialFusion';
 
 const SignUp = () => {
+  const dispatch = useAppDispatch();
+
   const { lang, translations } = useLang();
 
   const {
@@ -41,7 +50,11 @@ const SignUp = () => {
         <h2 className={Styles.signUp__head_title}>
           {translations[lang].authorization.sign_up}
         </h2>
-        <button className={Styles.signUp__head_close} type='button'>
+        <button
+          className={Styles.signUp__head_close}
+          type='button'
+          onClick={() => dispatch(closeDropDownAuth())}
+        >
           <IoMdClose color={COLORS.blackIcon} />
         </button>
       </div>
@@ -79,7 +92,11 @@ const SignUp = () => {
               {translations[lang].authorization.check_in}
             </Button>
 
-            <button className='btn-md-transparent' type='button'>
+            <button
+              className='btn-md-transparent'
+              type='button'
+              onClick={() => dispatch(openWindowSignIn())}
+            >
               {translations[lang].authorization.registered}
             </button>
           </div>

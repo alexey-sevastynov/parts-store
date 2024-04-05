@@ -54,6 +54,7 @@ $border-radius-input: 7px;
       &_left,
       &_right {
         max-width: $width-column;
+        width: 100%;
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -143,8 +144,6 @@ $border-radius-input: 7px;
         }
       }
       &_right {
-        width: 100%;
-
         &_title {
           font-size: $font-m;
           color: $black-font;

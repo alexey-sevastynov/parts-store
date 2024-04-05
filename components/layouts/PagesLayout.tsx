@@ -7,6 +7,9 @@ const PagesLayout = ({ children }: { children: React.ReactNode }) => {
   const isOpenDropDownLang = useAppSelector(
     (state) => state.modals.isOpenDropDownLang
   );
+  const isOpenDropDownAuth = useAppSelector(
+    (state) => state.modals.isOpenDropDownAuth.isOpen
+  );
 
   return (
     <>
@@ -19,7 +22,7 @@ const PagesLayout = ({ children }: { children: React.ReactNode }) => {
 
       {/* background, when the authorization drop-down window is open */}
       <div
-        className={`authorization-popup-overlay ${true ? 'overlay-active' : ''}`}
+        className={`authorization-popup-overlay ${isOpenDropDownAuth ? 'overlay-active' : ''}`}
       />
     </>
   );
