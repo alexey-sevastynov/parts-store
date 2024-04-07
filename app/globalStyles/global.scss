@@ -70,6 +70,10 @@
 // ________________Button
 .btn-md,
 .btn-md-transparent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   font-size: $font-l;
   font-weight: $weight-bold;
 
@@ -90,6 +94,10 @@
 
   &:active {
     background-color: $green-active;
+  }
+
+  &:disabled {
+    cursor: default;
   }
 }
 

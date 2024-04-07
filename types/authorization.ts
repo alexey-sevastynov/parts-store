@@ -19,3 +19,5 @@ export interface IButtonProps
   className?: string;
   nameIcon: string;
 }
+
+export type StatusType = 'loading' | 'success' | 'error' | 'idle' | null;

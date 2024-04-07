@@ -1,9 +1,7 @@
 'use client';
 
-import { AllowedLangs } from '@/constants/lang';
+import { AllowedLangs, defaultLang } from '@/constants/lang';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-
-const defaultLang = AllowedLangs.ua;
 
 // Function to get initial language from local storage
 const getInitialLang = () => {

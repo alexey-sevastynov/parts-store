@@ -1,6 +1,7 @@
 import Styles from '@/styles/modules/authorization/index.module.scss';
 
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 import { IoMdClose } from 'react-icons/io';
 import { COLORS } from '@/constants/colors';
@@ -19,10 +20,23 @@ import InputEmail from './InputEmail';
 import InputPassword from './InputPassword';
 import ButtonSocialFusion from './ButtonSocialFusion';
 import { useAppDispatch } from '@/context/hooks';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const SignIn = () => {
   const dispatch = useAppDispatch();
+  const route = useRouter();
+  const session = useSession();
+
+  const isAuthenticated = session.status === 'authenticated';
+
   const { lang, translations } = useLang();
+
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     route.replace('/');
+  //   }
+  // }, [session, route]);
 
   const {
     register,
@@ -36,8 +50,13 @@ const SignIn = () => {
     defaultValues: {},
   });
 
-  const onSubmit: SubmitHandler<IInputs> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IInputs> = async (data) => {
+    const res = await signIn('credentials', {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+    });
+    console.log(session, res);
   };
   return (
     <form className={Styles.signIn} onSubmit={handleSubmit(onSubmit)}>
@@ -62,9 +81,15 @@ const SignIn = () => {
           <InputPassword register={register} errors={errors} />
 
           <div className={Styles.signIn__main_left_footer}>
-            <Button type='submit'>
-              {translations[lang].authorization.sign_in}
-            </Button>
+            {isAuthenticated ? (
+              <Button type='button' onClick={() => signOut()}>
+                {translations[lang].authorization.sign_out}
+              </Button>
+            ) : (
+              <Button type='submit'>
+                {translations[lang].authorization.sign_in}
+              </Button>
+            )}
 
             <button
               className='btn-md-transparent'
@@ -90,7 +115,11 @@ const SignIn = () => {
           <h4 className={Styles.signIn__main_right_title}>
             {translations[lang].authorization.log_in_as_user}
           </h4>
-          <ButtonSocialFusion type='button' nameIcon='google'>
+          <ButtonSocialFusion
+            type='button'
+            nameIcon='google'
+            onClick={() => signIn('google')}
+          >
             Google
           </ButtonSocialFusion>
         </div>

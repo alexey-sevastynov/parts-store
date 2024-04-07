@@ -1,7 +1,9 @@
 import Styles from '@/styles/modules/authorization/index.module.scss';
 
+import React from 'react';
 import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { debounce } from 'lodash';
 
 import { useLang } from '@/hooks/useLang';
 
@@ -9,12 +11,13 @@ import { COLORS } from '@/constants/colors';
 import { IoMdClose } from 'react-icons/io';
 import { IInputs } from '@/types/authorization';
 
-import { useAppDispatch } from '@/context/hooks';
+import { useAppDispatch, useAppSelector } from '@/context/hooks';
 
 import {
   closeDropDownAuth,
   openWindowSignIn,
 } from '@/context/features/modals/modals';
+import { setFormDataSignUp } from '@/context/features/authorization/authorization';
 
 import InputFirstName from './InputFirstName';
 import InputLastName from './InputLastName';
@@ -24,11 +27,37 @@ import InputPassword from './InputPassword';
 import Paragraph from '@/components/elements/Paragraph';
 import { Button } from '@/components/elements/Button';
 import ButtonSocialFusion from './ButtonSocialFusion';
+import { createUserAccount } from '@/api/authorization';
+import { Oval } from 'react-loader-spinner';
+import { SIZE_ICON } from '@/constants/common';
 
 const SignUp = () => {
   const dispatch = useAppDispatch();
 
   const { lang, translations } = useLang();
+
+  const userForm = useAppSelector((state) => state.authorization.signUp.user);
+
+  const statusAPI = useAppSelector(
+    (state) => state.authorization.signUp.status
+  );
+  const errorMessageAPI = useAppSelector(
+    (state) => state.authorization.signUp.message
+  );
+
+  const statusLoading = statusAPI === 'loading';
+  const statusLoaded = statusAPI === 'success';
+
+  const message = (code: string | null) => {
+    if (code === 'Request failed with status code 400')
+      return translations[lang].validation.error_email;
+    if (
+      code === 'Request failed with status code 500' ||
+      'Request failed with status code 404'
+    )
+      return translations[lang].validation.error_server;
+    return;
+  };
 
   const {
     register,
@@ -37,11 +66,33 @@ const SignUp = () => {
     setFocus,
     watch,
     formState: { errors },
-  } = useForm<IInputs>({ mode: 'onBlur', defaultValues: { phone: '+38' } });
+  } = useForm<IInputs>({
+    mode: 'onBlur',
+    defaultValues: {
+      firstName: userForm.firstName,
+      lastName: userForm.lastName,
+      email: userForm.email,
+      phone: '+38',
+    },
+  });
 
   const onSubmit: SubmitHandler<IInputs> = (data) => {
-    console.log(data);
+    dispatch(createUserAccount(data));
   };
+
+  const updateFormDataWithDelay = debounce((data: IInputs) => {
+    dispatch(setFormDataSignUp(data));
+  }, 2000);
+
+  React.useEffect(() => {
+    watch((data: any) => {
+      updateFormDataWithDelay(data);
+    });
+
+    return () => {
+      updateFormDataWithDelay.cancel();
+    };
+  }, []);
 
   return (
     <form className={Styles.signUp} onSubmit={handleSubmit(onSubmit)}>
@@ -53,7 +104,9 @@ const SignUp = () => {
         <button
           className={Styles.signUp__head_close}
           type='button'
-          onClick={() => dispatch(closeDropDownAuth())}
+          onClick={() => {
+            dispatch(closeDropDownAuth());
+          }}
         >
           <IoMdClose color={COLORS.blackIcon} />
         </button>
@@ -87,9 +140,24 @@ const SignUp = () => {
               {translations[lang].authorization.user_agreement}
             </Link>
           </Paragraph>
+          {errorMessageAPI !== null && !statusLoaded && (
+            <p>{message(errorMessageAPI)}</p>
+          )}
+
           <div className={Styles.signUp__main_left_footer}>
-            <Button type='submit'>
-              {translations[lang].authorization.check_in}
+            <Button type='submit' disabled={statusLoading}>
+              {statusLoading ? (
+                <Oval
+                  visible={true}
+                  height={SIZE_ICON}
+                  width={SIZE_ICON}
+                  color={COLORS.whiteFont}
+                  secondaryColor={COLORS.whiteFont}
+                  ariaLabel='oval-loading'
+                />
+              ) : (
+                translations[lang].authorization.check_in
+              )}
             </Button>
 
             <button

@@ -3,6 +3,7 @@ import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 import { translationReducer } from './features/translation/translationSlice';
 import { persistStore, persistReducer, WebStorage } from 'redux-persist'; // Импорт WebStorage добавлен здесь
 import { modalsReducer } from './features/modals/modals';
+import { authorizationReducer } from './features/authorization/authorization';
 
 const createNoopStorage = () => {
   return {
@@ -31,6 +32,7 @@ export const persistConfig = {
 const rootReducer = combineReducers({
   translation: translationReducer,
   modals: modalsReducer,
+  authorization: authorizationReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -14,6 +14,7 @@
     "authorization": {
       "sign_up": "Sign Up",
       "sign_in": "Sign In",
+      "sign_out": "Sign Out",
       "first_name": "First name",
       "last_name": "Last name",
       "phone_number": "Phone number",
@@ -42,7 +43,9 @@
       "max_15": "Max 15 characters!",
       "required_password": "Enter your password!",
       "min_4": "Min 4 characters!",
-      "max_20": "Max 20 characters!"
+      "max_20": "Max 20 characters!",
+      "error_email": "The email address is already registered.",
+      "error_server": "Oops! Something went haywire in our engine room. Our mechanics are on it!"
     }
   },
 
@@ -61,6 +64,7 @@
     "authorization": {
       "sign_up": "Зареєструватися",
       "sign_in": "Увійти",
+      "sign_out": "Вийти",
       "first_name": "Ім'я",
       "last_name": "Прізвище",
       "phone_number": "Номер телефону",
@@ -89,7 +93,9 @@
       "max_15": "Не більше 15 символів!",
       "required_password": "Введіть свій пароль!",
       "min_4": "Мінімум 4 символи!",
-      "max_20": "Не більше 20 символів!"
+      "max_20": "Не більше 20 символів!",
+      "error_email": "Ця електронна адреса вже зареєстрована.",
+      "error_server": "Ой-ой! Щось пішло не так у нашому моторному відділі. Наші механіки вже вирішують це!"
     }
   },
 
@@ -108,6 +114,7 @@
     "authorization": {
       "sign_up": "Зарегистрироваться",
       "sign_in": "Вход",
+      "sign_out": "Выйти",
       "first_name": "Имя",
       "last_name": "Фамилия",
       "phone_number": "Номер телефону",
@@ -136,7 +143,9 @@
       "max_15": "Не более 15 символов!",
       "required_password": "Введите свой пароль!",
       "min_4": "Минимум 4 символа!",
-      "max_20": "Не более 20 символов!"
+      "max_20": "Не более 20 символов!",
+      "error_email": "Этот адрес электронной почты уже зарегистрирован.",
+      "error_server": "Ой-ой! Что-то пошло не так в нашем моторном отделе. Наши механики уже решают проблему!"
     }
   }
 }

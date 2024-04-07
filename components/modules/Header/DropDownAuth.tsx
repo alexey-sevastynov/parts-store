@@ -9,7 +9,7 @@ import { SIZE_ICON } from '@/constants/common';
 import { basePropsForMotionDropDown } from '@/constants/motion';
 
 import { IWrappedComponentProps } from '@/types/hocs';
-import { useAppDispatch } from '@/context/hooks';
+import { useAppDispatch, useAppSelector } from '@/context/hooks';
 
 import { withClickOutside } from '@/components/hocs/withClickOutside';
 
@@ -23,6 +23,9 @@ import {
 const DropDownAuth = forwardRef<HTMLDivElement, IWrappedComponentProps>(
   ({ open, setOpen }, ref) => {
     const dispatch = useAppDispatch();
+    const isOpenDropDown = useAppSelector(
+      (state) => state.modals.isOpenDropDownAuth.isOpen
+    );
 
     const handleShowPopup = () => {
       setOpen(true);
@@ -35,7 +38,7 @@ const DropDownAuth = forwardRef<HTMLDivElement, IWrappedComponentProps>(
         <Link href='/auth' onMouseEnter={handleShowPopup}>
           <FaUserLarge size={SIZE_ICON} />
         </Link>
-        {open && (
+        {isOpenDropDown && (
           <motion.div
             className={Styles.dropDownAuth}
             {...basePropsForMotionDropDown}

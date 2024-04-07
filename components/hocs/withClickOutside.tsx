@@ -20,6 +20,8 @@ export function withClickOutside(
     const componentRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+      setOpen(false);
+
       const handleClickOutside = (e: MouseEvent) => {
         if (
           componentRef.current &&
