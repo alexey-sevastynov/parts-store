@@ -1,50 +1,47 @@
 import Styles from '@/styles/modules/authorization/index.module.scss';
 
+import React from 'react';
+
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { useAppDispatch } from '@/context/hooks';
+import { useLang } from '@/hooks/useLang';
+import { signIn } from 'next-auth/react';
 
 import { IoMdClose } from 'react-icons/io';
+import { Oval } from 'react-loader-spinner';
 import { COLORS } from '@/constants/colors';
+import { SIZE_ICON } from '@/constants/common';
 
-import { useLang } from '@/hooks/useLang';
-import { IInputs } from '@/types/authorization';
-
-import { Button } from '@/components/elements/Button';
+import { IInputs, messageErrorType } from '@/types/authorization';
 
 import {
   closeDropDownAuth,
+  openWindowRemindPassword,
   openWindowSignUp,
 } from '@/context/features/modals/modals';
 
+import { Button } from '@/components/elements/Button';
+import NotificationBar from '@/components/elements/NotificationBar';
 import InputEmail from './InputEmail';
 import InputPassword from './InputPassword';
 import ButtonSocialFusion from './ButtonSocialFusion';
-import { useAppDispatch } from '@/context/hooks';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
 const SignIn = () => {
   const dispatch = useAppDispatch();
-  const route = useRouter();
-  const session = useSession();
-
-  const isAuthenticated = session.status === 'authenticated';
 
   const { lang, translations } = useLang();
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     route.replace('/');
-  //   }
-  // }, [session, route]);
+  const [messageError, setMessageError] =
+    React.useState<messageErrorType | null>(null);
+  // possible the message :
+  // 1. { msg: 'User not found', status: 401 };
+  // 2. { msg: 'Incorrect password', status: 401 };
 
   const {
     register,
     handleSubmit,
-    setValue,
-    setFocus,
-    watch,
-    formState: { errors },
+
+    formState: { errors, isSubmitting },
   } = useForm<IInputs>({
     mode: 'onBlur',
     defaultValues: {},
@@ -56,7 +53,11 @@ const SignIn = () => {
       password: data.password,
       redirect: false,
     });
-    console.log(session, res);
+
+    if (res?.status === 200) dispatch(closeDropDownAuth());
+
+    console.log(res);
+    setMessageError(res?.error as messageErrorType);
   };
   return (
     <form className={Styles.signIn} onSubmit={handleSubmit(onSubmit)}>
@@ -73,23 +74,43 @@ const SignIn = () => {
           <IoMdClose color={COLORS.blackIcon} />
         </button>
       </div>
+
       {/* _____main colum left, middle line and colum right */}
       <div className={Styles.signIn__main}>
         {/* _____colum left */}
         <div className={Styles.signIn__main_left}>
           <InputEmail register={register} errors={errors} />
+
           <InputPassword register={register} errors={errors} />
+          <div className={Styles.signIn__main_left_reminder_btn}>
+            <button onClick={() => dispatch(openWindowRemindPassword())}>
+              {translations[lang].authorization.password_reminder}
+            </button>
+          </div>
+
+          {/* _____notification Error */}
+          {messageError && (
+            <NotificationBar type='error'>
+              {/* @ts-ignore */}
+              {translations[lang].validation[messageError]}
+            </NotificationBar>
+          )}
 
           <div className={Styles.signIn__main_left_footer}>
-            {isAuthenticated ? (
-              <Button type='button' onClick={() => signOut()}>
-                {translations[lang].authorization.sign_out}
-              </Button>
-            ) : (
-              <Button type='submit'>
-                {translations[lang].authorization.sign_in}
-              </Button>
-            )}
+            <Button type='submit' disabled={isSubmitting}>
+              {isSubmitting ? (
+                <Oval
+                  visible={true}
+                  height={SIZE_ICON}
+                  width={SIZE_ICON}
+                  color={COLORS.whiteFont}
+                  secondaryColor={COLORS.whiteFont}
+                  ariaLabel='oval-loading'
+                />
+              ) : (
+                translations[lang].authorization.sign_in
+              )}
+            </Button>
 
             <button
               className='btn-md-transparent'
@@ -118,7 +139,11 @@ const SignIn = () => {
           <ButtonSocialFusion
             type='button'
             nameIcon='google'
-            onClick={() => signIn('google')}
+            onClick={() =>
+              signIn('google', { callbackUrl: '/', redirect: false }).finally(
+                () => dispatch(closeDropDownAuth())
+              )
+            }
           >
             Google
           </ButtonSocialFusion>

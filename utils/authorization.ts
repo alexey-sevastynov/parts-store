@@ -1,8 +1,11 @@
+import jwt from 'jsonwebtoken';
+
 export const nameValidationRules = (
   message: string,
   messageMinLength: string,
   messageMaxLength: string,
-  requireMessage?: string
+  requireMessage?: string,
+  messageDoesNotMatch?: string
 ) => ({
   ...(requireMessage && { required: requireMessage }),
   pattern: {
@@ -47,3 +50,15 @@ export const passwordValidationRules = (
   minLength: { value: 4, message: messageMinLength },
   maxLength: { value: 20, message: messageMaxLength },
 });
+
+// Function for token generation
+export const generateToken = (payload: any) => {
+  return jwt.sign(payload, process.env.TOKEN_SECRET as string, {
+    expiresIn: '1d',
+  });
+};
+
+// Function for token verification
+export const verifyToken = (token: any): any => {
+  return jwt.verify(token, process.env.TOKEN_SECRET as string);
+};

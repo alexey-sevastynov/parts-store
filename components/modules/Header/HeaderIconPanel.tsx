@@ -4,12 +4,18 @@ import Link from 'next/link';
 
 import DropDownLang from '@/components/modules/Header/DropDownLang';
 import { BiSolidCarGarage } from 'react-icons/bi';
-import { MdFavorite } from 'react-icons/md';
+import { MdDashboardCustomize, MdFavorite } from 'react-icons/md';
 import { PiShoppingCartSimpleFill } from 'react-icons/pi';
 import { SIZE_ICON } from '@/constants/common';
 import DropDownAuth from './DropDownAuth';
+import { useSession } from 'next-auth/react';
+import { RiAdminFill } from 'react-icons/ri';
 
 const HeaderIconPanel = () => {
+  const { status } = useSession();
+
+  const isAuthenticated = status === 'authenticated';
+
   return (
     <div className={Styles.headerIconPanel}>
       <DropDownLang />
@@ -30,9 +36,17 @@ const HeaderIconPanel = () => {
               <PiShoppingCartSimpleFill size={SIZE_ICON} />
             </Link>
           </li>
-          <li className={Styles.headerIconPanel__navigate_list_auth}>
-            <DropDownAuth />
+          <li>
+            <Link href='/dashboard'>
+              <MdDashboardCustomize size={SIZE_ICON} />
+            </Link>
           </li>
+
+          {!isAuthenticated && (
+            <li className={Styles.headerIconPanel__navigate_list_auth}>
+              <DropDownAuth />
+            </li>
+          )}
         </ul>
       </nav>
     </div>

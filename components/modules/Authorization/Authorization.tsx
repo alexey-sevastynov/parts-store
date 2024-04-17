@@ -4,6 +4,7 @@ import { useAppSelector } from '@/context/hooks';
 
 import SignUp from './SignUp';
 import SignIn from './SignIn';
+import RemindPassword from './RemindPassword';
 
 const Authorization = () => {
   const isActiveSignIn = useAppSelector(
@@ -14,10 +15,15 @@ const Authorization = () => {
     (items) => items.modals.isOpenDropDownAuth.isActiveSignUp
   );
 
+  const isActiveRemindPassword = useAppSelector(
+    (items) => items.modals.isOpenDropDownAuth.isActiveRemindPassword
+  );
+
   return (
     <section className={Styles.authorization}>
       {isActiveSignUp && <SignUp />}
       {isActiveSignIn && <SignIn />}
+      {isActiveRemindPassword && <RemindPassword />}
     </section>
   );
 };

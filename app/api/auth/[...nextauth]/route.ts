@@ -1,4 +1,4 @@
-import NextAuth, { Account, Profile } from 'next-auth';
+import NextAuth, { Account, Profile, Session } from 'next-auth';
 import bcrypt from 'bcryptjs';
 
 import GoogleProvider from 'next-auth/providers/google';
@@ -9,7 +9,7 @@ import connect from '@/lib/mongodb';
 
 connect();
 
-const authOptions = {
+export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GoogleProvider({
@@ -19,37 +19,24 @@ const authOptions = {
 
     CredentialsProvider({
       id: 'credentials',
-      name: 'Credentials',
+      name: 'credentials',
       credentials: {
-        email: { label: 'email', type: 'text' },
-        password: { label: 'password', type: 'password' },
+        email: { label: 'email', type: 'email', required: true },
+        password: { label: 'password', type: 'password', required: true },
       },
 
       async authorize(credentials: any) {
-        await connect();
-        try {
-          const user = await User.findOne({ email: credentials.email });
-          if (user) {
-            const isPasswordCorrect = await bcrypt.compare(
-              credentials.password,
-              user.password
-            );
-            if (isPasswordCorrect) {
-              return user;
-            } else {
-              throw new Error('Wrong credentials');
-            }
-          } else {
-            throw new Error('User not found!');
-          }
-        } catch (error: any) {
-          throw new Error(error);
-        }
+        const { email, password } = credentials;
+
+        const user = await signInWithCredentials({ email, password });
+        return user;
       },
     }),
   ],
   pages: {
-    signIn: 'sign-in',
+    signIn: '/',
+    signOut: '/',
+    error: '/errors',
   },
   callbacks: {
     async signIn(params: {
@@ -66,7 +53,23 @@ const authOptions = {
       return true;
     },
 
-    async jwt({ token }: { token: any }) {
+    async jwt({
+      token,
+      trigger,
+      session,
+    }: {
+      token: any;
+      trigger: any;
+      session: any;
+    }) {
+      if (trigger === 'update') {
+        token.user.firstName = session.firstName;
+        token.user.lastName = session.lastName;
+        token.user.phone = session.phone;
+      } else {
+        const user = await getUserByEmail({ email: token.email });
+        token.user = user;
+      }
       const user = await getUserByEmail({ email: token.email });
       token.user = user;
 
@@ -84,7 +87,6 @@ const authOptions = {
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
-
 
 // _______________________________________________________
 
@@ -104,6 +106,8 @@ async function signInWithOAuth({
     lastName: profile.name ? profile.name.split(' ').slice(0, 2)[1] : '',
     email: profile.email,
     photo: profile.picture,
+    phone: '',
+    provider: account.provider,
   });
 
   await newUser.save();
@@ -115,6 +119,27 @@ async function getUserByEmail({ email }: { email: string }) {
   const user = await User.findOne({ email }).select('-password');
 
   if (!user) throw new Error('Email does not exsist!');
+
+  return { ...user._doc, _id: user._id.toString() };
+}
+
+async function signInWithCredentials({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) {
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new Error('User not found');
+    // DO NOT change the msg !!! The text of msg bind with '@/puplic/transltion.json'
+  }
+
+  const compare = await bcrypt.compare(password, user.password);
+
+  if (!compare) throw new Error('Incorrect password');
+  // DO NOT change the msg !!! The text of msg bind with '@/puplic/transltion.json'
 
   return { ...user._doc, _id: user._id.toString() };
 }

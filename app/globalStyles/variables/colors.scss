@@ -3,17 +3,24 @@ $black-font: #242424;
 $black-icon: #242424;
 
 $grafit: #343434;
+$grafit-shadow: #3434346b;
 $grey: #c6c6c6;
 
 $white: #ffffff;
 $white-font: #ffffff;
 $white-icon: #ffffff;
 
-$red: hsl(0, 99%, 65%);
+$red: #fe4d4d;
+$red-opacity-20: hsla(0, 99%, 65%, 0.2);
 $red-hover: hsl(0, 99%, 63%);
 $red-active: hsl(0, 99%, 61%);
 
 $orange: #ff9718;
-$green: hsl(101, 55%, 47%);
+$orange-opacity-20: rgba(255, 151, 24, 0.2);
+$orange-hover: hsl(33, 100%, 53%);
+$orange-active: hsl(33, 100%, 51%);
+
+$green: #60ba36;
+$green-opacity-20: hsla(101, 55%, 47%, 0.2);
 $green-hover: hsl(101, 55%, 43%);
 $green-active: hsl(101, 55%, 41%);

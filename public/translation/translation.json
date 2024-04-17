@@ -3,7 +3,11 @@
     "common": {
       "ua": "Ukraine",
       "en": "English",
-      "ru": "Rusian"
+      "ru": "Rusian",
+      "edit": "Edit",
+      "save": "Save",
+      "cancel": "Cancel",
+      "delete": "Delete"
     },
     "header": {
       "catalog": "Catalog",
@@ -30,7 +34,20 @@
       "registered": "I'm already registered",
 
       "or": "or",
-      "log_in_as_user": "Log in as a user"
+      "log_in_as_user": "Log in as a user",
+      "password_change": "Password change",
+      "current_password": "Current password",
+      "new_password": "New password",
+      "new_password_repeat": "Repeat new password",
+      "password_reminder": "Password reminder",
+
+      "reset_password": "Reset password",
+      "remembered_password": "Remembered the password",
+      "A confirmation has been sent to the specified email address, please confirm it.": "A confirmation has been sent to the specified email address, please confirm it.",
+
+      "Old password does not match!": "Old password does not match!",
+      "Changed Password Succussefully!": "Changed Password Succussefully!",
+      "Email does not exist": "Email does not exist!"
     },
     "validation": {
       "invalid_value": "Invalid value!",
@@ -45,7 +62,55 @@
       "min_4": "Min 4 characters!",
       "max_20": "Max 20 characters!",
       "error_email": "The email address is already registered.",
-      "error_server": "Oops! Something went haywire in our engine room. Our mechanics are on it!"
+      "error_server": "Oops! Something went haywire in our engine room. Our mechanics are on it!",
+
+      "confirm_sign_up": "Please confirm your registration by clicking the link in the email.",
+
+      "Incorrect password": "Incorrect password",
+      "User not found": "User not found",
+      "Email already exsist": "Email already exsist!",
+      "Sign Up Success! Check your email to complete the registartion!": "Sign Up Success! Check your email to complete the registartion!",
+
+      "current_password": "Keep a current password",
+      "new_password": "Keep a new password",
+      "new_password_repeat": "Keep a repeat new password",
+
+      "password_does_not_match": "The last two passwords do not match!"
+    },
+    "user_page": {
+      "orders": "My orders",
+      "cart": "Cart",
+      "wish_list": "Wish list",
+      "viewed_products": "Viewed products",
+      "feedback": "My feedback",
+      "wallet": "My wallet",
+
+      "setup_title": "User profile",
+      "personal_data": "Personal data",
+      "client_code": "Client code",
+
+      "delivery_address": "Delivery address",
+
+      "settings": "Settings",
+      "change_password": "Change password",
+      "delete_account": "Delete account",
+      "message_delete_account": "I delete my account along with my wish lists, browsing and order history. I no longer want to receive newsletters about discounts and responses to my comments.",
+
+      "account_settings": "Account Settings"
+    },
+
+    "verify_page": {
+      "congratulation": "Congratulation!",
+      "message_successfully_registered": "You have successfully registered, you can now log in to your account. Click on the button below.",
+      "success": "Success",
+      "message_success": "Your profile is already registered",
+      "home_page": "Home page"
+    },
+
+    "reset_password_page": {
+      "create_password": "Сreate a new password",
+      "Success! Your password has been changed.": "Success! Your password has been changed. Click on the <Sign In> button to log in to your office.",
+      "logged_in_as_user": "You are logged in as a user"
     }
   },
 
@@ -53,7 +118,11 @@
     "common": {
       "ua": "Українська",
       "en": "Англійська",
-      "ru": "Російська"
+      "ru": "Російська",
+      "edit": "Редагувати",
+      "save": "Зберегти",
+      "cancel": "Скасувати",
+      "delete": "Видалити"
     },
     "header": {
       "catalog": "Каталог",
@@ -80,7 +149,20 @@
       "registered": "Я вже зареєструваний",
 
       "or": "або",
-      "log_in_as_user": "Увійдіть як користувач"
+      "log_in_as_user": "Увійдіть як користувач",
+      "password_change": "Зміна пароля",
+      "current_password": "Поточний пароль",
+      "new_password": "Новий пароль",
+      "new_password_repeat": "Повторіть новий пароль",
+      "password_reminder": "Нагадати пароль",
+
+      "reset_password": "Скинути пароль",
+      "remembered_password": "Згадав пароль",
+      "A confirmation has been sent to the specified email address, please confirm it.": "На вказану адресу ел. пошти надіслано підтвердження, підтвердіть його.",
+
+      "Old password does not match!": "Старий пароль не відповідає!",
+      "Changed Password Succussefully!": "Пароль успішно змінено!",
+      "Email does not exist": "Така електронна пошта не зареєстрована!"
     },
     "validation": {
       "invalid_value": "Невірне значення!",
@@ -95,7 +177,55 @@
       "min_4": "Мінімум 4 символи!",
       "max_20": "Не більше 20 символів!",
       "error_email": "Ця електронна адреса вже зареєстрована.",
-      "error_server": "Ой-ой! Щось пішло не так у нашому моторному відділі. Наші механіки вже вирішують це!"
+      "error_server": "Ой-ой! Щось пішло не так у нашому моторному відділі. Наші механіки вже вирішують це!",
+
+      "confirm_sign_up": "Будь ласка, підтвердіть вашу реєстрацію, перейшовши за посиланням в електронному листі.",
+
+      "Incorrect password": "Невірний пароль",
+      "User not found": "Користувач не знайдений",
+      "Email already exsist": "Електронна пошта вже існує!",
+      "Sign Up Success! Check your email to complete the registartion!": "Реєстрація пройшла успішно! Перевірте свою електронну пошту, щоб завершити реєстрацію!",
+
+      "current_password": "Введіть поточний пароль",
+      "new_password": "Введіть новий пароль",
+      "new_password_repeat": "Повторно введіть новий пароль",
+
+      "password_does_not_match": "Два останні пароля не збігаються!"
+    },
+    "user_page": {
+      "orders": "Мої замовлення",
+      "cart": "Кошик",
+      "wish_list": "Список бажань",
+      "viewed_products": "Переглянуті товари",
+      "feedback": "Мій відгуки",
+      "wallet": "Мій гаманець",
+
+      "setup_title": "Профіль користувача",
+      "personal_data": "Персональні дані",
+      "client_code": "Код клієнта",
+
+      "delivery_address": "Адреса доставки",
+
+      "settings": "Налаштування",
+      "change_password": "Змінити пароль",
+      "delete_account": "Видалити обліковий запис",
+      "message_delete_account": "Я видаляю свій обліковий запис разом зі списками бажань, історією переглядів та замовлень. Я більше не хочу отримувати розсилки про знижки та відповіді на мої коментарі.",
+
+      "account_settings": "Налаштування облікового запису"
+    },
+
+    "verify_page": {
+      "congratulation": "Вітання!",
+      "message_successfully_registered": "Ви успішно зареєструвалися, тепер ви можете увійти до свого облікового запису. Натисніть кнопку нижче.",
+      "success": "Успіх",
+      "message_success": "Ваш профіль вже зареєстрований",
+      "home_page": "Головна сторінка"
+    },
+
+    "reset_password_page": {
+      "create_password": "Створіть новий пароль",
+      "Success! Your password has been changed.": "Успіх! Ваш пароль змінено. Натисни на кнопку <Увійти>, щоб увійти до свого кабінету.",
+      "logged_in_as_user": "Ви увійшли в систему як користувач"
     }
   },
 
@@ -103,7 +233,11 @@
     "common": {
       "ua": "Украинский",
       "en": "Английский",
-      "ru": "Русский"
+      "ru": "Русский",
+      "edit": "Редактировать",
+      "save": "Сохранить",
+      "cancel": "Отмена",
+      "delete": "Удалить"
     },
     "header": {
       "catalog": "Каталог",
@@ -130,7 +264,20 @@
       "registered": "Я уже зарегистрирован",
 
       "or": "или",
-      "log_in_as_user": "Войдите как пользователь"
+      "log_in_as_user": "Войдите как пользователь",
+      "password_change": "Изменение пароля",
+      "current_password": "Текущий пароль",
+      "new_password": "Новый пароль",
+      "new_password_repeat": "Повторите новый пароль",
+      "password_reminder": "Напомнить пароль",
+
+      "reset_password": "Скинуть пароль",
+      "remembered_password": "Вспомнил пароль",
+      "A confirmation has been sent to the specified email address, please confirm it.": "На вказану адресу ел. пошти надіслано підтвердження, підтвердіть його.",
+
+      "Old password does not match!": "Старый пароль не совпадает!",
+      "Changed Password Succussefully!": "Пароль успешно изменен!",
+      "Email does not exist": "Такая электронная почта не зарегистрирована!"
     },
     "validation": {
       "invalid_value": "Неверное значение!",
@@ -145,7 +292,55 @@
       "min_4": "Минимум 4 символа!",
       "max_20": "Не более 20 символов!",
       "error_email": "Этот адрес электронной почты уже зарегистрирован.",
-      "error_server": "Ой-ой! Что-то пошло не так в нашем моторном отделе. Наши механики уже решают проблему!"
+      "error_server": "Ой-ой! Что-то пошло не так в нашем моторном отделе. Наши механики уже решают проблему!",
+
+      "confirm_sign_up": "Пожалуйста, подтвердите вашу регистрацию, перейдя по ссылке в электронном письме.",
+
+      "Incorrect password": "Неверный пароль",
+      "User not found": "Пользователь не найден",
+      "Email already exsist": "Электронная почта уже существует!",
+      "Sign Up Success! Check your email to complete the registartion!": "Регистрация прошла успешно! Проверьте свою почту, чтобы завершить регистрацию!",
+
+      "current_password": "Введите текущий пароль",
+      "new_password": "Введите новый пароль",
+      "new_password_repeat": "Повторно введите новый пароль",
+
+      "password_does_not_match": "Два последних пароля не совпадают!"
+    },
+    "user_page": {
+      "orders": "Мои заказы",
+      "cart": "Корзина",
+      "wish_list": "Список желаний",
+      "viewed_products": "Просмотренные товары",
+      "feedback": "Мой отзывы",
+      "wallet": "Мой кошелек",
+
+      "setup_title": "Профиль пользователя",
+      "personal_data": "Персональные данные",
+      "client_code": "Код клиента",
+
+      "delivery_address": "Адрес доставки",
+
+      "settings": "Настройка",
+      "change_password": "Изменить пароль",
+      "delete_account": "Удалить учетную запись",
+      "message_delete_account": "Я удаляю свою учетную запись вместе со списками желаний, историей просмотров и заказов. Я больше не хочу получать рассылки о скидках и ответы на мои комментарии.",
+
+      "account_settings": "Настройки учетной записи"
+    },
+
+    "verify_page": {
+      "congratulation": "Поздравляем!",
+      "message_successfully_registered": "Вы успешно зарегистрировались, теперь вы можете войти в свой аккаунт. Нажмите на кнопку ниже.",
+      "success": "Успех",
+      "message_success": "Ваш профиль уже зарегистрирован",
+      "home_page": "Главная страница"
+    },
+
+    "reset_password_page": {
+      "create_password": "Создайте новый пароль",
+      "Success! Your password has been changed.": "Успех! Ваш пароль изменен. Нажми на кнопку   <Вход>, что бы войти в свой кабинет.",
+      "logged_in_as_user": "Вы вошли в систему как пользователь"
     }
   }
 }

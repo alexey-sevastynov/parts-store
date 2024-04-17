@@ -1,0 +1,20 @@
+.counterCircle {
+  width: 15px;
+  height: 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: $orange;
+  border-radius: 100%;
+
+  &__text {
+    font-size: 8px;
+    font-weight: $weight-medium;
+
+    color: $white-font;
+
+    @include forbid-select-text;
+  }
+}

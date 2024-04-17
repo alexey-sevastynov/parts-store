@@ -1,0 +1,43 @@
+@import '../../../app/globalStyles/variables/colors.scss';
+@import '../../../app/globalStyles/variables/fonts.scss';
+@import '../../../app/globalStyles/variables/blocks.scss';
+@import '../../../app/globalStyles/base/mixins.scss';
+
+.verifyPage {
+  padding-top: $padding-top-page;
+
+  @include display-flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__title {
+    margin-top: 30px;
+    @include display-flex;
+
+    gap: 10px;
+
+    &_circle {
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 100%;
+      background-color: $red;
+    }
+
+    & h1 {
+      text-transform: uppercase;
+      color: $red;
+      font-size: $font-xxl;
+      font-weight: $weight-bold;
+    }
+  }
+
+  &__subtitle {
+    margin-top: 10px;
+  }
+
+  &__btn {
+    margin-top: 30px;
+    max-width: 300px;
+  }
+}

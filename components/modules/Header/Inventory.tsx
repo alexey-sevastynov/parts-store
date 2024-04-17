@@ -20,7 +20,8 @@ const Inventory = () => {
         <li className={Styles.header__inventory_list_category}>
           <LinkIconDescription
             imageName='catalog'
-            href={'/catalog'}
+            href={'/user/user-profile'}
+            // href={'/catalog'}
             color='light'
           >
             {translations[lang].header.catalog}

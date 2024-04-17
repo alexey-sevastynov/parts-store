@@ -1,0 +1,29 @@
+@import '../../../app/globalStyles/variables/colors.scss';
+@import '../../../app/globalStyles/variables/fonts.scss';
+@import '../../../app/globalStyles/variables/blocks.scss';
+@import '../../../app/globalStyles/base/mixins.scss';
+
+.sidebarNavigation {
+  padding-top: $padding-top-page;
+
+  box-sizing: border-box;
+  padding-right: 10px;
+
+  min-width: 300px;
+  border-right: 1px solid $grey;
+
+  flex-grow: 0;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+
+    &_item {
+      &:first-child {
+        padding-bottom: $padding-top-page;
+      }
+    }
+  }
+}

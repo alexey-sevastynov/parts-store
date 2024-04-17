@@ -1,0 +1,32 @@
+.notificationBar.success,
+.notificationBar.warning,
+.notificationBar.error {
+  padding: 20px 10px;
+
+  border-radius: 3px;
+}
+
+.notificationBar.success {
+  background-color: $green-opacity-20;
+  border: 1px solid $green-active;
+
+  & p {
+    color: $green-active;
+  }
+}
+.notificationBar.warning {
+  background-color: $orange-opacity-20;
+  border: 1px solid $orange-active;
+
+  & p {
+    color: $orange-active;
+  }
+}
+.notificationBar.error {
+  background-color: $red-opacity-20;
+  border: 1px solid $red-active;
+
+  & p {
+    color: $red-active;
+  }
+}

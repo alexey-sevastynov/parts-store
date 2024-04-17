@@ -14,4 +14,6 @@ export interface IUser extends IUserParams {
   likedProducts?: any;
   cars?: any;
   orders?: any;
+  provider?: string;
+  role?: 'user' | 'admin';
 }

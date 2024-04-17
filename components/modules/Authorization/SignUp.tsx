@@ -3,96 +3,68 @@ import Styles from '@/styles/modules/authorization/index.module.scss';
 import React from 'react';
 import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { debounce } from 'lodash';
-
+import { useAppDispatch } from '@/context/hooks';
 import { useLang } from '@/hooks/useLang';
+import { signIn } from 'next-auth/react';
+
+import { IoMdClose } from 'react-icons/io';
+import { Oval } from 'react-loader-spinner';
 
 import { COLORS } from '@/constants/colors';
-import { IoMdClose } from 'react-icons/io';
-import { IInputs } from '@/types/authorization';
+import { SIZE_ICON } from '@/constants/common';
 
-import { useAppDispatch, useAppSelector } from '@/context/hooks';
+import { signUpWithCredentials } from '@/actions/authActions';
+
+import { IInputs, messageErrorType } from '@/types/authorization';
 
 import {
   closeDropDownAuth,
   openWindowSignIn,
 } from '@/context/features/modals/modals';
-import { setFormDataSignUp } from '@/context/features/authorization/authorization';
 
+import NotificationBar from '@/components/elements/NotificationBar';
+import { Button } from '@/components/elements/Button';
 import InputFirstName from './InputFirstName';
 import InputLastName from './InputLastName';
 import InputPhone from './InputPhone';
 import InputEmail from './InputEmail';
 import InputPassword from './InputPassword';
 import Paragraph from '@/components/elements/Paragraph';
-import { Button } from '@/components/elements/Button';
+
 import ButtonSocialFusion from './ButtonSocialFusion';
-import { createUserAccount } from '@/api/authorization';
-import { Oval } from 'react-loader-spinner';
-import { SIZE_ICON } from '@/constants/common';
 
 const SignUp = () => {
   const dispatch = useAppDispatch();
 
   const { lang, translations } = useLang();
 
-  const userForm = useAppSelector((state) => state.authorization.signUp.user);
+  const [messageError, setMessageError] =
+    React.useState<messageErrorType | null>(null);
+  // possible the message :
+  // 1. { msg: 'Email already exsist', status: 401 };
+  // 2. { msg: 'Sign Up Success! Check your email to complete the registartion!', status: 201 }
 
-  const statusAPI = useAppSelector(
-    (state) => state.authorization.signUp.status
-  );
-  const errorMessageAPI = useAppSelector(
-    (state) => state.authorization.signUp.message
-  );
-
-  const statusLoading = statusAPI === 'loading';
-  const statusLoaded = statusAPI === 'success';
-
-  const message = (code: string | null) => {
-    if (code === 'Request failed with status code 400')
-      return translations[lang].validation.error_email;
-    if (
-      code === 'Request failed with status code 500' ||
-      'Request failed with status code 404'
-    )
-      return translations[lang].validation.error_server;
-    return;
-  };
+  const typeMessageError =
+    messageError === 'Email already exsist' ? 'error' : 'success';
 
   const {
     register,
     handleSubmit,
-    setValue,
-    setFocus,
-    watch,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<IInputs>({
     mode: 'onBlur',
     defaultValues: {
-      firstName: userForm.firstName,
-      lastName: userForm.lastName,
-      email: userForm.email,
       phone: '+38',
     },
   });
 
-  const onSubmit: SubmitHandler<IInputs> = (data) => {
-    dispatch(createUserAccount(data));
+  const onSubmit: SubmitHandler<IInputs> = async (data) => {
+    const res = await signUpWithCredentials(data);
+
+    setMessageError(res?.msg as messageErrorType);
+
+    console.log(res);
   };
-
-  const updateFormDataWithDelay = debounce((data: IInputs) => {
-    dispatch(setFormDataSignUp(data));
-  }, 2000);
-
-  React.useEffect(() => {
-    watch((data: any) => {
-      updateFormDataWithDelay(data);
-    });
-
-    return () => {
-      updateFormDataWithDelay.cancel();
-    };
-  }, []);
 
   return (
     <form className={Styles.signUp} onSubmit={handleSubmit(onSubmit)}>
@@ -140,13 +112,18 @@ const SignUp = () => {
               {translations[lang].authorization.user_agreement}
             </Link>
           </Paragraph>
-          {errorMessageAPI !== null && !statusLoaded && (
-            <p>{message(errorMessageAPI)}</p>
+
+          {/* _____notification Error */}
+          {!isSubmitting && messageError && (
+            <NotificationBar type={typeMessageError}>
+              {/* @ts-ignore */}
+              {translations[lang].validation[messageError]}
+            </NotificationBar>
           )}
 
           <div className={Styles.signUp__main_left_footer}>
-            <Button type='submit' disabled={statusLoading}>
-              {statusLoading ? (
+            <Button type='submit' disabled={isSubmitting}>
+              {isSubmitting ? (
                 <Oval
                   visible={true}
                   height={SIZE_ICON}
@@ -184,7 +161,15 @@ const SignUp = () => {
           <h4 className={Styles.signUp__main_right_title}>
             {translations[lang].authorization.log_in_as_user}
           </h4>
-          <ButtonSocialFusion type='button' nameIcon='google'>
+          <ButtonSocialFusion
+            type='button'
+            nameIcon='google'
+            onClick={() =>
+              signIn('google', { callbackUrl: '/', redirect: false }).finally(
+                () => dispatch(closeDropDownAuth())
+              )
+            }
+          >
             Google
           </ButtonSocialFusion>
         </div>

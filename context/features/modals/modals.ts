@@ -1,5 +1,6 @@
 'use client';
 import { createSlice } from '@reduxjs/toolkit';
+import { stat } from 'fs';
 
 export interface ModalsState {
   isOpenDropDownLang: boolean;
@@ -7,7 +8,11 @@ export interface ModalsState {
     isOpen: boolean;
     isActiveSignIn: boolean;
     isActiveSignUp: boolean;
+    isActiveRemindPassword: boolean;
   };
+
+  isOpenChangePassword: boolean;
+  isOpenDeleteUser: boolean;
 }
 
 const initialState: ModalsState = {
@@ -16,7 +21,11 @@ const initialState: ModalsState = {
     isOpen: false,
     isActiveSignIn: true,
     isActiveSignUp: false,
+    isActiveRemindPassword: false,
   },
+
+  isOpenChangePassword: false,
+  isOpenDeleteUser: false,
 };
 
 export const modalsSlice = createSlice({
@@ -35,6 +44,7 @@ export const modalsSlice = createSlice({
         isOpen: true,
         isActiveSignIn: true,
         isActiveSignUp: false,
+        isActiveRemindPassword: false,
       };
     },
 
@@ -43,6 +53,7 @@ export const modalsSlice = createSlice({
         isOpen: false,
         isActiveSignIn: false,
         isActiveSignUp: false,
+        isActiveRemindPassword: false,
       };
     },
 
@@ -51,6 +62,7 @@ export const modalsSlice = createSlice({
         isOpen: true,
         isActiveSignIn: true,
         isActiveSignUp: false,
+        isActiveRemindPassword: false,
       };
     },
 
@@ -59,7 +71,31 @@ export const modalsSlice = createSlice({
         isOpen: true,
         isActiveSignIn: false,
         isActiveSignUp: true,
+        isActiveRemindPassword: false,
       };
+    },
+
+    openWindowRemindPassword: (state) => {
+      state.isOpenDropDownAuth = {
+        isOpen: true,
+        isActiveSignIn: false,
+        isActiveSignUp: false,
+        isActiveRemindPassword: true,
+      };
+    },
+
+    openPopupWindowChangePassword: (state) => {
+      state.isOpenChangePassword = true;
+    },
+    closePopupWindowChangePassword: (state) => {
+      state.isOpenChangePassword = false;
+    },
+
+    openPopupWindowDeleteUser: (state) => {
+      state.isOpenDeleteUser = true;
+    },
+    closePopupWindowDeleteUser: (state) => {
+      state.isOpenDeleteUser = false;
     },
   },
 });
@@ -71,6 +107,11 @@ export const {
   closeDropDownAuth,
   openWindowSignIn,
   openWindowSignUp,
+  openPopupWindowChangePassword,
+  closePopupWindowChangePassword,
+  openWindowRemindPassword,
+  openPopupWindowDeleteUser,
+  closePopupWindowDeleteUser,
 } = modalsSlice.actions;
 
 export const modalsReducer = modalsSlice.reducer;

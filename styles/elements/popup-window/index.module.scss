@@ -1,0 +1,41 @@
+$padding-top-popup: 10px;
+$padding-bottom-popup: 10px;
+
+$padding-left-popup: 20px;
+$padding-right-popup: 20px;
+
+.popupWindow {
+  width: 300px;
+  min-height: 300px;
+
+  position: fixed;
+  top: calc(100vh - 50%);
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: $white;
+
+  z-index: 100;
+
+  border-radius: 3px;
+  box-shadow: 1px 1px 20px $grafit-shadow;
+
+  &__head {
+    padding: $padding-top-popup $padding-left-popup;
+    display: flex;
+    @include display-flex;
+    justify-content: space-between;
+
+    border-bottom: 1px solid $grey;
+    &_title {
+    }
+    &_close {
+      @include display-flex;
+
+      color: $black-font;
+    }
+  }
+
+  &__main {
+    padding: $padding-top-popup $padding-left-popup;
+  }
+}

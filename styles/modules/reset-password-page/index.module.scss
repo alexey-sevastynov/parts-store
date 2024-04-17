@@ -1,0 +1,102 @@
+@import '../../../app/globalStyles/variables/colors.scss';
+@import '../../../app/globalStyles/variables/fonts.scss';
+@import '../../../app/globalStyles/variables/blocks.scss';
+@import '../../../app/globalStyles/base/mixins.scss';
+
+$width-column: 267px;
+
+.resetPasswordPage {
+  margin-top: $padding-top-page;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__form {
+    max-width: $width-column;
+
+    .inputNewPassword {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+
+      &__label {
+        font-size: $font-m;
+        padding-bottom: 10px;
+      }
+
+      &__input {
+        @include input;
+
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+
+        align-items: start;
+        &_field {
+          @include input;
+          width: 229px;
+        }
+        &_button {
+          &_visible {
+            margin-top: 11px;
+            &:hover {
+              color: $orange;
+            }
+          }
+
+          &_hide {
+            margin-top: 7px;
+          }
+        }
+      }
+
+      &__error {
+        padding-top: 5px;
+        font-size: $font-s;
+        color: $red;
+      }
+    }
+
+    &_notification {
+      margin-top: 10px;
+    }
+    &_btn {
+      margin-top: 20px;
+      max-width: 250px;
+    }
+  }
+}
+
+.resetPasswordPage {
+  &__title {
+    margin-top: 30px;
+    @include display-flex;
+
+    gap: 10px;
+
+    &_circle {
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 100%;
+      background-color: $red;
+    }
+
+    & h1 {
+      text-transform: uppercase;
+      color: $red;
+      font-size: $font-xxl;
+      font-weight: $weight-bold;
+    }
+  }
+
+  &__subtitle {
+    margin-top: 10px;
+  }
+
+  &__btn {
+    margin-top: 30px;
+    max-width: 300px;
+  }
+}

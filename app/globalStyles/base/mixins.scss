@@ -40,3 +40,33 @@
   background-repeat: no-repeat;
   background-position: center center;
 }
+
+@mixin arrow-drop-down-black {
+  display: block;
+  width: 7px;
+  height: 4px;
+  background-image: url(/img/arrow-down-black.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+@mixin input {
+  font-size: $font-l;
+  width: 100%;
+  height: $height-input;
+
+  padding: $padding-input;
+  border-radius: $border-radius-input;
+  border-color: $grey;
+
+  &:focus {
+    outline: none;
+    border: 1px solid orange;
+  }
+}
+
+@mixin erro-message-input {
+  padding-top: 5px;
+  font-size: $font-s;
+  color: $red;
+}

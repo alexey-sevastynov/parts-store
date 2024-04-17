@@ -4,30 +4,12 @@
 @import '../../../app/globalStyles/variables/fonts.scss';
 
 $width-column: 267px;
-$height-input: 40px;
-$padding-input: 0px 5px;
-
-$border-radius-input: 7px;
-
-@mixin input {
-  font-size: $font-l;
-  width: 100%;
-  height: $height-input;
-
-  padding: $padding-input;
-  border-radius: $border-radius-input;
-  border-color: $grey;
-
-  &:focus {
-    outline: none;
-    border: 1px solid orange;
-  }
-}
 
 .authorization {
   min-width: 600px;
   & .signUp,
-  .signIn {
+  .signIn,
+  .remindPassword {
     &__head {
       @include display-flex;
 
@@ -117,6 +99,34 @@ $border-radius-input: 7px;
             color: $red;
           }
         }
+
+        &_reminder_btn {
+          display: flex;
+          justify-content: end;
+
+          & button {
+            font-size: $font-s;
+            width: max-content;
+            color: $black-font;
+
+            @include btn-hover(color);
+            &:hover {
+              color: $orange;
+            }
+          }
+        }
+
+        // &_error {
+        //   padding: 20px 10px;
+        //   background-color: $red-opacity-20;
+        //   border: 1px solid $red-active;
+
+        //   border-radius: 3px;
+
+        //   & p {
+        //     color: $red-active;
+        //   }
+        // }
       }
 
       &_middle {

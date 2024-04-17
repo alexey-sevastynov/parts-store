@@ -1,0 +1,55 @@
+.userCard {
+  @include display-flex;
+  height: 40px;
+
+  gap: 16px;
+
+  &__photo,
+  &__photo.userCard__photo_custom {
+    cursor: pointer;
+  }
+
+  &__photo {
+    display: block;
+    border-radius: 100%;
+  }
+
+  &__photo.userCard__photo_custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    background-color: $orange;
+    color: $white-font;
+
+    font-size: $font-xl;
+  }
+
+  &__description {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-around;
+
+    &_name,
+    &_email {
+      color: $black-font;
+    }
+
+    &_name {
+      font-size: $font-m;
+    }
+
+    &_name.userCard__description_name_active {
+      color: $orange;
+    }
+
+    &_email {
+      font-size: $font-s;
+    }
+  }
+}

@@ -13,6 +13,8 @@ const userSchema = new Schema(
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     phone: { type: String },
+    provider: { type: String, default: 'credentials' },
+    role: { type: String, default: 'user' },
     photo: { type: String },
     viewedProducts: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
     cart: [{ type: Schema.Types.ObjectId, ref: 'Product' }],

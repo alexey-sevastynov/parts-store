@@ -1,0 +1,27 @@
+.iconWithTitleCounter {
+  width: 100%;
+
+  @include display-flex;
+
+  gap: 16px;
+
+  cursor: pointer;
+
+  &:hover {
+    .iconWithTitleCounter__image,
+    .iconWithTitleCounter__text {
+      color: $orange;
+    }
+  }
+
+  &__image {
+    color: $grafit;
+  }
+  &__text {
+    flex-grow: 1;
+  }
+
+  &__counter {
+    flex-grow: 0;
+  }
+}

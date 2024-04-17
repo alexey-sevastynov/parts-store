@@ -6,11 +6,15 @@ export interface IInputs {
   phone: string;
   email: string;
   password: string;
+  passwordOld?: string;
+  passwordNew?: string;
 }
 
 export interface IAuthInput {
   register: UseFormRegister<IInputs>;
+  name?: 'password' | 'passwordOld' | 'passwordNew';
   errors: Partial<FieldErrorsImpl<IInputs>>;
+  labalText?: string;
 }
 
 export interface IButtonProps
@@ -21,3 +25,13 @@ export interface IButtonProps
 }
 
 export type StatusType = 'loading' | 'success' | 'error' | 'idle' | null;
+
+export type messageErrorType =
+  | 'Incorrect password'
+  | 'User not found'
+  | 'Email already exsist'
+  | 'Email does not exist'
+  | 'Sign Up Success! Check your email to complete the registartion!'
+  | 'Old password does not match!'
+  | 'Changed Password Succussefully!'
+  | 'A confirmation has been sent to the specified email address, please confirm it.';

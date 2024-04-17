@@ -1,0 +1,237 @@
+@import '../../../app/globalStyles/variables/colors.scss';
+@import '../../../app/globalStyles/variables/fonts.scss';
+@import '../../../app/globalStyles/variables/blocks.scss';
+@import '../../../app/globalStyles/base/mixins.scss';
+
+$padding-acordion-card: 20px;
+
+.setupUser {
+  padding-top: $padding-top-page;
+  padding-left: $padding-left-page;
+
+  flex-grow: 1;
+
+  &__title {
+    padding-bottom: $title-padding-bottom;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+  }
+
+  .accordionCard {
+    border: 1px solid $grey;
+    border-radius: 3px;
+
+    &__header {
+      @include display-flex;
+      @include forbid-select-text;
+      padding: $padding-acordion-card;
+
+      gap: 18px;
+
+      cursor: pointer;
+
+      &_icon {
+        flex-grow: 0;
+        color: $black-icon;
+      }
+
+      &_title {
+        flex-grow: 1;
+      }
+
+      &_arrow {
+        flex-grow: 0;
+        @include arrow-drop-down-black;
+      }
+    }
+
+    .accountSettings__accordion_content {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      &_btns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        justify-content: space-between;
+
+        & button {
+          font-size: $font-m;
+          color: $black-font;
+
+          @include btn-hover(color);
+          &:hover {
+            color: $red;
+          }
+        }
+      }
+    }
+
+    .personalData,
+    .accountSettings {
+      &__accordion_content {
+        padding-left: $padding-acordion-card;
+        padding-right: $padding-acordion-card;
+        padding-bottom: $padding-acordion-card;
+
+        &_list {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-template-rows: repeat(2, 1fr);
+          grid-column-gap: 40px;
+          grid-row-gap: 40px;
+
+          &_item {
+            min-width: max-content;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            & p:first-child {
+              font-size: $font-s;
+            }
+
+            & p:last-child {
+              font-size: $font-m;
+            }
+
+            .inputEditFirstName,
+            .inputEditLastName,
+            .inputEditPhone {
+              display: flex;
+              flex-direction: column;
+              &__input {
+                @include input;
+
+                width: auto;
+              }
+
+              &__error {
+                padding-top: 5px;
+                font-size: $font-s;
+                color: $red;
+              }
+            }
+          }
+        }
+      }
+
+      &__accordion_btns {
+        display: flex;
+        gap: 10px;
+      }
+
+      &__accordion_btn {
+        margin-top: 20px;
+        max-width: 150px;
+      }
+    }
+  }
+}
+
+// content to Window popup modal
+.passwordChange {
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+    .inputEditPassword {
+      display: flex;
+      flex-direction: column;
+
+      &__label {
+        font-size: $font-m;
+        padding-bottom: 10px;
+      }
+
+      &__input {
+        @include input;
+
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+
+        align-items: start;
+        &_field {
+          @include input;
+          width: 229px;
+        }
+        &_button {
+          &_visible {
+            margin-top: 11px;
+            &:hover {
+              color: $orange;
+            }
+          }
+
+          &_hide {
+            margin-top: 7px;
+          }
+        }
+      }
+
+      &__error {
+        padding-top: 5px;
+        font-size: $font-s;
+        color: $red;
+      }
+    }
+  }
+
+  &__errors {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-top: 10px;
+  }
+
+  &__btns {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.deleteUser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 20px;
+
+  &__agree {
+    display: flex;
+    gap: 10px;
+    &_btn {
+      min-width: 14px;
+      height: 14px;
+      background-color: $white;
+      border: 1px solid $black-icon;
+      border-radius: 3px;
+
+      @include btn-hover(background-color);
+    }
+
+    &_btn.active {
+      background-color: $green;
+    }
+
+    &_text {
+      text-align: justify;
+    }
+  }
+
+  &__btns {
+    &_btn {
+      min-width: 250px;
+    }
+  }
+}
