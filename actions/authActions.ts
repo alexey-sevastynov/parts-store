@@ -1,6 +1,5 @@
 'use server';
 
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import bcrypt from 'bcryptjs';
 import User from '@/models/User';
 import { generateToken, verifyToken } from '@/utils/authorization';
@@ -8,6 +7,7 @@ import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { IInputs } from '@/types/authorization';
 import sendEmail from '@/utils/sendEmail';
+import { authOptions } from '@/utils/authOption';
 
 const BASE_URL = process.env.NEXTAUTH_URL;
 

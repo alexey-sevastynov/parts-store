@@ -158,7 +158,7 @@ $padding-acordion-card: 20px;
         display: flex;
         justify-content: space-between;
 
-        align-items: start;
+        align-items: flex-start;
         &_field {
           @include input;
           width: 229px;

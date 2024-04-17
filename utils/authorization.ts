@@ -1,5 +1,9 @@
 import jwt from 'jsonwebtoken';
 
+import { NextAuthOptions } from 'next-auth';
+
+import GoogleProvider from 'next-auth/providers/google';
+
 export const nameValidationRules = (
   message: string,
   messageMinLength: string,

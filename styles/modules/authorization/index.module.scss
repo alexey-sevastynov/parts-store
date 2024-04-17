@@ -73,7 +73,7 @@ $width-column: 267px;
               display: flex;
               justify-content: space-between;
 
-              align-items: start;
+              align-items: flex-start;
               &_field {
                 @include input;
                 width: 229px;
@@ -102,7 +102,7 @@ $width-column: 267px;
 
         &_reminder_btn {
           display: flex;
-          justify-content: end;
+          justify-content: flex-end;
 
           & button {
             font-size: $font-s;
