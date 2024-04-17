@@ -6,6 +6,7 @@ import Logotype from '@/components/elements/Logotype';
 
 import Inventory from './Inventory';
 import HeaderIconPanel from './HeaderIconPanel';
+import Search from './Search';
 
 const Header = () => {
   return (
@@ -19,6 +20,7 @@ const Header = () => {
         <Logotype className={Styles.header__logo_img} />
       </div>
       <Inventory />
+      <Search />
       <HeaderIconPanel />
     </header>
   );
