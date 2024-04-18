@@ -13,7 +13,10 @@
       "catalog": "Catalog",
       "auto": "Auto",
       "sale": "Sale",
-      "changeLanguage": "Change language"
+      "changeLanguage": "Change language",
+
+      "search": "Search",
+      "find": "Find"
     },
     "authorization": {
       "sign_up": "Sign Up",
@@ -128,7 +131,10 @@
       "catalog": "Каталог",
       "auto": "Авто",
       "sale": "Акції",
-      "changeLanguage": "Змінити мову"
+      "changeLanguage": "Змінити мову",
+
+      "search": "Пошук",
+      "find": "Знайти"
     },
     "authorization": {
       "sign_up": "Зареєструватися",
@@ -243,7 +249,10 @@
       "catalog": "Каталог",
       "auto": "Авто",
       "sale": "Акции",
-      "changeLanguage": "Изменить язык"
+      "changeLanguage": "Изменить язык",
+
+      "search": "Поиск",
+      "find": "Найти"
     },
     "authorization": {
       "sign_up": "Зарегистрироваться",

@@ -15,6 +15,15 @@
   }
 }
 
+@mixin animation-hover-btn-unset {
+  @include btn-border-and-padding;
+  @include display-flex;
+
+  &:hover {
+    background-color: unset;
+  }
+}
+
 .header {
   position: relative;
   height: $height-header;
@@ -28,6 +37,14 @@
     }
 
     flex-grow: 0;
+
+    @media (max-width: $breakpoint_sm) {
+      &_btn {
+        @include animation-hover-btn-unset;
+
+        padding-left: 0px;
+      }
+    }
   }
 
   &__logo {
@@ -199,7 +216,7 @@
       padding: 0px 20px;
     }
     @media (max-width: $breakpoint_sm) {
-      padding: 0px 0px 0px 20px;
+      padding: 0px 0px 0px 0px;
     }
   }
 
@@ -227,8 +244,15 @@
 
     @media (max-width: $breakpoint_sm) {
       &__navigate {
+        & li {
+          @include animation-hover-btn-unset;
+          padding-right: 0px;
+        }
+
         &_list {
-          display: none;
+          &_cart {
+            display: none !important;
+          }
         }
       }
     }
@@ -356,7 +380,6 @@
   // ________________DROP DOWN AUTH
   & .dropDownAuth {
     padding: $padding-drop-down;
-    position: absolute;
 
     box-sizing: border-box;
     position: absolute;
@@ -367,12 +390,29 @@
     background-color: $white;
 
     top: $top-drop-down-language;
-    right: $right-drop-down-icon-link;
+
+    right: 0px;
 
     z-index: 10;
 
     &__arrow {
       @include arrow-background-drop-down;
+      right: 15px;
+    }
+
+    @media (max-width: $breakpoint_md) {
+      width: calc(100vw - $padding-container - $padding-container);
+      right: 0;
+
+      padding-bottom: 50px;
+
+      &__arrow {
+        display: none;
+      }
+    }
+
+    @media (max-width: $breakpoint_sm) {
+      width: calc(100vw - $padding-container-sm - $padding-container-sm);
     }
   }
 }

@@ -48,13 +48,24 @@ const DropDownLang = forwardRef<HTMLDivElement, IWrappedComponentProps>(
 
     return (
       <div className={Styles.dropDownLang}>
-        <Image
-          src={'/img/ukraine.svg'}
-          alt='ukraine'
-          width={12}
-          height={12}
-          priority
-        />
+        {lang !== 'ru' ? (
+          <Image
+            src={'/img/ukraine.svg'}
+            alt='ukraine'
+            width={20}
+            height={20}
+            priority
+          />
+        ) : (
+          <Image
+            src={'/img/clown.png'}
+            alt='ukraine'
+            width={20}
+            height={20}
+            priority
+          />
+        )}
+
         <button
           className={Styles.dropDownLang__select}
           onClick={() => dispatch(openDropDownLang())}

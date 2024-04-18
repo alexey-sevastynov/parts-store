@@ -2,7 +2,7 @@
 @import '../../../app/globalStyles/variables/blocks.scss';
 @import '../../../app/globalStyles/base/mixins.scss';
 @import '../../../app/globalStyles/variables/fonts.scss';
-
+@import '../../../app/globalStyles/variables/breakpoints.scss';
 $width-column: 267px;
 
 .authorization {
@@ -115,18 +115,6 @@ $width-column: 267px;
             }
           }
         }
-
-        // &_error {
-        //   padding: 20px 10px;
-        //   background-color: $red-opacity-20;
-        //   border: 1px solid $red-active;
-
-        //   border-radius: 3px;
-
-        //   & p {
-        //     color: $red-active;
-        //   }
-        // }
       }
 
       &_middle {
@@ -178,6 +166,47 @@ $width-column: 267px;
 
           &:hover {
             background-color: $grey;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: $breakpoint_md) {
+    min-width: 280px;
+    & .signUp,
+    .signIn,
+    .remindPassword {
+      &__main {
+        display: flex;
+        flex-direction: column;
+        gap: 70px;
+
+        margin-top: 10px;
+
+        display: flex;
+        justify-content: unset;
+        &_left,
+        &_right {
+          max-width: 100%;
+
+          & .password {
+            &__input {
+              gap: 10px;
+              &_field {
+                flex-grow: 1;
+              }
+            }
+          }
+        }
+
+        &_middle {
+          position: relative;
+          flex-direction: row;
+
+          &_line {
+            width: 100%;
+            height: 1px;
           }
         }
       }

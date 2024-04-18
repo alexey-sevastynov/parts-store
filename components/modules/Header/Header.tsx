@@ -7,12 +7,8 @@ import Logotype from '@/components/elements/Logotype';
 import Inventory from './Inventory';
 import HeaderIconPanel from './HeaderIconPanel';
 import Search from './Search';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { BREAKPOINTS } from '@/constants/breakpoints';
 
 const Header = () => {
-  const isMedia1200 = useMediaQuery(BREAKPOINTS.xl);
-
   return (
     <header className={Styles.header}>
       <div className={Styles.header__burger}>
