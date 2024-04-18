@@ -1,6 +1,7 @@
 @import '../../../app/globalStyles/variables/colors.scss';
 @import '../../../app/globalStyles/variables/fonts.scss';
 @import '../../../app/globalStyles/variables/blocks.scss';
+@import '../../../app/globalStyles/variables/breakpoints.scss';
 @import '../../../app/globalStyles/base/mixins.scss';
 
 @mixin animation-hover-btn {
@@ -33,6 +34,11 @@
     position: absolute;
     top: 6px;
     left: 60px;
+
+    //_____________MEDIA LOGO
+    @media (max-width: $breakpoint_xl) {
+      display: none;
+    }
   }
 
   &__inventory {
@@ -84,6 +90,30 @@
         }
       }
     }
+
+    //_____________MEDIA INVENTORY
+    @media (max-width: $breakpoint_md) {
+      &_list {
+        display: none;
+      }
+    }
+
+    @media (max-width: $breakpoint_xl) {
+      &_list {
+        padding-left: 20px;
+        &_sale {
+          display: none;
+        }
+      }
+    }
+
+    @media (max-width: $breakpoint_xxl) {
+      &_list {
+        &_auto {
+          display: none;
+        }
+      }
+    }
   }
 
   & .search {
@@ -91,7 +121,7 @@
     display: flex;
     height: 50px;
 
-    padding-left: 50px;
+    padding: 0px 50px;
 
     &__field {
       position: relative;
@@ -100,7 +130,7 @@
       &_input {
         @include input-search;
 
-        min-width: 300px;
+        min-width: 160px;
       }
 
       &_icon {
@@ -163,6 +193,14 @@
         background-color: $orange-active;
       }
     }
+
+    //_____________MEDIA SEARCH
+    @media (max-width: $breakpoint_md) {
+      padding: 0px 20px;
+    }
+    @media (max-width: $breakpoint_sm) {
+      padding: 0px 0px 0px 20px;
+    }
   }
 
   & .headerIconPanel {
@@ -186,7 +224,36 @@
         }
       }
     }
+
+    @media (max-width: $breakpoint_sm) {
+      &__navigate {
+        &_list {
+          display: none;
+        }
+      }
+    }
+
+    @media (max-width: $breakpoint_md) {
+      &__navigate {
+        &_list {
+          &_favorite {
+            display: none !important;
+          }
+        }
+      }
+    }
+
+    @media (max-width: $breakpoint_xxl) {
+      &__navigate {
+        &_list {
+          &_garage {
+            display: none !important;
+          }
+        }
+      }
+    }
   }
+
   // ________________DROP DOWN LANG
   & .dropDownLang {
     position: relative;
@@ -278,6 +345,11 @@
 
     label {
       font-size: $font-m;
+    }
+
+    //_____________MEDIA LANG POPUP
+    @media (max-width: $breakpoint_xl) {
+      display: none;
     }
   }
 

@@ -7,9 +7,14 @@ import React from 'react';
 import { useLang } from '@/hooks/useLang';
 
 import LinkIconDescription from '@/components/elements/LinkIconDescription';
+import { useSession } from 'next-auth/react';
 
 const Inventory = () => {
+  const { status } = useSession();
+
   const { lang, translations } = useLang();
+
+  const isAuthenticated = status === 'authenticated';
 
   const [isActiveAutoLink, setIsActiveAutoLink] = React.useState<boolean>(true);
   const [isActiveSaleLink, setIsActiveSaleLink] = React.useState<boolean>(true);
@@ -28,7 +33,7 @@ const Inventory = () => {
           </LinkIconDescription>
         </li>
 
-        {isActiveAutoLink && (
+        {isActiveAutoLink && isAuthenticated && (
           <li className={Styles.header__inventory_list_auto}>
             <LinkIconDescription imageName='auto' href={'/auto'} color='light'>
               {translations[lang].header.auto}

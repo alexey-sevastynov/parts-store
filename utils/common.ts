@@ -37,3 +37,13 @@ export function extractLastFiveCharacters(idMongoDB: string): string {
 
   return lastFiveDigits;
 }
+
+export const getWindowWidth = () => {
+  let windowWidth = 0;
+
+  if (typeof window !== 'undefined') {
+    windowWidth = window.innerWidth;
+  }
+
+  return { windowWidth };
+};

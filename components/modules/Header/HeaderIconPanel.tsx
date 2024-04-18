@@ -21,26 +21,31 @@ const HeaderIconPanel = () => {
       <DropDownLang />
       <nav className={Styles.headerIconPanel__navigate}>
         <ul className={Styles.headerIconPanel__navigate_list}>
-          <li>
-            <Link href='/garage'>
-              <BiSolidCarGarage size={SIZE_ICON} />
-            </Link>
-          </li>
-          <li>
-            <Link href='/favorites'>
-              <MdFavorite size={SIZE_ICON} />
-            </Link>
-          </li>
+          {isAuthenticated && (
+            <>
+              <li className={Styles.headerIconPanel__navigate_list_garage}>
+                <Link href='/garage'>
+                  <BiSolidCarGarage size={SIZE_ICON} />
+                </Link>
+              </li>
+              <li className={Styles.headerIconPanel__navigate_list_favorite}>
+                <Link href='/favorites'>
+                  <MdFavorite size={SIZE_ICON} />
+                </Link>
+              </li>
+            </>
+          )}
+
           <li>
             <Link href='/cart'>
               <PiShoppingCartSimpleFill size={SIZE_ICON} />
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link href='/dashboard'>
               <MdDashboardCustomize size={SIZE_ICON} />
             </Link>
-          </li>
+          </li> */}
 
           {!isAuthenticated && (
             <li className={Styles.headerIconPanel__navigate_list_auth}>
