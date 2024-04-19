@@ -12,7 +12,6 @@ const Logotype = ({ ...props }: ILgotypeProps) => {
       width={100}
       height={91}
       priority
-      style={{ width: 'auto', height: 'auto' }}
       {...otherProps}
     />
   );

@@ -140,6 +140,31 @@
       "delivery_and_payment": "Delivery and payment",
       "warranty": "Warranty",
       "turnover_of_goods": "Turnover of goods"
+    },
+
+    "footer_page": {
+      "all_rights_reserved": "All rights reserved",
+
+      "online_store": "Online store",
+      "catalog": "Catalog",
+      "all_categories": "All categories (from A to Z)",
+      "spare_parts_by_manufacturer": "Spare parts by manufacturer",
+      "original_catalogs": "Original catalogs",
+      "payment": "Payment",
+      "delivery": "Delivery",
+      "returns_and_warranty": "Returns and warranty",
+      "help": "Returns and warranty",
+
+      "useful_information": "Useful information",
+      "about_the_company": "About the company",
+      "contacts": "Contacts",
+      "legal_documents": "Legal documents",
+      "public_contract": "Public contract",
+      "forum": "Forum",
+      "vacancies": "Vacancies",
+
+      "personal_account": "Personal account",
+      "sign_in_sign_up": "Registration / Login"
     }
   },
 
@@ -284,6 +309,31 @@
       "delivery_and_payment": "Доставка і оплата",
       "warranty": "Гарантія",
       "turnover_of_goods": "Повернення товару"
+    },
+
+    "footer_page": {
+      "all_rights_reserved": "Всі права захищені",
+
+      "online_store": "Інтернет-магазин",
+      "catalog": "Каталог",
+      "all_categories": "Всі категорії (від А до Я)",
+      "spare_parts_by_manufacturer": "Запчастини за виробником",
+      "original_catalogs": "Оригінальні каталоги",
+      "payment": "Оплата",
+      "delivery": "Доставка",
+      "returns_and_warranty": "Повернення та гарантія",
+      "help": "Допомога",
+
+      "useful_information": "Корисна інформація",
+      "about_the_company": "Про компанію",
+      "contacts": "Контакти",
+      "legal_documents": "Юридичні документи",
+      "public_contract": "Публічний договір",
+      "forum": "Форум",
+      "vacancies": "Вакансії",
+
+      "personal_account": "Особистий кабінет",
+      "sign_in_sign_up": "Регастрація / Логін"
     }
   },
 
@@ -428,6 +478,31 @@
       "delivery_and_payment": "Доставка и оплата",
       "warranty": "Гарантия",
       "turnover_of_goods": "Возрат товара"
+    },
+
+    "footer_page": {
+      "all_rights_reserved": "Все права защищены",
+
+      "online_store": "Интернет-магазин",
+      "catalog": "Каталог",
+      "all_categories": "Все категории (от А до Я)",
+      "spare_parts_by_manufacturer": "Запчасти по производителю",
+      "original_catalogs": "Оригинальные каталоги",
+      "payment": "Оплата",
+      "delivery": "Доставка",
+      "returns_and_warranty": "Возврат и гарантия",
+      "help": "Помощь",
+
+      "useful_information": "Полезная информация",
+      "about_the_company": "О компании",
+      "contacts": "Контакты",
+      "legal_documents": "Юридические документы",
+      "public_contract": "Публичный договор",
+      "forum": "Форум",
+      "vacancies": "Вакансии",
+
+      "personal_account": "Личный кабинет",
+      "sign_in_sign_up": "Регистрация / Вход"
     }
   }
 }

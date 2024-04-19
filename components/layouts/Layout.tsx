@@ -13,6 +13,7 @@ import { useLang } from '@/hooks/useLang';
 import PasswordChange from '../modules/UserProfilePage/AccountSettings/PasswordChange/PasswordChange';
 import DeleteUser from '../modules/UserProfilePage/AccountSettings/DeleteUser';
 import AsidePanel from '../modules/AsidePanel/AsidePanel';
+import Footer from '../modules/Footer/Footer';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
@@ -31,12 +32,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <div className='header-wrapper'>
-        <div className='container'>
-          <Header />
-          {children}
-        </div>
-      </div>
+      {/* <div className='header-wrapper footer-wrapper'> */}
+      {/* <div className='container'> */}
+      <Header />
+      {children}
+      <Footer />
+      {/* </div> */}
+      {/* </div> */}
 
       {/* Window popup Aside Panel */}
       {isOpenAsidePanel && <AsidePanel />}
@@ -60,8 +62,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <DeleteUser />
         </PopupWindow>
       )}
-
-      {/* Footer here */}
     </>
   );
 };

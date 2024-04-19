@@ -25,11 +25,16 @@
 }
 
 .header {
-  position: relative;
-  height: $height-header;
   width: 100%;
+  height: $height-header;
+  background-color: $grafit;
 
-  @include display-flex;
+  &__container {
+    position: relative;
+    height: 100%;
+
+    @include display-flex;
+  }
 
   &__burger {
     &_btn {

@@ -16,23 +16,28 @@ const Header = () => {
 
   return (
     <header className={Styles.header}>
-      <div className={Styles.header__burger}>
-        <button
-          className={Styles.header__burger_btn}
-          onClick={() => {
-            dispatch(openPopupAsidePanel());
-            addOverflowHiddenToBody();
-          }}
-        >
-          <RxHamburgerMenu className={Styles.header__logo_btn_icon} size={24} />
-        </button>
+      <div className={`container ${Styles.header__container}`}>
+        <div className={Styles.header__burger}>
+          <button
+            className={Styles.header__burger_btn}
+            onClick={() => {
+              dispatch(openPopupAsidePanel());
+              addOverflowHiddenToBody();
+            }}
+          >
+            <RxHamburgerMenu
+              className={Styles.header__logo_btn_icon}
+              size={24}
+            />
+          </button>
+        </div>
+        <div className={Styles.header__logo}>
+          <Logotype className={Styles.header__logo_img} />
+        </div>
+        <Inventory />
+        <Search />
+        <HeaderIconPanel />{' '}
       </div>
-      <div className={Styles.header__logo}>
-        <Logotype className={Styles.header__logo_img} />
-      </div>
-      <Inventory />
-      <Search />
-      <HeaderIconPanel />
     </header>
   );
 };

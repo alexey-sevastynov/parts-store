@@ -114,7 +114,7 @@
 
       @include btn-hover(color);
       &:hover {
-        color: $orange;
+        color: $orange !important;
       }
     }
   }

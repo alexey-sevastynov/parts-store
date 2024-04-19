@@ -8,7 +8,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={Styles.userLayout}>
+    <div className={`container ${Styles.userLayout}`}>
       <SidebarNavigation />
       {children}
     </div>

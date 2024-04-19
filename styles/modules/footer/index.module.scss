@@ -1,0 +1,72 @@
+@import '../../../app/globalStyles/variables/colors.scss';
+@import '../../../app/globalStyles/variables/fonts.scss';
+@import '../../../app/globalStyles/variables/blocks.scss';
+@import '../../../app/globalStyles/variables/breakpoints.scss';
+@import '../../../app/globalStyles/base/mixins.scss';
+
+.footer {
+  padding: 24px 0px;
+  width: 100%;
+  height: max-content;
+  background-color: $grafit;
+
+  margin-top: auto;
+
+  color: $white-font;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__rights_reserved {
+    margin-top: 20px;
+    color: $white-font;
+    text-align: center;
+    font-size: $font-s;
+  }
+
+  &__main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    justify-content: space-between;
+
+    row-gap: 50px;
+
+    &_column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      &_tel {
+        display: flex;
+        flex-direction: column;
+
+        gap: 5px;
+
+        & a {
+          color: $white-font;
+          font-size: $font-m;
+        }
+      }
+    }
+  }
+
+  @media (max-width: $breakpoint_lg) {
+    &__main {
+      grid-template-columns: 1fr auto;
+      grid-template-rows: 1fr auto;
+    }
+  }
+
+  @media (max-width: $breakpoint_sm) {
+    &__main {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto auto;
+      &_column {
+        &:last-child {
+          align-items: center;
+        }
+      }
+    }
+  }
+}

@@ -19,13 +19,14 @@ export interface ILgotypeProps extends Omit<ImageProps, 'src' | 'alt'> {
 
 export type ParagraphSize = 'xl' | 'lg' | 'md' | 'sm';
 export type TitleSize = ParagraphSize;
+export type ThemeType = 'light' | 'dark';
 
 export interface IUserCardProps
   extends Omit<IUserParams, 'password' | 'phone'> {
   photo?: string;
   isActive?: boolean;
   isOnlyPhoto?: boolean;
-  theme?: 'light' | 'dark';
+  theme?: ThemeType;
 }
 
 export interface IIconWithTitleCounterProps {

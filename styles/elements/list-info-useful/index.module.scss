@@ -1,0 +1,9 @@
+.listInfoUseful {
+  &__title {
+    @include title-list-info;
+  }
+
+  &__list {
+    @include title-list-item-info;
+  }
+}

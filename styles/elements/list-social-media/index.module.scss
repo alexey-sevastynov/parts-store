@@ -5,7 +5,7 @@
 
   &__list {
     @include display-flex;
-    gap: 30px;
+    gap: 10px;
 
     &_item {
       &_icon {
