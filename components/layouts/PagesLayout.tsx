@@ -11,6 +11,9 @@ const PagesLayout = ({ children }: { children: React.ReactNode }) => {
 
   const isDashboardPage = pathname === '/dashboard';
 
+  const isOpenAsidePanel = useAppSelector(
+    (state) => state.modals.isOpenAsidePanel
+  );
   const isOpenDropDownLang = useAppSelector(
     (state) => state.modals.isOpenDropDownLang
   );
@@ -30,6 +33,11 @@ const PagesLayout = ({ children }: { children: React.ReactNode }) => {
       {!isDashboardPage && <Layout>{children}</Layout>}
 
       {isDashboardPage && <AdminLayout>{children}</AdminLayout>}
+
+      {/* background, when the aside panel window is open */}
+      <div
+        className={`popup-window-overlay ${isOpenAsidePanel ? 'overflow-hidden overlay-active ' : ''}`}
+      />
 
       {/* background, when the language drop-down window is open */}
       <div

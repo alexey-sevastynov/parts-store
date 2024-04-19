@@ -25,6 +25,7 @@ export interface IUserCardProps
   photo?: string;
   isActive?: boolean;
   isOnlyPhoto?: boolean;
+  theme?: 'light' | 'dark';
 }
 
 export interface IIconWithTitleCounterProps {

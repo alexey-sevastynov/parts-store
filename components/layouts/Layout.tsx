@@ -12,12 +12,16 @@ import {
 import { useLang } from '@/hooks/useLang';
 import PasswordChange from '../modules/UserProfilePage/AccountSettings/PasswordChange/PasswordChange';
 import DeleteUser from '../modules/UserProfilePage/AccountSettings/DeleteUser';
+import AsidePanel from '../modules/AsidePanel/AsidePanel';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
 
   const { lang, translations } = useLang();
 
+  const isOpenAsidePanel = useAppSelector(
+    (props) => props.modals.isOpenAsidePanel
+  );
   const isOpenChangePassword = useAppSelector(
     (props) => props.modals.isOpenChangePassword
   );
@@ -33,6 +37,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           {children}
         </div>
       </div>
+
+      {/* Window popup Aside Panel */}
+      {isOpenAsidePanel && <AsidePanel />}
 
       {/* Window popup the change password */}
       {isOpenChangePassword && (

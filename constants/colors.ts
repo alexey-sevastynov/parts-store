@@ -1,5 +1,6 @@
 export const COLORS = {
   whiteFont: '#ffffff',
+  whiteIcon: '#ffffff',
   blackFont: '#242424',
 
   blackIcon: '#242424',

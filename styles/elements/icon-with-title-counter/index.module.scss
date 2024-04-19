@@ -7,6 +7,12 @@
 
   cursor: pointer;
 
+  .iconWithTitleCounter__image,
+  .iconWithTitleCounter__text {
+    color: $black-font;
+    @include btn-hover(color);
+  }
+
   &:hover {
     .iconWithTitleCounter__image,
     .iconWithTitleCounter__text {

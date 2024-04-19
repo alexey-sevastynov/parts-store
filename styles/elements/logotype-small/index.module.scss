@@ -1,0 +1,18 @@
+.logotypeSmall {
+  display: flex;
+
+  @include forbid-select-text;
+
+  p {
+    color: $white-icon;
+
+    font-size: $font-xl;
+    font-weight: $weight-bold;
+
+    color: $white-font;
+
+    &::first-letter {
+      color: orange;
+    }
+  }
+}

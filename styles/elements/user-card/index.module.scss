@@ -5,26 +5,37 @@
   gap: 16px;
 
   &__photo,
-  &__photo.userCard__photo_custom {
+  &__photo.userCard__photo_custom,
+  &__photo_unauthenticated {
     cursor: pointer;
   }
 
-  &__photo {
+  &__photo,
+  &__photo_unauthenticated {
     display: block;
     border-radius: 100%;
   }
 
+  &__photo_unauthenticated,
   &__photo.userCard__photo_custom {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    height: 40px;
-    width: 40px;
+    min-height: 40px;
+    min-width: 40px;
     border-radius: 100%;
-    background-color: $orange;
-    color: $white-font;
 
+    color: $white-font;
+  }
+
+  &__photo_unauthenticated {
+    background-color: $grey;
+    cursor: default;
+  }
+
+  &__photo.userCard__photo_custom {
+    background-color: $orange;
     font-size: $font-xl;
   }
 
@@ -32,11 +43,47 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    gap: 5px;
 
     justify-content: space-around;
 
+    &_head {
+      display: flex;
+      gap: 10px;
+
+      &_divider {
+        display: block;
+        height: 16px;
+        width: 1px;
+        background-color: $grey;
+      }
+
+      &_signIn,
+      &_signUp {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      &_signIn.userCard__description_head_signIn_light,
+      &_signUp.userCard__description_head_signUp_light {
+        color: $white-font;
+      }
+
+      &_signIn,
+      &_signUp {
+        color: $black-font;
+      }
+
+      &_signIn,
+      &_signUp {
+        font-size: $font-m;
+      }
+    }
+
     &_name,
-    &_email {
+    &_email,
+    &_text {
       color: $black-font;
     }
 
@@ -48,7 +95,14 @@
       color: $orange;
     }
 
-    &_email {
+    &_name.userCard__description_name_light,
+    &_text.userCard__description_text_light,
+    &_email.userCard__description_email_light {
+      color: $white-font;
+    }
+
+    &_email,
+    &_text {
       font-size: $font-s;
     }
   }

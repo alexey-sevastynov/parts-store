@@ -90,3 +90,32 @@
   font-size: $font-s;
   color: $red;
 }
+
+@mixin title-list-info {
+  font-weight: $weight-semi-bold;
+  font-size: $font-m;
+
+  color: $grafit;
+
+  margin-bottom: 20px;
+}
+
+@mixin title-list-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  color: $grafit;
+  font-size: $font-m;
+
+  &_item {
+    & a {
+      color: $black-font;
+
+      @include btn-hover(color);
+      &:hover {
+        color: $orange;
+      }
+    }
+  }
+}

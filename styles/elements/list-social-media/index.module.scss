@@ -1,0 +1,22 @@
+.listSocialMedia {
+  &__title {
+    @include title-list-info;
+  }
+
+  &__list {
+    @include display-flex;
+    gap: 30px;
+
+    &_item {
+      &_icon {
+        color: black;
+
+        @include btn-hover(color);
+
+        &:hover {
+          color: $orange;
+        }
+      }
+    }
+  }
+}

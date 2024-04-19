@@ -1,6 +1,5 @@
 'use client';
 import { createSlice } from '@reduxjs/toolkit';
-import { stat } from 'fs';
 
 export interface ModalsState {
   isOpenDropDownLang: boolean;
@@ -13,6 +12,7 @@ export interface ModalsState {
 
   isOpenChangePassword: boolean;
   isOpenDeleteUser: boolean;
+  isOpenAsidePanel: boolean;
 }
 
 const initialState: ModalsState = {
@@ -26,6 +26,7 @@ const initialState: ModalsState = {
 
   isOpenChangePassword: false,
   isOpenDeleteUser: false,
+  isOpenAsidePanel: true,
 };
 
 export const modalsSlice = createSlice({
@@ -97,6 +98,12 @@ export const modalsSlice = createSlice({
     closePopupWindowDeleteUser: (state) => {
       state.isOpenDeleteUser = false;
     },
+    openPopupAsidePanel: (state) => {
+      state.isOpenAsidePanel = true;
+    },
+    closePopupAsidePanel: (state) => {
+      state.isOpenAsidePanel = false;
+    },
   },
 });
 
@@ -112,6 +119,8 @@ export const {
   openWindowRemindPassword,
   openPopupWindowDeleteUser,
   closePopupWindowDeleteUser,
+  openPopupAsidePanel,
+  closePopupAsidePanel,
 } = modalsSlice.actions;
 
 export const modalsReducer = modalsSlice.reducer;
