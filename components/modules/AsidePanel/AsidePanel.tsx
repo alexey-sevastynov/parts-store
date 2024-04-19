@@ -1,26 +1,33 @@
-import LogotypeSmall from '@/components/elements/LogotypeSmall';
-import UserCard from '@/components/elements/UserCard';
+import Styles from '@/styles/modules/aside-panel/index.module.scss';
+
+import { motion } from 'framer-motion';
+import { signOut, useSession } from 'next-auth/react';
+
+import { useLang } from '@/hooks/useLang';
 
 import { COLORS } from '@/constants/colors';
+
+import { IoMdClose } from 'react-icons/io';
+
 import { basePropsForMotionAsidePanel } from '@/constants/motion';
 import { closePopupAsidePanel } from '@/context/features/modals/modals';
 import { useAppDispatch } from '@/context/hooks';
-import Styles from '@/styles/modules/aside-panel/index.module.scss';
-import { removeOverflowHiddenFromBody } from '@/utils/common';
-import { motion } from 'framer-motion';
-import { useSession } from 'next-auth/react';
-import { IoMdClose } from 'react-icons/io';
-import { useLang } from '@/hooks/useLang';
 
-import ListLinks from './ListLinks';
-import LanguagePanel from './LanguagePanel';
+import { removeOverflowHiddenFromBody } from '@/utils/common';
+
+import LogotypeSmall from '@/components/elements/LogotypeSmall';
+import UserCard from '@/components/elements/UserCard';
 import ListInfoAboutCompany from '@/components/elements/ListInfoAboutCompany';
 import ListInfoHelpCompany from '@/components/elements/ListInfoHelpCompany';
 import ListSocialMedia from '@/components/elements/ListSocialMedia';
+import ListLinks from './ListLinks';
+import LanguagePanel from './LanguagePanel';
 
 const AsidePanel = () => {
-  const { data } = useSession();
+  const { data, status } = useSession();
   const dispatch = useAppDispatch();
+
+  const isAuthenticated = status === 'authenticated';
 
   const { lang, translations } = useLang();
 
@@ -69,11 +76,17 @@ const AsidePanel = () => {
 
         <ListSocialMedia />
 
-        <span className={Styles.asidePanel__main_divider} />
-
-        <button className={Styles.asidePanel__main_signOut}>
-          {translations[lang].authorization.sign_out_account}
-        </button>
+        {isAuthenticated && (
+          <>
+            <span className={Styles.asidePanel__main_divider} />
+            <button
+              className={Styles.asidePanel__main_signOut}
+              onClick={() => signOut({ redirect: false })}
+            >
+              {translations[lang].authorization.sign_out_account}
+            </button>
+          </>
+        )}
       </nav>
     </motion.section>
   );

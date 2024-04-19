@@ -10,9 +10,13 @@ import { FaCar, FaThList } from 'react-icons/fa';
 import IconWithTitleCounter from '@/components/elements/IconWithTitleCounter';
 import { MdChecklist, MdFavorite } from 'react-icons/md';
 import { PiShoppingCartSimpleFill } from 'react-icons/pi';
+import { useSession } from 'next-auth/react';
 
 const ListLinks = () => {
+  const { data, status } = useSession();
   const { lang, translations } = useLang();
+
+  const isAuthenticated = status === 'authenticated';
   return (
     <ul className={Styles.listLinks}>
       {/* ___________CATALOG */}
@@ -48,20 +52,22 @@ const ListLinks = () => {
       <span className={Styles.listLinks__divider} />
 
       {/* ___________FAVORITE LIST */}
-      <li className={Styles.listLinks__item}>
-        <Link href={'/favorites'}>
-          <IconWithTitleCounter
-            image={
-              <MdFavorite
-                className={StylesElement.iconWithTitleCounter__image}
-                size={SIZE_ICON}
-              />
-            }
-            text={translations[lang].aside_panel_page.wish_list}
-            counter={13}
-          />
-        </Link>
-      </li>
+      {isAuthenticated && (
+        <li className={Styles.listLinks__item}>
+          <Link href={'/favorites'}>
+            <IconWithTitleCounter
+              image={
+                <MdFavorite
+                  className={StylesElement.iconWithTitleCounter__image}
+                  size={SIZE_ICON}
+                />
+              }
+              text={translations[lang].aside_panel_page.wish_list}
+              counter={13}
+            />
+          </Link>
+        </li>
+      )}
 
       {/* ___________CART LIST */}
       <li className={Styles.listLinks__item}>
@@ -80,19 +86,21 @@ const ListLinks = () => {
       </li>
 
       {/* ___________ORDER LIST */}
-      <li className={Styles.listLinks__item}>
-        <Link href={'/cart'}>
-          <IconWithTitleCounter
-            image={
-              <MdChecklist
-                className={StylesElement.iconWithTitleCounter__image}
-                size={SIZE_ICON}
-              />
-            }
-            text={translations[lang].aside_panel_page.my_orders}
-          />
-        </Link>
-      </li>
+      {isAuthenticated && (
+        <li className={Styles.listLinks__item}>
+          <Link href={'/cart'}>
+            <IconWithTitleCounter
+              image={
+                <MdChecklist
+                  className={StylesElement.iconWithTitleCounter__image}
+                  size={SIZE_ICON}
+                />
+              }
+              text={translations[lang].aside_panel_page.my_orders}
+            />
+          </Link>
+        </li>
+      )}
     </ul>
   );
 };
