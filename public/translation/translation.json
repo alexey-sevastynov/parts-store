@@ -165,6 +165,17 @@
 
       "personal_account": "Personal account",
       "sign_in_sign_up": "Registration / Login"
+    },
+
+    "categories": {
+      "spare_parts_for_service": "Spare parts for service",
+      "oil_fluid_and_autochemistry": "Oil, fluid, and autochemistry",
+      "tires_and_wheels": "Tires and wheels",
+      "lighting": "Lighting",
+      "audio_and_electronics": "Audio and electronics",
+      "tools_and_equipment": "Tools and equipment",
+      "interior": "Interior",
+      "exterior": "Exterior"
     }
   },
 
@@ -334,6 +345,17 @@
 
       "personal_account": "Особистий кабінет",
       "sign_in_sign_up": "Регастрація / Логін"
+    },
+
+    "categories": {
+      "spare_parts_for_service": "Запчастини для ТО",
+      "oil_fluid_and_autochemistry": "Олива, рідина і автохімія",
+      "tires_and_wheels": "Шини та диски",
+      "lighting": "Освітлення",
+      "audio_and_electronics": "Аудіо та електроніка",
+      "tools_and_equipment": "Інструменти і обладнання",
+      "interior": "Інтер’єр",
+      "exterior": "Екстер’єр"
     }
   },
 
@@ -503,6 +525,17 @@
 
       "personal_account": "Личный кабинет",
       "sign_in_sign_up": "Регистрация / Вход"
+    },
+
+    "categories": {
+      "spare_parts_for_service": "Запчасти для ТО",
+      "oil_fluid_and_autochemistry": "Масло, жидкости и автохимия",
+      "tires_and_wheels": "Шины и диски",
+      "lighting": "Освещение",
+      "audio_and_electronics": "Аудио и электроника",
+      "tools_and_equipment": "Инструменты и оборудование",
+      "interior": "Интерьер",
+      "exterior": "Экстерьер"
     }
   }
 }

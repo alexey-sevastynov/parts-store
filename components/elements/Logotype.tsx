@@ -9,8 +9,8 @@ const Logotype = ({ ...props }: ILgotypeProps) => {
     <Image
       src={src}
       alt={alt}
-      width={100}
-      height={91}
+      width={121}
+      height={92}
       priority
       {...otherProps}
     />
