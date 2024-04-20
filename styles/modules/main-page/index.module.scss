@@ -9,7 +9,7 @@ $padding-right-aside-panel: 10px;
 .asidePanelMain {
   box-sizing: border-box;
   width: 320px;
-  border-right: 1px solid $grafit;
+  border-right: 1px solid $black;
 
   padding-top: $padding-top-page;
   padding-right: $padding-right-aside-panel;
@@ -21,7 +21,7 @@ $padding-right-aside-panel: 10px;
 
     height: 1px;
     width: calc(100% + $padding-right-aside-panel);
-    background-color: $grafit;
+    background-color: $black;
   }
 }
 
@@ -51,7 +51,7 @@ $padding-right-aside-panel: 10px;
     &_icon {
       & svg {
         @include btn-hover(color);
-        color: $black-icon;
+        color: $grey;
       }
     }
 
