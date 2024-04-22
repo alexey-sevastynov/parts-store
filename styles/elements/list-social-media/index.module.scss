@@ -9,12 +9,12 @@
 
     &_item {
       &_icon {
-        color: black;
+        color: $black-icon;
 
         @include btn-hover(color);
 
         &:hover {
-          color: $orange;
+          color: $orange !important;
         }
       }
     }

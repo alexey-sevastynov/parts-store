@@ -9,7 +9,7 @@ $padding-right-aside-panel: 10px;
 .asidePanelMain {
   box-sizing: border-box;
   width: 320px;
-  border-right: 1px solid $black;
+  border-right: 1px solid $grey;
 
   padding-top: $padding-top-page;
   padding-right: $padding-right-aside-panel;
@@ -21,7 +21,12 @@ $padding-right-aside-panel: 10px;
 
     height: 1px;
     width: calc(100% + $padding-right-aside-panel);
-    background-color: $black;
+    background-color: $grey;
+
+    &_last {
+      display: block;
+      padding-top: $padding-top-page;
+    }
   }
 }
 
@@ -45,6 +50,7 @@ $padding-right-aside-panel: 10px;
       .itemCategory__link_title,
       .itemCategory__link_arrow {
         color: $orange;
+        font-weight: $weight-medium;
       }
     }
 
@@ -67,6 +73,28 @@ $padding-right-aside-panel: 10px;
       color: $black-icon;
 
       right: 0;
+    }
+  }
+}
+
+.authUser {
+  &__list {
+    padding-top: 20px;
+    padding-left: calc($size-photo-user-card + $margin-right-user-card);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &_item,
+    &_item a {
+      font-size: $font-m;
+      color: $black-font;
+
+      width: max-content;
+
+      &:hover {
+        color: $orange;
+      }
     }
   }
 }

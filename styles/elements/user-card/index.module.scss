@@ -2,7 +2,7 @@
   @include display-flex;
   height: 40px;
 
-  gap: 16px;
+  gap: $margin-right-user-card;
 
   &__photo,
   &__photo.userCard__photo_custom,
@@ -22,8 +22,8 @@
     align-items: center;
     justify-content: center;
 
-    min-height: 40px;
-    min-width: 40px;
+    min-height: $size-photo-user-card;
+    min-width: $size-photo-user-card;
     border-radius: 100%;
 
     color: $white-font;
