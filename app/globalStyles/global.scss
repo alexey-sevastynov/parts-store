@@ -8,6 +8,9 @@
 @import './variables/breakpoints.scss';
 @import './variables/blocks.scss';
 
+// pages
+@import './pages/main-page.scss';
+
 .container {
   max-width: 1800px;
   margin: 0 auto;

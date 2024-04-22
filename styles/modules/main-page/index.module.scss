@@ -5,10 +5,11 @@
 @import '../../../app/globalStyles/base/mixins.scss';
 
 $padding-right-aside-panel: 10px;
+$width-aside-panel: 320px;
 
 .asidePanelMain {
   box-sizing: border-box;
-  width: 320px;
+  width: $width-aside-panel;
   border-right: 1px solid $grey;
 
   padding-top: $padding-top-page;
@@ -27,6 +28,10 @@ $padding-right-aside-panel: 10px;
       display: block;
       padding-top: $padding-top-page;
     }
+  }
+
+  @media (max-width: $breakpoint_lg) {
+    display: none;
   }
 }
 
@@ -95,6 +100,114 @@ $padding-right-aside-panel: 10px;
       &:hover {
         color: $orange;
       }
+    }
+  }
+}
+
+.userInterestPanel {
+  width: calc(100% - $width-aside-panel);
+  padding-top: $padding-top-page;
+  padding-left: $padding-left-page;
+
+  @media (max-width: $breakpoint_lg) {
+    padding-left: 0px;
+    width: 100%;
+  }
+}
+
+.cartNotificationBar {
+  @include display-flex;
+
+  max-width: 100%;
+
+  padding: 7px 15px;
+
+  border: 1px solid $grey;
+  border-radius: 10px;
+
+  &__icon {
+    svg {
+      color: $green;
+    }
+  }
+
+  &__total {
+    margin-left: 15px;
+    max-width: 160px;
+
+    min-width: 150px;
+
+    & p {
+      font-size: $font-m;
+      color: $black-font;
+    }
+
+    & b {
+      font-weight: $weight-bold;
+    }
+  }
+
+  &__items {
+    margin-left: 25px;
+
+    @include text-gradient-end;
+    @include display-flex;
+    gap: 10px;
+
+    max-width: 100%;
+
+    overflow-x: hidden;
+
+    &_item {
+      max-width: 100%;
+      @include display-flex;
+      gap: 10px;
+
+      &_description {
+        white-space: nowrap;
+
+        text-overflow: ellipsis;
+        vertical-align: baseline;
+      }
+    }
+  }
+
+  &__btns {
+    max-width: 100%;
+    flex-grow: 1;
+    justify-content: flex-end;
+
+    margin-left: 20px;
+    @include display-flex;
+
+    &_toCart,
+    &_toOrder {
+      white-space: nowrap;
+      padding: 0px 10px;
+    }
+
+    &_toCart {
+      padding-right: 20px;
+    }
+  }
+
+  @media (max-width: $breakpoint_xxl) {
+    &__btns {
+      &_toCart {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: $breakpoint_sm) {
+    &__icon {
+      display: none;
+    }
+    &__total {
+      margin-left: 0px;
+    }
+    &__items {
+      display: none;
     }
   }
 }
