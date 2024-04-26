@@ -8,6 +8,13 @@ $padding-right-aside-panel: 10px;
 $width-aside-panel: 320px;
 
 .asidePanelMain {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+
+  position: sticky;
+  bottom: 0px;
+
   box-sizing: border-box;
   width: $width-aside-panel;
   border-right: 1px solid $grey;

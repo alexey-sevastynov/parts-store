@@ -32,13 +32,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      {/* <div className='header-wrapper footer-wrapper'> */}
-      {/* <div className='container'> */}
       <Header />
       {children}
-      <Footer />
-      {/* </div> */}
-      {/* </div> */}
+      {/* <Footer /> */}
 
       {/* Window popup Aside Panel */}
       {isOpenAsidePanel && <AsidePanel />}
