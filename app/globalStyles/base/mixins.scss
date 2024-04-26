@@ -100,6 +100,15 @@
   margin-bottom: 20px;
 }
 
+@mixin title-list-item {
+  font-weight: $weight-medium;
+  font-size: $font-l;
+
+  color: $black-font;
+
+  padding-bottom: 20px;
+}
+
 @mixin title-list-item-info {
   display: flex;
   flex-direction: column;

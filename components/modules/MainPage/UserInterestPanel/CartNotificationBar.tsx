@@ -30,7 +30,10 @@ const CartNotificationBar = ({
 
       <div className={Styles.cartNotificationBar__items}>
         {items.map((item) => (
-          <article className={Styles.cartNotificationBar__items_item}>
+          <article
+            className={Styles.cartNotificationBar__items_item}
+            key={item.id}
+          >
             <Link href={'/'}>
               <Image
                 src={item.image || '/img/no-image.png'}
@@ -40,7 +43,7 @@ const CartNotificationBar = ({
                 style={{
                   objectFit: 'contain',
                 }}
-              />{' '}
+              />
             </Link>
 
             <p className={Styles.cartNotificationBar__items_item_description}>

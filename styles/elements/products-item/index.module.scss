@@ -1,0 +1,232 @@
+$heigth-more-block: 38px;
+
+.productsItem.wrap {
+  box-sizing: border-box;
+  width: calc(100% / 6);
+
+  @media (max-width: $breakpoint_xxl) {
+    width: calc(100% / 5);
+
+    &:first-child {
+      display: block;
+    }
+  }
+
+  @media (max-width: $breakpoint_xl) {
+    width: calc(100% / 4);
+
+    &:nth-child(2) {
+      display: block;
+    }
+  }
+
+  @media (max-width: $breakpoint_md) {
+    width: calc(100% / 2);
+
+    &:nth-child(3),
+    &:nth-child(4) {
+      display: block;
+    }
+  }
+}
+
+.productsItem {
+  position: relative;
+
+  padding: 20px;
+
+  width: 400px;
+
+  border-right: $border;
+  border-bottom: $border;
+
+  &:last-child {
+    .productsItem__more {
+      @include display-flex;
+      justify-content: center;
+      gap: 10px;
+
+      position: absolute;
+      left: -1px;
+      bottom: calc(-1px - $heigth-more-block);
+
+      height: $heigth-more-block;
+      width: calc(2px + 100%); // 1px border + 1px border = 2px
+
+      border-left: $border;
+      border-bottom: $border;
+      border-right: $border;
+
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+
+      &:hover {
+        & p,
+        & svg {
+          color: $orange;
+        }
+      }
+
+      & p,
+      & svg {
+        color: $black-font;
+        @include btn-hover(color);
+      }
+
+      & p {
+        font-size: $font-s;
+      }
+    }
+  }
+
+  &__favorite {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+
+    @include display-flex;
+
+    & svg {
+      color: $orange;
+    }
+  }
+
+  &__image {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+
+    max-width: 100%;
+    height: 200px;
+
+    & img {
+      object-fit: contain;
+    }
+  }
+
+  &__name {
+    display: block;
+    margin-top: 10px;
+    color: $black-font;
+    font-size: $font-m;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__brand {
+    margin-top: 10px;
+    color: $orange;
+  }
+
+  &__price {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+    margin-top: 20px;
+
+    height: 40px;
+
+    &_old {
+      color: $grafit;
+      text-decoration: line-through;
+      font-size: $font-s;
+    }
+    &_new {
+      color: $red;
+      font-size: $font-l;
+    }
+
+    &_current {
+      position: absolute;
+      bottom: 0;
+      font-size: $font-l;
+    }
+  }
+
+  &__availability {
+    height: $font-s;
+    & p {
+      margin-top: 7px;
+      font-size: $font-s;
+      color: $black-font;
+    }
+  }
+
+  &__more {
+    display: none;
+  }
+
+  @media (max-width: $breakpoint_xxl) {
+    &:first-child {
+      display: none;
+    }
+  }
+
+  @media (max-width: $breakpoint_xl) {
+    &:nth-child(2) {
+      display: none;
+    }
+  }
+
+  @media (max-width: $breakpoint_md) {
+    &:nth-child(3),
+    &:nth-child(4) {
+      display: none;
+    }
+
+    &:last-child {
+      .productsItem__more {
+        display: none;
+      }
+    }
+
+    &__more {
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+
+      display: flex;
+
+      @include display-flex;
+      justify-content: center;
+      gap: 10px;
+
+      position: absolute;
+      left: 0px;
+      bottom: calc(-1px - $heigth-more-block);
+
+      height: $heigth-more-block;
+      width: calc(2px + 200%); // 1px border + 1px border = 2px
+
+      border-left: $border;
+      border-bottom: $border;
+      border-right: $border;
+
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+
+      &:hover {
+        & p,
+        & svg {
+          color: $orange;
+        }
+      }
+
+      & p,
+      & svg {
+        color: $black-font;
+        @include btn-hover(color);
+      }
+
+      & p {
+        font-size: $font-s;
+      }
+    }
+  }
+}

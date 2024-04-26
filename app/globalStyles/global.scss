@@ -21,11 +21,11 @@
   }
 }
 
-.header-wrapper {
-  width: 100%;
-  height: $height-header;
-  background-color: $grafit;
-}
+// .header-wrapper {
+//   width: 100%;
+//   height: $height-header;
+//   background-color: $grafit;
+// }
 
 .footer-wrapper {
 }
@@ -50,7 +50,7 @@
   position: fixed;
   visibility: hidden;
 
-  z-index: 0;
+  z-index: 1;
 
   transition: opacity 0.3s ease;
 }

@@ -107,6 +107,7 @@ $width-aside-panel: 320px;
 .userInterestPanel {
   width: calc(100% - $width-aside-panel);
   padding-top: $padding-top-page;
+  padding-bottom: $padding-bottom-page;
   padding-left: $padding-left-page;
 
   @media (max-width: $breakpoint_lg) {
@@ -209,5 +210,15 @@ $width-aside-panel: 320px;
     &__items {
       display: none;
     }
+  }
+}
+
+.recentlyViewedProducts {
+  width: 100%;
+
+  margin-top: 30px;
+
+  &__title {
+    @include title-list-item;
   }
 }
