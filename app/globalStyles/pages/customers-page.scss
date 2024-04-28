@@ -1,4 +1,17 @@
 .customers-page {
-  // width: calc(100% - $width-aside-panel-admin);
-  background-color: green;
+  width: 100%;
+  background-color: $grey;
+  padding: 50px;
+
+  margin-left: $width-aside-panel-admin;
+
+  z-index: 200;
+
+  transition: margin-left 0.3s ease;
+}
+
+.customers-page-big {
+  margin-left: 100px;
+
+  transition: margin-left 0.3s ease;
 }

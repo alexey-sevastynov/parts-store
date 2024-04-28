@@ -5,16 +5,29 @@
 @import '../../../app/globalStyles/base/mixins.scss';
 
 .adminAsidePanel {
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
-  position: sticky;
-  top: 0;
+  position: fixed;
 
-  background-color: $black;
+  background-color: $red;
 
   height: 100vh;
   width: $width-aside-panel-admin;
 
-  color: $white-font;
+  color: $black-font;
+}
+
+.adminAsideButton {
+  height: 80px;
+  width: 80px;
+  border-radius: $border-radius-admin;
+
+  background-color: $white;
+
+  &__icon {
+    color: $black;
+  }
 }
 
 .customers {

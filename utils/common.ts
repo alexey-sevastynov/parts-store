@@ -3,11 +3,19 @@ export const removeOverflowHiddenFromBody = () => {
   body.classList.remove('overflow-hidden');
 };
 
-export const addOverflowHiddenToBody = (paddingRight = '') => {
+export const addOverflowHiddenToBody = () => {
   const body = document.querySelector('body') as HTMLBodyElement;
   body.classList.add('overflow-hidden');
+};
 
-  paddingRight && (body.style.paddingRight = paddingRight);
+export const collapseNavAdmin = () => {
+  const body = document.querySelector('.customers-page') as HTMLBodyElement;
+  body.classList.remove('customers-page-big');
+};
+
+export const expandNavAdmin = () => {
+  const body = document.querySelector('.customers-page') as HTMLBodyElement;
+  body.classList.add('customers-page-big');
 };
 
 export function parseNameString(fullName: string) {
