@@ -5,11 +5,12 @@ import Layout from './Layout';
 import AdminLayout from './AdminLayout';
 
 import { usePathname } from 'next/navigation';
+import AdminAsidePanel from '../modules/Dashboard/AdminAsidePanel/AdminAsidePanel';
 
 const PagesLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
 
-  const isDashboardPage = pathname === '/dashboard';
+  const isDashboardPage = pathname.startsWith('/dashboard');
 
   const isOpenAsidePanel = useAppSelector(
     (state) => state.modals.isOpenAsidePanel
@@ -32,7 +33,12 @@ const PagesLayout = ({ children }: { children: React.ReactNode }) => {
     <>
       {!isDashboardPage && <Layout>{children}</Layout>}
 
-      {isDashboardPage && <AdminLayout>{children}</AdminLayout>}
+      {isDashboardPage && (
+        <AdminLayout>
+          <AdminAsidePanel />
+          {children}
+        </AdminLayout>
+      )}
 
       {/* background, when the aside panel window is open */}
       <div

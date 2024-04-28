@@ -1,0 +1,21 @@
+@import '../../../app/globalStyles/variables/colors.scss';
+@import '../../../app/globalStyles/variables/fonts.scss';
+@import '../../../app/globalStyles/variables/blocks.scss';
+@import '../../../app/globalStyles/variables/breakpoints.scss';
+@import '../../../app/globalStyles/base/mixins.scss';
+
+.adminAsidePanel {
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+
+  background-color: $black;
+
+  height: 100vh;
+  width: $width-aside-panel-admin;
+
+  color: $white-font;
+}
+
+.customers {
+}
