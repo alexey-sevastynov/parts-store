@@ -4,8 +4,6 @@
   @include forbid-select-text;
 
   p {
-    color: $white-icon;
-
     font-size: $font-xl;
     font-weight: $weight-bold;
 
@@ -13,6 +11,20 @@
 
     &::first-letter {
       color: orange;
+    }
+  }
+}
+
+.logotypeSmall.dark {
+  p {
+    color: $black-font;
+  }
+}
+
+.logotypeSmall.red {
+  p {
+    &::first-letter {
+      color: $red;
     }
   }
 }

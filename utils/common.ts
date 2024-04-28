@@ -18,6 +18,16 @@ export const expandNavAdmin = () => {
   body.classList.add('customers-page-big');
 };
 
+export const hideNavMenu = () => {
+  const body = document.querySelector('.customers-page') as HTMLBodyElement;
+  body.classList.add('hide');
+};
+
+export const showNavMenu = () => {
+  const body = document.querySelector('.customers-page') as HTMLBodyElement;
+  body.classList.remove('hide');
+};
+
 export function parseNameString(fullName: string) {
   const parts = fullName.split(' ');
 

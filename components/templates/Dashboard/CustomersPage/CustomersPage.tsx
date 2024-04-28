@@ -4,7 +4,7 @@ import AdminAsideButton from '@/components/modules/Dashboard/AdminAsideButton';
 
 const CustomersPage = () => {
   return (
-    <main className='customers-page '>
+    <main className='customers-page'>
       <AdminAsideButton />
     </main>
   );

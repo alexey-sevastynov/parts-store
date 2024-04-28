@@ -1,7 +1,8 @@
 .customers-page {
   width: 100%;
+  min-height: 100vh;
   background-color: $grey;
-  padding: 50px;
+  padding: $padding-top-page-admin;
 
   margin-left: $width-aside-panel-admin;
 
@@ -11,7 +12,13 @@
 }
 
 .customers-page-big {
-  margin-left: 100px;
+  margin-left: 55px;
+
+  transition: margin-left 0.3s ease;
+}
+
+.hide {
+  margin-left: 0px;
 
   transition: margin-left 0.3s ease;
 }

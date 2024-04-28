@@ -5,17 +5,71 @@
 @import '../../../app/globalStyles/base/mixins.scss';
 
 .adminAsidePanel {
+  padding-top: $padding-top-page-admin;
+
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   position: fixed;
 
-  background-color: $red;
+  background-color: $white;
 
   height: 100vh;
   width: $width-aside-panel-admin;
 
   color: $black-font;
+
+  &__logo {
+    padding-left: 20px;
+    @include display-flex;
+    gap: 12px;
+  }
+
+  &__list {
+    margin-top: 50px;
+  }
+
+  .listNavAdmin {
+    display: flex;
+    flex-direction: column;
+
+    gap: 30px;
+    .itemNavAdmin {
+      height: 24px;
+      @include display-flex;
+
+      &__marker {
+        display: block;
+        width: 4px;
+        height: 100%;
+        background: $red;
+      }
+
+      &__icon {
+        padding-left: 20px;
+        height: 100%;
+        & svg {
+          color: black;
+        }
+      }
+
+      &__title {
+        padding-left: 12px;
+        color: $black-font;
+        font-weight: $weight-medium;
+
+        font-size: $font-l;
+      }
+
+      &__icon.active,
+      &__title.active {
+        color: $red;
+        svg {
+          color: $red;
+        }
+      }
+    }
+  }
 }
 
 .adminAsideButton {

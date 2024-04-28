@@ -17,6 +17,11 @@ export interface ILgotypeProps extends Omit<ImageProps, 'src' | 'alt'> {
   alt?: string;
 }
 
+export interface ILogotypeSmallProps {
+  theme?: ThemeType;
+  color?: 'red' | 'orange';
+}
+
 export type ParagraphSize = 'xl' | 'lg' | 'md' | 'sm';
 export type TitleSize = ParagraphSize;
 export type ThemeType = 'light' | 'dark';
