@@ -175,7 +175,8 @@ $padding-info-small-panel: 20px;
 
   &__head,
   &__table thead &__table_head,
-  &__table tbody tr {
+  &__table tbody tr,
+  &__table_head_delete {
     padding-left: $padding-left-right-table-admin;
     padding-right: $padding-left-right-table-admin;
   }
@@ -183,6 +184,28 @@ $padding-info-small-panel: 20px;
   &__head {
     display: flex;
     justify-content: space-between;
+
+    &_title {
+      display: flex;
+      gap: 10px;
+
+      & button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: max-content;
+
+        & svg {
+          color: $grey;
+
+          @include btn-hover(color);
+
+          &:hover {
+            color: $black-icon;
+          }
+        }
+      }
+    }
   }
 
   &__table {
@@ -252,6 +275,28 @@ $padding-info-small-panel: 20px;
 
           & svg {
             color: $grey;
+          }
+        }
+
+        &_delete {
+          display: flex;
+          justify-content: space-between;
+
+          font-size: $font-m;
+          padding-bottom: 20px;
+
+          & button {
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+
+          &_btn {
+            color: $black-font;
+
+            &_red {
+              color: $red;
+            }
           }
         }
 

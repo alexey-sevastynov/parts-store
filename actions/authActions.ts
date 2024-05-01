@@ -57,6 +57,38 @@ export async function deleteUser({ id }: { id: string }) {
   }
 }
 
+export async function deleteSelectedUsers(
+  checkboxes: { [key: string]: boolean },
+  currentUserID: string
+) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) throw new Error('Unauthorization!');
+
+    const selectedUserIds = Object.keys(checkboxes).filter(
+      (key) => checkboxes[key] && key !== currentUserID
+    );
+
+    if (selectedUserIds.length === 0) {
+      return { msg: 'No users selected for deletion', status: 400 };
+    }
+
+    const deletePromises = selectedUserIds.map(async (userId) => {
+      const user = await User.findByIdAndDelete(userId);
+      if (!user) {
+        console.log(`Failed to delete user with ID: ${userId}`);
+      }
+    });
+
+    await Promise.all(deletePromises);
+
+    return { msg: 'Selected users deleted successfully!', status: 200 };
+  } catch (error: any) {
+    console.error(error);
+    return { msg: 'Failed to delete selected users.', status: 500 };
+  }
+}
+
 export async function signUpWithCredentials({
   firstName,
   lastName,

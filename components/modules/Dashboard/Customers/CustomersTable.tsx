@@ -1,158 +1,211 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
-import SearchAdmin from '../SearchAdmin';
-import Title from '@/components/elements/Title';
-import { BiSort } from 'react-icons/bi';
-import { deleteUser, getAllUsers } from '@/actions/authActions';
+
 import React, { ChangeEvent } from 'react';
-import { IUser } from '@/types/user';
-import { extractLastFiveCharacters } from '@/utils/common';
-import DateTranslation from './DateTranslation';
+import { useSession } from 'next-auth/react';
+
 import { MdDelete } from 'react-icons/md';
-import { SIZE_ICON } from '@/constants/common';
+import { BiSort } from 'react-icons/bi';
+
+import { deleteSelectedUsers, deleteUser } from '@/actions/authActions';
+
 import { COLORS } from '@/constants/colors';
-import { useAppDispatch } from '@/context/hooks';
+import { SIZE_ICON } from '@/constants/common';
 
-const CustomersTable = () => {
-  const dispatch = useAppDispatch();
+import { extractLastFiveCharacters } from '@/utils/common';
 
-  const [users, setUsers] = React.useState<IUser[]>();
+import { IUser } from '@/types/user';
+
+import DateTranslation from './DateTranslation';
+
+const CustomersTable = ({ users }: { users?: IUser[] }) => {
+  const { data } = useSession();
+  const currentUserID = data?.user._id;
+
   const [checkboxes, setCheckboxes] = React.useState<{
     [key: string]: boolean;
   }>({});
 
+  const isCheckedAll = checkboxes['all'];
+
+  const isAnyCheckboxChecked = Object.values(checkboxes).some(
+    (value) => value === true
+  );
+
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
+
+    // If the "all" checkbox is selected, set the state of all checkboxes
     if (name === 'all') {
-      // Если выбран чекбокс "все", устанавливаем состояние всех чекбоксов
       const updatedCheckboxes: {
         [key: string]: boolean;
       } = {};
+
+      // If "all" is selected, set all checkboxes to true
       if (checked) {
-        // Если "все" выбран, устанавливаем все чекбоксы в true
         users?.forEach((user) => {
           updatedCheckboxes[user._id] = true;
         });
       }
+
+      // Update the status of the checkboxes, including the "all" checkboxes
       setCheckboxes({ ...updatedCheckboxes, all: checked });
     } else {
-      // Если выбран другой чекбокс, обновляем его состояние
-      setCheckboxes({ ...checkboxes, [name]: checked });
+      // If another checkbox is selected, update its state
+      const updatedCheckboxes = { ...checkboxes, [name]: checked };
+
+      // If the selected checkbox is deselected, deselect "all".
+      if (!checked) {
+        updatedCheckboxes.all = false;
+      } else {
+        // If a checkbox is selected and there are other selected checkboxes, select "all".
+        if (isAnyCheckboxChecked && name !== 'all') {
+          updatedCheckboxes.all = true;
+        }
+      }
+
+      // Update checkboxes status
+      setCheckboxes(updatedCheckboxes);
     }
   };
 
-  const getUsers = async () => {
-    const res = await getAllUsers();
-    setUsers(res.users);
+  const handleBackButtonClick = () => {
+    // Set the state of all checkboxes to false
+    const updatedCheckboxes = { ...checkboxes };
+    Object.keys(updatedCheckboxes).forEach((key) => {
+      updatedCheckboxes[key] = false;
+    });
+
+    setCheckboxes(updatedCheckboxes);
   };
 
   const deleteUserAccount = async (id: string | undefined) => {
-    if (id) {
+    if (id && id !== currentUserID) {
       await deleteUser({ id });
     }
   };
 
-  React.useEffect(() => {
-    getUsers();
-  }, []);
-
-  const isCheckedAll = checkboxes['all'];
-
-  console.log(checkboxes, isCheckedAll);
+  const deleteUsers = async (
+    checkboxes: { [key: string]: boolean },
+    currentUserID: string | undefined
+  ) => {
+    if (currentUserID) await deleteSelectedUsers(checkboxes, currentUserID);
+  };
 
   return (
-    <section className={Styles.customersTable}>
-      <div className={Styles.customersTable__head}>
-        <Title size='md' className={Styles.customersTable__head_title}>
-          Усі користувачі
-        </Title>
-        <SearchAdmin />
-      </div>
+    <table className={Styles.customersTable__table}>
+      <thead>
+        <tr className={Styles.customersTable__table_head}>
+          <th className={Styles.customersTable__table_head_checkbox}>
+            <input
+              type='checkbox'
+              name='all'
+              checked={checkboxes['all'] || false}
+              onChange={handleCheckboxChange}
+            />
+          </th>
+          <th className={Styles.customersTable__table_head_name}>
+            <button>
+              <p>Ім'я клієнта</p>
+              <BiSort />
+            </button>
+          </th>
+          <th className={Styles.customersTable__table_head_id}>ID клієнта</th>
+          <th className={Styles.customersTable__table_head_phone}>
+            Номер телефону
+          </th>
+          <th className={Styles.customersTable__table_head_email}>Email</th>
+          <th className={Styles.customersTable__table_head_block}>Блок</th>
+          <th className={Styles.customersTable__table_head_role}>Роль</th>
+          <th className={Styles.customersTable__table_head_created}>
+            Створено
+          </th>
+        </tr>
 
-      <table className={Styles.customersTable__table}>
-        <thead>
-          <tr className={Styles.customersTable__table_head}>
-            <th className={Styles.customersTable__table_head_checkbox}>
-              <input
-                type='checkbox'
-                name='all'
-                checked={checkboxes['all'] || false}
-                onChange={handleCheckboxChange}
-              />
-            </th>
-            <th className={Styles.customersTable__table_head_name}>
-              <button>
-                <p>Ім'я клієнта</p>
-                <BiSort />
+        {/* PANEL DELETE, WHEN SELECT */}
+        {isAnyCheckboxChecked && (
+          <tr className={Styles.customersTable__table_head_delete}>
+            <th>
+              <button
+                className={Styles.customersTable__table_head_delete_btn_red}
+                onClick={() => deleteUsers(checkboxes, currentUserID)}
+              >
+                Видалити виділенні користувачі
               </button>
             </th>
-            <th className={Styles.customersTable__table_head_id}>ID клієнта</th>
-            <th className={Styles.customersTable__table_head_phone}>
-              Номер телефону
-            </th>
-            <th className={Styles.customersTable__table_head_email}>Email</th>
-            <th className={Styles.customersTable__table_head_block}>Блок</th>
-            <th className={Styles.customersTable__table_head_role}>Роль</th>
-            <th className={Styles.customersTable__table_head_created}>
-              Створено
-            </th>
-          </tr>
-
-          <tr className={Styles.customersTable__table_head_line}>
-            <td />
-          </tr>
-        </thead>
-
-        <tbody>
-          {users?.map((user) => (
-            <tr
-              className={Styles.customersTable__table_body}
-              style={
-                checkboxes[user._id] ? { backgroundColor: COLORS.grey } : {}
-              }
-              key={user._id}
-            >
-              <td
-                className={`${Styles.customersTable__table_body_checkbox} ${
-                  checkboxes[user._id] && Styles.select
-                }`}
-              >
-                <input
-                  type='checkbox'
-                  name={user._id}
-                  checked={checkboxes[user._id] || false}
-                  onChange={handleCheckboxChange}
-                />
-              </td>
-              <td className={Styles.customersTable__table_body_name}>
-                {user.firstName + ' ' + user.lastName}
-              </td>
-              <td className={Styles.customersTable__table_body_id}>
-                {extractLastFiveCharacters(user._id || '00000')}
-              </td>
-              <td className={Styles.customersTable__table_body_phone}>
-                {user.phone || 'невідомо'}
-              </td>
-              <td className={Styles.customersTable__table_body_email}>
-                {user.email}
-              </td>
-              <td className={Styles.customersTable__table_body_block}>{'-'}</td>
-              <td className={Styles.customersTable__table_body_role}>
-                {user.role}
-              </td>
-              <td className={Styles.customersTable__table_body_created}>
-                <DateTranslation date={user.createdAt} />
-              </td>
-
-              <td className={Styles.customersTable__table_body_hover}>
-                <button onClick={() => deleteUserAccount(user._id)}>
-                  <MdDelete size={SIZE_ICON} />
+            <th>
+              {isCheckedAll && (
+                <button
+                  className={Styles.customersTable__table_head_delete_btn_red}
+                >
+                  Видалити усі користувачі
                 </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </section>
+              )}
+            </th>
+            <th>
+              <button
+                className={Styles.customersTable__table_head_delete_btn}
+                onClick={handleBackButtonClick}
+              >
+                Назад
+              </button>
+            </th>
+          </tr>
+        )}
+
+        {/* LINE */}
+        <tr className={Styles.customersTable__table_head_line}>
+          <td />
+        </tr>
+      </thead>
+
+      <tbody>
+        {users?.map((user) => (
+          <tr
+            className={Styles.customersTable__table_body}
+            style={checkboxes[user._id] ? { backgroundColor: COLORS.grey } : {}}
+            key={user._id}
+          >
+            <td
+              className={`${Styles.customersTable__table_body_checkbox} ${
+                checkboxes[user._id] && Styles.select
+              }`}
+            >
+              <input
+                type='checkbox'
+                name={user._id}
+                checked={checkboxes[user._id] || false}
+                onChange={handleCheckboxChange}
+              />
+            </td>
+            <td className={Styles.customersTable__table_body_name}>
+              {user.firstName + ' ' + user.lastName}
+            </td>
+            <td className={Styles.customersTable__table_body_id}>
+              {extractLastFiveCharacters(user._id || '00000')}
+            </td>
+            <td className={Styles.customersTable__table_body_phone}>
+              {user.phone || 'невідомо'}
+            </td>
+            <td className={Styles.customersTable__table_body_email}>
+              {user.email}
+            </td>
+            <td className={Styles.customersTable__table_body_block}>{'-'}</td>
+            <td className={Styles.customersTable__table_body_role}>
+              {user.role}
+            </td>
+            <td className={Styles.customersTable__table_body_created}>
+              <DateTranslation date={user.createdAt} />
+            </td>
+
+            <td className={Styles.customersTable__table_body_hover}>
+              <button onClick={() => deleteUserAccount(user._id)}>
+                <MdDelete size={SIZE_ICON} />
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };
 

@@ -1,6 +1,6 @@
 'use client';
 
-import CustomersTable from '@/components/modules/Dashboard/Customers/CustomersTable';
+import Customers from '@/components/modules/Dashboard/Customers/Customers';
 import HeaderAdmin from '@/components/modules/Dashboard/Header/HeaderAdmin';
 
 const CustomersPage = () => {
@@ -8,7 +8,7 @@ const CustomersPage = () => {
     <main className='customers-page'>
       <HeaderAdmin />
 
-      <CustomersTable />
+      <Customers />
     </main>
   );
 };
