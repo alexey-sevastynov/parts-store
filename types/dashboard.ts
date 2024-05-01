@@ -5,8 +5,12 @@ export interface IAdminAsideButtonProps
 
 export interface IItemNavAdminProps {
   icon: ReactNode;
-
   title: string;
-
   isActive: boolean;
+}
+
+export interface IInfoSmallPanelProps {
+  icon: ReactNode;
+  title: string;
+  number: number;
 }

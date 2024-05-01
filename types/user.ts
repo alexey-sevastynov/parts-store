@@ -16,4 +16,5 @@ export interface IUser extends IUserParams {
   orders?: any;
   provider?: string;
   role?: 'user' | 'admin';
+  createdAt?: string;
 }

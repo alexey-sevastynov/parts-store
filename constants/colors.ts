@@ -9,4 +9,5 @@ export const COLORS = {
   red: 'hsl(0, 99%, 65%)',
 
   green: 'hsl(101, 55%, 47%)',
+  grey: '#c6c6c6',
 };

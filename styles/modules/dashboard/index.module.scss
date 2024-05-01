@@ -4,6 +4,8 @@
 @import '../../../app/globalStyles/variables/breakpoints.scss';
 @import '../../../app/globalStyles/base/mixins.scss';
 
+$padding-info-small-panel: 20px;
+
 .adminAsidePanel {
   padding-top: $padding-top-page-admin;
 
@@ -72,15 +74,296 @@
   }
 }
 
-.adminAsideButton {
-  height: 80px;
-  width: 80px;
-  border-radius: $border-radius-admin;
+.headerAdmin {
+  display: flex;
+  gap: 20px;
+  &__tools {
+    max-width: 350px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+  }
 
+  &__charts {
+    background-color: $white;
+    width: 100%;
+
+    border-radius: $border-radius-admin;
+    padding: 12px $padding-info-small-panel;
+  }
+  .adminAsideButton {
+    height: 80px;
+    width: 80px;
+    border-radius: $border-radius-admin;
+
+    background-color: $white;
+
+    &__icon {
+      color: $black;
+    }
+  }
+
+  .languagePanelAdmin {
+    height: 80px;
+    width: 80px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+
+    &__button {
+      border-radius: $border-radius-admin;
+      height: 35px;
+      width: 35px;
+      color: $black-font;
+
+      background-color: $white;
+    }
+
+    &__button.active {
+      color: $white-font;
+
+      background-color: $red;
+    }
+  }
+
+  .infoSmallPanel {
+    position: relative;
+    box-sizing: border-box;
+    padding: 12px $padding-info-small-panel;
+    height: 80px;
+    min-width: 200px;
+    border-radius: $border-radius-admin;
+    background-color: $white;
+
+    display: flex;
+    flex-direction: column;
+
+    flex-grow: 1;
+
+    justify-content: space-between;
+
+    &__title {
+      font-size: $font-l;
+    }
+
+    &__number {
+      font-size: $font-xl;
+      font-weight: $weight-semi-bold;
+    }
+
+    &__icon {
+      position: absolute;
+      right: $padding-info-small-panel;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.customersTable {
+  width: 100%;
   background-color: $white;
 
+  margin-top: 40px;
+  padding-top: $padding-top-table-admin;
+  padding-bottom: $padding-top-table-admin;
+
+  border-radius: $border-radius-admin;
+
+  &__head,
+  &__table thead &__table_head,
+  &__table tbody tr {
+    padding-left: $padding-left-right-table-admin;
+    padding-right: $padding-left-right-table-admin;
+  }
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__table {
+    width: 100%;
+    display: block;
+
+    .customersTable__table_head,
+    .customersTable__table_body {
+      display: flex;
+      gap: 10px;
+      &_checkbox {
+        width: 14px;
+      }
+
+      &_name {
+        width: 23%;
+      }
+
+      &_id {
+        width: 10%;
+      }
+
+      &_phone {
+        width: 17%;
+      }
+
+      &_email {
+        width: 23%;
+      }
+
+      &_block {
+        width: 7%;
+      }
+
+      &_role {
+        width: 10%;
+      }
+
+      &_created {
+        width: 10%;
+      }
+    }
+
+    & thead {
+      display: flex;
+      flex-direction: column;
+      .customersTable__table_head {
+        box-sizing: border-box;
+
+        width: 100%;
+        @include display-flex;
+        gap: 10px;
+
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+        & th button {
+          @include display-flex;
+          gap: 3px;
+        }
+
+        & th,
+        & th p {
+          display: flex;
+          color: $grey;
+          font-size: $font-m;
+
+          & svg {
+            color: $grey;
+          }
+        }
+
+        &_line {
+          & td {
+            display: block;
+            height: 1px;
+            width: 100%;
+            background-color: $grey;
+          }
+        }
+      }
+    }
+
+    & tbody {
+      display: flex;
+      flex-direction: column;
+
+      .customersTable__table_body.all {
+        background-color: $grey;
+      }
+
+      .customersTable__table_body .customersTable__table_body_checkbox.select {
+        background-color: $grey;
+      }
+
+      .customersTable__table_body {
+        height: 60px;
+        position: relative;
+
+        align-items: center;
+
+        border-bottom: 1px solid $grey;
+
+        @include btn-hover(background-color);
+        &_hover {
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          padding-right: 50px;
+
+          right: -2%;
+          background-color: unset;
+          @include btn-hover(all);
+
+          & button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 100%;
+            width: 34px;
+            height: 34px;
+            background-color: $grey-light;
+            opacity: 0;
+            & svg {
+              color: $black-icon;
+            }
+          }
+        }
+
+        &:hover {
+          background-color: $grey;
+          .customersTable__table_body_hover {
+            width: 200px;
+            height: 100%;
+            background-color: $grey;
+            right: 0%;
+
+            & button {
+              opacity: 1;
+              & svg {
+                color: $black-icon;
+
+                @include btn-hover(color);
+
+                &:hover {
+                  color: $red;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.searchAdmin {
+  position: relative;
   &__icon {
-    color: $black;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    color: $black-icon;
+  }
+
+  &__input {
+    display: block;
+    background-color: $grey;
+    border: none;
+
+    border-radius: $border-radius-admin;
+
+    padding: 0px 50px;
+
+    min-width: 350px;
+    height: 50px;
+
+    font-size: $font-l;
   }
 }
 

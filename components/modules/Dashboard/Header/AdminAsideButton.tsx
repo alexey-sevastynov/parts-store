@@ -1,7 +1,15 @@
+import Styles from '@/styles/modules/dashboard/index.module.scss';
+
+import React from 'react';
+
+import { HiMenu, HiMenuAlt1 } from 'react-icons/hi';
+import { IoCloseOutline } from 'react-icons/io5';
+
 import { BREAKPOINTS } from '@/constants/breakpoints';
 import { SIZE_ICON_BIG } from '@/constants/common';
+
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import Styles from '@/styles/modules/dashboard/index.module.scss';
+
 import { IAdminAsideButtonProps } from '@/types/dashboard';
 import {
   collapseNavAdmin,
@@ -9,9 +17,6 @@ import {
   hideNavMenu,
   showNavMenu,
 } from '@/utils/common';
-import React from 'react';
-import { HiMenu, HiMenuAlt1 } from 'react-icons/hi';
-import { IoCloseOutline } from 'react-icons/io5';
 
 const AdminAsideButton = ({ ...props }: IAdminAsideButtonProps) => {
   const isMedia768 = useMediaQuery(BREAKPOINTS.md);

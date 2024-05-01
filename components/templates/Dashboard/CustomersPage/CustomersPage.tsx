@@ -1,11 +1,14 @@
 'use client';
 
-import AdminAsideButton from '@/components/modules/Dashboard/AdminAsideButton';
+import CustomersTable from '@/components/modules/Dashboard/Customers/CustomersTable';
+import HeaderAdmin from '@/components/modules/Dashboard/Header/HeaderAdmin';
 
 const CustomersPage = () => {
   return (
     <main className='customers-page'>
-      <AdminAsideButton />
+      <HeaderAdmin />
+
+      <CustomersTable />
     </main>
   );
 };

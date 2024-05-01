@@ -12,7 +12,8 @@ export default withAuth(
 
     if (pathname.startsWith('/dashboard') && token?.user?.role !== 'admin') {
       return new NextResponse(
-        'No access. You need to get administrator rights!'
+        'No access. You need to get administrator rights!',
+        { status: 403 }
       );
     }
   },
@@ -25,4 +26,4 @@ export default withAuth(
   }
 );
 
-export const config = { matcher: ['/dashboard'] };
+export const config = { matcher: ['/dashboard', '/dashboard/customers'] };

@@ -215,3 +215,13 @@ export async function resetPasswordWithCredentials({
     console.log(error);
   }
 }
+
+export async function getAllUsers() {
+  try {
+    const users = await User.find().select('-password');
+    return { users, msg: 'Users retrieved successfully!', status: 200 };
+  } catch (error) {
+    console.error(error);
+    return { msg: 'Failed to retrieve users.', status: 500 };
+  }
+}
