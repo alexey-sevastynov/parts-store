@@ -170,6 +170,8 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
     }
   };
 
+  const sortedUserList = sortedUsers(users);
+
   return (
     <table className={Styles.customersTable}>
       <thead>
@@ -282,51 +284,62 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
       </thead>
 
       <tbody>
-        {sortedUsers(users)?.map((user) => (
-          <tr
-            className={Styles.customersTable__body}
-            style={checkboxes[user._id] ? { backgroundColor: COLORS.grey } : {}}
-            key={user._id}
-          >
-            <td
-              className={`${Styles.customersTable__body_checkbox} ${
-                checkboxes[user._id] && Styles.select
-              }`}
-            >
-              <input
-                type='checkbox'
-                name={user._id}
-                checked={checkboxes[user._id] || false}
-                onChange={handleCheckboxChange}
-              />
-            </td>
-            <td className={Styles.customersTable__body_name}>
-              {user.firstName + ' ' + user.lastName}
-            </td>
-            <td className={Styles.customersTable__body_id}>
-              {extractLastFiveCharacters(user._id || '00000')}
-            </td>
-            <td className={Styles.customersTable__body_phone}>
-              {user.phone || 'невідомо'}
-            </td>
-            <td className={Styles.customersTable__body_email}>{user.email}</td>
-            <td className={Styles.customersTable__body_block}>
-              {user.isBlocked
-                ? translations[lang].common.yes
-                : translations[lang].common.no}
-            </td>
-            <td className={Styles.customersTable__body_role}>{user.role}</td>
-            <td className={Styles.customersTable__body_created}>
-              <DateTranslation date={user.createdAt} />
-            </td>
+        {/* if sorted User List NOT empty */}
+        {sortedUserList.length > 0
+          ? // then show list sorted User List
+            sortedUserList?.map((user) => (
+              <tr
+                className={Styles.customersTable__body}
+                style={
+                  checkboxes[user._id] ? { backgroundColor: COLORS.grey } : {}
+                }
+                key={user._id}
+              >
+                <td
+                  className={`${Styles.customersTable__body_checkbox} ${
+                    checkboxes[user._id] && Styles.select
+                  }`}
+                >
+                  <input
+                    type='checkbox'
+                    name={user._id}
+                    checked={checkboxes[user._id] || false}
+                    onChange={handleCheckboxChange}
+                  />
+                </td>
+                <td className={Styles.customersTable__body_name}>
+                  {user.firstName + ' ' + user.lastName}
+                </td>
+                <td className={Styles.customersTable__body_id}>
+                  {extractLastFiveCharacters(user._id || '00000')}
+                </td>
+                <td className={Styles.customersTable__body_phone}>
+                  {user.phone || 'невідомо'}
+                </td>
+                <td className={Styles.customersTable__body_email}>
+                  {user.email}
+                </td>
+                <td className={Styles.customersTable__body_block}>
+                  {user.isBlocked
+                    ? translations[lang].common.yes
+                    : translations[lang].common.no}
+                </td>
+                <td className={Styles.customersTable__body_role}>
+                  {user.role}
+                </td>
+                <td className={Styles.customersTable__body_created}>
+                  <DateTranslation date={user.createdAt} />
+                </td>
 
-            <td className={Styles.customersTable__body_hover}>
-              <button onClick={() => deleteUserAccount(user._id)}>
-                <MdDelete size={SIZE_ICON} />
-              </button>
-            </td>
-          </tr>
-        ))}
+                <td className={Styles.customersTable__body_hover}>
+                  <button onClick={() => deleteUserAccount(user._id)}>
+                    <MdDelete size={SIZE_ICON} />
+                  </button>
+                </td>
+              </tr>
+            ))
+          : // if not, than show the message "not found"
+            'not found'}
       </tbody>
     </table>
   );

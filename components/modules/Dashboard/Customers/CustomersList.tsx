@@ -9,16 +9,23 @@ const CustomersList = ({ users }: { users?: IUser[] }) => {
   }>({});
 
   return (
-    <ul className={Styles.customersList}>
-      {users?.map((user) => (
-        <CustomersItem
-          key={user._id}
-          checkboxes={checkboxes}
-          setCheckboxes={setCheckboxes}
-          {...user}
-        />
-      ))}
-    </ul>
+    <>
+      {/* if sorted User List NOT empty */}
+      {users && users.length > 0 ? (
+        <ul className={Styles.customersList}>
+          {users.map((user) => (
+            <CustomersItem
+              key={user._id}
+              checkboxes={checkboxes}
+              setCheckboxes={setCheckboxes}
+              {...user}
+            />
+          ))}
+        </ul> // if not, than show the message "not found"
+      ) : (
+        'not found'
+      )}
+    </>
   );
 };
 
