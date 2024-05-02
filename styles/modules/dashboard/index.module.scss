@@ -308,6 +308,14 @@ $padding-info-small-panel: 20px;
             background-color: $grey;
           }
         }
+
+        & .btn_active {
+          & p,
+          & svg {
+            font-weight: $weight-semi-bold;
+            color: $red;
+          }
+        }
       }
     }
 

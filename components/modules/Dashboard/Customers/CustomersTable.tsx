@@ -28,6 +28,18 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
     [key: string]: boolean;
   }>({});
 
+  const [sortState, setSortState] = React.useState<{
+    byName: boolean;
+    byBlocked: boolean;
+    byRole: boolean;
+    byCreated: boolean;
+  }>({
+    byName: false,
+    byBlocked: false,
+    byRole: false,
+    byCreated: true,
+  });
+
   const isCheckedAll = checkboxes['all'];
 
   const isAnyCheckboxChecked = Object.values(checkboxes).some(
@@ -94,10 +106,75 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
     if (currentUserID) await deleteSelectedUsers(checkboxes, currentUserID);
   };
 
+  const handleSortButtonClick = (
+    sortType: 'name' | 'blocked' | 'role' | 'created'
+  ) => {
+    setSortState({
+      byName: sortType === 'name' ? true : false,
+      byBlocked: sortType === 'blocked' ? true : false,
+      byRole: sortType === 'role' ? true : false,
+      byCreated: sortType === 'created' ? true : false,
+    });
+  };
+
+  const sortedUsers = (users: IUser[] | undefined) => {
+    // If there are no users, return an empty array
+    if (!users) {
+      return [];
+    } else {
+      // Create a copy of the original user array
+      const sortedUsers = [...users];
+
+      // Function for sorting by name
+      const sortByName = (a: IUser, b: IUser) => {
+        return a.firstName.localeCompare(b.firstName);
+      };
+
+      // Function for sorting by blocked users
+      const sortByBlocked = (a: IUser, b: IUser) => {
+        return a.isBlocked === b.isBlocked ? 0 : a.isBlocked ? -1 : 1;
+      };
+
+      // Function for sorting by role
+      const sortByRole = (a: IUser, b: IUser) => {
+        const roleA = a.role || '';
+        const roleB = b.role || '';
+        return roleA.localeCompare(roleB);
+      };
+
+      // Function for sorting by creation date
+      const sortByCreated = (a: IUser, b: IUser) => {
+        const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+        const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+        return dateB - dateA;
+      };
+
+      // Apply sorting depending on active sorting
+      if (sortState.byName) {
+        sortedUsers.sort(sortByName);
+      }
+
+      if (sortState.byBlocked) {
+        sortedUsers.sort(sortByBlocked);
+      }
+
+      if (sortState.byRole) {
+        sortedUsers.sort(sortByRole);
+      }
+
+      if (sortState.byCreated) {
+        sortedUsers.sort(sortByCreated);
+      }
+
+      return sortedUsers;
+    }
+  };
+
   return (
     <table className={Styles.customersTable}>
       <thead>
         <tr className={Styles.customersTable__head}>
+          {/* checkbox ALL */}
           <th className={Styles.customersTable__head_checkbox}>
             <input
               type='checkbox'
@@ -106,27 +183,66 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
               onChange={handleCheckboxChange}
             />
           </th>
+
+          {/* name */}
           <th className={Styles.customersTable__head_name}>
-            <button>
+            <button
+              className={sortState.byName ? Styles.btn_active : Styles.btn}
+              title={translations[lang].dashboard_page.sort_by_alphabet}
+              onClick={() => handleSortButtonClick('name')}
+            >
               <p>{translations[lang].dashboard_page.name}</p>
               <BiSort />
             </button>
           </th>
+
+          {/* code */}
           <th className={Styles.customersTable__head_id}>
             {translations[lang].dashboard_page.code}
           </th>
+
+          {/* phone */}
           <th className={Styles.customersTable__head_phone}>
             {translations[lang].dashboard_page.phone}
           </th>
+
+          {/* email */}
           <th className={Styles.customersTable__head_email}>Email</th>
+
+          {/* blocked */}
           <th className={Styles.customersTable__head_block}>
-            {translations[lang].dashboard_page.blocked}
+            <button
+              className={sortState.byBlocked ? Styles.btn_active : Styles.btn}
+              title={translations[lang].dashboard_page.sort_by_blocked_users}
+              onClick={() => handleSortButtonClick('blocked')}
+            >
+              <p>{translations[lang].dashboard_page.blocked}</p>
+              <BiSort />
+            </button>
           </th>
+
+          {/* role */}
           <th className={Styles.customersTable__head_role}>
-            {translations[lang].dashboard_page.role}
+            <button
+              className={sortState.byRole ? Styles.btn_active : Styles.btn}
+              title={translations[lang].dashboard_page.sort_by_role}
+              onClick={() => handleSortButtonClick('role')}
+            >
+              <p>{translations[lang].dashboard_page.role}</p>
+              <BiSort />
+            </button>
           </th>
+
+          {/* created */}
           <th className={Styles.customersTable__head_created}>
-            {translations[lang].dashboard_page.created}
+            <button
+              className={sortState.byCreated ? Styles.btn_active : Styles.btn}
+              title={translations[lang].dashboard_page.sort_by_created}
+              onClick={() => handleSortButtonClick('created')}
+            >
+              <p>{translations[lang].dashboard_page.created}</p>
+              <BiSort />
+            </button>
           </th>
         </tr>
 
@@ -166,7 +282,7 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
       </thead>
 
       <tbody>
-        {users?.map((user) => (
+        {sortedUsers(users)?.map((user) => (
           <tr
             className={Styles.customersTable__body}
             style={checkboxes[user._id] ? { backgroundColor: COLORS.grey } : {}}

@@ -202,7 +202,12 @@
       "updated": "Updated",
 
       "delete_selected_users": "Delete selected users",
-      "delete_all_users": "Delete all users"
+      "delete_all_users": "Delete all users",
+
+      "sort_by_alphabet": "Sort by A-Z",
+      "sort_by_blocked_users": "Sort by blocked users",
+      "sort_by_role": "Sort by admin",
+      "sort_by_created": "Sort by date created"
     }
   },
 
@@ -409,7 +414,12 @@
       "updated": "Оновлено",
 
       "delete_selected_users": "Видалити обраних користувачів",
-      "delete_all_users": "Видалити всіх користувачів"
+      "delete_all_users": "Видалити всіх користувачів",
+
+      "sort_by_alphabet": "Сортувати за алфавітом",
+      "sort_by_blocked_users": "Сортувати за блокованими користувачами",
+      "sort_by_role": "Сортувати за адміністраторами",
+      "sort_by_created": "Сортувати за датою створення"
     }
   },
 
@@ -616,7 +626,12 @@
       "updated": "Обновлен",
 
       "delete_selected_users": "Удалить выбранных пользователей",
-      "delete_all_users": "Удалить всех пользователей"
+      "delete_all_users": "Удалить всех пользователей",
+
+      "sort_by_alphabet": "Сортировка по алфавиту",
+      "sort_by_blocked_users": "Сортировка по заблокированным пользователям",
+      "sort_by_role": "Сортировка по администраторам",
+      "sort_by_created": "Сортировка по дате создания"
     }
   }
 }
