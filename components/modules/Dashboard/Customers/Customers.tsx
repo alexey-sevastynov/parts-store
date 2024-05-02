@@ -2,6 +2,7 @@ import Styles from '@/styles/modules/dashboard/index.module.scss';
 
 import React from 'react';
 import { GrUpdate } from 'react-icons/gr';
+import { useLang } from '@/hooks/useLang';
 
 import { getAllUsers } from '@/actions/authActions';
 import { IUser } from '@/types/user';
@@ -13,6 +14,8 @@ import SearchAdmin from '../SearchAdmin';
 import CustomersList from './CustomersList';
 
 const Customers = () => {
+  const { lang, translations } = useLang();
+
   const [users, setUsers] = React.useState<IUser[]>();
 
   const getUsers = async () => {
@@ -27,9 +30,9 @@ const Customers = () => {
     <section className={Styles.customers}>
       <div className={Styles.customers__head}>
         <div className={Styles.customers__head_title}>
-          <Title size='md'>Усі користувачі</Title>
+          <Title size='md'>{translations[lang].dashboard_page.all_users}</Title>
           <button onClick={getUsers}>
-            <GrUpdate title='update' />
+            <GrUpdate title={translations[lang].common.update} />
           </button>
         </div>
 

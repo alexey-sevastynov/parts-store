@@ -1,6 +1,8 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
+
+import { useLang } from '@/hooks/useLang';
 import { ICustomersItemProps } from '@/types/dashboard';
-import { IUser } from '@/types/user';
+
 import PhotoUser from './PhotoUser';
 import { extractLastFiveCharacters } from '@/utils/common';
 import DateTranslation from './DateTranslation';
@@ -18,10 +20,13 @@ const CustomersItem = ({
   role,
   phone,
   photo,
+  isBlocked,
 
   checkboxes,
   setCheckboxes,
 }: ICustomersItemProps) => {
+  const { lang, translations } = useLang();
+
   return (
     <li className={Styles.customersItem}>
       <div className={Styles.customersItem__select}>
@@ -34,21 +39,27 @@ const CustomersItem = ({
 
       {/* First name */}
       <div className={Styles.customersItem__description}>
-        <p className={Styles.customersItem__description_key}>Имя</p>
+        <p className={Styles.customersItem__description_key}>
+          {translations[lang].dashboard_page.first_name}
+        </p>
         <p className={Styles.customersItem__description_value}>{firstName}</p>
         <span className={Styles.customersItem__description_line} />
       </div>
 
       {/* Last names */}
       <div className={Styles.customersItem__description}>
-        <p className={Styles.customersItem__description_key}>Фамилия</p>
+        <p className={Styles.customersItem__description_key}>
+          {translations[lang].dashboard_page.last_name}
+        </p>
         <p className={Styles.customersItem__description_value}>{lastName}</p>
         <span className={Styles.customersItem__description_line} />
       </div>
 
-      {/* Id client */}
+      {/* code client */}
       <div className={Styles.customersItem__description}>
-        <p className={Styles.customersItem__description_key}>ID клиента</p>
+        <p className={Styles.customersItem__description_key}>
+          {translations[lang].dashboard_page.code}
+        </p>
         <p className={Styles.customersItem__description_value}>
           {extractLastFiveCharacters(_id || '00000')}
         </p>
@@ -64,7 +75,9 @@ const CustomersItem = ({
 
       {/* phone client */}
       <div className={Styles.customersItem__description}>
-        <p className={Styles.customersItem__description_key}>Телефон</p>
+        <p className={Styles.customersItem__description_key}>
+          {translations[lang].dashboard_page.phone}
+        </p>
         <p className={Styles.customersItem__description_value}>
           {phone || 'неизвестно'}
         </p>
@@ -73,7 +86,9 @@ const CustomersItem = ({
 
       {/* created */}
       <div className={Styles.customersItem__description}>
-        <p className={Styles.customersItem__description_key}>Создан</p>
+        <p className={Styles.customersItem__description_key}>
+          {translations[lang].dashboard_page.created}
+        </p>
         <p className={Styles.customersItem__description_value}>
           <DateTranslation date={createdAt} />
         </p>
@@ -82,7 +97,9 @@ const CustomersItem = ({
 
       {/* update */}
       <div className={Styles.customersItem__description}>
-        <p className={Styles.customersItem__description_key}>Изменен</p>
+        <p className={Styles.customersItem__description_key}>
+          {translations[lang].dashboard_page.updated}
+        </p>
         <p className={Styles.customersItem__description_value}>
           <DateTranslation date={updatedAt} />
         </p>
@@ -91,15 +108,24 @@ const CustomersItem = ({
 
       {/* role */}
       <div className={Styles.customersItem__description}>
-        <p className={Styles.customersItem__description_key}>Роль</p>
+        <p className={Styles.customersItem__description_key}>
+          {translations[lang].dashboard_page.role}
+        </p>
         <p className={Styles.customersItem__description_value}>{role}</p>
         <span className={Styles.customersItem__description_line} />
       </div>
 
       {/* block */}
       <div className={Styles.customersItem__description}>
-        <p className={Styles.customersItem__description_key}>Блок</p>
-        <p className={Styles.customersItem__description_value}>{'-'}</p>
+        <p className={Styles.customersItem__description_key}>
+          {' '}
+          {translations[lang].dashboard_page.blocked}
+        </p>
+        <p className={Styles.customersItem__description_value}>
+          {isBlocked
+            ? translations[lang].common.yes
+            : translations[lang].common.no}
+        </p>
         <span className={Styles.customersItem__description_line} />
       </div>
 

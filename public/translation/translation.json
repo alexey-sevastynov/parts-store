@@ -8,6 +8,9 @@
       "save": "Save",
       "cancel": "Cancel",
       "delete": "Delete",
+      "update": "Update",
+      "yes": "Yes",
+      "no": "No",
 
       "social_networks": "We are on social networks"
     },
@@ -176,6 +179,30 @@
       "tools_and_equipment": "Tools and equipment",
       "interior": "Interior",
       "exterior": "Exterior"
+    },
+
+    "dashboard_page": {
+      "statistic": "Statistics",
+      "customers": "Customers",
+
+      "users": "Users",
+      "admins": "Admins",
+
+      "search_placeholder": "Search by name or code",
+
+      "all_users": "All users",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "name": "Name",
+      "code": "Code",
+      "phone": "Phone number",
+      "blocked": "Block",
+      "role": "Role",
+      "created": "Created",
+      "updated": "Updated",
+
+      "delete_selected_users": "Delete selected users",
+      "delete_all_users": "Delete all users"
     }
   },
 
@@ -188,6 +215,9 @@
       "save": "Зберегти",
       "cancel": "Скасувати",
       "delete": "Видалити",
+      "update": "Оновити",
+      "yes": "Да",
+      "no": "Нет",
 
       "social_networks": "Ми в соціальних мережах"
     },
@@ -356,6 +386,30 @@
       "tools_and_equipment": "Інструменти і обладнання",
       "interior": "Інтер’єр",
       "exterior": "Екстер’єр"
+    },
+
+    "dashboard_page": {
+      "statistic": "Статистика",
+      "customers": "Клієнти",
+
+      "users": "Користувачів",
+      "admins": "Адміністратори",
+
+      "search_placeholder": "Пошук за ім'ям або кодом",
+
+      "all_users": "Усі користувачі",
+      "first_name": "Ім'я",
+      "last_name": "Прізвище",
+      "name": "Ім'я",
+      "code": "Код",
+      "phone": "Номер телефону",
+      "blocked": "Блок",
+      "role": "Роль",
+      "created": "Створено",
+      "updated": "Оновлено",
+
+      "delete_selected_users": "Видалити обраних користувачів",
+      "delete_all_users": "Видалити всіх користувачів"
     }
   },
 
@@ -368,6 +422,9 @@
       "save": "Сохранить",
       "cancel": "Отмена",
       "delete": "Удалить",
+      "update": "Обновить",
+      "yes": "Да",
+      "no": "Ні",
 
       "social_networks": "Мы в социальных сетях"
     },
@@ -536,6 +593,30 @@
       "tools_and_equipment": "Инструменты и оборудование",
       "interior": "Интерьер",
       "exterior": "Экстерьер"
+    },
+
+    "dashboard_page": {
+      "statistic": "Статистика",
+      "customers": "Клиенты",
+
+      "users": "Пользователи",
+      "admins": "Администраторы",
+
+      "search_placeholder": "Поиск по имени или коду",
+
+      "all_users": "Все пользователи",
+      "first_name": "Имя",
+      "last_name": "Фамилия",
+      "name": "Имя",
+      "code": "Код",
+      "phone": "Номер телефона",
+      "blocked": "Блок",
+      "role": "Роль",
+      "created": "Создан",
+      "updated": "Обновлен",
+
+      "delete_selected_users": "Удалить выбранных пользователей",
+      "delete_all_users": "Удалить всех пользователей"
     }
   }
 }

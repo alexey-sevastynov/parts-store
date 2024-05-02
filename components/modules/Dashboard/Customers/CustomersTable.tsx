@@ -2,6 +2,7 @@ import Styles from '@/styles/modules/dashboard/index.module.scss';
 
 import React, { ChangeEvent } from 'react';
 import { useSession } from 'next-auth/react';
+import { useLang } from '@/hooks/useLang';
 
 import { MdDelete } from 'react-icons/md';
 import { BiSort } from 'react-icons/bi';
@@ -18,6 +19,8 @@ import { IUser } from '@/types/user';
 import DateTranslation from './DateTranslation';
 
 const CustomersTable = ({ users }: { users?: IUser[] }) => {
+  const { lang, translations } = useLang();
+
   const { data } = useSession();
   const currentUserID = data?.user._id;
 
@@ -105,16 +108,26 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
           </th>
           <th className={Styles.customersTable__head_name}>
             <button>
-              <p>Ім'я клієнта</p>
+              <p>{translations[lang].dashboard_page.name}</p>
               <BiSort />
             </button>
           </th>
-          <th className={Styles.customersTable__head_id}>ID клієнта</th>
-          <th className={Styles.customersTable__head_phone}>Номер телефону</th>
+          <th className={Styles.customersTable__head_id}>
+            {translations[lang].dashboard_page.code}
+          </th>
+          <th className={Styles.customersTable__head_phone}>
+            {translations[lang].dashboard_page.phone}
+          </th>
           <th className={Styles.customersTable__head_email}>Email</th>
-          <th className={Styles.customersTable__head_block}>Блок</th>
-          <th className={Styles.customersTable__head_role}>Роль</th>
-          <th className={Styles.customersTable__head_created}>Створено</th>
+          <th className={Styles.customersTable__head_block}>
+            {translations[lang].dashboard_page.blocked}
+          </th>
+          <th className={Styles.customersTable__head_role}>
+            {translations[lang].dashboard_page.role}
+          </th>
+          <th className={Styles.customersTable__head_created}>
+            {translations[lang].dashboard_page.created}
+          </th>
         </tr>
 
         {/* PANEL DELETE, WHEN SELECT */}
@@ -125,13 +138,13 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
                 className={Styles.customersTable__head_delete_btn_red}
                 onClick={() => deleteUsers(checkboxes, currentUserID)}
               >
-                Видалити виділенні користувачі
+                {translations[lang].dashboard_page.delete_selected_users}
               </button>
             </th>
             <th>
               {isCheckedAll && (
                 <button className={Styles.customersTable__head_delete_btn_red}>
-                  Видалити усі користувачі
+                  {translations[lang].dashboard_page.delete_all_users}
                 </button>
               )}
             </th>
@@ -140,7 +153,7 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
                 className={Styles.customersTable__head_delete_btn}
                 onClick={handleBackButtonClick}
               >
-                Назад
+                {translations[lang].common.cancel}
               </button>
             </th>
           </tr>
@@ -181,7 +194,11 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
               {user.phone || 'невідомо'}
             </td>
             <td className={Styles.customersTable__body_email}>{user.email}</td>
-            <td className={Styles.customersTable__body_block}>{'-'}</td>
+            <td className={Styles.customersTable__body_block}>
+              {user.isBlocked
+                ? translations[lang].common.yes
+                : translations[lang].common.no}
+            </td>
             <td className={Styles.customersTable__body_role}>{user.role}</td>
             <td className={Styles.customersTable__body_created}>
               <DateTranslation date={user.createdAt} />
