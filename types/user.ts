@@ -17,4 +17,6 @@ export interface IUser extends IUserParams {
   provider?: string;
   role?: 'user' | 'admin';
   createdAt?: string;
+  updatedAt?: string;
+  isBlocked: boolean;
 }

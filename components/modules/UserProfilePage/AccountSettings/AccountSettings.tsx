@@ -15,8 +15,6 @@ import { addOverflowHiddenToBody } from '@/utils/common';
 
 import AccordionCard from '../AccordionCard';
 import { signOut, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { deleteUser } from '@/actions/authActions';
 
 const AccountSettings = () => {
   const dispatch = useAppDispatch();

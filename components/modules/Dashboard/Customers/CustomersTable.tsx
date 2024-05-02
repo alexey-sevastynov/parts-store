@@ -92,10 +92,10 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
   };
 
   return (
-    <table className={Styles.customersTable__table}>
+    <table className={Styles.customersTable}>
       <thead>
-        <tr className={Styles.customersTable__table_head}>
-          <th className={Styles.customersTable__table_head_checkbox}>
+        <tr className={Styles.customersTable__head}>
+          <th className={Styles.customersTable__head_checkbox}>
             <input
               type='checkbox'
               name='all'
@@ -103,30 +103,26 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
               onChange={handleCheckboxChange}
             />
           </th>
-          <th className={Styles.customersTable__table_head_name}>
+          <th className={Styles.customersTable__head_name}>
             <button>
               <p>Ім'я клієнта</p>
               <BiSort />
             </button>
           </th>
-          <th className={Styles.customersTable__table_head_id}>ID клієнта</th>
-          <th className={Styles.customersTable__table_head_phone}>
-            Номер телефону
-          </th>
-          <th className={Styles.customersTable__table_head_email}>Email</th>
-          <th className={Styles.customersTable__table_head_block}>Блок</th>
-          <th className={Styles.customersTable__table_head_role}>Роль</th>
-          <th className={Styles.customersTable__table_head_created}>
-            Створено
-          </th>
+          <th className={Styles.customersTable__head_id}>ID клієнта</th>
+          <th className={Styles.customersTable__head_phone}>Номер телефону</th>
+          <th className={Styles.customersTable__head_email}>Email</th>
+          <th className={Styles.customersTable__head_block}>Блок</th>
+          <th className={Styles.customersTable__head_role}>Роль</th>
+          <th className={Styles.customersTable__head_created}>Створено</th>
         </tr>
 
         {/* PANEL DELETE, WHEN SELECT */}
         {isAnyCheckboxChecked && (
-          <tr className={Styles.customersTable__table_head_delete}>
+          <tr className={Styles.customersTable__head_delete}>
             <th>
               <button
-                className={Styles.customersTable__table_head_delete_btn_red}
+                className={Styles.customersTable__head_delete_btn_red}
                 onClick={() => deleteUsers(checkboxes, currentUserID)}
               >
                 Видалити виділенні користувачі
@@ -134,16 +130,14 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
             </th>
             <th>
               {isCheckedAll && (
-                <button
-                  className={Styles.customersTable__table_head_delete_btn_red}
-                >
+                <button className={Styles.customersTable__head_delete_btn_red}>
                   Видалити усі користувачі
                 </button>
               )}
             </th>
             <th>
               <button
-                className={Styles.customersTable__table_head_delete_btn}
+                className={Styles.customersTable__head_delete_btn}
                 onClick={handleBackButtonClick}
               >
                 Назад
@@ -153,7 +147,7 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
         )}
 
         {/* LINE */}
-        <tr className={Styles.customersTable__table_head_line}>
+        <tr className={Styles.customersTable__head_line}>
           <td />
         </tr>
       </thead>
@@ -161,12 +155,12 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
       <tbody>
         {users?.map((user) => (
           <tr
-            className={Styles.customersTable__table_body}
+            className={Styles.customersTable__body}
             style={checkboxes[user._id] ? { backgroundColor: COLORS.grey } : {}}
             key={user._id}
           >
             <td
-              className={`${Styles.customersTable__table_body_checkbox} ${
+              className={`${Styles.customersTable__body_checkbox} ${
                 checkboxes[user._id] && Styles.select
               }`}
             >
@@ -177,27 +171,23 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
                 onChange={handleCheckboxChange}
               />
             </td>
-            <td className={Styles.customersTable__table_body_name}>
+            <td className={Styles.customersTable__body_name}>
               {user.firstName + ' ' + user.lastName}
             </td>
-            <td className={Styles.customersTable__table_body_id}>
+            <td className={Styles.customersTable__body_id}>
               {extractLastFiveCharacters(user._id || '00000')}
             </td>
-            <td className={Styles.customersTable__table_body_phone}>
+            <td className={Styles.customersTable__body_phone}>
               {user.phone || 'невідомо'}
             </td>
-            <td className={Styles.customersTable__table_body_email}>
-              {user.email}
-            </td>
-            <td className={Styles.customersTable__table_body_block}>{'-'}</td>
-            <td className={Styles.customersTable__table_body_role}>
-              {user.role}
-            </td>
-            <td className={Styles.customersTable__table_body_created}>
+            <td className={Styles.customersTable__body_email}>{user.email}</td>
+            <td className={Styles.customersTable__body_block}>{'-'}</td>
+            <td className={Styles.customersTable__body_role}>{user.role}</td>
+            <td className={Styles.customersTable__body_created}>
               <DateTranslation date={user.createdAt} />
             </td>
 
-            <td className={Styles.customersTable__table_body_hover}>
+            <td className={Styles.customersTable__body_hover}>
               <button onClick={() => deleteUserAccount(user._id)}>
                 <MdDelete size={SIZE_ICON} />
               </button>

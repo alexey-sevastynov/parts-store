@@ -15,6 +15,7 @@ const userSchema = new Schema(
     phone: { type: String },
     provider: { type: String, default: 'credentials' },
     role: { type: String, default: 'user' },
+    isBlocked: { type: Boolean, default: false },
     photo: { type: String },
     viewedProducts: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
     cart: [{ type: Schema.Types.ObjectId, ref: 'Product' }],

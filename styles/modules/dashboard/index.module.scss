@@ -78,9 +78,10 @@ $padding-info-small-panel: 20px;
   display: flex;
   gap: 20px;
   &__tools {
-    max-width: 350px;
-    display: flex;
-    flex-wrap: wrap;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: 80px 1fr;
     gap: 20px;
     justify-content: space-between;
   }
@@ -161,9 +162,15 @@ $padding-info-small-panel: 20px;
       transform: translateY(-50%);
     }
   }
+
+  @media (max-width: $breakpoint_lg) {
+    &__charts {
+      display: none;
+    }
+  }
 }
 
-.customersTable {
+.customers {
   width: 100%;
   background-color: $white;
 
@@ -173,17 +180,11 @@ $padding-info-small-panel: 20px;
 
   border-radius: $border-radius-admin;
 
-  &__head,
-  &__table thead &__table_head,
-  &__table tbody tr,
-  &__table_head_delete {
-    padding-left: $padding-left-right-table-admin;
-    padding-right: $padding-left-right-table-admin;
-  }
-
   &__head {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
 
     &_title {
       display: flex;
@@ -208,23 +209,34 @@ $padding-info-small-panel: 20px;
     }
   }
 
-  &__table {
+  &__head,
+  & .customersTable__head,
+  & .customersTable tbody tr,
+  & .customersTable__head_delete {
+    padding-left: $padding-left-right-table-admin;
+    padding-right: $padding-left-right-table-admin;
+  }
+
+  & .customersTable {
     width: 100%;
     display: block;
 
-    .customersTable__table_head,
-    .customersTable__table_body {
+    .customersTable__head,
+    .customersTable__body {
       display: flex;
       gap: 10px;
       &_checkbox {
         width: 14px;
       }
 
-      &_name {
+      &_name,
+      &_email {
         width: 23%;
       }
 
-      &_id {
+      &_id,
+      &_role,
+      &_created {
         width: 10%;
       }
 
@@ -232,27 +244,15 @@ $padding-info-small-panel: 20px;
         width: 17%;
       }
 
-      &_email {
-        width: 23%;
-      }
-
       &_block {
         width: 7%;
-      }
-
-      &_role {
-        width: 10%;
-      }
-
-      &_created {
-        width: 10%;
       }
     }
 
     & thead {
       display: flex;
       flex-direction: column;
-      .customersTable__table_head {
+      .customersTable__head {
         box-sizing: border-box;
 
         width: 100%;
@@ -315,15 +315,15 @@ $padding-info-small-panel: 20px;
       display: flex;
       flex-direction: column;
 
-      .customersTable__table_body.all {
+      .customersTable__body.all {
         background-color: $grey;
       }
 
-      .customersTable__table_body .customersTable__table_body_checkbox.select {
+      .customersTable__body .customersTable__body_checkbox.select {
         background-color: $grey;
       }
 
-      .customersTable__table_body {
+      .customersTable__body {
         height: 60px;
         position: relative;
 
@@ -360,7 +360,7 @@ $padding-info-small-panel: 20px;
 
         &:hover {
           background-color: $grey;
-          .customersTable__table_body_hover {
+          .customersTable__body_hover {
             width: 200px;
             height: 100%;
             background-color: $grey;
@@ -382,11 +382,188 @@ $padding-info-small-panel: 20px;
         }
       }
     }
+
+    // MEDIA customersTable
+    @media (max-width: $breakpoint_xxl) {
+      & .customersTable__head,
+      & .customersTable__body {
+        &_block,
+        &_role,
+        &_created {
+          display: none !important;
+        }
+
+        &_name,
+        &_email {
+          width: 32%;
+        }
+
+        &_id {
+          width: 14%;
+        }
+
+        &_phone {
+          width: 22%;
+        }
+      }
+    }
+
+    @media (max-width: $breakpoint_xl) {
+      & .customersTable__head,
+      & .customersTable__body {
+        &_email {
+          display: none !important;
+        }
+
+        &_name {
+          width: 41%;
+        }
+
+        &_id {
+          width: 26%;
+        }
+
+        &_phone {
+          width: 33%;
+        }
+      }
+    }
+
+    @media (max-width: $breakpoint_lg) {
+      display: none;
+    }
+  }
+
+  & .customersList {
+    display: none;
+
+    @media (max-width: $breakpoint_lg) {
+      margin-top: 40px;
+      background-color: $grey;
+      box-sizing: border-box;
+
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      width: 100%;
+
+      .customersItem {
+        background-color: $white;
+        width: 100%;
+
+        &__select {
+          box-sizing: border-box;
+          padding: 10px;
+          display: flex;
+          justify-content: flex-end;
+          width: 100%;
+
+          padding-left: $padding-left-right-table-admin;
+          padding-right: $padding-left-right-table-admin;
+
+          border-top: $border;
+          border-bottom: $border;
+        }
+
+        &__photo {
+          padding-top: 13px;
+          padding-bottom: 26px;
+
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        &__description {
+          position: relative;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+
+          padding-top: 10px;
+          padding-bottom: 10px;
+
+          &_key,
+          &_value {
+            font-size: $font-m;
+            padding-left: $padding-left-right-table-admin;
+            padding-right: $padding-left-right-table-admin;
+          }
+
+          &_key {
+            width: max-content;
+            color: $grey;
+            font-weight: $weight-semi-bold;
+          }
+
+          &_value {
+            width: max-content;
+            text-align: right;
+          }
+
+          &_line {
+            position: absolute;
+            bottom: 0px;
+
+            display: block;
+            height: 1px;
+            width: 100%;
+            background-color: $grey;
+          }
+        }
+
+        &__btns {
+          display: flex;
+          justify-content: space-between;
+
+          padding: 10px $padding-left-right-table-admin 10px
+            $padding-left-right-table-admin;
+
+          &_view {
+            background-color: $orange;
+          }
+
+          &_delete {
+            background-color: $red;
+          }
+          &_view,
+          &_delete {
+            width: 40px;
+            height: 40px;
+            border-radius: $border-radius-admin;
+
+            svg {
+              color: $black-icon;
+
+              @include btn-hover(color);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  & .photoUser {
+    &__photo {
+      border-radius: 100%;
+      &_custom {
+      }
+    }
+  }
+
+  // MEDIA customers
+  @media (max-width: $breakpoint_lg) {
+    &__search {
+      width: 100%;
+    }
   }
 }
 
 .searchAdmin {
   position: relative;
+  width: 100%;
   &__icon {
     position: absolute;
     left: 12px;
@@ -405,12 +582,10 @@ $padding-info-small-panel: 20px;
 
     padding: 0px 50px;
 
-    min-width: 350px;
+    width: 100%;
+
     height: 50px;
 
     font-size: $font-l;
   }
-}
-
-.customers {
 }

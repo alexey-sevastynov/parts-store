@@ -22,6 +22,14 @@ const AdminAsideButton = ({ ...props }: IAdminAsideButtonProps) => {
   const isMedia768 = useMediaQuery(BREAKPOINTS.md);
   const [isExpandedNavMenu, setIsExpandedNavMenu] = React.useState(false);
 
+  React.useEffect(() => {
+    if (isMedia768) {
+      hideNavMenu();
+    } else {
+      showNavMenu();
+    }
+  }, [isMedia768]);
+
   const handleToggle = () => {
     if (isExpandedNavMenu) {
       if (isMedia768) {

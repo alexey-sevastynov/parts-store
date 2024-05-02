@@ -37,7 +37,7 @@ const HeaderIconPanel = () => {
           )}
 
           <li className={Styles.headerIconPanel__navigate_list_cart}>
-            <Link href='/cart'>
+            <Link href='/dashboard/customers'>
               <PiShoppingCartSimpleFill size={SIZE_ICON} />
             </Link>
           </li>
