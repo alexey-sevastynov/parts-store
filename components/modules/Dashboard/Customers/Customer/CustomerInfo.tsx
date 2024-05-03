@@ -16,6 +16,7 @@ import { extractLastFiveCharacters } from '@/utils/common';
 import { Role } from '@/constants/user';
 import { changeUserBlockStatus, changeUserRole } from '@/actions/authActions';
 import { getRoleFromString } from '@/utils/user';
+import CustomerInfoLoading from './CustomerInfoLoading';
 
 const CustomerInfo = ({
   user,
@@ -24,7 +25,7 @@ const CustomerInfo = ({
   user: IUser | undefined;
   getUser: (id: string) => void;
 }) => {
-  if (!user) return <></>;
+  if (!user) return <CustomerInfoLoading />;
   const { lang, translations } = useLang();
 
   const [isActiveEdit, setIsActiveEdit] = React.useState<boolean>(false);
@@ -183,49 +184,47 @@ const CustomerInfo = ({
           </div>
         </div>
 
-        <div>
-          {isActiveEdit ? (
-            // _______ if edit buttons
-            <div className={Styles.customerInfo__btns}>
-              <Button
-                className={Styles.customerInfo__btn}
-                disabled={!isValueChanged || isSubmitting}
-                type='submit'
-              >
-                {isSubmitting ? (
-                  <Oval
-                    visible={true}
-                    height={SIZE_ICON}
-                    width={SIZE_ICON}
-                    color={COLORS.whiteFont}
-                    secondaryColor={COLORS.whiteFont}
-                    ariaLabel='oval-loading'
-                  />
-                ) : (
-                  translations[lang].common.save
-                )}
-              </Button>
-              <Button
-                className={Styles.customerInfo__btn}
-                onClick={handleCancelEdit}
-                type='button'
-              >
-                {translations[lang].common.cancel}
-              </Button>
-            </div>
-          ) : (
-            // _______ if NOT edit button
-            <div className={Styles.customerInfo__btns}>
-              <Button
-                className={Styles.customerInfo__btn}
-                onClick={handleEdit}
-                type='button'
-              >
-                {translations[lang].common.edit}
-              </Button>
-            </div>
-          )}
-        </div>
+        {isActiveEdit ? (
+          // _______ if edit buttons
+          <div className={Styles.customerInfo__btns}>
+            <Button
+              className={Styles.customerInfo__btn}
+              disabled={!isValueChanged || isSubmitting}
+              type='submit'
+            >
+              {isSubmitting ? (
+                <Oval
+                  visible={true}
+                  height={SIZE_ICON}
+                  width={SIZE_ICON}
+                  color={COLORS.whiteFont}
+                  secondaryColor={COLORS.whiteFont}
+                  ariaLabel='oval-loading'
+                />
+              ) : (
+                translations[lang].common.save
+              )}
+            </Button>
+            <Button
+              className={Styles.customerInfo__btn}
+              onClick={handleCancelEdit}
+              type='button'
+            >
+              {translations[lang].common.cancel}
+            </Button>
+          </div>
+        ) : (
+          // _______ if NOT edit button
+          <div className={Styles.customerInfo__btns}>
+            <Button
+              className={Styles.customerInfo__btn}
+              onClick={handleEdit}
+              type='button'
+            >
+              {translations[lang].common.edit}
+            </Button>
+          </div>
+        )}
       </form>
     </div>
   );

@@ -171,7 +171,8 @@ $padding-info-small-panel: 20px;
 }
 
 .customer {
-  .customerInfo {
+  .customerInfo,
+  .customerInfoLoading {
     &__line {
       display: block;
       height: 1px;
