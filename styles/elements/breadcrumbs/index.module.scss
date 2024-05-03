@@ -1,0 +1,44 @@
+.breadcrumbs {
+  padding: 33px 0px 31px 0px;
+  display: flex;
+  flex-wrap: wrap;
+  color: $black;
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+
+    & p {
+      padding: 0px 5px;
+    }
+  }
+
+  &__item {
+    a {
+      font-size: $font-xl;
+      font-weight: $weight-medium;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &:last-child {
+      a {
+        color: $red;
+        cursor: default;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+
+    &:not(:last-child)::after {
+      content: '>>';
+      cursor: auto;
+      pointer-events: none;
+      margin: 0 5px;
+    }
+  }
+}

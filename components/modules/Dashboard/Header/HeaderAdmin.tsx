@@ -1,3 +1,5 @@
+'use client';
+
 import Styles from '@/styles/modules/dashboard/index.module.scss';
 import React from 'react';
 import { useLang } from '@/hooks/useLang';

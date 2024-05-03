@@ -1,3 +1,5 @@
+import { TypeRole } from '@/constants/user';
+
 export interface IUserParams {
   email: string;
   password: string;
@@ -15,7 +17,7 @@ export interface IUser extends IUserParams {
   cars?: any;
   orders?: any;
   provider?: string;
-  role?: 'user' | 'admin';
+  role?: TypeRole;
   createdAt?: string;
   updatedAt?: string;
   isBlocked: boolean;

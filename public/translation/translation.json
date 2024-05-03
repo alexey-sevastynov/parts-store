@@ -196,6 +196,7 @@
       "name": "Name",
       "code": "Code",
       "phone": "Phone number",
+      "not_phone": "Unknown",
       "blocked": "Block",
       "role": "Role",
       "created": "Created",
@@ -207,7 +208,9 @@
       "sort_by_alphabet": "Sort by A-Z",
       "sort_by_blocked_users": "Sort by blocked users",
       "sort_by_role": "Sort by admin",
-      "sort_by_created": "Sort by date created"
+      "sort_by_created": "Sort by date created",
+
+      "user_info": "User information"
     }
   },
 
@@ -408,6 +411,7 @@
       "name": "Ім'я",
       "code": "Код",
       "phone": "Номер телефону",
+      "not_phone": "Невідомо",
       "blocked": "Блок",
       "role": "Роль",
       "created": "Створено",
@@ -419,7 +423,9 @@
       "sort_by_alphabet": "Сортувати за алфавітом",
       "sort_by_blocked_users": "Сортувати за блокованими користувачами",
       "sort_by_role": "Сортувати за адміністраторами",
-      "sort_by_created": "Сортувати за датою створення"
+      "sort_by_created": "Сортувати за датою створення",
+
+      "user_info": "Інформація про користувача"
     }
   },
 
@@ -620,6 +626,7 @@
       "name": "Имя",
       "code": "Код",
       "phone": "Номер телефона",
+      "not_phone": "Неизвестно",
       "blocked": "Блок",
       "role": "Роль",
       "created": "Создан",
@@ -631,7 +638,9 @@
       "sort_by_alphabet": "Сортировка по алфавиту",
       "sort_by_blocked_users": "Сортировка по заблокированным пользователям",
       "sort_by_role": "Сортировка по администраторам",
-      "sort_by_created": "Сортировка по дате создания"
+      "sort_by_created": "Сортировка по дате создания",
+
+      "user_info": "Информация о пользователе"
     }
   }
 }

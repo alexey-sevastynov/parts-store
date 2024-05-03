@@ -1,4 +1,8 @@
-import { deleteSelectedUsers, deleteUser } from '@/actions/authActions';
+import {
+  deleteSelectedUsers,
+  deleteUser,
+  findUserById,
+} from '@/actions/authActions';
 
 export const deleteUsers = async (
   checkboxes: { [key: string]: boolean },

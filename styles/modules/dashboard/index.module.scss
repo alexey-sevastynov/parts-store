@@ -170,7 +170,111 @@ $padding-info-small-panel: 20px;
   }
 }
 
-.customers {
+.customer {
+  .customerInfo {
+    &__line {
+      display: block;
+      height: 1px;
+      background-color: $grey;
+      width: 100%;
+    }
+
+    &__title,
+    &__form {
+      padding-top: 16px;
+    }
+
+    &__title,
+    &__form,
+    &__btn {
+      padding-left: $padding-left-right-table-admin;
+      padding-right: $padding-left-right-table-admin;
+    }
+
+    &__title {
+      font-weight: $weight-semi-bold;
+    }
+
+    &__form {
+      .customerInfo__content {
+        display: flex;
+
+        justify-content: space-between;
+
+        &_list {
+          width: 100%;
+          display: grid;
+          gap: 24px;
+
+          grid-template-columns: 1fr 1fr 1fr;
+          justify-content: space-between;
+
+          &_item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            & p {
+              &:first-child {
+                color: $grey;
+                font-size: $font-s;
+                font-weight: $weight-semi-bold;
+              }
+            }
+
+            & select {
+              height: 40px;
+
+              border: $border;
+              border-radius: 7px;
+
+              font-size: $font-l;
+            }
+          }
+        }
+
+        &_code {
+          display: flex;
+          gap: 30px;
+        }
+      }
+    }
+
+    &__btns,
+    &__btn {
+      width: 170px;
+      & button {
+        width: 170px;
+      }
+    }
+    &__btns {
+      margin-top: 36px;
+      display: flex;
+      gap: 20px;
+    }
+
+    @media (max-width: $breakpoint_xl) {
+      &__form {
+        .customerInfo__content {
+          &_list {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+      }
+    }
+    @media (max-width: $breakpoint_lg) {
+      &__form {
+        .customerInfo__content {
+          flex-direction: column-reverse;
+          gap: 20px;
+          &_list {
+          }
+        }
+      }
+    }
+  }
+}
+.customers,
+.customer {
   width: 100%;
   background-color: $white;
 

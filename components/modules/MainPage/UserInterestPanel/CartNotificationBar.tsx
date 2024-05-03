@@ -31,8 +31,8 @@ const CartNotificationBar = ({
       <div className={Styles.cartNotificationBar__items}>
         {items.map((item) => (
           <article
-            className={Styles.cartNotificationBar__items_item}
             key={item.id}
+            className={Styles.cartNotificationBar__items_item}
           >
             <Link href={'/'}>
               <Image

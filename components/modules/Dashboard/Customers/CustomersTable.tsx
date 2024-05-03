@@ -16,6 +16,7 @@ import { deleteUserAccount, deleteUsers } from '@/utils/dashboards';
 import { IUser } from '@/types/user';
 
 import DateTranslation from './DateTranslation';
+import Link from 'next/link';
 
 const CustomersTable = ({ users }: { users?: IUser[] }) => {
   const { lang, translations } = useLang();
@@ -271,15 +272,16 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
 
       <tbody>
         {/* if sorted User List NOT empty */}
-        {sortedUserList.length > 0
-          ? // then show list sorted User List
-            sortedUserList?.map((user) => (
+        {sortedUserList.length > 0 ? (
+          // then show list sorted User List
+          sortedUserList?.map((user) => {
+            return (
               <tr
+                key={user._id}
                 className={Styles.customersTable__body}
                 style={
                   checkboxes[user._id] ? { backgroundColor: COLORS.grey } : {}
                 }
-                key={user._id}
               >
                 <td
                   className={`${Styles.customersTable__body_checkbox} ${
@@ -294,7 +296,9 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
                   />
                 </td>
                 <td className={Styles.customersTable__body_name}>
-                  {user.firstName + ' ' + user.lastName}
+                  <Link href={`customers/${user._id}`}>
+                    {user.firstName + ' ' + user.lastName}
+                  </Link>
                 </td>
                 <td className={Styles.customersTable__body_id}>
                   {extractLastFiveCharacters(user._id || '00000')}
@@ -325,9 +329,16 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
                   </button>
                 </td>
               </tr>
-            ))
-          : // if not, than show the message "not found"
-            'not found'}
+            );
+          })
+        ) : (
+          // if not, than show the message "not found"
+          <tr>
+            <td>
+              <p>'not found'</p>
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
   );

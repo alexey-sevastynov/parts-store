@@ -1,6 +1,4 @@
-'use client';
-
-import Customers from '@/app/dashboard/customers/page';
+import Customer from '@/components/modules/Dashboard/Customers/Customer/Customer';
 import HeaderAdmin from '@/components/modules/Dashboard/Header/HeaderAdmin';
 
 const CustomerPage = () => {
@@ -8,7 +6,7 @@ const CustomerPage = () => {
     <main className='customers-page'>
       <HeaderAdmin />
 
-      <Customers />
+      <Customer />
     </main>
   );
 };

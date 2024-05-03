@@ -101,3 +101,13 @@ export interface IItemProduct {
 export type TypeListProducts = IItemProduct[];
 
 export interface IProductsItemProps {}
+
+export interface BreadcrumbsItem {
+  id: number;
+  name: string;
+  link?: string;
+}
+
+export interface BreadcrumbsProps {
+  items: BreadcrumbsItem[];
+}

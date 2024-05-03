@@ -42,53 +42,6 @@ export async function updateUser({
   }
 }
 
-export async function deleteUser({ id }: { id: string }) {
-  try {
-    const session = await getServerSession(authOptions);
-    if (!session) throw new Error('Unauthoriztion!');
-
-    const user = await User.findByIdAndDelete(id);
-
-    if (!user) throw new Error('Email does not exsist!');
-
-    return { msg: 'Delete Profile Successfully!', status: 201 };
-  } catch (error: any) {
-    redirect(`/errors?error=${error.message}`);
-  }
-}
-
-export async function deleteSelectedUsers(
-  checkboxes: { [key: string]: boolean },
-  currentUserID: string
-) {
-  try {
-    const session = await getServerSession(authOptions);
-    if (!session) throw new Error('Unauthorization!');
-
-    const selectedUserIds = Object.keys(checkboxes).filter(
-      (key) => checkboxes[key] && key !== currentUserID
-    );
-
-    if (selectedUserIds.length === 0) {
-      return { msg: 'No users selected for deletion', status: 400 };
-    }
-
-    const deletePromises = selectedUserIds.map(async (userId) => {
-      const user = await User.findByIdAndDelete(userId);
-      if (!user) {
-        console.log(`Failed to delete user with ID: ${userId}`);
-      }
-    });
-
-    await Promise.all(deletePromises);
-
-    return { msg: 'Selected users deleted successfully!', status: 200 };
-  } catch (error: any) {
-    console.error(error);
-    return { msg: 'Failed to delete selected users.', status: 500 };
-  }
-}
-
 export async function signUpWithCredentials({
   firstName,
   lastName,
@@ -255,5 +208,119 @@ export async function getAllUsers() {
   } catch (error) {
     console.error(error);
     return { msg: 'Failed to retrieve users.', status: 500 };
+  }
+}
+
+export async function findUserById(id: string) {
+  try {
+    const user = await User.findById(id).select('-password');
+
+    if (!user) {
+      return { msg: 'User not found', status: 404 };
+    }
+
+    return { user, msg: 'User retrieved successfully!', status: 200 };
+  } catch (error) {
+    console.error(error);
+    return { msg: 'Failed to retrieve user.', status: 500 };
+  }
+}
+
+export async function deleteUser({ id }: { id: string }) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) throw new Error('Unauthoriztion!');
+
+    const user = await User.findByIdAndDelete(id);
+
+    if (!user) throw new Error('Email does not exsist!');
+
+    return { msg: 'Delete Profile Successfully!', status: 201 };
+  } catch (error: any) {
+    redirect(`/errors?error=${error.message}`);
+  }
+}
+
+export async function deleteSelectedUsers(
+  checkboxes: { [key: string]: boolean },
+  currentUserID: string
+) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) throw new Error('Unauthorization!');
+
+    const selectedUserIds = Object.keys(checkboxes).filter(
+      (key) => checkboxes[key] && key !== currentUserID
+    );
+
+    if (selectedUserIds.length === 0) {
+      return { msg: 'No users selected for deletion', status: 400 };
+    }
+
+    const deletePromises = selectedUserIds.map(async (userId) => {
+      const user = await User.findByIdAndDelete(userId);
+      if (!user) {
+        console.log(`Failed to delete user with ID: ${userId}`);
+      }
+    });
+
+    await Promise.all(deletePromises);
+
+    return { msg: 'Selected users deleted successfully!', status: 200 };
+  } catch (error: any) {
+    console.error(error);
+    return { msg: 'Failed to delete selected users.', status: 500 };
+  }
+}
+
+export async function changeUserBlockStatus({
+  id,
+  isBlocked,
+}: {
+  id: string;
+  isBlocked: boolean;
+}) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) throw new Error('Unauthorized!');
+
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { isBlocked },
+      { new: true }
+    );
+
+    if (!updatedUser) throw new Error('User not found!');
+
+    return { msg: 'User block status updated successfully!', status: 200 };
+  } catch (error: any) {
+    console.error(error);
+    return { msg: 'Failed to update user block status.', status: 500 };
+  }
+}
+
+export async function changeUserRole({
+  id,
+  role,
+}: {
+  id: string;
+  role: 'admin' | 'user';
+}) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) throw new Error('Unauthorized!');
+
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { role },
+      { new: true }
+    );
+
+    if (!updatedUser) throw new Error('User not found!');
+
+    return { msg: 'User role updated successfully!', status: 200 };
+  } catch (error: any) {
+    console.error(error);
+    return { msg: 'Failed to update user role.', status: 500 };
   }
 }
