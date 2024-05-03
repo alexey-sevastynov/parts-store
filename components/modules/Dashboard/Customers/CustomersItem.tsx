@@ -1,14 +1,20 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
 
+import { useSession } from 'next-auth/react';
+
+import { FaStreetView } from 'react-icons/fa6';
+import { MdDelete } from 'react-icons/md';
+
 import { useLang } from '@/hooks/useLang';
 import { ICustomersItemProps } from '@/types/dashboard';
 
-import PhotoUser from './PhotoUser';
+import { deleteUserAccount } from '@/utils/dashboards';
 import { extractLastFiveCharacters } from '@/utils/common';
-import DateTranslation from './DateTranslation';
-import { FaStreetView } from 'react-icons/fa6';
-import { MdDelete } from 'react-icons/md';
+
 import { SIZE_ICON } from '@/constants/common';
+
+import PhotoUser from './PhotoUser';
+import DateTranslation from './DateTranslation';
 
 const CustomersItem = ({
   firstName,
@@ -22,15 +28,43 @@ const CustomersItem = ({
   photo,
   isBlocked,
 
-  checkboxes,
-  setCheckboxes,
+  isChecked,
+  handleCheckboxChange,
+  handleDeleteUser,
 }: ICustomersItemProps) => {
+  const { data } = useSession();
+  const currentUserID = data?.user._id;
+
   const { lang, translations } = useLang();
 
+  const handleDeleteButtonClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.stopPropagation(); // Prevent checkbox toggle when delete button is clicked
+    handleDeleteUser(_id);
+  };
+
   return (
-    <li className={Styles.customersItem}>
+    <li
+      className={`${Styles.customersItem} ${isChecked && Styles.activeSelect}`}
+    >
       <div className={Styles.customersItem__select}>
-        <input type='checkbox' name={_id} />
+        {isChecked && (
+          <button
+            className={Styles.customersItem__select_delete}
+            onClick={handleDeleteButtonClick}
+          >
+            {translations[lang].dashboard_page.delete_selected_users}
+          </button>
+        )}
+
+        <input
+          className={Styles.customersItem__select_checkboxs}
+          name={_id}
+          checked={isChecked}
+          onChange={() => handleCheckboxChange(_id)}
+          type='checkbox'
+        />
       </div>
 
       <div className={Styles.customersItem__photo}>
@@ -133,7 +167,10 @@ const CustomersItem = ({
         <button className={Styles.customersItem__btns_view}>
           <FaStreetView size={SIZE_ICON} />
         </button>
-        <button className={Styles.customersItem__btns_delete}>
+        <button
+          className={Styles.customersItem__btns_delete}
+          onClick={() => deleteUserAccount(_id, currentUserID)}
+        >
           <MdDelete size={SIZE_ICON} />
         </button>
       </div>

@@ -7,12 +7,11 @@ import { useLang } from '@/hooks/useLang';
 import { MdDelete } from 'react-icons/md';
 import { BiSort } from 'react-icons/bi';
 
-import { deleteSelectedUsers, deleteUser } from '@/actions/authActions';
-
 import { COLORS } from '@/constants/colors';
 import { SIZE_ICON } from '@/constants/common';
 
 import { extractLastFiveCharacters } from '@/utils/common';
+import { deleteUserAccount, deleteUsers } from '@/utils/dashboards';
 
 import { IUser } from '@/types/user';
 
@@ -91,19 +90,6 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
     });
 
     setCheckboxes(updatedCheckboxes);
-  };
-
-  const deleteUserAccount = async (id: string | undefined) => {
-    if (id && id !== currentUserID) {
-      await deleteUser({ id });
-    }
-  };
-
-  const deleteUsers = async (
-    checkboxes: { [key: string]: boolean },
-    currentUserID: string | undefined
-  ) => {
-    if (currentUserID) await deleteSelectedUsers(checkboxes, currentUserID);
   };
 
   const handleSortButtonClick = (
@@ -332,7 +318,9 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
                 </td>
 
                 <td className={Styles.customersTable__body_hover}>
-                  <button onClick={() => deleteUserAccount(user._id)}>
+                  <button
+                    onClick={() => deleteUserAccount(user._id, currentUserID)}
+                  >
                     <MdDelete size={SIZE_ICON} />
                   </button>
                 </td>

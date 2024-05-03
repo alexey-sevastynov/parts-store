@@ -1,6 +1,8 @@
+'use server';
+
 import ResetPasswordPage from '@/components/templates/ResetPasswordPage/ResetPasswordPage';
 
-const ResetPassword = (props: any) => {
+const ResetPassword = async (props: any) => {
   return <ResetPasswordPage token={props.searchParams.token} />;
 };
 

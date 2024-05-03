@@ -64,7 +64,7 @@ const Customers = () => {
       </div>
 
       <CustomersTable users={searchResults} />
-      <CustomersList users={searchResults} />
+      <CustomersList users={searchResults} updateListUsers={getUsers} />
     </section>
   );
 };

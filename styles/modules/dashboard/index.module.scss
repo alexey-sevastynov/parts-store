@@ -456,8 +456,24 @@ $padding-info-small-panel: 20px;
 
       width: 100%;
 
+      .customersItem.activeSelect {
+        border: 2px solid $red;
+
+        .customersItem__select {
+          justify-content: space-between;
+
+          &_delete {
+            font-size: $font-m;
+            color: $red;
+            text-decoration: underline;
+          }
+        }
+      }
+
       .customersItem {
+        box-sizing: border-box;
         background-color: $white;
+
         width: 100%;
 
         &__select {
@@ -556,8 +572,20 @@ $padding-info-small-panel: 20px;
   & .photoUser {
     &__photo {
       border-radius: 100%;
-      &_custom {
-      }
+    }
+
+    &__photo_custom {
+      width: 96px;
+      height: 96px;
+
+      background-color: $red;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: $font-xxl;
+      color: $white-font;
     }
   }
 

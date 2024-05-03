@@ -1,12 +1,43 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
-import { IUser } from '@/types/user';
-import CustomersItem from './CustomersItem';
-import React from 'react';
 
-const CustomersList = ({ users }: { users?: IUser[] }) => {
-  const [checkboxes, setCheckboxes] = React.useState<{
+import React from 'react';
+import { useSession } from 'next-auth/react';
+
+import { IUser } from '@/types/user';
+
+import { deleteUsers } from '@/utils/dashboards';
+
+import CustomersItem from './CustomersItem';
+
+const CustomersList = ({
+  users,
+  updateListUsers,
+}: {
+  users?: IUser[];
+  updateListUsers: () => void;
+}) => {
+  const { data } = useSession();
+  const currentUserID = data?.user._id;
+
+  const [selectedCheckboxes, setSelectedCheckboxes] = React.useState<{
     [key: string]: boolean;
   }>({});
+
+  const handleCheckboxChange = (userId: string) => {
+    setSelectedCheckboxes({
+      ...selectedCheckboxes,
+      [userId]: !selectedCheckboxes[userId],
+    });
+  };
+
+  const handleDeleteSelectedUsers = () => {
+    deleteUsers(selectedCheckboxes, currentUserID).finally(
+      () => updateListUsers() // // Call the update function after deleting a user
+    );
+
+    // Clear selected checkboxes after deletion
+    setSelectedCheckboxes({});
+  };
 
   return (
     <>
@@ -16,8 +47,9 @@ const CustomersList = ({ users }: { users?: IUser[] }) => {
           {users.map((user) => (
             <CustomersItem
               key={user._id}
-              checkboxes={checkboxes}
-              setCheckboxes={setCheckboxes}
+              isChecked={selectedCheckboxes[user._id] || false}
+              handleCheckboxChange={handleCheckboxChange}
+              handleDeleteUser={handleDeleteSelectedUsers}
               {...user}
             />
           ))}

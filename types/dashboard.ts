@@ -17,10 +17,7 @@ export interface IInfoSmallPanelProps {
 }
 
 export interface ICustomersItemProps extends IUser {
-  checkboxes: { [key: string]: boolean };
-  setCheckboxes: React.Dispatch<
-    React.SetStateAction<{
-      [key: string]: boolean;
-    }>
-  >;
+  isChecked: boolean;
+  handleCheckboxChange: (userId: string) => void;
+  handleDeleteUser: (userId: string) => void;
 }
