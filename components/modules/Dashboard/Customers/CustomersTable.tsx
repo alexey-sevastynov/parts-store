@@ -1,5 +1,7 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
 
+import ContentLoader, { IContentLoaderProps } from 'react-content-loader';
+
 import React, { ChangeEvent } from 'react';
 import { useSession } from 'next-auth/react';
 import { useLang } from '@/hooks/useLang';
@@ -8,7 +10,7 @@ import { MdDelete } from 'react-icons/md';
 import { BiSort } from 'react-icons/bi';
 
 import { COLORS } from '@/constants/colors';
-import { SIZE_ICON } from '@/constants/common';
+import { ROUTES, SIZE_ICON } from '@/constants/common';
 
 import { extractLastFiveCharacters } from '@/utils/common';
 import { deleteUserAccount, deleteUsers } from '@/utils/dashboards';
@@ -170,6 +172,7 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
               name='all'
               checked={checkboxes['all'] || false}
               onChange={handleCheckboxChange}
+              disabled={!users}
             />
           </th>
 
@@ -272,76 +275,110 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
 
       <tbody>
         {/* if sorted User List NOT empty */}
-        {sortedUserList.length > 0 ? (
-          // then show list sorted User List
-          sortedUserList?.map((user) => {
-            return (
-              <tr
-                key={user._id}
-                className={Styles.customersTable__body}
-                style={
-                  checkboxes[user._id] ? { backgroundColor: COLORS.grey } : {}
-                }
-              >
-                <td
-                  className={`${Styles.customersTable__body_checkbox} ${
-                    checkboxes[user._id] && Styles.select
-                  }`}
+        {sortedUserList.length > 0
+          ? // then show list sorted User List
+            sortedUserList?.map((user) => {
+              return (
+                <tr
+                  key={user._id}
+                  className={Styles.customersTable__body}
+                  style={
+                    checkboxes[user._id] ? { backgroundColor: COLORS.grey } : {}
+                  }
                 >
-                  <input
-                    type='checkbox'
-                    name={user._id}
-                    checked={checkboxes[user._id] || false}
-                    onChange={handleCheckboxChange}
-                  />
+                  <td
+                    className={`${Styles.customersTable__body_checkbox} ${
+                      checkboxes[user._id] && Styles.select
+                    }`}
+                  >
+                    <input
+                      type='checkbox'
+                      name={user._id}
+                      checked={checkboxes[user._id] || false}
+                      onChange={handleCheckboxChange}
+                    />
+                  </td>
+                  <td className={Styles.customersTable__body_name}>
+                    <Link href={ROUTES.VIEW_CUSTOMER_BY_ID(user._id)}>
+                      {user.firstName + ' ' + user.lastName}
+                    </Link>
+                  </td>
+                  <td className={Styles.customersTable__body_id}>
+                    {extractLastFiveCharacters(user._id || '00000')}
+                  </td>
+                  <td className={Styles.customersTable__body_phone}>
+                    {user.phone || 'невідомо'}
+                  </td>
+                  <td className={Styles.customersTable__body_email}>
+                    {user.email}
+                  </td>
+                  <td className={Styles.customersTable__body_block}>
+                    {user.isBlocked
+                      ? translations[lang].common.yes
+                      : translations[lang].common.no}
+                  </td>
+                  <td className={Styles.customersTable__body_role}>
+                    {user.role}
+                  </td>
+                  <td className={Styles.customersTable__body_created}>
+                    <DateTranslation date={user.createdAt} />
+                  </td>
+
+                  <td className={Styles.customersTable__body_hover}>
+                    <button
+                      onClick={() => deleteUserAccount(user._id, currentUserID)}
+                    >
+                      <MdDelete size={SIZE_ICON} />
+                    </button>
+                  </td>
+                </tr>
+              );
+            })
+          : [...Array(10)].map((_, id) => (
+              <tr key={id} className={Styles.customersTable__body}>
+                <td className={Styles.customersTable__body_checkbox}>
+                  <MyLoader />
                 </td>
                 <td className={Styles.customersTable__body_name}>
-                  <Link href={`customers/${user._id}`}>
-                    {user.firstName + ' ' + user.lastName}
-                  </Link>
+                  <MyLoader />
                 </td>
                 <td className={Styles.customersTable__body_id}>
-                  {extractLastFiveCharacters(user._id || '00000')}
+                  <MyLoader />
                 </td>
                 <td className={Styles.customersTable__body_phone}>
-                  {user.phone || 'невідомо'}
+                  <MyLoader />
                 </td>
                 <td className={Styles.customersTable__body_email}>
-                  {user.email}
+                  <MyLoader />
                 </td>
                 <td className={Styles.customersTable__body_block}>
-                  {user.isBlocked
-                    ? translations[lang].common.yes
-                    : translations[lang].common.no}
+                  <MyLoader />
                 </td>
                 <td className={Styles.customersTable__body_role}>
-                  {user.role}
+                  <MyLoader />
                 </td>
                 <td className={Styles.customersTable__body_created}>
-                  <DateTranslation date={user.createdAt} />
-                </td>
-
-                <td className={Styles.customersTable__body_hover}>
-                  <button
-                    onClick={() => deleteUserAccount(user._id, currentUserID)}
-                  >
-                    <MdDelete size={SIZE_ICON} />
-                  </button>
+                  <MyLoader />
                 </td>
               </tr>
-            );
-          })
-        ) : (
-          // if not, than show the message "not found"
-          <tr>
-            <td>
-              <p>'not found'</p>
-            </td>
-          </tr>
-        )}
+            ))}
       </tbody>
     </table>
   );
 };
 
 export default CustomersTable;
+
+const MyLoader = (props: IContentLoaderProps) => (
+  <ContentLoader
+    speed={1}
+    width={`100%`}
+    height={20}
+    viewBox='0 0 100% 20'
+    backgroundColor='#c6c6c6'
+    foregroundColor='#e5e5e5'
+    {...props}
+  >
+    <rect x='0' y='0' rx='1' ry='1' width='100%' height='20' />
+  </ContentLoader>
+);

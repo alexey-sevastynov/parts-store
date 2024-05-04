@@ -8,7 +8,7 @@ import { ROUTES } from '@/constants/common';
 import { useLang } from '@/hooks/useLang';
 
 import { useParams } from 'next/navigation';
-import CustomerInfo from './CustomerInfo';
+import CustomerInfo from './CustomerInfo/CustomerInfo';
 import React from 'react';
 import { findUserById } from '@/actions/authActions';
 import { extractLastFiveCharacters } from '@/utils/common';

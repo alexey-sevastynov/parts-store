@@ -8,6 +8,6 @@ export const ROUTES = {
   DASHBOARD: '/dashboard',
   CUSTOMERS: '/dashboard/customers',
   VIEW_CUSTOMER_BY_ID: (id: string) => {
-    return `/customers/${id}`;
+    return `customers/${id}`;
   },
 };

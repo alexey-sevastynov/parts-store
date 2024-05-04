@@ -4,7 +4,7 @@ import Title from '@/components/elements/Title';
 import { useLang } from '@/hooks/useLang';
 import ItemInfoLoader from './ItemInfoLoader';
 import ItemInfoPhotoLoader from './ItemInfoPhotoLoader';
-import ButtonLoader from './ButtonLoader';
+import ButtonLoader from '../ButtonLoader';
 
 const CustomerInfoLoading = () => {
   const { lang, translations } = useLang();

@@ -11,10 +11,12 @@ import { ICustomersItemProps } from '@/types/dashboard';
 import { deleteUserAccount } from '@/utils/dashboards';
 import { extractLastFiveCharacters } from '@/utils/common';
 
-import { SIZE_ICON } from '@/constants/common';
+import { ROUTES, SIZE_ICON } from '@/constants/common';
 
-import PhotoUser from './PhotoUser';
-import DateTranslation from './DateTranslation';
+import PhotoUser from '../PhotoUser';
+import DateTranslation from '../DateTranslation';
+import ContentLoader, { IContentLoaderProps } from 'react-content-loader';
+import Link from 'next/link';
 
 const CustomersItem = ({
   firstName,
@@ -68,7 +70,9 @@ const CustomersItem = ({
       </div>
 
       <div className={Styles.customersItem__photo}>
-        <PhotoUser photo={photo} firstName={firstName} lastName={lastName} />
+        <Link href={ROUTES.VIEW_CUSTOMER_BY_ID(_id)}>
+          <PhotoUser photo={photo} firstName={firstName} lastName={lastName} />
+        </Link>
       </div>
 
       {/* First name */}
@@ -164,7 +168,7 @@ const CustomersItem = ({
       </div>
 
       <div className={Styles.customersItem__btns}>
-        <button className={Styles.customersItem__btns_view}>
+        <button disabled className={Styles.customersItem__btns_view}>
           <FaStreetView size={SIZE_ICON} />
         </button>
         <button

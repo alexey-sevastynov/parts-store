@@ -7,7 +7,9 @@ import { IUser } from '@/types/user';
 
 import { deleteUsers } from '@/utils/dashboards';
 
-import CustomersItem from './CustomersItem';
+import CustomersItem from './CustomerItem/CustomersItem';
+
+import CustomersItemLoading from './CustomerItem/CustomersItemLoading';
 
 const CustomersList = ({
   users,
@@ -55,7 +57,11 @@ const CustomersList = ({
           ))}
         </ul> // if not, than show the message "not found"
       ) : (
-        'not found'
+        <ul className={Styles.customersList}>
+          {[...Array(6)].map((_, id) => (
+            <CustomersItemLoading key={id} />
+          ))}
+        </ul>
       )}
     </>
   );
