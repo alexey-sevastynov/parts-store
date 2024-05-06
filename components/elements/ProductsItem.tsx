@@ -55,8 +55,6 @@ const ProductsItem = ({
     </>
   );
 
-  console.log(lengthItems < 7);
-
   return (
     <motion.li
       className={`${Styles.productsItem} ${showMoreItem ? Styles.wrap : ''}`}

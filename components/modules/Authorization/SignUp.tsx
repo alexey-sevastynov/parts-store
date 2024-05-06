@@ -62,8 +62,6 @@ const SignUp = () => {
     const res = await signUpWithCredentials(data);
 
     setMessageError(res?.msg as messageErrorType);
-
-    console.log(res);
   };
 
   return (

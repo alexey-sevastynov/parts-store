@@ -125,13 +125,17 @@ const CustomerInfo = ({
             {/* ____________createdAt */}
             <li className={Styles.customerInfo__content_list_item}>
               <p>{translations[lang].dashboard_page.created}</p>
-              <DateTranslation date={user?.createdAt} />
+              <p>
+                <DateTranslation date={user?.createdAt} />
+              </p>
             </li>
 
             {/* ____________updatedAt */}
             <li className={Styles.customerInfo__content_list_item}>
               <p>{translations[lang].dashboard_page.updated}</p>
-              <DateTranslation date={user?.updatedAt} />
+              <p>
+                <DateTranslation date={user?.updatedAt} />
+              </p>
             </li>
 
             {/* ____________role */}

@@ -210,7 +210,17 @@
       "sort_by_role": "Sort by admin",
       "sort_by_created": "Sort by date created",
 
-      "user_info": "User information"
+      "user_info": "User information",
+
+      "goods": "Goods",
+
+      "characteristic": "Characteristic",
+
+      "name_characteristic": "Characteristic name",
+      "list_characteristics": "List of characteristics",
+
+      "delete_selected_characteristic": "Delete selected characteristics",
+      "delete_all_characteristic": "Delete all characteristics"
     }
   },
 
@@ -425,7 +435,17 @@
       "sort_by_role": "Сортувати за адміністраторами",
       "sort_by_created": "Сортувати за датою створення",
 
-      "user_info": "Інформація про користувача"
+      "user_info": "Інформація про користувача",
+
+      "goods": "Товари",
+
+      "characteristic": "Характеристики",
+
+      "name_characteristic": "Ім'я характеристики",
+      "list_characteristics": "Перелік характеристик",
+
+      "delete_selected_characteristic": "Видалити вибрані характеристики",
+      "delete_all_characteristic": "Видалити всі характеристики"
     }
   },
 
@@ -640,7 +660,17 @@
       "sort_by_role": "Сортировка по администраторам",
       "sort_by_created": "Сортировка по дате создания",
 
-      "user_info": "Информация о пользователе"
+      "user_info": "Информация о пользователе",
+
+      "goods": "Товары",
+
+      "characteristic": "Характеристики",
+
+      "name_characteristic": "Имя характеристики",
+      "list_characteristics": "List characteristics",
+
+      "delete_selected_characteristic": "Удалить выбранные характеристики",
+      "delete_all_characteristic": "Удалить все характеристики"
     }
   }
 }

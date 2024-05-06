@@ -76,7 +76,7 @@ export async function signUpWithCredentials({
     }; // DO NOT change the msg !!! The text of msg bind with '@/puplic/transltion.json'
   } catch (error: any) {
     // redirect(`/errors?error=${error.message}`);
-    console.log(error);
+    // console.log(error);
   }
 }
 
@@ -136,7 +136,7 @@ export async function changePasswordWithCredentials({
     return { msg: 'Changed Password Succussefully!', status: 201 };
   } catch (error: any) {
     // redirect(`/errors?error=${error.message}`);
-    console.log(error);
+    // console.log(error);
   }
 }
 
@@ -197,7 +197,7 @@ export async function resetPasswordWithCredentials({
       // DO NOT change the msg !!! The text of msg bind with '@/puplic/transltion.json'
     };
   } catch (error: any) {
-    console.log(error);
+    // console.log(error);
   }
 }
 
@@ -260,7 +260,7 @@ export async function deleteSelectedUsers(
     const deletePromises = selectedUserIds.map(async (userId) => {
       const user = await User.findByIdAndDelete(userId);
       if (!user) {
-        console.log(`Failed to delete user with ID: ${userId}`);
+        // console.log(`Failed to delete user with ID: ${userId}`);
       }
     });
 

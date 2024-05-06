@@ -56,7 +56,6 @@ const SignIn = () => {
 
     if (res?.status === 200) dispatch(closeDropDownAuth());
 
-    console.log(res);
     setMessageError(res?.error as messageErrorType);
   };
   return (

@@ -372,9 +372,9 @@ export default CustomersTable;
 const MyLoader = (props: IContentLoaderProps) => (
   <ContentLoader
     speed={1}
-    width={`100%`}
+    width={100}
     height={20}
-    viewBox='0 0 100% 20'
+    viewBox='0 0 100 20'
     backgroundColor='#c6c6c6'
     foregroundColor='#e5e5e5'
     {...props}

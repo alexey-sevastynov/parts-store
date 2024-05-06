@@ -3,7 +3,7 @@ import HeaderAdmin from '@/components/modules/Dashboard/Header/HeaderAdmin';
 
 const CustomerPage = () => {
   return (
-    <main className='customers-page'>
+    <main className='dashboard-pages'>
       <HeaderAdmin />
 
       <Customer />

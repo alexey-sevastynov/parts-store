@@ -9,22 +9,22 @@ export const addOverflowHiddenToBody = () => {
 };
 
 export const collapseNavAdmin = () => {
-  const body = document.querySelector('.customers-page') as HTMLBodyElement;
-  body.classList.remove('customers-page-big');
+  const body = document.querySelector('.dashboard-pages') as HTMLBodyElement;
+  body.classList.remove('dashboard-pages-big');
 };
 
 export const expandNavAdmin = () => {
-  const body = document.querySelector('.customers-page') as HTMLBodyElement;
-  body.classList.add('customers-page-big');
+  const body = document.querySelector('.dashboard-pages') as HTMLBodyElement;
+  body.classList.add('dashboard-pages-big');
 };
 
 export const hideNavMenu = () => {
-  const body = document.querySelector('.customers-page') as HTMLBodyElement;
+  const body = document.querySelector('.dashboard-pages') as HTMLBodyElement;
   body.classList.add('hide');
 };
 
 export const showNavMenu = () => {
-  const body = document.querySelector('.customers-page') as HTMLBodyElement;
+  const body = document.querySelector('.dashboard-pages') as HTMLBodyElement;
   body.classList.remove('hide');
 };
 

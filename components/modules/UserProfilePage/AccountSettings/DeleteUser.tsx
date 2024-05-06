@@ -33,8 +33,6 @@ const DeleteUser = () => {
         router.push('/');
         dispatch(closePopupWindowDeleteUser());
       });
-
-      console.log(res);
     }
   };
 

@@ -1,16 +1,16 @@
 'use client';
 
-import Customers from '@/components/modules/Dashboard/Customers/Customers';
+import Goods from '@/components/modules/Dashboard/Goods/Goods';
 import HeaderAdmin from '@/components/modules/Dashboard/Header/HeaderAdmin';
 
-const CustomersPage = () => {
+const GoodsPage = () => {
   return (
     <main className='dashboard-pages'>
       <HeaderAdmin />
 
-      <Customers />
+      <Goods />
     </main>
   );
 };
 
-export default CustomersPage;
+export default GoodsPage;

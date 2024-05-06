@@ -93,8 +93,6 @@ const PersonalData = () => {
     const { firstName, lastName, phone } = data;
     const res = await updateUser({ firstName, lastName, phone });
 
-    console.log(update);
-
     if (update) update({ firstName, lastName, phone });
 
     if (res.status === 'success') {

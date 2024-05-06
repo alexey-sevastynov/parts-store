@@ -275,7 +275,9 @@ $padding-info-small-panel: 20px;
   }
 }
 .customers,
-.customer {
+.customer,
+.goods,
+.characteristic {
   width: 100%;
   background-color: $white;
 
@@ -316,24 +318,34 @@ $padding-info-small-panel: 20px;
 
   &__head,
   & .customersTable__head,
+  & .characteristicTable__head,
   & .customersTable tbody tr,
-  & .customersTable__head_delete {
+  & .characteristicTable tbody tr,
+  & .customersTable__head_delete,
+  & .characteristicTable__head_delete {
     padding-left: $padding-left-right-table-admin;
     padding-right: $padding-left-right-table-admin;
   }
 
-  & .customersTable {
+  & .customersTable,
+  & .characteristicTable {
     width: 100%;
     display: block;
 
     .customersTable__head,
-    .customersTable__body {
+    .customersTable__body,
+    .characteristicTable__head,
+    .characteristicTable__body {
       display: flex;
       gap: 10px;
+
       &_checkbox {
         width: 14px;
       }
+    }
 
+    .customersTable__head,
+    .customersTable__body {
       &_name,
       &_email {
         width: 23%;
@@ -354,10 +366,29 @@ $padding-info-small-panel: 20px;
       }
     }
 
+    .characteristicTable__head,
+    .characteristicTable__body {
+      &_name_characteristic {
+        width: 30%;
+      }
+      &_list_characteristics {
+        width: 70%;
+        @include text-gradient-end;
+        display: flex;
+        gap: 5px;
+        overflow: hidden;
+
+        &_item {
+          white-space: nowrap;
+        }
+      }
+    }
+
     & thead {
       display: flex;
       flex-direction: column;
-      .customersTable__head {
+      .customersTable__head,
+      .characteristicTable__head {
         box-sizing: border-box;
 
         width: 100%;
@@ -428,15 +459,18 @@ $padding-info-small-panel: 20px;
       display: flex;
       flex-direction: column;
 
-      .customersTable__body.all {
+      .customersTable__body.all,
+      .characteristicTable__body.all {
         background-color: $grey;
       }
 
-      .customersTable__body .customersTable__body_checkbox.select {
+      .customersTable__body .customersTable__body_checkbox.select,
+      .characteristicTable__body .characteristicTable__body_checkbox.select {
         background-color: $grey;
       }
 
-      .customersTable__body {
+      .customersTable__body,
+      .characteristicTable__body {
         height: 60px;
         position: relative;
 

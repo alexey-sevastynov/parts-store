@@ -51,14 +51,10 @@ const ResetPasswordPage = ({ token }: { token: string }) => {
   const onSubmit: SubmitHandler<IInputs> = async (data) => {
     const password = data.passwordNew;
 
-    console.log(password, token);
-
     if (password && token) {
       const res = await resetPasswordWithCredentials({ token, password });
 
       setMessageError(res?.msg as messageErrorType);
-
-      console.log(res);
     }
   };
 

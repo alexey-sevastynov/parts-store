@@ -7,6 +7,9 @@ export const ROUTES = {
   HOME: '/',
   DASHBOARD: '/dashboard',
   CUSTOMERS: '/dashboard/customers',
+  GOODS: '/dashboard/goods',
+  CHARACTERISTIC: '/dashboard/characteristic',
+
   VIEW_CUSTOMER_BY_ID: (id: string) => {
     return `customers/${id}`;
   },

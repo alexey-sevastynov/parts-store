@@ -43,8 +43,6 @@ const PasswordChange = () => {
     passwordNew,
     passwordOld,
   }) => {
-    console.log(isPasswordMatch, passwordNew, passwordOld);
-
     if (passwordOld && passwordNew && isPasswordMatch) {
       const res = await changePasswordWithCredentials({
         passwordOld,
@@ -52,8 +50,6 @@ const PasswordChange = () => {
       });
 
       setMessageError(res?.msg as messageErrorType);
-
-      console.log(res);
     }
   };
 
