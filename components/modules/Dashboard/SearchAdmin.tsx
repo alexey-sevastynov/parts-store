@@ -1,6 +1,8 @@
+import Styles from '@/styles/modules/dashboard/index.module.scss';
+
 import { SIZE_ICON } from '@/constants/common';
 import { useLang } from '@/hooks/useLang';
-import Styles from '@/styles/modules/dashboard/index.module.scss';
+
 import React from 'react';
 
 import { CiSearch } from 'react-icons/ci';

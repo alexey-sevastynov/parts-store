@@ -37,6 +37,7 @@ $padding-info-small-panel: 20px;
 
     gap: 30px;
     .itemNavAdmin {
+      position: relative;
       height: 24px;
       @include display-flex;
 
@@ -63,12 +64,45 @@ $padding-info-small-panel: 20px;
         font-size: $font-l;
       }
 
+      &__arrow {
+        position: absolute;
+        right: 10px;
+
+        color: $black-icon;
+      }
+
       &__icon.active,
-      &__title.active {
+      &__title.active,
+      &__arrow.active {
         color: $red;
         svg {
           color: $red;
         }
+      }
+    }
+
+    &__accordion {
+      &_list {
+        & .itemNavAdmin {
+          &__marker {
+            background: $orange;
+          }
+
+          &__icon.active,
+          &__title.active,
+          &__arrow.active {
+            color: $orange;
+            svg {
+              color: $orange;
+            }
+          }
+        }
+        margin-left: 0px;
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+
+        color: green !important;
       }
     }
   }
@@ -170,14 +204,25 @@ $padding-info-small-panel: 20px;
   }
 }
 
-.customer {
+.characteristic__line {
+  @include horizon-line;
+}
+
+.customer,
+.characteristicForm,
+.add,
+.characteristic {
   .customerInfo,
-  .customerInfoLoading {
-    &__line {
-      display: block;
-      height: 1px;
-      background-color: $grey;
-      width: 100%;
+  .characteristicInfoName,
+  .characteristicInfoList,
+  .customerInfoLoading,
+  .characteristicForm,
+  .addCharacteristicName,
+  .addCharacteristicValue,
+  .listAddedCharacteristics {
+    &__line,
+    .characteristic__line {
+      @include horizon-line;
     }
 
     &__title,
@@ -196,7 +241,13 @@ $padding-info-small-panel: 20px;
       font-weight: $weight-semi-bold;
     }
 
+    .characteristicInfoName__form {
+      padding: 0;
+      padding-left: $padding-left-right-table-admin;
+    }
+
     &__form {
+      .characteristicInfoList__content,
       .customerInfo__content {
         display: flex;
 
@@ -230,6 +281,14 @@ $padding-info-small-panel: 20px;
 
               font-size: $font-l;
             }
+
+            & label {
+              @include label;
+            }
+
+            & input {
+              @include input;
+            }
           }
         }
 
@@ -255,6 +314,7 @@ $padding-info-small-panel: 20px;
 
     @media (max-width: $breakpoint_xl) {
       &__form {
+        .characteristicInfoList__content,
         .customerInfo__content {
           &_list {
             grid-template-columns: 1fr 1fr;
@@ -264,6 +324,7 @@ $padding-info-small-panel: 20px;
     }
     @media (max-width: $breakpoint_lg) {
       &__form {
+        .characteristicInfoList__content,
         .customerInfo__content {
           flex-direction: column-reverse;
           gap: 20px;
@@ -277,7 +338,8 @@ $padding-info-small-panel: 20px;
 .customers,
 .customer,
 .goods,
-.characteristic {
+.characteristic,
+.add {
   width: 100%;
   background-color: $white;
 
@@ -297,45 +359,52 @@ $padding-info-small-panel: 20px;
       display: flex;
       gap: 10px;
 
-      & button {
+      &_btn_update,
+      &_btn_add {
         display: flex;
         align-items: center;
         justify-content: center;
         height: max-content;
+      }
 
-        & svg {
-          color: $grey;
-
-          @include btn-hover(color);
-
-          &:hover {
-            color: $black-icon;
-          }
-        }
+      &_btn_update {
+        @include icon-hover($grey, $black-icon);
+      }
+      &_btn_add {
+        @include icon-hover($green, $green-active);
       }
     }
   }
 
   &__head,
   & .customersTable__head,
-  & .characteristicTable__head,
   & .customersTable tbody tr,
-  & .characteristicTable tbody tr,
   & .customersTable__head_delete,
-  & .characteristicTable__head_delete {
+  & .characteristicTable__head,
+  & .characteristicTable tbody tr,
+  & .characteristicTable__head_delete,
+  & .charateristicTableEdit__head,
+  & .charateristicTableEdit tbody tr,
+  & .charateristicTableEdit__head_delete,
+  & .serverErrorMsg,
+  .notFoundMsg,
+  .listAddedCharacteristics {
     padding-left: $padding-left-right-table-admin;
     padding-right: $padding-left-right-table-admin;
   }
 
   & .customersTable,
-  & .characteristicTable {
+  & .characteristicTable,
+  & .charateristicTableEdit {
     width: 100%;
     display: block;
 
     .customersTable__head,
+    .charateristicTableEdit__head,
     .customersTable__body,
     .characteristicTable__head,
-    .characteristicTable__body {
+    .characteristicTable__body,
+    .charateristicTableEdit__body {
       display: flex;
       gap: 10px;
 
@@ -384,11 +453,32 @@ $padding-info-small-panel: 20px;
       }
     }
 
+    .charateristicTableEdit__head,
+    .charateristicTableEdit__body {
+      &_name_characteristic {
+        width: 20%;
+
+        & input {
+          @include input;
+        }
+      }
+
+      &_button_block {
+        width: 40%;
+
+        &_btns {
+          display: flex;
+          gap: 20px;
+        }
+      }
+    }
+
     & thead {
       display: flex;
       flex-direction: column;
       .customersTable__head,
-      .characteristicTable__head {
+      .characteristicTable__head,
+      .charateristicTableEdit__head {
         box-sizing: border-box;
 
         width: 100%;
@@ -470,7 +560,8 @@ $padding-info-small-panel: 20px;
       }
 
       .customersTable__body,
-      .characteristicTable__body {
+      .characteristicTable__body,
+      .charateristicTableEdit__body {
         height: 60px;
         position: relative;
 
@@ -478,54 +569,39 @@ $padding-info-small-panel: 20px;
 
         border-bottom: 1px solid $grey;
 
-        @include btn-hover(background-color);
-        &_hover {
-          position: absolute;
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-          padding-right: 50px;
-
-          right: -2%;
-          background-color: unset;
-          @include btn-hover(all);
-
-          & button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 100%;
-            width: 34px;
-            height: 34px;
-            background-color: $grey-light;
-            opacity: 0;
-            & svg {
-              color: $black-icon;
-            }
-          }
+        &_not_found {
+          margin-top: 20px;
         }
+
+        @include btn-hover(background-color);
+        // &_hover {
+        //   position: absolute;
+        //   display: flex;
+        //   align-items: center;
+        //   justify-content: flex-end;
+        //   padding-right: 50px;
+
+        //   right: -2%;
+        //   background-color: unset;
+        //   @include btn-hover(all);
+
+        //   & button {
+        //     display: flex;
+        //     align-items: center;
+        //     justify-content: center;
+        //     border-radius: 100%;
+        //     width: 34px;
+        //     height: 34px;
+        //     background-color: $grey-light;
+        //     opacity: 0;
+        //     & svg {
+        //       color: $black-icon;
+        //     }
+        //   }
+        // }
 
         &:hover {
           background-color: $grey;
-          .customersTable__body_hover {
-            width: 200px;
-            height: 100%;
-            background-color: $grey;
-            right: 0%;
-
-            & button {
-              opacity: 1;
-              & svg {
-                color: $black-icon;
-
-                @include btn-hover(color);
-
-                &:hover {
-                  color: $red;
-                }
-              }
-            }
-          }
         }
       }
     }
@@ -728,11 +804,107 @@ $padding-info-small-panel: 20px;
     }
   }
 
+  & .characteristic__info {
+    display: flex;
+    width: 100%;
+
+    gap: 10px;
+
+    & .characteristicInfoName,
+    .addCharacteristicValue {
+      width: 50%;
+    }
+  }
+
   // MEDIA customers
   @media (max-width: $breakpoint_lg) {
     &__search {
       width: 100%;
     }
+  }
+}
+
+.add,
+.characteristic {
+  .characteristicForm,
+  &__info {
+    width: 100%;
+
+    &__inputs {
+      display: flex;
+      gap: 20px;
+    }
+
+    .addCharacteristicName,
+    .addCharacteristicValue,
+    .characteristicInfoName {
+      &__list,
+      .characteristicInfoName__content_list {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        &_item {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          & label {
+            @include label;
+          }
+
+          & input {
+            @include input;
+          }
+        }
+      }
+    }
+
+    .addCharacteristicName {
+      width: 50%;
+      padding-left: $padding-left-right-table-admin;
+
+      &__info {
+        margin-top: 20px;
+      }
+    }
+
+    .addCharacteristicValue {
+      width: 50%;
+      padding-right: $padding-left-right-table-admin;
+
+      &__btn {
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+.serverErrorMsg {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  & p {
+    color: $black-font;
+    font-size: $font-m;
+
+    & b {
+      color: $red;
+
+      font-weight: $weight-semi-bold;
+    }
+  }
+}
+
+.notFoundMsg {
+  margin-top: 20px;
+  & p {
+    color: $black-font;
+    font-size: $font-m;
   }
 }
 

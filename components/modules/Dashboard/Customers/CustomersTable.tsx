@@ -1,7 +1,5 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
 
-import ContentLoader, { IContentLoaderProps } from 'react-content-loader';
-
 import React, { ChangeEvent } from 'react';
 import { useSession } from 'next-auth/react';
 import { useLang } from '@/hooks/useLang';
@@ -10,17 +8,21 @@ import { MdDelete } from 'react-icons/md';
 import { BiSort } from 'react-icons/bi';
 
 import { COLORS } from '@/constants/colors';
-import { ROUTES, SIZE_ICON } from '@/constants/common';
+import { ROUTES } from '@/constants/common';
 
 import { extractLastFiveCharacters } from '@/utils/common';
-import { deleteUserAccount, deleteUsers } from '@/utils/dashboards';
+import { deleteUsers, handleCheckboxChange } from '@/utils/dashboards';
 
 import { IUser } from '@/types/user';
 
 import DateTranslation from './DateTranslation';
 import Link from 'next/link';
+import { ICustomersTableProps } from '@/types/dashboard';
 
-const CustomersTable = ({ users }: { users?: IUser[] }) => {
+import CustomerRowLoader from './CustomerRowLoader';
+import NotFoundMsg from '../NotFoundMsg';
+
+const CustomersTable = ({ users, isLoading }: ICustomersTableProps) => {
   const { lang, translations } = useLang();
 
   const { data } = useSession();
@@ -47,43 +49,6 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
   const isAnyCheckboxChecked = Object.values(checkboxes).some(
     (value) => value === true
   );
-
-  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = event.target;
-
-    // If the "all" checkbox is selected, set the state of all checkboxes
-    if (name === 'all') {
-      const updatedCheckboxes: {
-        [key: string]: boolean;
-      } = {};
-
-      // If "all" is selected, set all checkboxes to true
-      if (checked) {
-        users?.forEach((user) => {
-          updatedCheckboxes[user._id] = true;
-        });
-      }
-
-      // Update the status of the checkboxes, including the "all" checkboxes
-      setCheckboxes({ ...updatedCheckboxes, all: checked });
-    } else {
-      // If another checkbox is selected, update its state
-      const updatedCheckboxes = { ...checkboxes, [name]: checked };
-
-      // If the selected checkbox is deselected, deselect "all".
-      if (!checked) {
-        updatedCheckboxes.all = false;
-      } else {
-        // If a checkbox is selected and there are other selected checkboxes, select "all".
-        if (isAnyCheckboxChecked && name !== 'all') {
-          updatedCheckboxes.all = true;
-        }
-      }
-
-      // Update checkboxes status
-      setCheckboxes(updatedCheckboxes);
-    }
-  };
 
   const handleBackButtonClick = () => {
     // Set the state of all checkboxes to false
@@ -171,7 +136,15 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
               type='checkbox'
               name='all'
               checked={checkboxes['all'] || false}
-              onChange={handleCheckboxChange}
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                handleCheckboxChange(
+                  users,
+                  event,
+                  checkboxes,
+                  setCheckboxes,
+                  isAnyCheckboxChecked
+                )
+              }
               disabled={!users}
             />
           </th>
@@ -274,10 +247,15 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
       </thead>
 
       <tbody>
-        {/* if sorted User List NOT empty */}
-        {sortedUserList.length > 0
-          ? // then show list sorted User List
-            sortedUserList?.map((user) => {
+        {/* if the search didn't turn up anything, */}
+        {!isLoading && (!users || users.length === 0) && (
+          <NotFoundMsg message={translations[lang].dashboard_page.not_found} />
+        )}
+
+        {/* if the data has not yet been downloaded */}
+        {isLoading
+          ? [...Array(10)].map((_, id) => <CustomerRowLoader key={id} />)
+          : sortedUserList?.map((user) => {
               return (
                 <tr
                   key={user._id}
@@ -295,7 +273,15 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
                       type='checkbox'
                       name={user._id}
                       checked={checkboxes[user._id] || false}
-                      onChange={handleCheckboxChange}
+                      onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                        handleCheckboxChange(
+                          users,
+                          event,
+                          checkboxes,
+                          setCheckboxes,
+                          isAnyCheckboxChecked
+                        )
+                      }
                     />
                   </td>
                   <td className={Styles.customersTable__body_name}>
@@ -323,62 +309,12 @@ const CustomersTable = ({ users }: { users?: IUser[] }) => {
                   <td className={Styles.customersTable__body_created}>
                     <DateTranslation date={user.createdAt} />
                   </td>
-
-                  <td className={Styles.customersTable__body_hover}>
-                    <button
-                      onClick={() => deleteUserAccount(user._id, currentUserID)}
-                    >
-                      <MdDelete size={SIZE_ICON} />
-                    </button>
-                  </td>
                 </tr>
               );
-            })
-          : [...Array(10)].map((_, id) => (
-              <tr key={id} className={Styles.customersTable__body}>
-                <td className={Styles.customersTable__body_checkbox}>
-                  <MyLoader />
-                </td>
-                <td className={Styles.customersTable__body_name}>
-                  <MyLoader />
-                </td>
-                <td className={Styles.customersTable__body_id}>
-                  <MyLoader />
-                </td>
-                <td className={Styles.customersTable__body_phone}>
-                  <MyLoader />
-                </td>
-                <td className={Styles.customersTable__body_email}>
-                  <MyLoader />
-                </td>
-                <td className={Styles.customersTable__body_block}>
-                  <MyLoader />
-                </td>
-                <td className={Styles.customersTable__body_role}>
-                  <MyLoader />
-                </td>
-                <td className={Styles.customersTable__body_created}>
-                  <MyLoader />
-                </td>
-              </tr>
-            ))}
+            })}
       </tbody>
     </table>
   );
 };
 
 export default CustomersTable;
-
-const MyLoader = (props: IContentLoaderProps) => (
-  <ContentLoader
-    speed={1}
-    width={100}
-    height={20}
-    viewBox='0 0 100 20'
-    backgroundColor='#c6c6c6'
-    foregroundColor='#e5e5e5'
-    {...props}
-  >
-    <rect x='0' y='0' rx='1' ry='1' width='100%' height='20' />
-  </ContentLoader>
-);

@@ -14,7 +14,7 @@ import { findUserById } from '@/actions/authActions';
 import { extractLastFiveCharacters } from '@/utils/common';
 import { IUser } from '@/types/user';
 
-const Customer = () => {
+const Customer = ({ data }: { data: IUser }) => {
   const params = useParams();
 
   const { lang, translations } = useLang();
@@ -40,7 +40,9 @@ const Customer = () => {
   };
 
   React.useEffect(() => {
-    getUser(id);
+    setUser(data);
+
+    // getUser(id);
   }, []);
 
   return (

@@ -11,11 +11,11 @@ export interface IUserParams {
 export interface IUser extends IUserParams {
   _id: string;
   photo?: string;
-  viewedProducts?: any;
-  cart?: any;
-  likedProducts?: any;
-  cars?: any;
-  orders?: any;
+  viewedProducts?: string[];
+  cart?: string[];
+  likedProducts?: string[];
+  cars?: string[];
+  orders?: string[];
   provider?: string;
   role?: TypeRole;
   createdAt?: string;

@@ -12,6 +12,8 @@
       "yes": "Yes",
       "no": "No",
 
+      "add": "Add",
+
       "social_networks": "We are on social networks"
     },
     "header": {
@@ -215,12 +217,36 @@
       "goods": "Goods",
 
       "characteristic": "Characteristic",
+      "characteristics": "Characteristics",
 
       "name_characteristic": "Characteristic name",
       "list_characteristics": "List of characteristics",
 
       "delete_selected_characteristic": "Delete selected characteristics",
-      "delete_all_characteristic": "Delete all characteristics"
+      "delete_all_characteristic": "Delete all characteristics",
+
+      "error_msg": "We are very sorry there was a mistake, we are already doing our best to solve the problem",
+      "msg_about_error": "Error messages",
+      "status": "Status",
+
+      "not_found": "Sorry, nothing found. First Name Last Name or Customer Code is not in the database.",
+      "not_found_characteristics": "Unfortunately, nothing was found. The name of the characteristic is not in the database.",
+
+      "value_characteristic": "Characteristic value",
+
+      "name_ua": "Name (UA)",
+      "name_ru": "Name (RU)",
+      "name_en": "Name (EN)",
+
+      "value_ua": "Value (UA)",
+      "value_ru": "Value (RU)",
+      "value_en": "Value (EN)",
+
+      "help_text_name_characteristic": "All fields with the name must be filled in, in different languages. Enter once and then fill in the fields (values) by adding different characteristics.",
+
+      "list_added_characteristics": "List of added characteristics",
+
+      "name_characteristic_different_language": "The name of the characterization is in different languages"
     }
   },
 
@@ -236,6 +262,8 @@
       "update": "Оновити",
       "yes": "Да",
       "no": "Нет",
+
+      "add": "Додати",
 
       "social_networks": "Ми в соціальних мережах"
     },
@@ -439,13 +467,37 @@
 
       "goods": "Товари",
 
-      "characteristic": "Характеристики",
+      "characteristic": "Характеристика",
+      "characteristics": "Характеристики",
 
       "name_characteristic": "Ім'я характеристики",
       "list_characteristics": "Перелік характеристик",
 
       "delete_selected_characteristic": "Видалити вибрані характеристики",
-      "delete_all_characteristic": "Видалити всі характеристики"
+      "delete_all_characteristic": "Видалити всі характеристики",
+
+      "error_msg": "Нам дуже шкода, що сталася помилка, ми вже робимо все можливе, щоб вирішити проблему",
+      "msg_about_error": "Повідомлення про помилку",
+      "status": "Статус",
+
+      "not_found": "На жаль, нічого не знайдено. Ім'я Прізвище або код клієнта немає такого в базі даних.",
+      "not_found_characteristics": "На жаль, нічого не знайдено. Ім'я характеристики такої немає в базі даних.",
+
+      "value_characteristic": "Значення характеристики",
+
+      "name_ua": "Ім'я (UA)",
+      "name_ru": "Ім'я (RU)",
+      "name_en": "Ім'я (EN)",
+
+      "value_ua": "Значення (UA)",
+      "value_ru": "Значення (RU)",
+      "value_en": "Значення (EN)",
+
+      "help_text_name_characteristic": "Усі поля з ім'ям мають бути заповнені, різними мовами. Введіть один раз і потім заповнюйте поля (значення), додаючи різні характеристики.",
+
+      "list_added_characteristics": "Список доданих характеристик",
+
+      "name_characteristic_different_language": "Ім'я характеристики різними мовами"
     }
   },
 
@@ -461,6 +513,8 @@
       "update": "Обновить",
       "yes": "Да",
       "no": "Ні",
+
+      "add": "Добавить",
 
       "social_networks": "Мы в социальных сетях"
     },
@@ -664,13 +718,37 @@
 
       "goods": "Товары",
 
-      "characteristic": "Характеристики",
+      "characteristic": "Характеристика",
+      "characteristics": "Характеристики",
 
       "name_characteristic": "Имя характеристики",
       "list_characteristics": "List characteristics",
 
       "delete_selected_characteristic": "Удалить выбранные характеристики",
-      "delete_all_characteristic": "Удалить все характеристики"
+      "delete_all_characteristic": "Удалить все характеристики",
+
+      "error_msg": "Нам очень жаль произошла ошибка, мы уже делаем все возможное, что бы решить проблему",
+      "msg_about_error": "Сообщения об ошибке",
+      "status": "Статус",
+
+      "not_found": "К сожилению, ничего не найдено. Имя Фамилия или код клиента нет такого в базе данных.",
+      "not_found_characteristics": "К сожилению, ничего не найдено. Имя характеристики такой нет в базе данных.",
+
+      "value_characteristic": "Значения характеристики",
+
+      "name_ua": "Имя (UA)",
+      "name_ru": "Имя (RU)",
+      "name_en": "Имя (EN)",
+
+      "value_ua": "Значения (UA)",
+      "value_ru": "Значения (RU)",
+      "value_en": "Значения (EN)",
+
+      "help_text_name_characteristic": "Все поля с именем должны быть заплнены, на разных языках. Введите один раз и потом заполняйте поля (значения), добавляя разные характеристики.",
+
+      "list_added_characteristics": "Список добавленных характеристик",
+
+      "name_characteristic_different_language": "Имя характеристики на разних языках"
     }
   }
 }

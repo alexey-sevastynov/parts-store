@@ -6,3 +6,10 @@ export type BreakpointsType = {
   xl: number;
   xxl: number;
 };
+
+export interface ILanguageStrings {
+  _id?: string;
+  en: string;
+  ru: string;
+  ua: string;
+}

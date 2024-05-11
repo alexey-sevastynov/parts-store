@@ -1,0 +1,14 @@
+.questionIconWithHint {
+  @include display-flex;
+  gap: 10px;
+
+  &__icon {
+    & svg {
+      color: $black-icon;
+    }
+  }
+
+  & p {
+    text-align: justify;
+  }
+}

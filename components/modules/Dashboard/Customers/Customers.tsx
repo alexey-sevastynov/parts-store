@@ -15,21 +15,27 @@ import SearchAdmin from '../SearchAdmin';
 
 import CustomersList from './CustomersList';
 import { extractLastFiveCharacters } from '@/utils/common';
+import { ICustomersProps } from '@/types/dashboard';
+import ServerErrorMsg from '../ServerErrorMsg';
 
-const Customers = () => {
+const Customers = ({ data, status, msg }: ICustomersProps) => {
   const { lang, translations } = useLang();
 
   const [users, setUsers] = React.useState<IUser[]>();
-  const [searchResults, setSearchResults] = React.useState<IUser[]>();
+  const [searchResults, setSearchResults] = React.useState<IUser[]>(data);
+
+  const isLoaded = status === 200;
+  const isLoading: boolean = !Object.assign(data);
 
   const getUsers = async () => {
     const res = await getAllUsers();
     setUsers(res.users);
-    setSearchResults(res.users);
+    setSearchResults(res.users as IUser[]);
   };
 
   React.useEffect(() => {
-    getUsers();
+    setUsers(data);
+    setSearchResults(data);
   }, []);
 
   const handleSearch = (query: string) => {
@@ -60,13 +66,27 @@ const Customers = () => {
           </button>
         </div>
 
-        <div className={Styles.customers__search}>
-          <SearchAdmin onSearch={handleSearch} />
-        </div>
+        {/* if loaded and status = 200 */}
+        {isLoaded && (
+          <div className={Styles.customers__search}>
+            <SearchAdmin onSearch={handleSearch} />
+          </div>
+        )}
       </div>
 
-      <CustomersTable users={searchResults} />
-      <CustomersList users={searchResults} updateListUsers={getUsers} />
+      {/* if loaded and status = 200 */}
+      {!isLoaded ? (
+        <ServerErrorMsg msg={msg} status={status} />
+      ) : (
+        <>
+          <CustomersTable users={searchResults} isLoading={isLoading} />
+          <CustomersList
+            users={searchResults}
+            isLoading={isLoading}
+            updateListUsers={getUsers}
+          />
+        </>
+      )}
     </section>
   );
 };

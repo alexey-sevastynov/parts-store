@@ -1,12 +1,19 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
-import ItemNavAdmin from './ItemNavAdmin';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+import { useLang } from '@/hooks/useLang';
+
+import { FaBoxesStacked, FaUsers } from 'react-icons/fa6';
 import { MdDashboard } from 'react-icons/md';
 import { SiHomeassistantcommunitystore } from 'react-icons/si';
+import { RiAddBoxFill } from 'react-icons/ri';
+
 import { ROUTES, SIZE_ICON } from '@/constants/common';
-import { FaBoxesStacked, FaUsers } from 'react-icons/fa6';
-import Link from 'next/link';
-import { useLang } from '@/hooks/useLang';
-import { usePathname } from 'next/navigation';
+
+import AccordionItemAdmin from './AccordionItemAdmin';
+import ItemNavAdmin from './ItemNavAdmin';
 
 const ListNavAdmin = () => {
   const { lang, translations } = useLang();
@@ -39,13 +46,23 @@ const ListNavAdmin = () => {
         />
       </Link>
 
-      <Link href={ROUTES.CHARACTERISTIC}>
-        <ItemNavAdmin
-          icon={<FaBoxesStacked size={SIZE_ICON} />}
-          title={translations[lang].dashboard_page.characteristic}
-          isActive={pathName === ROUTES.CHARACTERISTIC}
-        />
-      </Link>
+      <AccordionItemAdmin
+        className={Styles.listNavAdmin__accordion}
+        icon={<FaBoxesStacked size={SIZE_ICON} />}
+        title={translations[lang].dashboard_page.characteristic}
+        isActive={pathName.startsWith(ROUTES.CHARACTERISTICS)}
+        href={ROUTES.CHARACTERISTICS}
+      >
+        <div className={Styles.listNavAdmin__accordion_list}>
+          <Link href={ROUTES.CHARACTERISTICS_ADD}>
+            <ItemNavAdmin
+              icon={<RiAddBoxFill size={SIZE_ICON} />}
+              title={translations[lang].common.add}
+              isActive={pathName === ROUTES.CHARACTERISTICS_ADD}
+            />
+          </Link>
+        </div>
+      </AccordionItemAdmin>
     </ul>
   );
 };

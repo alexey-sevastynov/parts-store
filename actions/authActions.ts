@@ -204,7 +204,15 @@ export async function resetPasswordWithCredentials({
 export async function getAllUsers() {
   try {
     const users = await User.find().select('-password');
-    return { users, msg: 'Users retrieved successfully!', status: 200 };
+    const modifiedUsers = users.map((user) => ({
+      ...user.toObject(),
+      _id: user._id.toString(), // Convert ObjectId to string
+    }));
+    return {
+      users: modifiedUsers,
+      msg: 'Users retrieved successfully!',
+      status: 200,
+    };
   } catch (error) {
     console.error(error);
     return { msg: 'Failed to retrieve users.', status: 500 };

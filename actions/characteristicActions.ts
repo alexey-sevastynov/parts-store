@@ -3,6 +3,7 @@
 import Characteristic from '@/models/Characteristic';
 import CharacteristicValue from '@/models/CharacteristicValue';
 import { ICharacteristics } from '@/types/characteristic';
+import { ILanguageStrings } from '@/types/constants';
 
 export async function createCharacteristic(characteristics: ICharacteristics) {
   try {
@@ -42,6 +43,30 @@ export async function getAllCharacteristics() {
   } catch (error) {
     console.error(error);
     return { msg: 'Failed to retrieve characteristics.', status: 500 };
+  }
+}
+
+export async function getCharacteristicById(characteristicId: string) {
+  try {
+    const characteristic = await Characteristic.findById(characteristicId);
+
+    if (!characteristic) {
+      return { msg: 'Characteristic not found.', status: 404 };
+    }
+
+    // Get the associated values of the characteristic
+    const values = await CharacteristicValue.find({
+      _id: { $in: characteristic.values },
+    });
+
+    return {
+      characteristic: { ...characteristic.toObject(), values },
+      msg: 'Characteristic found successfully!',
+      status: 200,
+    };
+  } catch (error) {
+    console.error(error);
+    return { msg: 'Failed to retrieve characteristic.', status: 500 };
   }
 }
 
@@ -159,60 +184,137 @@ export async function deleteAllCharacteristics() {
   }
 }
 
-// export async function getAllCharacteristics() {
-//   try {
-//     const characteristics = await Characteristic.find().populate('values');
+export async function updateCharacteristicNameById(
+  characteristicId: string,
+  names: ILanguageStrings
+) {
+  try {
+    const characteristic = await Characteristic.findById(characteristicId);
 
-//     return {
-//       characteristics,
-//       msg: 'Characteristics get all successfully!',
-//       status: 200,
-//     };
-//   } catch (error) {
-//     console.error(error);
-//     return { msg: 'Failed to retrieve characteristics.', status: 500 };
-//   }
-// }
+    if (!characteristic) {
+      return { msg: 'Characteristic not found.', status: 404 };
+    }
 
-// // Function for adding data to a new collection
-// export async function createCharacteristic(characteristics: ICharacteristics) {
-//   try {
-//     // Creating a new characteristic object
-//     const characteristic = new Characteristic({
-//       name: {
-//         en: characteristics.name.en,
-//         ru: characteristics.name.ru,
-//         ua: characteristics.name.ua,
-//       },
-//       value: characteristics.value.map((value) => ({
-//         en: value.en,
-//         ru: value.ru,
-//         ua: value.ua,
-//       })),
-//     });
+    // Update characterization names in three languages
+    characteristic.name = names;
+    await characteristic.save();
 
-//     // Saving a new characteristic to the database
-//     await characteristic.save();
+    return {
+      msg: 'Characteristic name updated successfully!',
+      status: 200,
+    };
+  } catch (error) {
+    console.error(error);
+    return { msg: 'Failed to update characteristic name.', status: 500 };
+  }
+}
 
-//     return { msg: 'Characteristic created successfully!', status: 200 };
-//   } catch (error) {
-//     console.error(error);
-//     return { msg: 'Failed to create characteristic.', status: 500 };
-//   }
-// }
+export async function deleteSelectedCharacteristicValues(
+  selectedValueIds: string[]
+) {
+  try {
+    // Delete each selected characteristic value
+    const deletePromises = selectedValueIds.map(async (valueId) => {
+      // Remove the characteristic value
+      const deletedValue = await CharacteristicValue.findByIdAndDelete(valueId);
 
-// // Function to get all characteristics from the collection
-// export async function getAllCharacteristics() {
-//   try {
-//     const characteristics = await Characteristic.find().populate('value');
+      if (!deletedValue) {
+        console.log(`Characteristic value with ID ${valueId} not found.`);
+        return;
+      }
 
-//     return {
-//       characteristics,
-//       msg: 'Characteristics get all successfully!',
-//       status: 201,
-//     };
-//   } catch (error) {
-//     console.error(error);
-//     return { msg: 'Failed to retrieve characteristics.', status: 500 };
-//   }
-// }
+      // Remove references to this value from all characteristics
+      await Characteristic.updateMany(
+        { values: valueId },
+        { $pull: { values: valueId } }
+      );
+
+      console.log(
+        `Characteristic value with ID ${valueId} deleted successfully.`
+      );
+    });
+
+    await Promise.all(deletePromises);
+
+    return {
+      msg: 'Selected characteristic values deleted successfully!',
+      status: 200,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      msg: 'Failed to delete selected characteristic values.',
+      status: 500,
+    };
+  }
+}
+
+export async function addOrUpdateCharacteristicValue(
+  characteristicId: string,
+  value: ILanguageStrings
+) {
+  try {
+    // Создаем новое значение характеристики
+    const newValue = await CharacteristicValue.create(value);
+
+    // Получаем текущую характеристику по идентификатору
+    const characteristic = await Characteristic.findById(characteristicId);
+
+    if (!characteristic) {
+      return { msg: 'Characteristic not found.', status: 404 };
+    }
+
+    // Проверяем, существует ли значение с такими языковыми строками
+    const existingValue = characteristic.values.find(
+      (val) => val.en === value.en && val.ru === value.ru && val.ua === value.ua
+    );
+
+    if (existingValue) {
+      // Если значение уже существует, обновляем его
+      existingValue.en = value.en;
+      existingValue.ru = value.ru;
+      existingValue.ua = value.ua;
+    } else {
+      // Если значения не существует, добавляем новое значение в характеристику
+      characteristic.values.push(newValue._id);
+    }
+
+    // Сохраняем обновленную характеристику
+    await characteristic.save();
+
+    return {
+      msg: 'Characteristic value added/updated successfully!',
+      status: 200,
+    };
+  } catch (error) {
+    console.error(error);
+    return { msg: 'Failed to add/update characteristic value.', status: 500 };
+  }
+}
+
+export async function updateCharacteristicValueById(
+  valueId: string,
+  newValue: ILanguageStrings
+) {
+  try {
+    // Находим значение характеристики по его идентификатору
+    const value = await CharacteristicValue.findById(valueId);
+
+    if (!value) {
+      return { msg: 'Characteristic value not found.', status: 404 };
+    }
+
+    // Обновляем языковые строки значения
+    value.en = newValue.en;
+    value.ru = newValue.ru;
+    value.ua = newValue.ua;
+
+    // Сохраняем обновленное значение характеристики
+    await value.save();
+
+    return { msg: 'Characteristic value updated successfully!', status: 200 };
+  } catch (error) {
+    console.error(error);
+    return { msg: 'Failed to update characteristic value.', status: 500 };
+  }
+}

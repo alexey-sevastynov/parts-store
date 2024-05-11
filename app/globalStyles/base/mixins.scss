@@ -50,6 +50,13 @@
   background-position: center center;
 }
 
+@mixin label {
+  font-size: $font-s;
+  color: $grey;
+
+  font-weight: $weight-semi-bold;
+}
+
 @mixin input {
   font-size: $font-l;
   width: 100%;
@@ -143,4 +150,22 @@
     height: 100%;
     background: linear-gradient(to right, transparent, white);
   }
+}
+
+@mixin icon-hover($color, $color-hover) {
+  & svg {
+    color: $color;
+    @include btn-hover(color);
+
+    &:hover {
+      color: $color-hover;
+    }
+  }
+}
+
+@mixin horizon-line {
+  display: block;
+  height: 1px;
+  background-color: $grey;
+  width: 100%;
 }

@@ -7,7 +7,6 @@ import { useLang } from '@/hooks/useLang';
 import { FaUser, FaUsers } from 'react-icons/fa6';
 import { SIZE_ICON_BIG } from '@/constants/common';
 import { COLORS } from '@/constants/colors';
-import { getAllUsers } from '@/actions/authActions';
 
 import { IUser } from '@/types/user';
 
@@ -15,19 +14,16 @@ import AdminAsideButton from './AdminAsideButton';
 import LanguagePanelAdmin from './LanguagePanelAdmin';
 import InfoSmallPanel from './InfoSmallPanel';
 
-const HeaderAdmin = () => {
+const HeaderAdmin = ({
+  dataUsers,
+}: {
+  statusDataUsers: number;
+  msgDataUsers: string;
+  dataUsers: IUser[];
+}) => {
   const { lang, translations } = useLang();
 
-  const [users, setUsers] = React.useState<IUser[]>();
-
-  const getUsers = async () => {
-    const res = await getAllUsers();
-    setUsers(res.users);
-  };
-
-  React.useEffect(() => {
-    getUsers();
-  }, []);
+  const [users, setUsers] = React.useState<IUser[]>(dataUsers);
 
   return (
     <div className={Styles.headerAdmin}>
