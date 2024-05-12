@@ -19,12 +19,17 @@ import { Breadcrumbs } from '@/components/elements/Breadcrumbs';
 import CharacteristicInfoList from './CharacteristicInfoList';
 import AddCharacteristicValue from '../Add/AddCharacteristicValue';
 import CharacteristicInfoName from './CharacteristicInfoName';
+import { getCharacteristic } from '@/utils/dashboards';
+import { ILanguageStrings } from '@/types/constants';
 
 const Characteristic = ({ data, status, msg }: ICharacteristicProps) => {
   const params = useParams();
   const { lang, translations } = useLang();
 
   const { name, values, _id } = data;
+
+  const [valuesCharacteristic, setValuesCharacteristic] =
+    React.useState<ILanguageStrings[]>(values);
 
   const isLoading: boolean = !Object.assign(data);
 
@@ -47,6 +52,12 @@ const Characteristic = ({ data, status, msg }: ICharacteristicProps) => {
   }>({});
 
   const id = Array.isArray(params.id) ? params.id.join(', ') : params.id;
+
+  const updateCharacteristic = async (id: string) => {
+    const newCharacteristic = await getCharacteristic(id);
+
+    setValuesCharacteristic(newCharacteristic.characteristic.values);
+  };
 
   const CHARACTRERISTIC_BREADCRUMBS = [
     {
@@ -77,6 +88,8 @@ const Characteristic = ({ data, status, msg }: ICharacteristicProps) => {
           ru: valueRu,
           en: valueEn,
         });
+
+        updateCharacteristic(_id);
       } catch (error) {
         console.error('Failed to update characteristic values:', error);
       }
@@ -125,7 +138,7 @@ const Characteristic = ({ data, status, msg }: ICharacteristicProps) => {
       </div>
 
       <CharacteristicInfoList
-        values={values}
+        values={valuesCharacteristic}
         isLoading={isLoading}
         onDeleteSelected={deleteSelected}
         checkboxes={checkboxes}

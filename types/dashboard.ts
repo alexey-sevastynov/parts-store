@@ -62,6 +62,7 @@ export interface ICustomersTableProps {
 
 export interface ICharacteristicTableProps {
   characteristics: ICharacteristics[];
+  searchResultsCharacteristic: ICharacteristics[];
   isLoading: boolean;
   getCharacteristics: () => void;
 }

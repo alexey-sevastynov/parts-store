@@ -10,9 +10,14 @@ import { SIZE_ICON } from '@/constants/common';
 
 import { CharacteristicRowProps } from '@/types/dashboard';
 
-import { updateCharacteristicValueById } from '@/actions/characteristicActions';
+import {
+  getCharacteristicValueById,
+  updateCharacteristicValueById,
+} from '@/actions/characteristicActions';
 
 import { Button } from '@/components/elements/Button';
+import { log } from 'console';
+import { getUsers } from '@/utils/dashboards';
 
 const CharacteristicRowEdit: React.FC<CharacteristicRowProps> = ({
   value,
@@ -29,6 +34,18 @@ const CharacteristicRowEdit: React.FC<CharacteristicRowProps> = ({
   const [uaValue, setUaValue] = React.useState(ua);
   const [ruValue, setRuValue] = React.useState(ru);
   const [enValue, setEnValue] = React.useState(en);
+
+  const updateValue = async (id: string) => {
+    const newCharacteristic = await getCharacteristicValueById(id);
+
+    const { ua, ru, en } = newCharacteristic.characteristicValue;
+
+    console.log(ua, ru, en, '+');
+
+    setUaValue(ua);
+    setRuValue(ru);
+    setEnValue(en);
+  };
 
   const handleInputChange = (newValue: string, oldValue: string) => {
     if (newValue !== oldValue) {
@@ -86,6 +103,12 @@ const CharacteristicRowEdit: React.FC<CharacteristicRowProps> = ({
           en: enValue,
         });
 
+        console.log('update');
+
+        updateValue(_id);
+
+        getUsers();
+
         setIsSubmitting(false);
         setIsActiveEdit(false);
       } catch (error) {
@@ -122,7 +145,7 @@ const CharacteristicRowEdit: React.FC<CharacteristicRowProps> = ({
             <input value={uaValue} onChange={handleUaChange} />
           </form>
         ) : (
-          ua
+          uaValue
         )}
       </td>
 
@@ -133,7 +156,7 @@ const CharacteristicRowEdit: React.FC<CharacteristicRowProps> = ({
             <input value={ruValue} onChange={handleRuChange} />
           </form>
         ) : (
-          ru
+          ruValue
         )}
       </td>
 
@@ -144,7 +167,7 @@ const CharacteristicRowEdit: React.FC<CharacteristicRowProps> = ({
             <input value={enValue} onChange={handleEnChange} />
           </form>
         ) : (
-          en
+          enValue
         )}
       </td>
 

@@ -231,6 +231,7 @@
 
       "not_found": "Sorry, nothing found. First Name Last Name or Customer Code is not in the database.",
       "not_found_characteristics": "Unfortunately, nothing was found. The name of the characteristic is not in the database.",
+      "not_characteristics": "No characteristics, add the first characteristic.",
 
       "value_characteristic": "Characteristic value",
 
@@ -482,6 +483,7 @@
 
       "not_found": "На жаль, нічого не знайдено. Ім'я Прізвище або код клієнта немає такого в базі даних.",
       "not_found_characteristics": "На жаль, нічого не знайдено. Ім'я характеристики такої немає в базі даних.",
+      "not_characteristics": "Немає характеристик, додай першу характеристику.",
 
       "value_characteristic": "Значення характеристики",
 
@@ -733,6 +735,7 @@
 
       "not_found": "К сожилению, ничего не найдено. Имя Фамилия или код клиента нет такого в базе данных.",
       "not_found_characteristics": "К сожилению, ничего не найдено. Имя характеристики такой нет в базе данных.",
+      "not_characteristics": "Нет характеристик, добавь первую характеристику.",
 
       "value_characteristic": "Значения характеристики",
 

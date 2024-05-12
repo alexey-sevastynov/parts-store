@@ -100,12 +100,11 @@ const Characteristics = ({ data, status, msg }: ICharacteristicsProps) => {
       ) : (
         <>
           <CharacteristicsTable
-            characteristics={searchResults}
+            characteristics={characteristics}
+            searchResultsCharacteristic={searchResults}
             isLoading={isLoading}
             getCharacteristics={getCharacteristics}
           />
-
-          {/* <CharacteristicForm /> */}
         </>
       )}
     </section>

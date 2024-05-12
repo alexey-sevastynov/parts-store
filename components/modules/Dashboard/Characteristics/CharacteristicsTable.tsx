@@ -20,20 +20,19 @@ import CharacteristicRow from './CharacteristicRow';
 
 const CharacteristicTable = ({
   characteristics,
+  searchResultsCharacteristic,
   isLoading,
   getCharacteristics,
 }: ICharacteristicTableProps) => {
-  if (!characteristics) return <p>nothing</p>;
-
   const { lang, translations } = useLang();
 
   const [isSortByName, setIsSortByName] = React.useState<boolean>(false);
 
   const renderedCharacteristics = isSortByName
-    ? characteristics
+    ? searchResultsCharacteristic
         .slice()
         .sort((a, b) => a.name[lang].localeCompare(b.name[lang]))
-    : characteristics.slice().reverse();
+    : searchResultsCharacteristic.slice().reverse();
 
   const [checkboxes, setCheckboxes] = React.useState<{
     [key: string]: boolean;
@@ -44,6 +43,10 @@ const CharacteristicTable = ({
   const isAnyCheckboxChecked = Object.values(checkboxes).some(
     (value) => value === true
   );
+
+  const isEmptyCharacteristics = characteristics.length === 0;
+  const isEmptySearchResultsCharacteristic =
+    searchResultsCharacteristic.length === 0;
 
   const deleteCharacteristics = async () => {
     try {
@@ -106,7 +109,11 @@ const CharacteristicTable = ({
                   isAnyCheckboxChecked
                 )
               }
-              disabled={!characteristics}
+              disabled={
+                !characteristics ||
+                isEmptySearchResultsCharacteristic ||
+                isEmptyCharacteristics
+              }
             />
           </th>
           {/* name */}
@@ -168,33 +175,59 @@ const CharacteristicTable = ({
         </tr>
       </thead>
       <tbody>
-        {!isLoading && (!characteristics || characteristics.length === 0) && (
-          <NotFoundMsg
-            message={
-              translations[lang].dashboard_page.not_found_characteristics
-            }
-          />
+        {/* Checking for data loading */}
+        {isLoading &&
+          // Loader Display
+          [...Array(10)].map((_, id) => <CharacteristicRowLoader key={id} />)}
+
+        {/* Checking the availability of characteristics */}
+        {!isLoading && characteristics && characteristics.length === 0 && (
+          <tr>
+            <td>
+              <NotFoundMsg
+                message={translations[lang].dashboard_page.not_characteristics}
+              />
+            </td>
+          </tr>
         )}
 
-        {isLoading
-          ? [...Array(10)].map((_, id) => <CharacteristicRowLoader key={id} />)
-          : renderedCharacteristics.map((characteristic) => (
-              <CharacteristicRow
-                key={characteristic._id}
-                characteristic={characteristic}
-                isChecked={!!checkboxes[characteristic._id as string]}
-                handleCheckboxChange={(event: ChangeEvent<HTMLInputElement>) =>
-                  handleCheckboxChange(
-                    characteristics,
-                    event,
-                    checkboxes,
-                    setCheckboxes,
-                    isAnyCheckboxChecked
-                  )
-                }
-                lang={lang}
-              />
-            ))}
+        {/* Checking search results */}
+        {!isLoading &&
+          searchResultsCharacteristic &&
+          isEmptySearchResultsCharacteristic &&
+          !isEmptyCharacteristics && (
+            <tr>
+              <td>
+                <NotFoundMsg
+                  message={
+                    translations[lang].dashboard_page.not_found_characteristics
+                  }
+                />
+              </td>
+            </tr>
+          )}
+
+        {/* Display of characteristics */}
+        {!isLoading &&
+          searchResultsCharacteristic &&
+          !isEmptySearchResultsCharacteristic &&
+          renderedCharacteristics.map((characteristic) => (
+            <CharacteristicRow
+              key={characteristic._id}
+              characteristic={characteristic}
+              isChecked={!!checkboxes[characteristic._id as string]}
+              handleCheckboxChange={(event: ChangeEvent<HTMLInputElement>) =>
+                handleCheckboxChange(
+                  characteristics,
+                  event,
+                  checkboxes,
+                  setCheckboxes,
+                  isAnyCheckboxChecked
+                )
+              }
+              lang={lang}
+            />
+          ))}
       </tbody>
     </table>
   );

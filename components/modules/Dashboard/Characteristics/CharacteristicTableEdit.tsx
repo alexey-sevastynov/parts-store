@@ -130,22 +130,27 @@ const CharacteristicTableEdit = ({
 
         {isLoading
           ? [...Array(10)].map((_, id) => <CharacteristicRowLoader key={id} />)
-          : values.map((value) => (
-              <CharacteristicRowEdit
-                key={value._id}
-                value={value}
-                isChecked={!!checkboxes[value._id as string]}
-                handleCheckboxChange={(event: ChangeEvent<HTMLInputElement>) =>
-                  handleCheckboxChange(
-                    values,
-                    event,
-                    checkboxes,
-                    setCheckboxes,
-                    isAnyCheckboxChecked
-                  )
-                }
-              />
-            ))}
+          : values
+              .slice()
+              .reverse()
+              .map((value) => (
+                <CharacteristicRowEdit
+                  key={value._id}
+                  value={value}
+                  isChecked={!!checkboxes[value._id as string]}
+                  handleCheckboxChange={(
+                    event: ChangeEvent<HTMLInputElement>
+                  ) =>
+                    handleCheckboxChange(
+                      values,
+                      event,
+                      checkboxes,
+                      setCheckboxes,
+                      isAnyCheckboxChecked
+                    )
+                  }
+                />
+              ))}
       </tbody>
     </table>
   );

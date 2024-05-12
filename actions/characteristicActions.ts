@@ -70,6 +70,25 @@ export async function getCharacteristicById(characteristicId: string) {
   }
 }
 
+export async function getCharacteristicValueById(valueId: string) {
+  try {
+    const value = await CharacteristicValue.findById(valueId);
+
+    if (!value) {
+      return { msg: 'Characteristic value not found.', status: 404 };
+    }
+
+    return {
+      characteristicValue: value.toObject(),
+      msg: 'Characteristic value retrieved successfully!',
+      status: 200,
+    };
+  } catch (error) {
+    console.error(error);
+    return { msg: 'Failed to retrieve characteristic value.', status: 500 };
+  }
+}
+
 export async function deleteCharacteristicById(characteristicId: string) {
   try {
     const deletedCharacteristic =
