@@ -1,5 +1,7 @@
+@import '../../../app/globalStyles/variables/colors.scss';
+
 .adminLayout {
   width: 100%;
-
+  background-color: $grey;
   display: flex;
 }

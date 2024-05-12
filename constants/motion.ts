@@ -12,3 +12,9 @@ export const basePropsForMotionAsidePanel = {
     x: -100,
   },
 };
+
+export const deleteItemsTableMotion = {
+  initial: { opacity: 1 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0, y: '-100%', transition: { duration: 0.3 } },
+};

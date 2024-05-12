@@ -14,6 +14,8 @@ import { Button } from '@/components/elements/Button';
 import AddCharacteristicName from './AddCharacteristicName';
 import AddCharacteristicValue from './AddCharacteristicValue';
 import ListAddedCharacteristics from './ListAddedCharacteristics';
+import NotificationBar from '@/components/elements/NotificationBar';
+import { TypeNotificationMessage } from '@/types/elements';
 
 export default function CharacteristicForm() {
   const { lang, translations } = useLang();
@@ -27,8 +29,10 @@ export default function CharacteristicForm() {
     valueUa: '',
     values: [],
   });
-
-  console.log(state.values);
+  const [notification, setNotification] = React.useState<null | {
+    type: TypeNotificationMessage;
+    message: string;
+  }>(null);
 
   const [checkboxes, setCheckboxes] = React.useState<{
     [key: string]: boolean;
@@ -103,8 +107,6 @@ export default function CharacteristicForm() {
       values: valuesWithoutId, // Передаем массив без поля _id
     };
 
-    console.log(characteristics);
-
     if (
       characteristics.name.ua &&
       characteristics.name.ru &&
@@ -113,12 +115,35 @@ export default function CharacteristicForm() {
     )
       try {
         const response = await createCharacteristic(characteristics);
-        console.log(response);
-        // Очистка формы или другие действия при успешном создании характеристики
-      } catch (error) {
-        console.error(error);
-        // Обработка ошибки при создании характеристики
+
+        await showNotification(
+          'success',
+          `${translations[lang].common.success_fetch}: "${response.msg}"`
+        );
+
+        // Clear the state after a successful operation
+        setState({
+          nameEn: '',
+          nameRu: '',
+          nameUa: '',
+          valueEn: '',
+          valueRu: '',
+          valueUa: '',
+          values: [],
+        });
+      } catch (error: any) {
+        showNotification(
+          'error',
+          `${translations[lang].common.error_fetch}: ${error.message}`
+        );
       }
+  };
+
+  const showNotification = (type: TypeNotificationMessage, message: string) => {
+    setNotification({ type, message });
+    setTimeout(() => {
+      setNotification(null); // Here we set null to hide the notification
+    }, 3000);
   };
 
   return (
@@ -141,7 +166,27 @@ export default function CharacteristicForm() {
         setCheckboxes={setCheckboxes}
       />
 
-      <Button type='submit'>{translations[lang].common.add}</Button>
+      {notification && (
+        <div className={Styles.characteristicForm__notification}>
+          <NotificationBar type={notification.type}>
+            {notification.message}
+          </NotificationBar>
+        </div>
+      )}
+
+      <div className={Styles.characteristicForm__submit}>
+        <Button
+          type='submit'
+          disabled={
+            !state.nameUa ||
+            !state.nameRu ||
+            !state.nameEn ||
+            state.values.length === 0
+          }
+        >
+          {translations[lang].common.add}
+        </Button>
+      </div>
     </form>
   );
 }

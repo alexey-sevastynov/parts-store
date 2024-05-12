@@ -143,6 +143,7 @@ const Characteristic = ({ data, status, msg }: ICharacteristicProps) => {
         onDeleteSelected={deleteSelected}
         checkboxes={checkboxes}
         setCheckboxes={setCheckboxes}
+        updateCharacteristic={updateCharacteristic}
       />
     </section>
   );

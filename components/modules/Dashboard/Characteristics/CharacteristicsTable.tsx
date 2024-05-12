@@ -17,6 +17,7 @@ import { ICharacteristicTableProps } from '@/types/dashboard';
 import CharacteristicRowLoader from './CharacteristicRowLoader';
 import NotFoundMsg from '../NotFoundMsg';
 import CharacteristicRow from './CharacteristicRow';
+import { AnimatePresence } from 'framer-motion';
 
 const CharacteristicTable = ({
   characteristics,
@@ -148,16 +149,7 @@ const CharacteristicTable = ({
                 }
               </button>
             </th>
-            <th>
-              {isCheckedAll && (
-                <button
-                  className={Styles.characteristicTable__head_delete_btn_red}
-                  onClick={deleteCharacteristics}
-                >
-                  {translations[lang].dashboard_page.delete_all_characteristic}
-                </button>
-              )}
-            </th>
+
             <th>
               <button
                 className={Styles.characteristicTable__head_delete_btn}
@@ -208,26 +200,28 @@ const CharacteristicTable = ({
           )}
 
         {/* Display of characteristics */}
-        {!isLoading &&
-          searchResultsCharacteristic &&
-          !isEmptySearchResultsCharacteristic &&
-          renderedCharacteristics.map((characteristic) => (
-            <CharacteristicRow
-              key={characteristic._id}
-              characteristic={characteristic}
-              isChecked={!!checkboxes[characteristic._id as string]}
-              handleCheckboxChange={(event: ChangeEvent<HTMLInputElement>) =>
-                handleCheckboxChange(
-                  characteristics,
-                  event,
-                  checkboxes,
-                  setCheckboxes,
-                  isAnyCheckboxChecked
-                )
-              }
-              lang={lang}
-            />
-          ))}
+        <AnimatePresence initial={false}>
+          {!isLoading &&
+            searchResultsCharacteristic &&
+            !isEmptySearchResultsCharacteristic &&
+            renderedCharacteristics.map((characteristic) => (
+              <CharacteristicRow
+                key={characteristic._id}
+                characteristic={characteristic}
+                isChecked={!!checkboxes[characteristic._id as string]}
+                handleCheckboxChange={(event: ChangeEvent<HTMLInputElement>) =>
+                  handleCheckboxChange(
+                    characteristics,
+                    event,
+                    checkboxes,
+                    setCheckboxes,
+                    isAnyCheckboxChecked
+                  )
+                }
+                lang={lang}
+              />
+            ))}
+        </AnimatePresence>
       </tbody>
     </table>
   );

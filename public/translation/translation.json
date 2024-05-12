@@ -14,7 +14,10 @@
 
       "add": "Add",
 
-      "social_networks": "We are on social networks"
+      "social_networks": "We are on social networks",
+
+      "success_fetch": "The operation was successfully completed",
+      "error_fetch": "An error occurred"
     },
     "header": {
       "catalog": "Catalog",
@@ -266,7 +269,10 @@
 
       "add": "Додати",
 
-      "social_networks": "Ми в соціальних мережах"
+      "social_networks": "Ми в соціальних мережах",
+
+      "success_fetch": "Операцію успішно виконано",
+      "error_fetch": "Сталася помилка"
     },
     "header": {
       "catalog": "Каталог",
@@ -518,7 +524,10 @@
 
       "add": "Добавить",
 
-      "social_networks": "Мы в социальных сетях"
+      "social_networks": "Мы в социальных сетях",
+
+      "success_fetch": "Операция успешно выполнена",
+      "error_fetch": "Произошла ошибка"
     },
     "header": {
       "catalog": "Каталог",
@@ -724,7 +733,7 @@
       "characteristics": "Характеристики",
 
       "name_characteristic": "Имя характеристики",
-      "list_characteristics": "List characteristics",
+      "list_characteristics": "Список характеристик",
 
       "delete_selected_characteristic": "Удалить выбранные характеристики",
       "delete_all_characteristic": "Удалить все характеристики",

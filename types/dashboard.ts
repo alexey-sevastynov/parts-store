@@ -87,7 +87,9 @@ export interface ICharacteristicTableEditProps {
 }
 
 export interface ICharacteristicInfoListProps
-  extends ICharacteristicTableEditProps {}
+  extends ICharacteristicTableEditProps {
+  updateCharacteristic: (id: string) => void;
+}
 
 export interface ICustomersList {
   users?: IUser[];

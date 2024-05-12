@@ -66,6 +66,7 @@ const AddCharacteristicValue = ({
         className={Styles.addCharacteristicValue__btn}
         type='button'
         onClick={addValue}
+        disabled={!state.valueUa || !state.valueRu || !state.valueEn}
       >
         {translations[lang].common.add}
       </Button>

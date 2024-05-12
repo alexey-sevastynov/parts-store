@@ -8,6 +8,8 @@ import { AllowedLangs } from '@/constants/lang';
 import { ROUTES } from '@/constants/common';
 
 import { ICharacteristics } from '@/types/characteristic';
+import { motion } from 'framer-motion';
+import { deleteItemsTableMotion } from '@/constants/motion';
 
 interface CharacteristicRowProps {
   characteristic: ICharacteristics;
@@ -25,10 +27,11 @@ const CharacteristicRow: React.FC<CharacteristicRowProps> = ({
   const { _id, values, name } = characteristic;
 
   return (
-    <tr
+    <motion.tr
       key={_id}
       className={Styles.characteristicTable__body}
       style={isChecked ? { backgroundColor: COLORS.grey } : {}}
+      {...deleteItemsTableMotion}
     >
       {/* checkbox */}
       <td
@@ -53,25 +56,28 @@ const CharacteristicRow: React.FC<CharacteristicRowProps> = ({
 
       {/* value characteristic */}
       <td className={Styles.characteristicTable__head_list_characteristics}>
-        {values.map((item) => {
+        {values.map((item, index, array) => {
           // Check if there is a translation for the current language
           if (item.hasOwnProperty(lang)) {
             return (
-              <p
-                className={
-                  Styles.characteristicTable__head_list_characteristics_item
-                }
-                key={item._id}
-              >
-                {item[lang] + ', '}
-              </p>
+              <React.Fragment key={item._id}>
+                <p
+                  className={
+                    Styles.characteristicTable__head_list_characteristics_item
+                  }
+                >
+                  {item[lang]}
+                </p>
+                {/* Add comma if not the last item */}
+                {index !== array.length - 1 && ', '}
+              </React.Fragment>
             );
           }
           // If there is no translation for the current language, return null
           return null;
         })}
       </td>
-    </tr>
+    </motion.tr>
   );
 };
 

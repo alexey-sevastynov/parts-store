@@ -225,6 +225,11 @@ $padding-info-small-panel: 20px;
       @include horizon-line;
     }
 
+    &__notification {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
     &__title,
     &__form {
       padding-top: 16px;
@@ -232,7 +237,9 @@ $padding-info-small-panel: 20px;
 
     &__title,
     &__form,
-    &__btn {
+    &__btn,
+    &__submit,
+    &__notification {
       padding-left: $padding-left-right-table-admin;
       padding-right: $padding-left-right-table-admin;
     }
@@ -328,9 +335,14 @@ $padding-info-small-panel: 20px;
         .customerInfo__content {
           flex-direction: column-reverse;
           gap: 20px;
+
           &_list {
           }
         }
+      }
+
+      .characteristicInfoName__form {
+        padding-left: 0;
       }
     }
   }
@@ -340,7 +352,7 @@ $padding-info-small-panel: 20px;
 .goods,
 .characteristic,
 .add {
-  width: 100%;
+  max-width: 100%;
   background-color: $white;
 
   margin-top: 40px;
@@ -354,6 +366,8 @@ $padding-info-small-panel: 20px;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 20px;
+
+    margin-bottom: 20px;
 
     &_title {
       display: flex;
@@ -396,7 +410,7 @@ $padding-info-small-panel: 20px;
   & .customersTable,
   & .characteristicTable,
   & .charateristicTableEdit {
-    width: 100%;
+    max-width: 100%;
     display: block;
 
     .customersTable__head,
@@ -437,18 +451,30 @@ $padding-info-small-panel: 20px;
 
     .characteristicTable__head,
     .characteristicTable__body {
+      max-width: 100%;
+      box-sizing: border-box;
+
       &_name_characteristic {
-        width: 30%;
+        font-size: $font-m;
+        color: $black-font;
+        width: 35%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
       }
+
       &_list_characteristics {
-        width: 70%;
-        @include text-gradient-end;
+        width: 65%;
         display: flex;
-        gap: 5px;
+
+        gap: 0px;
+
         overflow: hidden;
 
         &_item {
           white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
         }
       }
     }
@@ -457,6 +483,9 @@ $padding-info-small-panel: 20px;
     .charateristicTableEdit__body {
       &_name_characteristic {
         width: 20%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
 
         & input {
           @include input;
@@ -605,7 +634,9 @@ $padding-info-small-panel: 20px;
         }
       }
     }
+  }
 
+  .customersTable {
     // MEDIA customersTable
     @media (max-width: $breakpoint_xxl) {
       & .customersTable__head,
@@ -654,6 +685,36 @@ $padding-info-small-panel: 20px;
 
     @media (max-width: $breakpoint_lg) {
       display: none;
+    }
+  }
+
+  .characteristicTable {
+    // MEDIA characteristicTable
+
+    @media (max-width: $breakpoint_lg) {
+      display: block;
+
+      .characteristicTable__head,
+      .characteristicTable__body {
+        &_name_characteristic {
+          width: 50%;
+        }
+        &_list_characteristics {
+          width: 50%;
+        }
+      }
+    }
+
+    @media (max-width: $breakpoint_sm) {
+      .characteristicTable__head,
+      .characteristicTable__body {
+        &_name_characteristic {
+          width: 50%;
+        }
+        &_list_characteristics {
+          width: 50%;
+        }
+      }
     }
   }
 
@@ -821,6 +882,16 @@ $padding-info-small-panel: 20px;
     &__search {
       width: 100%;
     }
+
+    & .characteristic__info {
+      & .characteristicInfoName,
+      .addCharacteristicValue {
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: $padding-left-right-table-admin;
+        padding-right: $padding-left-right-table-admin;
+      }
+    }
   }
 }
 
@@ -838,6 +909,8 @@ $padding-info-small-panel: 20px;
     .addCharacteristicName,
     .addCharacteristicValue,
     .characteristicInfoName {
+      margin-bottom: 30px;
+
       &__list,
       .characteristicInfoName__content_list {
         margin-top: 20px;
@@ -877,6 +950,27 @@ $padding-info-small-panel: 20px;
       &__btn {
         width: 100%;
         margin-top: 20px;
+      }
+    }
+  }
+
+  // media characteristic
+  @media (max-width: $breakpoint_lg) {
+    & .characteristic__info {
+      flex-direction: column;
+    }
+
+    .characteristicForm {
+      &__inputs {
+        flex-direction: column;
+      }
+
+      .addCharacteristicName,
+      .addCharacteristicValue {
+        box-sizing: border-box;
+        width: 100%;
+        padding-left: $padding-left-right-table-admin;
+        padding-right: $padding-left-right-table-admin;
       }
     }
   }

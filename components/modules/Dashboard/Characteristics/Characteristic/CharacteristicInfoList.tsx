@@ -12,6 +12,7 @@ const CharacteristicInfoList = ({
   onDeleteSelected,
   checkboxes,
   setCheckboxes,
+  updateCharacteristic,
 }: ICharacteristicInfoListProps) => {
   const { lang, translations } = useLang();
 

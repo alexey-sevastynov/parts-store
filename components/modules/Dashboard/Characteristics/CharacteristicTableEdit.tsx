@@ -94,15 +94,7 @@ const CharacteristicTableEdit = ({
                 }
               </button>
             </th>
-            <th>
-              {isCheckedAll && (
-                <button
-                  className={Styles.charateristicTableEdit__head_delete_btn_red}
-                >
-                  {translations[lang].dashboard_page.delete_all_characteristic}
-                </button>
-              )}
-            </th>
+
             <th>
               <button
                 className={Styles.charateristicTableEdit__head_delete_btn}
