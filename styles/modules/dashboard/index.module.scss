@@ -210,6 +210,7 @@ $padding-info-small-panel: 20px;
 
 .customer,
 .characteristicForm,
+.categoryForm,
 .add,
 .characteristic,
 .categories {
@@ -218,6 +219,7 @@ $padding-info-small-panel: 20px;
   .characteristicInfoList,
   .customerInfoLoading,
   .characteristicForm,
+  .categoryForm,
   .addCharacteristicName,
   .addCharacteristicValue,
   .listAddedCharacteristics {
@@ -900,6 +902,7 @@ $padding-info-small-panel: 20px;
 .add,
 .characteristic {
   .characteristicForm,
+  .categoryForm,
   &__info {
     width: 100%;
 
@@ -962,7 +965,8 @@ $padding-info-small-panel: 20px;
       flex-direction: column;
     }
 
-    .characteristicForm {
+    .characteristicForm,
+    .categoryForm {
       &__inputs {
         flex-direction: column;
       }

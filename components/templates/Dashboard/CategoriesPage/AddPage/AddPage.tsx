@@ -3,6 +3,7 @@
 import { IUser } from '@/types/user';
 
 import HeaderAdmin from '@/components/modules/Dashboard/Header/HeaderAdmin';
+import Add from '@/components/modules/Dashboard/Categories/Add/Add';
 
 const AddPage = ({
   users: { msg: msgUsers, status: statusUsers, users },
@@ -16,6 +17,8 @@ const AddPage = ({
         msgDataUsers={msgUsers}
         dataUsers={users}
       />
+
+      <Add />
     </main>
   );
 };
