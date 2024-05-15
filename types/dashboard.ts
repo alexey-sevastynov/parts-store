@@ -55,6 +55,8 @@ export interface ICharacteristicsProps
 export interface ICharacteristicProps
   extends IPromiseResponse<ICharacteristics> {}
 
+export interface ICategoriesProps extends IPromiseResponse<IUser[]> {}
+
 export interface ICustomersTableProps {
   users: IUser[];
   isLoading: boolean;

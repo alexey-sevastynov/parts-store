@@ -1,3 +1,4 @@
+import Categories from '@/components/modules/Dashboard/Categories/Categories';
 import HeaderAdmin from '@/components/modules/Dashboard/Header/HeaderAdmin';
 import { IUser } from '@/types/user';
 import React from 'react';
@@ -14,6 +15,8 @@ const CategoriesPage = ({
         msgDataUsers={msgUsers}
         dataUsers={users}
       />
+
+      <Categories data={users} status={statusUsers} msg={msgUsers} />
     </div>
   );
 };

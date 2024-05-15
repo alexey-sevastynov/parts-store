@@ -1,0 +1,96 @@
+'use client';
+
+import Styles from '@/styles/modules/dashboard/index.module.scss';
+
+import { useLang } from '@/hooks/useLang';
+
+import Title from '@/components/elements/Title';
+import { GrUpdate } from 'react-icons/gr';
+import Link from 'next/link';
+import { ROUTES } from '@/constants/common';
+import { BsPlusCircleFill } from 'react-icons/bs';
+import SearchAdmin from '../SearchAdmin';
+import ServerErrorMsg from '../ServerErrorMsg';
+import { ICategoriesProps } from '@/types/dashboard';
+import { IUser } from '@/types/user';
+import React from 'react';
+import { getAllUsers } from '@/actions/authActions';
+
+const Categories = ({ data, status, msg }: ICategoriesProps) => {
+  const { lang, translations } = useLang();
+
+  const isLoaded = status === 200;
+  const isLoading: boolean = !Object.assign(data);
+
+  const [categories, setСategories] = React.useState<IUser[]>(data);
+  const [searchResults, setSearchResults] = React.useState<IUser[]>(data);
+
+  const getUsers = async () => {
+    try {
+      const res = await getAllUsers();
+      console.log(res);
+
+      setСategories(res.users as IUser[]);
+      setSearchResults(res.users as IUser[]);
+    } catch (error) {
+      console.error('Failed to fetch characteristics:', error);
+    }
+  };
+
+  const handleSearch = (query: string) => {
+    if (!categories) return [];
+
+    if (!query) {
+      setSearchResults(categories); // If the query is empty, show all characteristics
+    } else {
+      console.log(query);
+    }
+  };
+
+  return (
+    <section className={Styles.categories}>
+      <div className={Styles.categories__head}>
+        <div className={Styles.categories__head_title}>
+          <Title size='md'>
+            {translations[lang].dashboard_page.categories}
+          </Title>
+          <button className={Styles.categories__head_title_btn_update}>
+            <GrUpdate
+              title={translations[lang].common.update}
+              onClick={getUsers}
+            />
+          </button>
+          <Link
+            href={ROUTES.CATEGORIES_ADD}
+            className={Styles.categories__head_title_btn_add}
+          >
+            <BsPlusCircleFill title={translations[lang].common.add} />
+          </Link>
+        </div>
+
+        {/* if loaded and status = 200 */}
+        {isLoaded && (
+          <div className={Styles.categories__search}>
+            <SearchAdmin onSearch={handleSearch} />
+          </div>
+        )}
+      </div>
+
+      {/* if loaded and status = 200 */}
+      {/* {!isLoaded ? (
+        <ServerErrorMsg msg={msg} status={status} />
+      ) : (
+        <>
+          <CharacteristicsTable
+            characteristics={characteristics}
+            searchResultsCharacteristic={searchResults}
+            isLoading={isLoading}
+            getCharacteristics={getCharacteristics}
+          />
+        </>
+      )} */}
+    </section>
+  );
+};
+
+export default Categories;

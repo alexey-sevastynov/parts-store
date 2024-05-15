@@ -211,7 +211,8 @@ $padding-info-small-panel: 20px;
 .customer,
 .characteristicForm,
 .add,
-.characteristic {
+.characteristic,
+.categories {
   .customerInfo,
   .characteristicInfoName,
   .characteristicInfoList,
@@ -351,6 +352,7 @@ $padding-info-small-panel: 20px;
 .customer,
 .goods,
 .characteristic,
+.categories,
 .add {
   max-width: 100%;
   background-color: $white;
