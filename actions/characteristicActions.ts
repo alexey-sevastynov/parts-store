@@ -273,32 +273,33 @@ export async function addOrUpdateCharacteristicValue(
   value: ILanguageStrings
 ) {
   try {
-    // Создаем новое значение характеристики
+    // Create a new characteristic value
     const newValue = await CharacteristicValue.create(value);
 
-    // Получаем текущую характеристику по идентификатору
+    // Get the current characteristic by identifier
     const characteristic = await Characteristic.findById(characteristicId);
 
     if (!characteristic) {
       return { msg: 'Characteristic not found.', status: 404 };
     }
 
-    // Проверяем, существует ли значение с такими языковыми строками
+    // Check if there is a value with these language strings
     const existingValue = characteristic.values.find(
-      (val) => val.en === value.en && val.ru === value.ru && val.ua === value.ua
+      (val: ILanguageStrings) =>
+        val.en === value.en && val.ru === value.ru && val.ua === value.ua
     );
 
     if (existingValue) {
-      // Если значение уже существует, обновляем его
+      // If the value already exists, update it
       existingValue.en = value.en;
       existingValue.ru = value.ru;
       existingValue.ua = value.ua;
     } else {
-      // Если значения не существует, добавляем новое значение в характеристику
+      // If the value does not exist, add a new value to the characteristic
       characteristic.values.push(newValue._id);
     }
 
-    // Сохраняем обновленную характеристику
+    // Save the updated characteristic
     await characteristic.save();
 
     return {

@@ -2,23 +2,31 @@ import AddPage from '@/components/templates/Dashboard/CharacteristicsPage/AddPag
 import { getUsers } from '@/utils/dashboards';
 
 const Add = async () => {
+  const fetchedUsers = await getUsers();
   try {
-    const fetchedUsers = await getUsers();
-
     if (fetchedUsers.users) {
       return <AddPage users={fetchedUsers} />;
     } else {
-      // Handling the case when the data does not contain users
-      return (
-        <AddPage
-          users={{ msg: fetchedUsers.msg, status: fetchedUsers.status }}
-        />
-      );
+      // Handling cases where data is missing or incomplete
+      return <div>Loading...</div>;
     }
   } catch (error) {
-    console.error(error);
-    // Handling data retrieval error
-    return <AddPage users={{ msg: 'Failed to fetch users.', status: 500 }} />;
+    if (fetchedUsers.users) {
+      console.error(error);
+      // Handling data retrieval error
+      return (
+        <AddPage
+          users={{
+            ...fetchedUsers,
+            msg: 'Failed to fetch users.',
+            status: 500,
+          }}
+        />
+      );
+    } else {
+      console.error(error);
+      return <div>Error fetching data.</div>;
+    }
   }
 };
 
