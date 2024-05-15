@@ -23,7 +23,7 @@ const AccordionItemAdmin = ({
     React.useState<boolean>(false);
 
   React.useEffect(() => {
-    setIsActiveDropDown(pathname.startsWith(ROUTES.CHARACTERISTICS));
+    setIsActiveDropDown(pathname.startsWith(href));
   }, [pathname, href]);
 
   return (

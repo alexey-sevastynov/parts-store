@@ -14,6 +14,7 @@ import { ROUTES, SIZE_ICON } from '@/constants/common';
 
 import AccordionItemAdmin from './AccordionItemAdmin';
 import ItemNavAdmin from './ItemNavAdmin';
+import { BiSolidCategoryAlt } from 'react-icons/bi';
 
 const ListNavAdmin = () => {
   const { lang, translations } = useLang();
@@ -59,6 +60,24 @@ const ListNavAdmin = () => {
               icon={<RiAddBoxFill size={SIZE_ICON} />}
               title={translations[lang].common.add}
               isActive={pathName === ROUTES.CHARACTERISTICS_ADD}
+            />
+          </Link>
+        </div>
+      </AccordionItemAdmin>
+
+      <AccordionItemAdmin
+        className={Styles.listNavAdmin__accordion}
+        icon={<BiSolidCategoryAlt size={SIZE_ICON} />}
+        title={translations[lang].dashboard_page.categories}
+        isActive={pathName.startsWith(ROUTES.CATEGORIES)}
+        href={ROUTES.CATEGORIES}
+      >
+        <div className={Styles.listNavAdmin__accordion_list}>
+          <Link href={ROUTES.CATEGORIES_ADD}>
+            <ItemNavAdmin
+              icon={<RiAddBoxFill size={SIZE_ICON} />}
+              title={translations[lang].common.add}
+              isActive={pathName === ROUTES.CATEGORIES_ADD}
             />
           </Link>
         </div>

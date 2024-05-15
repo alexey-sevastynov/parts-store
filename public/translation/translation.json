@@ -250,7 +250,9 @@
 
       "list_added_characteristics": "List of added characteristics",
 
-      "name_characteristic_different_language": "The name of the characterization is in different languages"
+      "name_characteristic_different_language": "The name of the characterization is in different languages",
+
+      "categories": "Categories"
     }
   },
 
@@ -505,7 +507,9 @@
 
       "list_added_characteristics": "Список доданих характеристик",
 
-      "name_characteristic_different_language": "Ім'я характеристики різними мовами"
+      "name_characteristic_different_language": "Ім'я характеристики різними мовами",
+
+      "categories": "Категорії"
     }
   },
 
@@ -760,7 +764,9 @@
 
       "list_added_characteristics": "Список добавленных характеристик",
 
-      "name_characteristic_different_language": "Имя характеристики на разних языках"
+      "name_characteristic_different_language": "Имя характеристики на разних языках",
+
+      "categories": "Категории"
     }
   }
 }
