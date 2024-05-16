@@ -25,4 +25,12 @@ export const ROUTES = {
   VIEW_CATEGORIES_BY_ID: (id: string) => {
     return `categories/${id}`;
   },
+
+  VIEW_SUBCATEGORIES_ADD: (id: string) => {
+    return `/dashboard/categories/add/${id}`;
+  },
+
+  VIEW_SUB_SUBCATEGORIES_ADD_BY_ID: (id1: string, id2: string) => {
+    return `${id1}/${id2}`;
+  },
 };

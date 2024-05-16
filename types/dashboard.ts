@@ -8,6 +8,7 @@ import {
 import { IUser } from './user';
 import { ICharacteristics } from './characteristic';
 import { ILanguageStrings } from './constants';
+import { ICategory, ISubcategory } from './category';
 
 export interface IAdminAsideButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
@@ -56,6 +57,14 @@ export interface ICharacteristicProps
   extends IPromiseResponse<ICharacteristics> {}
 
 export interface ICategoriesProps extends IPromiseResponse<IUser[]> {}
+
+export interface IAddSubcategoriesProps
+  extends IPromiseResponse<ICategory | undefined> {}
+
+export interface IAddSubSubcategoriesProps
+  extends IPromiseResponse<ISubcategory | undefined> {
+  idSubcategory: string;
+}
 
 export interface ICustomersTableProps {
   users: IUser[];

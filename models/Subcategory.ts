@@ -3,11 +3,11 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const multiLanguageSchema = new Schema({
+const multiLanguageSchema = {
   en: String,
   ru: String,
   ua: String,
-});
+};
 
 const subcategorySchema = new Schema({
   name: multiLanguageSchema,

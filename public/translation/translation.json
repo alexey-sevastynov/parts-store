@@ -252,7 +252,9 @@
 
       "name_characteristic_different_language": "The name of the characterization is in different languages",
 
-      "categories": "Categories"
+      "categories": "Categories",
+      "category": "Category",
+      "sub_category": "Subcategory"
     }
   },
 
@@ -509,7 +511,9 @@
 
       "name_characteristic_different_language": "Ім'я характеристики різними мовами",
 
-      "categories": "Категорії"
+      "categories": "Категорії",
+      "category": "Категорія",
+      "sub_category": "Підкатегорія"
     }
   },
 
@@ -766,7 +770,9 @@
 
       "name_characteristic_different_language": "Имя характеристики на разних языках",
 
-      "categories": "Категории"
+      "categories": "Категории",
+      "category": "Категория",
+      "sub_category": "Подкатегория"
     }
   }
 }

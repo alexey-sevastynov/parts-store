@@ -1,16 +1,16 @@
-import { useForm } from 'react-hook-form';
-import { ICategoryFormData } from '@/types/category';
-import { createCategory } from '@/actions/categoryActions';
+// SubcategoryForm.tsx
+import { createSubcategory } from '@/actions/categoryActions';
+import { ISubcategoryFormData, ISubcategoryFormProps } from '@/types/category';
+
 import React from 'react';
+import { useForm } from 'react-hook-form';
 
-const CategoryForm: React.FC = () => {
-  const { register, handleSubmit } = useForm<ICategoryFormData>();
+const SubcategoryForm: React.FC<ISubcategoryFormProps> = ({ categoryId }) => {
+  const { register, handleSubmit } = useForm<ISubcategoryFormData>();
 
-  const onSubmit = async (data: ICategoryFormData) => {
-    console.log(data.imageUrl);
-
+  const onSubmit = async (data: ISubcategoryFormData) => {
     try {
-      const response = await createCategory({
+      const response = await createSubcategory(categoryId, {
         name: {
           en: data.nameEn,
           ru: data.nameRu,
@@ -19,16 +19,14 @@ const CategoryForm: React.FC = () => {
         imageUrl: data.imageUrl,
       });
 
-      console.log(response);
-
       if (response.status === 200) {
-        console.log(response.msg); // Logic for a successful response
+        console.log(response.msg); // Логика для успешного ответа
       } else {
-        console.error(response.msg); // Logic for an unsuccessful response
+        console.error(response.msg); // Логика для неуспешного ответа
       }
     } catch (error) {
       console.error(error);
-      // Logic for handling an error if the request failed to execute
+      // Логика для обработки ошибки, если запрос не удалось выполнить
     }
   };
 
@@ -56,4 +54,4 @@ const CategoryForm: React.FC = () => {
   );
 };
 
-export default CategoryForm;
+export default SubcategoryForm;
