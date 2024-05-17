@@ -111,3 +111,10 @@ export interface BreadcrumbsItem {
 export interface BreadcrumbsProps {
   items: BreadcrumbsItem[];
 }
+
+export interface SvgIconUrlProps {
+  imageUrl: string;
+  alt: string;
+  className?: string;
+  size?: number;
+}

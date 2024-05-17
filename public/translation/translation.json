@@ -17,7 +17,8 @@
       "social_networks": "We are on social networks",
 
       "success_fetch": "The operation was successfully completed",
-      "error_fetch": "An error occurred"
+      "error_fetch": "An error occurred",
+      "icon": "Icon"
     },
     "header": {
       "catalog": "Catalog",
@@ -224,8 +225,12 @@
 
       "name_characteristic": "Characteristic name",
       "list_characteristics": "List of characteristics",
+      "name_category": "Category Name",
+      "list_categories": "List of Categories",
 
       "delete_selected_characteristic": "Delete selected characteristics",
+      "delete_selected_categories": "Delete selected categories",
+
       "delete_all_characteristic": "Delete all characteristics",
 
       "error_msg": "We are very sorry there was a mistake, we are already doing our best to solve the problem",
@@ -234,7 +239,10 @@
 
       "not_found": "Sorry, nothing found. First Name Last Name or Customer Code is not in the database.",
       "not_found_characteristics": "Unfortunately, nothing was found. The name of the characteristic is not in the database.",
+      "not_found_categories": "Unfortunately, nothing was found. The name of the category is not in the database.",
+
       "not_characteristics": "No characteristics, add the first characteristic.",
+      "not_categories": "No categories, add the first category.",
 
       "value_characteristic": "Characteristic value",
 
@@ -276,7 +284,8 @@
       "social_networks": "Ми в соціальних мережах",
 
       "success_fetch": "Операцію успішно виконано",
-      "error_fetch": "Сталася помилка"
+      "error_fetch": "Сталася помилка",
+      "icon": "Іконка"
     },
     "header": {
       "catalog": "Каталог",
@@ -483,8 +492,12 @@
 
       "name_characteristic": "Ім'я характеристики",
       "list_characteristics": "Перелік характеристик",
+      "name_category": "Назва категорії",
+      "list_categories": "Список категорій",
 
       "delete_selected_characteristic": "Видалити вибрані характеристики",
+      "delete_selected_categories": "Видалення вибраних категорій",
+
       "delete_all_characteristic": "Видалити всі характеристики",
 
       "error_msg": "Нам дуже шкода, що сталася помилка, ми вже робимо все можливе, щоб вирішити проблему",
@@ -493,7 +506,10 @@
 
       "not_found": "На жаль, нічого не знайдено. Ім'я Прізвище або код клієнта немає такого в базі даних.",
       "not_found_characteristics": "На жаль, нічого не знайдено. Ім'я характеристики такої немає в базі даних.",
+      "not_found_categories": "На жаль, нічого не знайдено. Ім'я категорії такої немає в базі даних.",
+
       "not_characteristics": "Немає характеристик, додай першу характеристику.",
+      "not_categories": "Немає категорій, додай першу категорію.",
 
       "value_characteristic": "Значення характеристики",
 
@@ -535,7 +551,8 @@
       "social_networks": "Мы в социальных сетях",
 
       "success_fetch": "Операция успешно выполнена",
-      "error_fetch": "Произошла ошибка"
+      "error_fetch": "Произошла ошибка",
+      "icon": "Иконка"
     },
     "header": {
       "catalog": "Каталог",
@@ -742,8 +759,11 @@
 
       "name_characteristic": "Имя характеристики",
       "list_characteristics": "Список характеристик",
+      "name_category": "Имя категории",
+      "list_categories": "Список категорий",
 
       "delete_selected_characteristic": "Удалить выбранные характеристики",
+      "delete_selected_categories": "Удалить выбранные категории",
       "delete_all_characteristic": "Удалить все характеристики",
 
       "error_msg": "Нам очень жаль произошла ошибка, мы уже делаем все возможное, что бы решить проблему",
@@ -752,7 +772,10 @@
 
       "not_found": "К сожилению, ничего не найдено. Имя Фамилия или код клиента нет такого в базе данных.",
       "not_found_characteristics": "К сожилению, ничего не найдено. Имя характеристики такой нет в базе данных.",
+      "not_found_categories": "К сожилению, ничего не найдено. Имя категорий такой нет в базе данных.",
+
       "not_characteristics": "Нет характеристик, добавь первую характеристику.",
+      "not_categories": "Нет категорий, добавь первую категорию.",
 
       "value_characteristic": "Значения характеристики",
 

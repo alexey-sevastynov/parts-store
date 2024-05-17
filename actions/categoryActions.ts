@@ -75,13 +75,13 @@ export async function createSubcategory(
   subcategoryData: Omit<ISubcategory, 'subSubcategories'>
 ): Promise<{ msg: string; status: number; subcategory?: ISubcategory }> {
   try {
-    // Создаем подкатегорию
+    // Create subcategory
     const subcategory = await Subcategory.create({
       ...subcategoryData,
       category: categoryId,
     });
 
-    // Обновляем категорию, добавляя новую подкатегорию
+    // Update a category by adding a new subcategory
     await Category.findByIdAndUpdate(categoryId, {
       $push: { subcategories: subcategory._id },
     });
@@ -102,13 +102,13 @@ export async function createSubSubcategory(
   subSubcategoryData: Omit<ISubSubcategory, 'subcategory'>
 ): Promise<{ msg: string; status: number; subSubcategory?: ISubSubcategory }> {
   try {
-    // Создаем подподкатегорию
+    // Create subcategory
     const subSubcategory = await SubSubcategory.create({
       ...subSubcategoryData,
       subcategory: subcategoryId,
     });
 
-    // Обновляем подкатегорию, добавляя новую подподкатегорию
+    // Update a subcategory by adding a new subcategory
     await Subcategory.findByIdAndUpdate(subcategoryId, {
       $push: { subSubcategories: subSubcategory._id },
     });
@@ -152,5 +152,53 @@ export async function getAllCategories(): Promise<{
       msg: 'Failed to fetch all categories.',
       status: 500,
     };
+  }
+}
+
+export async function deleteSelectedCategories(
+  selectedCategoryIds: string[]
+): Promise<{ msg: string; status: number }> {
+  try {
+    // Delete each selected category
+    const deletePromises = selectedCategoryIds.map(async (categoryId) => {
+      // Find the category to get its subcategories
+      const category = await Category.findById(categoryId);
+
+      if (!category) {
+        console.log(`Category with ID ${categoryId} not found.`);
+        return;
+      }
+
+      // Delete subcategories and their sub-subcategories
+      const subcategoryDeletePromises = category.subcategories.map(
+        async (subcategoryId: string) => {
+          const subcategory = await Subcategory.findById(subcategoryId);
+
+          if (subcategory) {
+            await SubSubcategory.deleteMany({
+              _id: { $in: subcategory.subSubcategories },
+            });
+            await Subcategory.findByIdAndDelete(subcategoryId);
+          }
+        }
+      );
+
+      await Promise.all(subcategoryDeletePromises);
+
+      // Finally, delete the category
+      await Category.findByIdAndDelete(categoryId);
+
+      console.log(`Category with ID ${categoryId} deleted successfully.`);
+    });
+
+    await Promise.all(deletePromises);
+
+    return {
+      msg: 'Selected categories deleted successfully!',
+      status: 200,
+    };
+  } catch (error) {
+    console.error(error);
+    return { msg: 'Failed to delete selected categories.', status: 500 };
   }
 }

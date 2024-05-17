@@ -1,76 +1,54 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
 
 import React, { ChangeEvent } from 'react';
-
 import { useLang } from '@/hooks/useLang';
-
 import { BiSort } from 'react-icons/bi';
-
-import {
-  deleteAllCharacteristics,
-  deleteSelectedCharacteristics,
-} from '@/actions/characteristicActions';
-
-import { handleCheckboxChange } from '@/utils/dashboards';
-import { ICharacteristicTableProps } from '@/types/dashboard';
-
-import CharacteristicRowLoader from './CharacteristicRowLoader';
+import { ICategoriesTableProps } from '@/types/dashboard';
+import CategoryRowLoader from './CategoryRowLoader';
 import NotFoundMsg from '../NotFoundMsg';
-import CharacteristicRow from './CharacteristicRow';
+import { handleCheckboxChange } from '@/utils/dashboards';
 import { AnimatePresence } from 'framer-motion';
+import CategoryRow from './CategoryRow';
+import { deleteSelectedCategories } from '@/actions/categoryActions';
 
-const CharacteristicTable = ({
-  characteristics,
-  searchResultsCharacteristic,
+const CategoriesTable = ({
+  categories,
+  searchResultsCategory,
   isLoading,
-  getCharacteristics,
-}: ICharacteristicTableProps) => {
+  getCategories,
+}: ICategoriesTableProps) => {
   const { lang, translations } = useLang();
 
   const [isSortByName, setIsSortByName] = React.useState<boolean>(false);
 
-  const renderedCharacteristics = isSortByName
-    ? searchResultsCharacteristic
+  const renderedCategories = isSortByName
+    ? searchResultsCategory
         .slice()
         .sort((a, b) => a.name[lang].localeCompare(b.name[lang]))
-    : searchResultsCharacteristic.slice().reverse();
+    : searchResultsCategory.slice().reverse();
 
   const [checkboxes, setCheckboxes] = React.useState<{
     [key: string]: boolean;
   }>({});
 
-  const isCheckedAll = checkboxes['all'];
-
   const isAnyCheckboxChecked = Object.values(checkboxes).some(
     (value) => value === true
   );
 
-  const isEmptyCharacteristics = characteristics.length === 0;
-  const isEmptySearchResultsCharacteristic =
-    searchResultsCharacteristic.length === 0;
-
-  const deleteCharacteristics = async () => {
-    try {
-      const res = await deleteAllCharacteristics();
-      console.log(res);
-    } catch (error) {
-      console.error('Failed to delete characteristic:', error);
-    }
-  };
+  const isEmptyCategories = categories.length === 0;
+  const isEmptySearchResultsCategory = searchResultsCategory.length === 0;
 
   const deleteSelected = async () => {
     try {
       const selectedCharacteristicIds = Object.keys(checkboxes).filter(
         (key) => checkboxes[key] && key !== 'all'
       );
-      const res = await deleteSelectedCharacteristics(
-        selectedCharacteristicIds
-      );
+      const res = await deleteSelectedCategories(selectedCharacteristicIds);
 
       if (res.status === 200) {
         setCheckboxes({});
 
-        getCharacteristics();
+        getCategories();
       }
     } catch (error) {
       console.error('Failed to delete selected characteristics:', error);
@@ -92,18 +70,18 @@ const CharacteristicTable = ({
   };
 
   return (
-    <table className={Styles.characteristicTable}>
+    <table className={Styles.categoriesTable}>
       <thead>
-        <tr className={Styles.characteristicTable__head}>
+        <tr className={Styles.categoriesTable__head}>
           {/* checkbox ALL */}
-          <th className={Styles.characteristicTable__head_checkbox}>
+          <th className={Styles.categoriesTable__head_checkbox}>
             <input
               type='checkbox'
               name='all'
               checked={checkboxes['all'] || false}
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
                 handleCheckboxChange(
-                  characteristics,
+                  categories,
                   event,
                   checkboxes,
                   setCheckboxes,
@@ -111,48 +89,49 @@ const CharacteristicTable = ({
                 )
               }
               disabled={
-                !characteristics ||
-                isEmptySearchResultsCharacteristic ||
-                isEmptyCharacteristics
+                !categories || isEmptySearchResultsCategory || isEmptyCategories
               }
             />
           </th>
+
+          {/* icon */}
+          <th className={Styles.categoriesTable__head_icon}>
+            <p>{translations[lang].common.icon}</p>
+          </th>
+
           {/* name */}
-          <th className={Styles.characteristicTable__head_name_characteristic}>
+          <th className={Styles.categoriesTable__head_name_category}>
             <button
               className={isSortByName ? Styles.btn_active : Styles.btn}
               title={translations[lang].dashboard_page.sort_by_alphabet}
               onClick={handleSortButtonClick}
             >
-              <p>{translations[lang].dashboard_page.name_characteristic}</p>
+              <p>{translations[lang].dashboard_page.name_category}</p>
               <BiSort />
             </button>
           </th>
 
-          {/* list characteristics */}
-          <th className={Styles.characteristicTable__head_list_characteristics}>
-            {translations[lang].dashboard_page.list_characteristics}
+          {/* list categories */}
+          <th className={Styles.categoriesTable__head_list_categories}>
+            {translations[lang].dashboard_page.list_categories}
           </th>
         </tr>
 
         {/* PANEL DELETE, WHEN SELECT */}
         {isAnyCheckboxChecked && (
-          <tr className={Styles.characteristicTable__head_delete}>
+          <tr className={Styles.categoriesTable__head_delete}>
             <th>
               <button
-                className={Styles.characteristicTable__head_delete_btn_red}
+                className={Styles.categoriesTable__head_delete_btn_red}
                 onClick={deleteSelected}
               >
-                {
-                  translations[lang].dashboard_page
-                    .delete_selected_characteristic
-                }
+                {translations[lang].dashboard_page.delete_selected_categories}
               </button>
             </th>
 
             <th>
               <button
-                className={Styles.characteristicTable__head_delete_btn}
+                className={Styles.categoriesTable__head_delete_btn}
                 onClick={handleBackButtonClick}
               >
                 {translations[lang].common.cancel}
@@ -162,21 +141,22 @@ const CharacteristicTable = ({
         )}
 
         {/* line */}
-        <tr className={Styles.characteristicTable__head_line}>
+        <tr className={Styles.categoriesTable__head_line}>
           <td />
         </tr>
       </thead>
+
       <tbody>
-        {/* Checking for data loading */}
         {isLoading &&
           // Loader Display
-          [...Array(10)].map((_, id) => <CharacteristicRowLoader key={id} />)}
-        {/* Checking the availability of characteristics */}
-        {!isLoading && characteristics && characteristics.length === 0 && (
+          [...Array(10)].map((_, id) => <CategoryRowLoader key={id} />)}
+
+        {/* Checking the availability of categories */}
+        {!isLoading && categories && categories.length === 0 && (
           <tr>
             <td>
               <NotFoundMsg
-                message={translations[lang].dashboard_page.not_characteristics}
+                message={translations[lang].dashboard_page.not_categories}
               />
             </td>
           </tr>
@@ -184,32 +164,33 @@ const CharacteristicTable = ({
 
         {/* Checking search results */}
         {!isLoading &&
-          searchResultsCharacteristic &&
-          isEmptySearchResultsCharacteristic &&
-          !isEmptyCharacteristics && (
+          searchResultsCategory &&
+          isEmptySearchResultsCategory &&
+          !isEmptyCategories && (
             <tr>
               <td>
                 <NotFoundMsg
                   message={
-                    translations[lang].dashboard_page.not_found_characteristics
+                    translations[lang].dashboard_page.not_found_categories
                   }
                 />
               </td>
             </tr>
           )}
-        {/* Display of characteristics */}
+
+        {/* Display of categories */}
         <AnimatePresence initial={false}>
           {!isLoading &&
-            searchResultsCharacteristic &&
-            !isEmptySearchResultsCharacteristic &&
-            renderedCharacteristics.map((characteristic) => (
-              <CharacteristicRow
-                key={characteristic._id}
-                characteristic={characteristic}
-                isChecked={!!checkboxes[characteristic._id as string]}
+            searchResultsCategory &&
+            !isEmptySearchResultsCategory &&
+            renderedCategories.map((category) => (
+              <CategoryRow
+                key={category._id}
+                category={category}
+                isChecked={!!checkboxes[category._id as string]}
                 handleCheckboxChange={(event: ChangeEvent<HTMLInputElement>) =>
                   handleCheckboxChange(
-                    characteristics,
+                    categories,
                     event,
                     checkboxes,
                     setCheckboxes,
@@ -225,4 +206,4 @@ const CharacteristicTable = ({
   );
 };
 
-export default CharacteristicTable;
+export default CategoriesTable;

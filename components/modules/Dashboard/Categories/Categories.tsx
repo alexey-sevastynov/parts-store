@@ -3,18 +3,23 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
 
 import { useLang } from '@/hooks/useLang';
+import Link from 'next/link';
+import React from 'react';
+
+import { BsPlusCircleFill } from 'react-icons/bs';
+import { GrUpdate } from 'react-icons/gr';
+
+import { ROUTES } from '@/constants/common';
+
+import { ICategory } from '@/types/category';
+import { ICategoriesProps } from '@/types/dashboard';
+
+import { getAllCategories } from '@/actions/categoryActions';
 
 import Title from '@/components/elements/Title';
-import { GrUpdate } from 'react-icons/gr';
-import Link from 'next/link';
-import { ROUTES } from '@/constants/common';
-import { BsPlusCircleFill } from 'react-icons/bs';
 import SearchAdmin from '../SearchAdmin';
 import ServerErrorMsg from '../ServerErrorMsg';
-import { ICategoriesProps } from '@/types/dashboard';
-import { IUser } from '@/types/user';
-import React from 'react';
-import { getAllUsers } from '@/actions/authActions';
+import CategoriesTable from './CategoriesTable';
 
 const Categories = ({ data, status, msg }: ICategoriesProps) => {
   const { lang, translations } = useLang();
@@ -22,18 +27,18 @@ const Categories = ({ data, status, msg }: ICategoriesProps) => {
   const isLoaded = status === 200;
   const isLoading: boolean = !Object.assign(data);
 
-  const [categories, setСategories] = React.useState<IUser[]>(data);
-  const [searchResults, setSearchResults] = React.useState<IUser[]>(data);
+  const [categories, setСategories] = React.useState<ICategory[]>(data);
+  const [searchResults, setSearchResults] = React.useState<ICategory[]>(data);
 
-  const getUsers = async () => {
+  const getCategories = async () => {
     try {
-      const res = await getAllUsers();
+      const res = await getAllCategories();
       console.log(res);
 
-      setСategories(res.users as IUser[]);
-      setSearchResults(res.users as IUser[]);
+      setСategories(res.categories as ICategory[]);
+      setSearchResults(res.categories as ICategory[]);
     } catch (error) {
-      console.error('Failed to fetch characteristics:', error);
+      console.error('Failed to fetch categories:', error);
     }
   };
 
@@ -41,9 +46,12 @@ const Categories = ({ data, status, msg }: ICategoriesProps) => {
     if (!categories) return [];
 
     if (!query) {
-      setSearchResults(categories); // If the query is empty, show all characteristics
+      setSearchResults(categories); // If the query is empty, show all categories
     } else {
-      console.log(query);
+      const filteredCategories = categories.filter((category) => {
+        return category.name[lang].toLowerCase().includes(query.toLowerCase());
+      });
+      setSearchResults(filteredCategories);
     }
   };
 
@@ -57,7 +65,7 @@ const Categories = ({ data, status, msg }: ICategoriesProps) => {
           <button className={Styles.categories__head_title_btn_update}>
             <GrUpdate
               title={translations[lang].common.update}
-              onClick={getUsers}
+              onClick={getCategories}
             />
           </button>
           <Link
@@ -77,18 +85,18 @@ const Categories = ({ data, status, msg }: ICategoriesProps) => {
       </div>
 
       {/* if loaded and status = 200 */}
-      {/* {!isLoaded ? (
+      {!isLoaded ? (
         <ServerErrorMsg msg={msg} status={status} />
       ) : (
         <>
-          <CharacteristicsTable
-            characteristics={characteristics}
-            searchResultsCharacteristic={searchResults}
+          <CategoriesTable
+            categories={categories}
+            searchResultsCategory={searchResults}
             isLoading={isLoading}
-            getCharacteristics={getCharacteristics}
+            getCategories={getCategories}
           />
         </>
-      )} */}
+      )}
     </section>
   );
 };

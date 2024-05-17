@@ -56,7 +56,7 @@ export interface ICharacteristicsProps
 export interface ICharacteristicProps
   extends IPromiseResponse<ICharacteristics> {}
 
-export interface ICategoriesProps extends IPromiseResponse<IUser[]> {}
+export interface ICategoriesProps extends IPromiseResponse<ICategory[]> {}
 
 export interface IAddSubcategoriesProps
   extends IPromiseResponse<ICategory | undefined> {}
@@ -76,6 +76,13 @@ export interface ICharacteristicTableProps {
   searchResultsCharacteristic: ICharacteristics[];
   isLoading: boolean;
   getCharacteristics: () => void;
+}
+
+export interface ICategoriesTableProps {
+  categories: ICategory[];
+  searchResultsCategory: ICategory[];
+  isLoading: boolean;
+  getCategories: () => void;
 }
 
 export interface IListAddedCharacteristicsProps {

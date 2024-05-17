@@ -35,11 +35,27 @@ const SubSubcategoryForm: React.FC<ISubSubcategoryFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input type='text' {...register('nameEn')} />
-      <input type='text' {...register('nameRu')} />
-      <input type='text' {...register('nameUa')} />
-      <input type='text' {...register('imageUrl')} />
-      <input type='text' {...register('description')} />
+      <div>
+        <label htmlFor='nameEn'>English name</label>
+        <input type='text' id='nameEn' {...register('nameEn')} />
+      </div>
+      <div>
+        <label htmlFor='nameRu'>Russian name</label>
+        <input type='text' id='nameRu' {...register('nameRu')} />
+      </div>
+      <div>
+        <label htmlFor='nameUa'>Ukraine name</label>
+        <input type='text' id='nameUa' {...register('nameUa')} />
+      </div>
+      <div>
+        <label htmlFor='imageUrl'>Icon Url svg</label>
+        <input type='text' id='imageUrl' {...register('imageUrl')} />
+      </div>
+      <div>
+        <label htmlFor='description'>description</label>
+        <textarea id='description' {...register('description')} />
+      </div>
+
       <button type='submit'>Submit</button>
     </form>
   );

@@ -1,22 +1,27 @@
 import Categories from '@/components/modules/Dashboard/Categories/Categories';
 import HeaderAdmin from '@/components/modules/Dashboard/Header/HeaderAdmin';
+import { ICategory } from '@/types/category';
 import { IUser } from '@/types/user';
 import React from 'react';
 
 const CategoriesPage = ({
   users: { msg: msgUsers, status: statusUsers, users },
+  data: { msg, status, categories },
 }: {
-  users: { msg: string; status: number; users: IUser[] };
+  users: { msg: string; status: number; users?: IUser[] };
+  data: { msg: string; status: number; categories?: ICategory[] };
 }) => {
   return (
     <div className='dashboard-pages'>
-      <HeaderAdmin
-        statusDataUsers={statusUsers}
-        msgDataUsers={msgUsers}
-        dataUsers={users}
-      />
+      {users && (
+        <HeaderAdmin
+          statusDataUsers={statusUsers}
+          msgDataUsers={msgUsers}
+          dataUsers={users}
+        />
+      )}
 
-      <Categories data={users} status={statusUsers} msg={msgUsers} />
+      {categories && <Categories data={categories} status={status} msg={msg} />}
     </div>
   );
 };

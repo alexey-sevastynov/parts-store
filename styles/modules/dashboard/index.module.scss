@@ -401,6 +401,9 @@ $padding-info-small-panel: 20px;
   & .characteristicTable__head,
   & .characteristicTable tbody tr,
   & .characteristicTable__head_delete,
+  & .categoriesTable__head,
+  & .categoriesTable tbody tr,
+  & .categoriesTable__head_delete,
   & .charateristicTableEdit__head,
   & .charateristicTableEdit tbody tr,
   & .charateristicTableEdit__head_delete,
@@ -413,6 +416,7 @@ $padding-info-small-panel: 20px;
 
   & .customersTable,
   & .characteristicTable,
+  & .categoriesTable,
   & .charateristicTableEdit {
     max-width: 100%;
     display: block;
@@ -422,6 +426,8 @@ $padding-info-small-panel: 20px;
     .customersTable__body,
     .characteristicTable__head,
     .characteristicTable__body,
+    .categoriesTable__head,
+    .categoriesTable__body,
     .charateristicTableEdit__body {
       display: flex;
       gap: 10px;
@@ -454,11 +460,33 @@ $padding-info-small-panel: 20px;
     }
 
     .characteristicTable__head,
-    .characteristicTable__body {
+    .characteristicTable__body,
+    .categoriesTable__head,
+    .categoriesTable__body {
       max-width: 100%;
       box-sizing: border-box;
 
-      &_name_characteristic {
+      &_icon {
+        width: 80px;
+        & p {
+          width: 80px !important;
+        }
+
+        @media (max-width: $breakpoint_lg) {
+          display: none !important;
+        }
+      }
+
+      .categoriesTable__body_icon.white_icon {
+        svg {
+          path {
+            fill: white;
+          }
+        }
+      }
+
+      &_name_characteristic,
+      &_name_category {
         font-size: $font-m;
         color: $black-font;
         width: 35%;
@@ -467,7 +495,8 @@ $padding-info-small-panel: 20px;
         overflow: hidden;
       }
 
-      &_list_characteristics {
+      &_list_characteristics,
+      &_list_categories {
         width: 65%;
         display: flex;
 
@@ -485,7 +514,8 @@ $padding-info-small-panel: 20px;
 
     .charateristicTableEdit__head,
     .charateristicTableEdit__body {
-      &_name_characteristic {
+      &_name_characteristic,
+      &_name_categories {
         width: 20%;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -511,6 +541,7 @@ $padding-info-small-panel: 20px;
       flex-direction: column;
       .customersTable__head,
       .characteristicTable__head,
+      .categoriesTable__head,
       .charateristicTableEdit__head {
         box-sizing: border-box;
 
@@ -583,17 +614,20 @@ $padding-info-small-panel: 20px;
       flex-direction: column;
 
       .customersTable__body.all,
-      .characteristicTable__body.all {
+      .characteristicTable__body.all,
+      .categoriesTable__body.all {
         background-color: $grey;
       }
 
       .customersTable__body .customersTable__body_checkbox.select,
-      .characteristicTable__body .characteristicTable__body_checkbox.select {
+      .characteristicTable__body .characteristicTable__body_checkbox.select,
+      .categoriesTable__body .categoriesTable__body_checkbox.select {
         background-color: $grey;
       }
 
       .customersTable__body,
       .characteristicTable__body,
+      .categoriesTable__body,
       .charateristicTableEdit__body {
         height: 60px;
         position: relative;
@@ -607,34 +641,19 @@ $padding-info-small-panel: 20px;
         }
 
         @include btn-hover(background-color);
-        // &_hover {
-        //   position: absolute;
-        //   display: flex;
-        //   align-items: center;
-        //   justify-content: flex-end;
-        //   padding-right: 50px;
-
-        //   right: -2%;
-        //   background-color: unset;
-        //   @include btn-hover(all);
-
-        //   & button {
-        //     display: flex;
-        //     align-items: center;
-        //     justify-content: center;
-        //     border-radius: 100%;
-        //     width: 34px;
-        //     height: 34px;
-        //     background-color: $grey-light;
-        //     opacity: 0;
-        //     & svg {
-        //       color: $black-icon;
-        //     }
-        //   }
-        // }
 
         &:hover {
           background-color: $grey;
+
+          .categoriesTable__body_icon {
+            color: $orange;
+
+            svg {
+              path {
+                fill: $orange;
+              }
+            }
+          }
         }
       }
     }
@@ -699,23 +718,15 @@ $padding-info-small-panel: 20px;
       display: block;
 
       .characteristicTable__head,
-      .characteristicTable__body {
-        &_name_characteristic {
+      .characteristicTable__body,
+      .categoriesTable__head,
+      .categoriesTable__body {
+        &_name_characteristic,
+        &_name_category {
           width: 50%;
         }
-        &_list_characteristics {
-          width: 50%;
-        }
-      }
-    }
-
-    @media (max-width: $breakpoint_sm) {
-      .characteristicTable__head,
-      .characteristicTable__body {
-        &_name_characteristic {
-          width: 50%;
-        }
-        &_list_characteristics {
+        &_list_characteristics,
+        &_list_categories {
           width: 50%;
         }
       }

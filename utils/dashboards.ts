@@ -8,6 +8,7 @@ import {
   getAllCharacteristics,
   getCharacteristicById,
 } from '@/actions/characteristicActions';
+import { ICategory } from '@/types/category';
 import { ICharacteristics } from '@/types/characteristic';
 import { ILanguageStrings } from '@/types/constants';
 import { IUser } from '@/types/user';
@@ -30,7 +31,7 @@ export const deleteUserAccount = async (
 };
 
 export const handleCheckboxChange = (
-  listData: IUser[] | ICharacteristics[] | ILanguageStrings[],
+  listData: IUser[] | ICharacteristics[] | ILanguageStrings[] | ICategory[],
   event: ChangeEvent<HTMLInputElement>,
   checkboxes: { [key: string]: boolean },
   setCheckboxes: React.Dispatch<

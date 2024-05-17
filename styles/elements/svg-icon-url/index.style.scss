@@ -1,0 +1,12 @@
+.svgIconUrl {
+  color: $grey;
+
+  & svg {
+    width: 100%;
+    height: 100%;
+
+    path {
+      fill: $grey;
+    }
+  }
+}
