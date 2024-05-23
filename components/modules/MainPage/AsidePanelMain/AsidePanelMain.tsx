@@ -4,11 +4,12 @@ import AuthUser from './AuthUser';
 import ListSocialMedia from '@/components/elements/ListSocialMedia';
 import ListInfoUseful from '@/components/elements/ListInfoUseful';
 import ListInfoInternetStore from '@/components/elements/ListInfoInternetStore';
+import { ICategory } from '@/types/category';
 
-const AsidePanelMain = () => {
+const AsidePanelMain = ({ categories }: { categories: ICategory[] }) => {
   return (
     <section className={Styles.asidePanelMain}>
-      <ListCategories />
+      <ListCategories categories={categories} />
 
       <span className={Styles.asidePanelMain__divider} />
 

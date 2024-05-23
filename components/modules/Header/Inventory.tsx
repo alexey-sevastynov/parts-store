@@ -8,6 +8,7 @@ import { useLang } from '@/hooks/useLang';
 
 import LinkIconDescription from '@/components/elements/LinkIconDescription';
 import { useSession } from 'next-auth/react';
+import ButtonIconDescription from '@/components/elements/ButtonIconDescription';
 
 const Inventory = () => {
   const { status } = useSession();
@@ -23,14 +24,13 @@ const Inventory = () => {
     <nav className={Styles.header__inventory}>
       <ul className={Styles.header__inventory_list}>
         <li className={Styles.header__inventory_list_category}>
-          <LinkIconDescription
+          <ButtonIconDescription
             imageName='catalog'
-            href={'/user/user-profile'}
-            // href={'/catalog'}
             color='light'
+            type='button'
           >
             {translations[lang].header.catalog}
-          </LinkIconDescription>
+          </ButtonIconDescription>
         </li>
 
         {isActiveAutoLink && isAuthenticated && (

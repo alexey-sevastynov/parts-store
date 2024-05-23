@@ -57,12 +57,30 @@ $width-aside-panel: 320px;
     @include display-flex;
     gap: 15px;
 
+    color: $grey;
+    circle {
+      stroke: $grey;
+    }
+    path {
+      fill: $grey;
+      stroke: $grey;
+    }
+
     &:hover {
       .itemCategory__link_icon svg,
       .itemCategory__link_title,
       .itemCategory__link_arrow {
         color: $orange;
         font-weight: $weight-medium;
+
+        circle {
+          stroke: $orange;
+        }
+
+        path {
+          fill: $orange;
+          stroke: $orange;
+        }
       }
     }
 

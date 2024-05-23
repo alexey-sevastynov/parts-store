@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 export interface IItemCategoryProps {
   title: string;
-  icon: ReactNode;
+  icon: string;
   href?: string;
   isWithArrow?: boolean;
 }

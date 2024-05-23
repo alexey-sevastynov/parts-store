@@ -12,6 +12,14 @@ export interface ILinkIconDescriptionProps
   children: React.ReactNode;
 }
 
+export interface IButtonIconDescriptionProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  imageName: string;
+  color: 'light' | 'dark';
+
+  children: string;
+}
+
 export interface ILgotypeProps extends Omit<ImageProps, 'src' | 'alt'> {
   src?: string;
   alt?: string;
