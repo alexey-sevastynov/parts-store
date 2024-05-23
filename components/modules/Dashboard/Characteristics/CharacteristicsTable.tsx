@@ -52,7 +52,6 @@ const CharacteristicTable = ({
   const deleteCharacteristics = async () => {
     try {
       const res = await deleteAllCharacteristics();
-      console.log(res);
     } catch (error) {
       console.error('Failed to delete characteristic:', error);
     }

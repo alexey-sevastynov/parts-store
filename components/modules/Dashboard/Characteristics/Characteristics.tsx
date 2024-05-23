@@ -36,7 +36,7 @@ const Characteristics = ({ data, status, msg }: ICharacteristicsProps) => {
   const getCharacteristics = async () => {
     try {
       const res = await getAllCharacteristics();
-      console.log(res);
+      res;
 
       setCharacteristics(res.characteristics as ICharacteristics[]);
       setSearchResults(res.characteristics as ICharacteristics[]);

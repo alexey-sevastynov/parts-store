@@ -40,8 +40,6 @@ const CharacteristicRowEdit: React.FC<CharacteristicRowProps> = ({
 
     const { ua, ru, en } = newCharacteristic.characteristicValue;
 
-    console.log(ua, ru, en, '+');
-
     setUaValue(ua);
     setRuValue(ru);
     setEnValue(en);
@@ -102,8 +100,6 @@ const CharacteristicRowEdit: React.FC<CharacteristicRowProps> = ({
           ru: ruValue,
           en: enValue,
         });
-
-        console.log('update');
 
         updateValue(_id);
 

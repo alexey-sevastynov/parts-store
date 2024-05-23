@@ -58,12 +58,11 @@ export interface ICharacteristicProps
 
 export interface ICategoriesProps extends IPromiseResponse<ICategory[]> {}
 
-export interface IAddSubcategoriesProps
-  extends IPromiseResponse<ICategory | undefined> {}
+export interface IAddSubcategoriesProps extends IPromiseResponse<ICategory> {}
 
 export interface IAddSubSubcategoriesProps
-  extends IPromiseResponse<ISubcategory | undefined> {
-  idSubcategory: string;
+  extends IPromiseResponse<ISubcategory> {
+  idCategory: string;
 }
 
 export interface ICustomersTableProps {
@@ -102,6 +101,20 @@ export interface ICharacteristicTableEditProps {
     [key: string]: boolean;
   };
   setCheckboxes: Dispatch<SetStateAction<{ [key: string]: boolean }>>;
+}
+export interface ICategoriesTableEditProps {
+  values: ICategory[] | ISubcategory[];
+  isLoading: boolean;
+  onDeleteSelected: () => void;
+  checkboxes: {
+    [key: string]: boolean;
+  };
+  setCheckboxes: Dispatch<SetStateAction<{ [key: string]: boolean }>>;
+  idCategory?: string;
+  handleEditSubmit: (
+    id: string,
+    updatedData: { ua: string; ru: string; en: string }
+  ) => Promise<void>;
 }
 
 export interface ICharacteristicInfoListProps

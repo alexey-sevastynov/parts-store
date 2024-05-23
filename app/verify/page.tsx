@@ -9,7 +9,6 @@ const Verify = async ({
 }) => {
   const res = await verifyWithCredentials(token);
 
-  // console.log(res);
   return <VerifyPage />;
 };
 

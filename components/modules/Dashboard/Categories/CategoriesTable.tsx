@@ -40,15 +40,39 @@ const CategoriesTable = ({
 
   const deleteSelected = async () => {
     try {
-      const selectedCharacteristicIds = Object.keys(checkboxes).filter(
-        (key) => checkboxes[key] && key !== 'all'
+      const selectedCategories = categories.filter(
+        (category) =>
+          category._id && checkboxes[category._id] && category._id !== 'all'
       );
-      const res = await deleteSelectedCategories(selectedCharacteristicIds);
+      const selectedCategoriesIds = selectedCategories.map(
+        (category) => category._id as string
+      );
+      const selectedCategoriesUrl = selectedCategories.map(
+        (category) => category.imageUrl
+      );
+
+      const res = await deleteSelectedCategories(selectedCategoriesIds);
+
+      const fetchRes = await fetch('/api/uploadthing', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          url: selectedCategoriesUrl,
+        }),
+      });
+
+      const fetchResult = await fetchRes.json();
 
       if (res.status === 200) {
         setCheckboxes({});
 
         getCategories();
+      }
+
+      if (!fetchRes.ok) {
+        console.error('Failed to delete categories:', fetchResult);
       }
     } catch (error) {
       console.error('Failed to delete selected characteristics:', error);

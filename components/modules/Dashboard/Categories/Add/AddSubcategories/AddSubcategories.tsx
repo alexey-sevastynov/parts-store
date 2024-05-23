@@ -7,9 +7,22 @@ import { Breadcrumbs } from '@/components/elements/Breadcrumbs';
 import { IAddSubcategoriesProps } from '@/types/dashboard';
 import SubcategoryForm from './SubcategoryForm';
 import ListAddedSubcategories from './ListAddedSubcategories';
+import { ISubcategory } from '@/types/category';
+import React from 'react';
+import { getSubcategories } from '@/utils/dashboards';
 
 const AddSubcategories = ({ msg, status, data }: IAddSubcategoriesProps) => {
   const { lang, translations } = useLang();
+
+  const [listSubcategory, setListSubcategory] = React.useState<ISubcategory[]>(
+    data?.subcategories
+  );
+
+  const updateListSubcategories = async () => {
+    const subcategories = await getSubcategories(data._id || '');
+
+    setListSubcategory(subcategories);
+  };
 
   const ADD_SUBCATEGORIES_BREADCRUMBS = [
     {
@@ -33,14 +46,22 @@ const AddSubcategories = ({ msg, status, data }: IAddSubcategoriesProps) => {
       <div className={Styles.add__head}>
         <Breadcrumbs items={ADD_SUBCATEGORIES_BREADCRUMBS} />
       </div>
-      {data?._id && <SubcategoryForm categoryId={data?._id} />}
 
-      {data?.subcategories && (
-        <ListAddedSubcategories
-          data={data?.subcategories}
-          idSubcategory={data._id}
+      <span className={Styles.add__line} />
+      {data?._id && (
+        <SubcategoryForm
+          categoryId={data?._id}
+          updateListSubcategories={updateListSubcategories}
         />
       )}
+
+      <span className={Styles.add__line} />
+
+      <ListAddedSubcategories
+        data={listSubcategory}
+        idCategory={data._id}
+        updateListSubcategories={updateListSubcategories}
+      />
     </section>
   );
 };

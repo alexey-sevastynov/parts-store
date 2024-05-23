@@ -40,7 +40,7 @@ const SignIn = () => {
   const {
     register,
     handleSubmit,
-
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<IInputs>({
     mode: 'onBlur',

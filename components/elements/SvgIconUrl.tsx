@@ -17,11 +17,16 @@ const SvgIconUrl = ({
   const [svgContent, setSvgContent] = React.useState<string>('');
   const [isSvg, setIsSvg] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(true);
+  const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     const fetchSvg = async () => {
       try {
         const response = await fetch(imageUrl);
+
+        if (!response.ok) {
+          throw new Error(`HTTP Error: Status ${response.status}`);
+        }
         const contentType = response.headers.get('Content-Type');
 
         if (contentType && contentType.includes('image/svg+xml')) {
@@ -30,9 +35,10 @@ const SvgIconUrl = ({
           setIsSvg(true);
         } else {
           setIsSvg(false);
+          throw new Error('The resulting content is not SVG.');
         }
-      } catch (error) {
-        console.error('Error fetching SVG:', error);
+      } catch (error: any) {
+        setError(error.message);
         setIsSvg(false);
       } finally {
         setLoading(false);

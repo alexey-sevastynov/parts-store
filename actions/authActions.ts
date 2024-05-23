@@ -136,7 +136,6 @@ export async function changePasswordWithCredentials({
     return { msg: 'Changed Password Succussefully!', status: 201 };
   } catch (error: any) {
     // redirect(`/errors?error=${error.message}`);
-    // console.log(error);
   }
 }
 
@@ -196,9 +195,7 @@ export async function resetPasswordWithCredentials({
       status: 201,
       // DO NOT change the msg !!! The text of msg bind with '@/puplic/transltion.json'
     };
-  } catch (error: any) {
-    // console.log(error);
-  }
+  } catch (error: any) {}
 }
 
 export async function getAllUsers() {

@@ -33,7 +33,6 @@ const Categories = ({ data, status, msg }: ICategoriesProps) => {
   const getCategories = async () => {
     try {
       const res = await getAllCategories();
-      console.log(res);
 
       setСategories(res.categories as ICategory[]);
       setSearchResults(res.categories as ICategory[]);
@@ -88,14 +87,12 @@ const Categories = ({ data, status, msg }: ICategoriesProps) => {
       {!isLoaded ? (
         <ServerErrorMsg msg={msg} status={status} />
       ) : (
-        <>
-          <CategoriesTable
-            categories={categories}
-            searchResultsCategory={searchResults}
-            isLoading={isLoading}
-            getCategories={getCategories}
-          />
-        </>
+        <CategoriesTable
+          categories={categories}
+          searchResultsCategory={searchResults}
+          isLoading={isLoading}
+          getCategories={getCategories}
+        />
       )}
     </section>
   );

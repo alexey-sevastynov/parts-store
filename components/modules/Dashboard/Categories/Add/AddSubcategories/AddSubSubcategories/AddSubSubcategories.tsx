@@ -10,26 +10,48 @@ import SubSubcategoryForm from './SubSubcategoryForm';
 import ListAddedSubSubcategories from './ListAddedSubSubcategories';
 import { getCategoryById, getSubcategoryById } from '@/actions/categoryActions';
 import React from 'react';
+import { ISubSubcategory } from '@/types/category';
+import { getSubcategories } from '@/utils/dashboards';
 
 const AddSubSubcategories = ({
   msg,
   status,
   data,
-  idSubcategory,
+  idCategory,
 }: IAddSubSubcategoriesProps) => {
   const { lang, translations } = useLang();
 
-  const [subcategoryName, setSubcategoryName] = React.useState<string>('');
+  const [subcategoryName, setSubcategoryName] = React.useState<string>(
+    data?.name[lang] || ''
+  );
+  const [subSubcategoryList, setSubSubcategoryList] = React.useState<
+    ISubSubcategory[]
+  >(data?.subSubcategories);
+
+  const isLoaded = status === 200;
+  const isLoading: boolean = !Object.assign(data);
+
+  const updateListSubSubcategories = async () => {
+    try {
+      const res = await getSubcategoryById(data._id as string);
+
+      if (res.subcategory) {
+        setSubSubcategoryList(res.subcategory.subSubcategories);
+      }
+    } catch (error) {
+      console.error('Error fetching subcategory:', error);
+    }
+  };
 
   React.useEffect(() => {
     const fetchSubcategoryName = async () => {
-      const res = await getCategoryById(idSubcategory);
+      const res = await getCategoryById(idCategory);
 
       if (res.category) setSubcategoryName(res?.category.name[lang]);
     };
 
     fetchSubcategoryName();
-  }, [idSubcategory]);
+  }, [idCategory]);
 
   const ADD_SUBCATEGORIES_BREADCRUMBS = [
     {
@@ -45,7 +67,7 @@ const AddSubSubcategories = ({
     {
       id: 3,
       name: subcategoryName || translations[lang].dashboard_page.category,
-      link: ROUTES.VIEW_SUBCATEGORIES_ADD(idSubcategory || 'unknown_id'),
+      link: ROUTES.VIEW_SUBCATEGORIES_ADD(idCategory || 'unknown_id'),
     },
     {
       id: 4,
@@ -59,12 +81,19 @@ const AddSubSubcategories = ({
         <Breadcrumbs items={ADD_SUBCATEGORIES_BREADCRUMBS} />
       </div>
 
-      {data?._id && <SubSubcategoryForm subcategoryId={data?._id} />}
+      {data?._id && (
+        <SubSubcategoryForm
+          subcategoryId={data?._id}
+          updateListData={updateListSubSubcategories}
+        />
+      )}
 
       {data && (
         <ListAddedSubSubcategories
-          data={data?.subSubcategories}
-          idSubcategory={idSubcategory}
+          data={subSubcategoryList}
+          idCategory={idCategory}
+          isLoading={isLoading}
+          updateListData={updateListSubSubcategories}
         />
       )}
     </section>

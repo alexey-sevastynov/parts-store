@@ -4,6 +4,7 @@ import Category from '@/models/Category';
 import Subcategory from '@/models/Subcategory';
 import SubSubcategory from '@/models/SubSubcategory';
 import { ICategory, ISubcategory, ISubSubcategory } from '@/types/category';
+import { ILanguageStrings } from '@/types/constants';
 
 export async function createCategory(
   categoryData: Omit<ICategory, 'subcategories'>
@@ -200,5 +201,172 @@ export async function deleteSelectedCategories(
   } catch (error) {
     console.error(error);
     return { msg: 'Failed to delete selected categories.', status: 500 };
+  }
+}
+
+export async function deleteSelectedSubcategories(
+  selectedSubcategoryIds: string[]
+): Promise<{ msg: string; status: number }> {
+  try {
+    // Delete each selected subcategory
+    const deletePromises = selectedSubcategoryIds.map(async (subcategoryId) => {
+      // Find the subcategory to get its sub-subcategories
+      const subcategory = await Subcategory.findById(subcategoryId);
+
+      if (!subcategory) {
+        console.log(`Subcategory with ID ${subcategoryId} not found.`);
+        return;
+      }
+
+      // Delete sub-subcategories
+      await SubSubcategory.deleteMany({
+        _id: { $in: subcategory.subSubcategories },
+      });
+
+      // Delete the subcategory
+      await Subcategory.findByIdAndDelete(subcategoryId);
+
+      // Update the parent category to remove the reference to the deleted subcategory
+      await Category.findByIdAndUpdate(subcategory.category, {
+        $pull: { subcategories: subcategoryId },
+      });
+
+      console.log(`Subcategory with ID ${subcategoryId} deleted successfully.`);
+    });
+
+    await Promise.all(deletePromises);
+
+    return {
+      msg: 'Selected subcategories deleted successfully!',
+      status: 200,
+    };
+  } catch (error) {
+    console.error(error);
+    return { msg: 'Failed to delete selected subcategories.', status: 500 };
+  }
+}
+
+export async function updateCategoryNameById(
+  categoryId: string,
+  newName: ILanguageStrings
+): Promise<{ msg: string; status: number }> {
+  try {
+    // Find the category by its ID
+    const category = await Category.findById(categoryId);
+
+    if (!category) {
+      return { msg: 'Category not found.', status: 404 };
+    }
+
+    // Update the language strings of the category name
+    category.name.en = newName.en;
+    category.name.ru = newName.ru;
+    category.name.ua = newName.ua;
+
+    // Save the updated category
+    await category.save();
+
+    return { msg: 'Category name updated successfully!', status: 200 };
+  } catch (error) {
+    console.error(error);
+    return { msg: 'Failed to update category name.', status: 500 };
+  }
+}
+
+export async function deleteSelectedSubSubCategories(
+  selectedSubSubCategoryIds: string[]
+): Promise<{ msg: string; status: number }> {
+  try {
+    // Deletes each selected subcategory of level 3
+    const deletePromises = selectedSubSubCategoryIds.map(
+      async (subSubcategoryId) => {
+        // Find level 3 subcategory
+        const subSubcategory = await SubSubcategory.findById(subSubcategoryId);
+
+        if (!subSubcategory) {
+          console.log(`SubSubcategory with ID ${subSubcategoryId} not found.`);
+          return;
+        }
+
+        // Delete 3rd level subcategory
+        await SubSubcategory.findByIdAndDelete(subSubcategoryId);
+
+        // Update the parent subcategory to remove the link to the deleted level 3 subcategory
+        await Subcategory.findByIdAndUpdate(subSubcategory.subcategory, {
+          $pull: { subSubcategories: subSubcategoryId },
+        });
+
+        console.log(
+          `SubSubcategory with ID ${subSubcategoryId} deleted successfully.`
+        );
+      }
+    );
+
+    await Promise.all(deletePromises);
+
+    return {
+      msg: 'Selected sub-subcategories deleted successfully!',
+      status: 200,
+    };
+  } catch (error) {
+    console.error(error);
+    return { msg: 'Failed to delete selected sub-subcategories.', status: 500 };
+  }
+}
+
+export async function updateSubcategoryNameById(
+  subcategoryId: string,
+  newName: ILanguageStrings
+): Promise<{ msg: string; status: number }> {
+  try {
+    // Find the subcategory by its ID
+    const subcategory = await Subcategory.findById(subcategoryId);
+
+    if (!subcategory) {
+      return { msg: 'Subcategory not found.', status: 404 };
+    }
+
+    // Update the language strings of the subcategory name
+    subcategory.name.en = newName.en;
+    subcategory.name.ru = newName.ru;
+    subcategory.name.ua = newName.ua;
+
+    // Save the updated subcategory
+    await subcategory.save();
+
+    return { msg: 'Subcategory name updated successfully!', status: 200 };
+  } catch (error) {
+    console.error(error);
+    return { msg: 'Failed to update subcategory name.', status: 500 };
+  }
+}
+
+export async function updateSubSubcategoryById(
+  subSubcategoryId: string,
+  updateData: { ua: string; ru: string; en: string; description?: string }
+): Promise<{ msg: string; status: number }> {
+  try {
+    // Find the sub-subcategory by its ID
+    const subSubcategory = await SubSubcategory.findById(subSubcategoryId);
+    console.log('updateData-backend:', updateData);
+
+    if (!subSubcategory) {
+      return { msg: 'SubSubcategory not found.', status: 404 };
+    }
+
+    // Update the name fields of the sub-subcategory
+    subSubcategory.name.en = updateData.en;
+    subSubcategory.name.ru = updateData.ru;
+    subSubcategory.name.ua = updateData.ua;
+
+    subSubcategory.description = updateData.description;
+
+    // Save the updated sub-subcategory
+    await subSubcategory.save();
+
+    return { msg: 'SubSubcategory updated successfully!', status: 200 };
+  } catch (error) {
+    console.error(error);
+    return { msg: 'Failed to update subSubcategory.', status: 500 };
   }
 }

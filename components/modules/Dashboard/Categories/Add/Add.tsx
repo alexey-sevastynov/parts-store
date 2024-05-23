@@ -8,9 +8,35 @@ import { useLang } from '@/hooks/useLang';
 import { Breadcrumbs } from '@/components/elements/Breadcrumbs';
 import CategoryForm from './CategoryForm';
 import ListAddedCategories from './ListAddedCategories';
+import { ICategoriesProps } from '@/types/dashboard';
+import { ICategory } from '@/types/category';
+import { getAllCategories } from '@/actions/categoryActions';
+import ServerErrorMsg from '../../ServerErrorMsg';
 
-const Add = () => {
+const Add = ({ data, msg, status }: ICategoriesProps) => {
   const { lang, translations } = useLang();
+
+  const [listCategories, setListCategories] = React.useState<ICategory[]>(data);
+
+  const isLoaded = status === 200;
+  const isLoading: boolean = !Object.assign(data);
+
+  const updateListCategories = async (): Promise<void> => {
+    try {
+      const res = await getAllCategories();
+
+      if (res.categories) {
+        setListCategories(res.categories);
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error('Error fetching subcategory:', error.message);
+      } else {
+        console.error('Error fetching subcategory:', error);
+      }
+      throw error;
+    }
+  };
 
   const ADD_CATEGORIES_BREADCRUMBS = [
     {
@@ -30,9 +56,24 @@ const Add = () => {
         <Breadcrumbs items={ADD_CATEGORIES_BREADCRUMBS} />
       </div>
 
-      <CategoryForm />
+      {/* if loaded and status = 200 */}
+      <span className={Styles.add__line} />
+      {!isLoaded ? (
+        <ServerErrorMsg msg={msg} status={status} />
+      ) : (
+        <CategoryForm updateData={updateListCategories} />
+      )}
 
-      <ListAddedCategories />
+      <span className={Styles.add__line} />
+      {!isLoaded ? (
+        <ServerErrorMsg msg={msg} status={status} />
+      ) : (
+        <ListAddedCategories
+          data={listCategories}
+          updateData={updateListCategories}
+          isLoading={isLoading}
+        />
+      )}
     </section>
   );
 };

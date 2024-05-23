@@ -10,11 +10,11 @@ import AddSubSubcategories from '@/components/modules/Dashboard/Categories/Add/A
 const AddSubSubcategoriesPage = ({
   users: { msg: msgUsers, status: statusUsers, users },
   data: { msg, status, subcategory: data },
-  idSubcategory,
+  idCategory,
 }: {
   users: { msg: string; status: number; users: IUser[] };
   data: { msg: string; status: number; subcategory?: ISubcategory };
-  idSubcategory: string;
+  idCategory: string;
 }) => {
   return (
     <main className='dashboard-pages'>
@@ -24,12 +24,14 @@ const AddSubSubcategoriesPage = ({
         dataUsers={users}
       />
 
-      <AddSubSubcategories
-        msg={msg}
-        status={status}
-        data={data}
-        idSubcategory={idSubcategory}
-      />
+      {data && (
+        <AddSubSubcategories
+          msg={msg}
+          status={status}
+          data={data}
+          idCategory={idCategory}
+        />
+      )}
     </main>
   );
 };

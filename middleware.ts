@@ -8,8 +8,6 @@ export default withAuth(
     const { pathname, origin } = req.nextUrl;
     const { token } = req.nextauth as { token: { user: IUser } };
 
-    // console.log({ pathname, origin, token });
-
     if (pathname.startsWith('/dashboard') && token?.user?.role !== 'admin') {
       return new NextResponse(
         'No access. You need to get administrator rights!',

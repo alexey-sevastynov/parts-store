@@ -204,7 +204,8 @@ $padding-info-small-panel: 20px;
   }
 }
 
-.characteristic__line {
+.characteristic__line,
+.add__line {
   @include horizon-line;
 }
 
@@ -401,15 +402,21 @@ $padding-info-small-panel: 20px;
   & .characteristicTable__head,
   & .characteristicTable tbody tr,
   & .characteristicTable__head_delete,
+  & .categoriesTable__body,
   & .categoriesTable__head,
   & .categoriesTable tbody tr,
   & .categoriesTable__head_delete,
+  & .categoriesTableEdit__body,
+  & .categoriesTableEdit__head,
+  & .categoriesTableEdit__head_delete,
   & .charateristicTableEdit__head,
   & .charateristicTableEdit tbody tr,
   & .charateristicTableEdit__head_delete,
+  & .listAddedCategories__title,
   & .serverErrorMsg,
   .notFoundMsg,
-  .listAddedCharacteristics {
+  .listAddedCharacteristics,
+  .notification {
     padding-left: $padding-left-right-table-admin;
     padding-right: $padding-left-right-table-admin;
   }
@@ -417,7 +424,8 @@ $padding-info-small-panel: 20px;
   & .customersTable,
   & .characteristicTable,
   & .categoriesTable,
-  & .charateristicTableEdit {
+  & .charateristicTableEdit,
+  & .categoriesTableEdit {
     max-width: 100%;
     display: block;
 
@@ -426,9 +434,11 @@ $padding-info-small-panel: 20px;
     .customersTable__body,
     .characteristicTable__head,
     .characteristicTable__body,
+    .charateristicTableEdit__body,
     .categoriesTable__head,
     .categoriesTable__body,
-    .charateristicTableEdit__body {
+    .categoriesTableEdit__body,
+    .categoriesTableEdit__head {
       display: flex;
       gap: 10px;
 
@@ -462,7 +472,9 @@ $padding-info-small-panel: 20px;
     .characteristicTable__head,
     .characteristicTable__body,
     .categoriesTable__head,
-    .categoriesTable__body {
+    .categoriesTable__body,
+    .categoriesTableEdit__head,
+    .categoriesTableEdit__body {
       max-width: 100%;
       box-sizing: border-box;
 
@@ -477,10 +489,16 @@ $padding-info-small-panel: 20px;
         }
       }
 
-      .categoriesTable__body_icon.white_icon {
+      .categoriesTable__body_icon.white_icon,
+      .categoriesTableEdit__body_icon.white_icon {
         svg {
+          circle {
+            stroke: $white-icon;
+          }
+
           path {
-            fill: white;
+            stroke: $white-icon;
+            fill: $white-icon;
           }
         }
       }
@@ -513,10 +531,15 @@ $padding-info-small-panel: 20px;
     }
 
     .charateristicTableEdit__head,
-    .charateristicTableEdit__body {
+    .charateristicTableEdit__body,
+    .categoriesTableEdit__head,
+    .categoriesTableEdit__body,
+    .categoriesTable__head,
+    .categoriesTable__body {
       &_name_characteristic,
-      &_name_categories {
-        width: 20%;
+      &_name_category {
+        max-width: 20%;
+        min-width: 20%;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
@@ -532,6 +555,11 @@ $padding-info-small-panel: 20px;
         &_btns {
           display: flex;
           gap: 20px;
+
+          &_btn,
+          &_link {
+            padding: 0px 20px;
+          }
         }
       }
     }
@@ -542,7 +570,8 @@ $padding-info-small-panel: 20px;
       .customersTable__head,
       .characteristicTable__head,
       .categoriesTable__head,
-      .charateristicTableEdit__head {
+      .charateristicTableEdit__head,
+      .categoriesTableEdit__head {
         box-sizing: border-box;
 
         width: 100%;
@@ -628,6 +657,7 @@ $padding-info-small-panel: 20px;
       .customersTable__body,
       .characteristicTable__body,
       .categoriesTable__body,
+      .categoriesTableEdit__body,
       .charateristicTableEdit__body {
         height: 60px;
         position: relative;
@@ -645,12 +675,18 @@ $padding-info-small-panel: 20px;
         &:hover {
           background-color: $grey;
 
-          .categoriesTable__body_icon {
+          .categoriesTable__body_icon,
+          .categoriesTableEdit__body_icon {
             color: $orange;
 
             svg {
+              circle {
+                stroke: $orange;
+              }
+
               path {
                 fill: $orange;
+                stroke: $orange;
               }
             }
           }
@@ -728,6 +764,163 @@ $padding-info-small-panel: 20px;
         &_list_characteristics,
         &_list_categories {
           width: 50%;
+        }
+      }
+    }
+  }
+
+  & .categoriesList {
+    margin-top: 20px;
+    background-color: $grey;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    width: 100%;
+
+    .categoriesItem.activeSelect {
+      border: 2px solid $red;
+
+      .categoriesItem__select {
+        justify-content: space-between;
+
+        &_delete {
+          font-size: $font-m;
+          color: $red;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .categoriesItem {
+      box-sizing: border-box;
+      background-color: $white;
+
+      width: 100%;
+
+      &__select {
+        box-sizing: border-box;
+        padding: 10px;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+
+        padding-left: $padding-left-right-table-admin;
+        padding-right: $padding-left-right-table-admin;
+
+        border-top: $border;
+        border-bottom: $border;
+      }
+
+      &__photo {
+        padding-top: 13px;
+        padding-bottom: 26px;
+
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &__descriptionValue {
+        box-sizing: border-box;
+
+        padding: 10px $padding-left-right-table-admin;
+
+        width: 100%;
+
+        & input {
+          margin-top: 10px;
+          @include input;
+        }
+
+        &_key,
+        &_value {
+          font-size: $font-m;
+        }
+
+        &_key {
+          color: $grey;
+          font-weight: $weight-semi-bold;
+        }
+
+        &_value {
+          margin-left: 10px;
+          color: $black-font;
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+        }
+      }
+
+      &__description {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        &_key,
+        &_value,
+        &_form {
+          font-size: $font-m;
+          padding-left: $padding-left-right-table-admin;
+          padding-right: $padding-left-right-table-admin;
+        }
+
+        &_key {
+          width: max-content;
+          color: $grey;
+          font-weight: $weight-semi-bold;
+
+          display: flex;
+          align-items: center;
+        }
+
+        &_value {
+          width: max-content;
+          text-align: right;
+        }
+
+        &_line {
+          position: absolute;
+          bottom: 0px;
+
+          display: block;
+          height: 1px;
+          width: 100%;
+          background-color: $grey;
+        }
+
+        &_form {
+          & input {
+            @include input;
+          }
+        }
+      }
+
+      &__btns {
+        display: flex;
+        justify-content: space-between;
+
+        padding: 10px $padding-left-right-table-admin 10px
+          $padding-left-right-table-admin;
+
+        &_link {
+        }
+
+        &_edit {
+          display: flex;
+          gap: 20px;
+        }
+
+        & button {
+          width: 40px;
+          height: 40px;
+          border-radius: $border-radius-admin;
         }
       }
     }
@@ -910,10 +1103,30 @@ $padding-info-small-panel: 20px;
   }
 }
 
+.add {
+  .listAddedCategories {
+    padding-top: 16px;
+    padding-bottom: 16px;
+
+    &__title {
+      display: flex;
+      gap: 10px;
+      & svg {
+        color: $grey;
+
+        @include btn-hover(color);
+
+        &:hover {
+          color: $black-icon;
+        }
+      }
+    }
+  }
+}
+
 .add,
 .characteristic {
   .characteristicForm,
-  .categoryForm,
   &__info {
     width: 100%;
 
@@ -976,8 +1189,7 @@ $padding-info-small-panel: 20px;
       flex-direction: column;
     }
 
-    .characteristicForm,
-    .categoryForm {
+    .characteristicForm {
       &__inputs {
         flex-direction: column;
       }
@@ -988,6 +1200,82 @@ $padding-info-small-panel: 20px;
         width: 100%;
         padding-left: $padding-left-right-table-admin;
         padding-right: $padding-left-right-table-admin;
+      }
+    }
+  }
+}
+
+.add {
+  .notification {
+    box-sizing: border-box;
+    width: 100%;
+    padding-bottom: 16px;
+  }
+  .categoryForm {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 16px $padding-left-right-table-admin;
+
+    display: flex;
+    gap: 20px;
+    &__image {
+      box-sizing: border-box;
+      border: 2px dashed $grey;
+      border-radius: $border-radius-admin;
+      padding: 2px;
+
+      height: 210px;
+      min-width: 210px;
+      max-width: 210px;
+    }
+
+    &__main {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      gap: 20px;
+      &_inputs {
+        display: flex;
+        flex-wrap: wrap;
+
+        gap: 20px;
+        &_input {
+          & label {
+            @include label;
+          }
+          & input {
+            @include input;
+          }
+        }
+      }
+      &_submit {
+        max-width: 200px;
+      }
+    }
+  }
+
+  @media (max-width: $breakpoint_sm) {
+    .categoryForm {
+      flex-direction: column;
+
+      &__image {
+        width: 100%;
+      }
+
+      &__main {
+        &_inputs {
+          gap: 10px;
+          &_input {
+            width: 100%;
+            & input {
+              width: 100%;
+            }
+          }
+        }
+        &_submit {
+          max-width: 100%;
+        }
       }
     }
   }

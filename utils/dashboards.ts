@@ -4,11 +4,12 @@ import {
   findUserById,
   getAllUsers,
 } from '@/actions/authActions';
+import { getAllCategories } from '@/actions/categoryActions';
 import {
   getAllCharacteristics,
   getCharacteristicById,
 } from '@/actions/characteristicActions';
-import { ICategory } from '@/types/category';
+import { ICategory, ISubSubcategory, ISubcategory } from '@/types/category';
 import { ICharacteristics } from '@/types/characteristic';
 import { ILanguageStrings } from '@/types/constants';
 import { IUser } from '@/types/user';
@@ -31,7 +32,13 @@ export const deleteUserAccount = async (
 };
 
 export const handleCheckboxChange = (
-  listData: IUser[] | ICharacteristics[] | ILanguageStrings[] | ICategory[],
+  listData:
+    | IUser[]
+    | ICharacteristics[]
+    | ILanguageStrings[]
+    | ICategory[]
+    | ISubcategory[]
+    | ISubSubcategory[],
   event: ChangeEvent<HTMLInputElement>,
   checkboxes: { [key: string]: boolean },
   setCheckboxes: React.Dispatch<
@@ -83,4 +90,22 @@ export const getCharacteristics = async () => {
 export const getCharacteristic = async (id: string) => {
   const res = await getCharacteristicById(id);
   return res;
+};
+
+export const getSubcategories = async (categoryId: string) => {
+  const res = await getAllCategories();
+
+  if (res.categories) {
+    const category = res.categories.find(
+      (category) => category._id === categoryId
+    );
+
+    if (category) {
+      console.log('category.subcategories:', category.subcategories);
+
+      return category.subcategories as ISubcategory[];
+    }
+  }
+
+  return [];
 };

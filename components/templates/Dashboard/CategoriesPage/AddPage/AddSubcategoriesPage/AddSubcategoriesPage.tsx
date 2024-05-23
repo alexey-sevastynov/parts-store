@@ -21,7 +21,7 @@ const AddSubcategoriesPage = ({
         dataUsers={users}
       />
 
-      <AddSubcategories msg={msg} status={status} data={data} />
+      {data && <AddSubcategories msg={msg} status={status} data={data} />}
     </main>
   );
 };

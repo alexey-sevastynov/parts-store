@@ -77,7 +77,7 @@ const ListNavAdmin = () => {
             <ItemNavAdmin
               icon={<RiAddBoxFill size={SIZE_ICON} />}
               title={translations[lang].common.add}
-              isActive={pathName === ROUTES.CATEGORIES_ADD}
+              isActive={pathName.startsWith(ROUTES.CATEGORIES_ADD)}
             />
           </Link>
         </div>

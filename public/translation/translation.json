@@ -18,7 +18,13 @@
 
       "success_fetch": "The operation was successfully completed",
       "error_fetch": "An error occurred",
-      "icon": "Icon"
+      "icon": "Icon",
+
+      "upload_image_text": "Upload an image here or click the button",
+      "attach": "Attach",
+
+      "fill_all_fields": "Fill in all fields",
+      "description": "Description"
     },
     "header": {
       "catalog": "Catalog",
@@ -257,12 +263,25 @@
       "help_text_name_characteristic": "All fields with the name must be filled in, in different languages. Enter once and then fill in the fields (values) by adding different characteristics.",
 
       "list_added_characteristics": "List of added characteristics",
+      "list_added_categories": "List of added categories",
+      "list_added_subcategories": "List of added subcategories",
 
       "name_characteristic_different_language": "The name of the characterization is in different languages",
 
       "categories": "Categories",
       "category": "Category",
-      "sub_category": "Subcategory"
+      "sub_category": "Subcategory",
+      "sub_categories": "Subcategories"
+    },
+
+    "uploadthing": {
+      "upload_icon": "Upload Icon",
+      "upload_image": "Upload Image",
+      "uploading": "Uploading",
+      "max_file_image": "Maximum file size .svg 2MB",
+      "max_file_png": "Maximum file size .png 2MB",
+      "image_is_uploading": "It looks like the image is uploading",
+      "checking_what_you_allow": "Checking what you allow"
     }
   },
 
@@ -285,7 +304,14 @@
 
       "success_fetch": "Операцію успішно виконано",
       "error_fetch": "Сталася помилка",
-      "icon": "Іконка"
+      "icon": "Іконка",
+
+      "upload_image_text": "Скиньте зображення сюди або натисніть кнопку",
+      "attach": "Прикріпити",
+
+      "fill_all_fields": "Заповніть усі поля",
+
+      "description": "Опис"
     },
     "header": {
       "catalog": "Каталог",
@@ -524,12 +550,25 @@
       "help_text_name_characteristic": "Усі поля з ім'ям мають бути заповнені, різними мовами. Введіть один раз і потім заповнюйте поля (значення), додаючи різні характеристики.",
 
       "list_added_characteristics": "Список доданих характеристик",
+      "list_added_categories": "Список добавленных категорий",
+      "list_added_subcategories": "Список добавленных подкатегорий",
 
       "name_characteristic_different_language": "Ім'я характеристики різними мовами",
 
       "categories": "Категорії",
       "category": "Категорія",
-      "sub_category": "Підкатегорія"
+      "sub_category": "Підкатегорія",
+      "sub_categories": "Підкатегоріі"
+    },
+
+    "uploadthing": {
+      "upload_icon": "Завантажити іконку",
+      "upload_image": "Завантажити зображення",
+      "uploading": "Завантаження",
+      "max_file_image": "Максимальний розмір файлу .svg 2 МБ",
+      "max_file_png": "Максимальний розмір файлу .png 2 МБ",
+      "image_is_uploading": "Схоже, що зображення завантажується",
+      "checking_what_you_allow": "Перевірка того, що ви дозволяєте"
     }
   },
 
@@ -552,7 +591,13 @@
 
       "success_fetch": "Операция успешно выполнена",
       "error_fetch": "Произошла ошибка",
-      "icon": "Иконка"
+      "icon": "Иконка",
+      "upload_image_text": "Скиньте изображения сюда или нажмите кнопку",
+      "attach": "Прикрепить",
+
+      "fill_all_fields": "Заполните все поля",
+
+      "description": "Описание"
     },
     "header": {
       "catalog": "Каталог",
@@ -790,12 +835,25 @@
       "help_text_name_characteristic": "Все поля с именем должны быть заплнены, на разных языках. Введите один раз и потом заполняйте поля (значения), добавляя разные характеристики.",
 
       "list_added_characteristics": "Список добавленных характеристик",
+      "list_added_categories": "Список доданих категорій",
+      "list_added_subcategories": "Список доданих підкатегорій",
 
       "name_characteristic_different_language": "Имя характеристики на разних языках",
 
       "categories": "Категории",
       "category": "Категория",
-      "sub_category": "Подкатегория"
+      "sub_category": "Подкатегория",
+      "sub_categories": "Подкатегории"
+    },
+
+    "uploadthing": {
+      "upload_icon": "Загрузить иконку",
+      "upload_image": "Загрузить изображение",
+      "uploading": "Загрузка",
+      "max_file_image": "Максимальный размер файла .svg 2mb",
+      "max_file_png": "Максимальный размер файла .png 2mb",
+      "image_is_uploading": "Похоже, что изображение загружается",
+      "checking_what_you_allow": "Проверка того, что вы позволяете"
     }
   }
 }

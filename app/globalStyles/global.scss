@@ -113,15 +113,51 @@
 
 .btn-md {
   color: $white-font;
-  background-color: $green;
 
   border-radius: 7px;
   @include btn-hover(background, ease-in);
 
+  &:disabled {
+    cursor: default;
+    background-color: $grey;
+  }
+}
+
+.btn-md.btn-red {
+  background-color: $red;
+  &:hover {
+    background-color: $red-hover;
+  }
+
+  &:active {
+    background-color: $red-active;
+  }
+
+  &:disabled {
+    cursor: default;
+    background-color: $grey;
+  }
+}
+
+.btn-md.btn-orange {
+  background-color: $orange;
+  &:hover {
+    background-color: $orange-hover;
+  }
+  &:active {
+    background-color: $orange-active;
+  }
+  &:disabled {
+    cursor: default;
+    background-color: $grey;
+  }
+}
+
+.btn-md.btn-green {
+  background-color: $green;
   &:hover {
     background-color: $green-hover;
   }
-
   &:active {
     background-color: $green-active;
   }

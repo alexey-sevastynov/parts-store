@@ -1,0 +1,34 @@
+.uploadImage {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  height: 210px;
+  width: 210px;
+
+  padding: 2px;
+
+  border: 2px dashed $grey;
+
+  border-radius: 10px;
+
+  &__header,
+  &__footer {
+    height: 50%;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    text-align: center;
+  }
+}

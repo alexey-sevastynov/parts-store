@@ -104,7 +104,6 @@ const Characteristic = ({ data, status, msg }: ICharacteristicProps) => {
       const res = await deleteSelectedCharacteristicValues(
         selectedCharacteristicIds
       );
-      console.log(res);
     } catch (error) {
       console.error('Failed to delete selected characteristics:', error);
     }

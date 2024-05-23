@@ -1,6 +1,7 @@
 import { ILanguageStrings } from './constants';
 
 export interface ISubSubcategory {
+  _id?: string;
   name: ILanguageStrings;
   imageUrl: string;
   description: string;
@@ -34,8 +35,10 @@ export interface ISubSubcategoryFormData extends ICategoryFormData {
 
 export interface ISubcategoryFormProps {
   categoryId: string;
+  updateListSubcategories: () => Promise<void>;
 }
 
 export interface ISubSubcategoryFormProps {
   subcategoryId: string;
+  updateListData: () => Promise<void>;
 }

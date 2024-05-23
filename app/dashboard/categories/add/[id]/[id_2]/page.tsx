@@ -13,7 +13,7 @@ const Add = async ({ params }: { params: { id: string; id_2: string } }) => {
         <AddSubSubcategoriesPage
           users={fetchedUsers}
           data={fetchedSubcategory}
-          idSubcategory={params.id}
+          idCategory={params.id}
         />
       );
     } else {
@@ -32,7 +32,7 @@ const Add = async ({ params }: { params: { id: string; id_2: string } }) => {
             status: 500,
           }}
           data={fetchedSubcategory}
-          idSubcategory={params.id}
+          idCategory={params.id}
         />
       );
     } else {
