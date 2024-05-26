@@ -4,6 +4,7 @@ import { ROUTES, SIZE_ICON, SIZE_ICON_BIG } from '@/constants/common';
 import { useLang } from '@/hooks/useLang';
 import Styles from '@/styles/modules/dashboard/index.module.scss';
 import { ILanguageStrings } from '@/types/constants';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { ChangeEvent } from 'react';
@@ -13,6 +14,9 @@ import { IoMdClose } from 'react-icons/io';
 import { MdDelete, MdDownloadDone } from 'react-icons/md';
 import { PiTreeViewFill } from 'react-icons/pi';
 import { Oval } from 'react-loader-spinner';
+
+import { UploadFileResponse } from '@/types/uploathing-image/client';
+import { UploadButton } from '@/utils/uploadthing';
 
 const CategoryItem = ({
   isChecked,
@@ -36,7 +40,7 @@ const CategoryItem = ({
   handleEditSubmit: (
     id: string,
     updatedData: { ua: string; ru: string; en: string; description?: string },
-    idCategory?: string
+    imageUrl?: string
   ) => Promise<void>;
 }) => {
   if (!name || !_id) {
@@ -47,10 +51,13 @@ const CategoryItem = ({
 
   const [isActiveEdit, setIsActiveEdit] = React.useState<boolean>(false);
   const [isValueChanged, setIsValueChanged] = React.useState<boolean>(false);
+  const [isImageChanged, setIsImageChanged] = React.useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
   const [uaName, setUaName] = React.useState(name.ua);
   const [ruName, setRuName] = React.useState(name.ru);
   const [enName, setEnName] = React.useState(name.en);
+  const [currentImageUrl, setCurrentImageUrl] = React.useState(imageUrl);
+  const [image, setImage] = React.useState<UploadFileResponse[]>([]);
 
   const [descriptionValue, setDescriptionValue] = React.useState(description);
 
@@ -99,10 +106,12 @@ const CategoryItem = ({
   const handleCancelEdit = () => {
     setIsActiveEdit(false);
     setIsValueChanged(false);
+    setIsImageChanged(false); // Reset image change state
 
     setUaName(name.ua);
     setRuName(name.ru);
     setEnName(name.en);
+    setCurrentImageUrl(imageUrl); // Reset the image URL to the original
   };
 
   const handleEdit = (
@@ -115,21 +124,30 @@ const CategoryItem = ({
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
-    if (uaName && ruName && enName && _id) {
+    if (uaName && ruName && enName && _id && (isImageChanged || imageUrl)) {
       try {
         if (descriptionValue) {
-          await handleEditSubmit(_id, {
-            ua: uaName,
-            ru: ruName,
-            en: enName,
-            description: descriptionValue,
-          });
+          await handleEditSubmit(
+            _id,
+            {
+              ua: uaName,
+              ru: ruName,
+              en: enName,
+              description: descriptionValue,
+            },
+            isImageChanged ? image[0].url : currentImageUrl
+          );
         } else {
-          await handleEditSubmit(_id, { ua: uaName, ru: ruName, en: enName });
+          await handleEditSubmit(
+            _id,
+            { ua: uaName, ru: ruName, en: enName },
+            isImageChanged ? image[0].url : currentImageUrl
+          );
         }
 
         setIsSubmitting(false);
         setIsActiveEdit(false);
+        setIsImageChanged(false); // Reset image change state after submit
       } catch (error) {
         console.error('Failed to update characteristic value:', error);
         setIsSubmitting(false);
@@ -161,7 +179,76 @@ const CategoryItem = ({
       </div>
 
       <div className={Styles.categoriesItem__photo}>
-        <Image src={imageUrl} alt='' width={200} height={200} />
+        {isActiveEdit ? (
+          <>
+            <Image
+              src={image[0]?.url || currentImageUrl || '/img/no-image.png'}
+              alt='image'
+              width={200}
+              height={200}
+            />
+            <UploadButton
+              endpoint='imageUploader'
+              appearance={{
+                button({ ready, isUploading }) {
+                  return {
+                    color: COLORS.whiteFont,
+
+                    ...(ready && { backgroundColor: COLORS.green }),
+                    ...(isUploading && { backgroundColor: COLORS.red }),
+                  };
+                },
+                allowedContent: {
+                  color: COLORS.grey,
+                },
+              }}
+              content={{
+                button({ ready }) {
+                  if (ready)
+                    return <p>{translations[lang].uploadthing.upload_icon}</p>;
+
+                  return <p>{translations[lang].uploadthing.uploading}</p>;
+                },
+                allowedContent({ ready, fileTypes, isUploading }) {
+                  if (!ready)
+                    return translations[lang].uploadthing
+                      .checking_what_you_allow;
+                  if (isUploading)
+                    return translations[lang].uploadthing.image_is_uploading;
+                  return translations[lang].uploadthing.max_file_image;
+                },
+              }}
+              onClientUploadComplete={async (res) => {
+                try {
+                  const json = JSON.stringify({ url: currentImageUrl });
+                  const _res = await fetch('/api/uploadthing', {
+                    method: 'DELETE',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: json,
+                  });
+
+                  if (!_res.ok) {
+                    const errorText = await _res.text();
+                    throw new Error(`Error deleting file: ${errorText}`);
+                  }
+
+                  setImage(res as any);
+                  setCurrentImageUrl(res[0].url);
+                  setIsImageChanged(true);
+                } catch (error) {
+                  console.error('Failed to delete file:', error);
+                }
+              }}
+              onUploadError={(error: Error) => {
+                alert(`ERROR! ${error.message}`);
+              }}
+            />
+          </>
+        ) : (
+          <Image src={imageUrl} alt='' width={200} height={200} />
+        )}
       </div>
 
       {/* name ukrainian */}
@@ -283,7 +370,7 @@ const CategoryItem = ({
             >
               <Button
                 className={Styles.categoriesItem__btns_edit_bnt}
-                disabled={!isValueChanged || isSubmitting}
+                disabled={(!isValueChanged && !isImageChanged) || isSubmitting}
                 type='submit'
                 title={translations[lang].common.save}
               >

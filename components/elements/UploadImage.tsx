@@ -12,8 +12,8 @@ import '@uploadthing/react/styles.css';
 import Link from 'next/link';
 import { UploadButton } from '@/utils/uploadthing';
 import { COLORS } from '@/constants/colors';
-import { UploadFileResponse } from 'uploadthing/client';
 import { RotatingLines } from 'react-loader-spinner';
+import { UploadFileResponse } from '@/types/uploathing-image/client';
 
 export interface IUploadImageProps extends HTMLAttributes<HTMLDivElement> {
   image: UploadFileResponse[];

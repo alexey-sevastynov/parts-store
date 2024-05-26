@@ -820,6 +820,8 @@ $padding-info-small-panel: 20px;
 
         width: 100%;
         display: flex;
+        flex-direction: column;
+        gap: 10px;
         align-items: center;
         justify-content: center;
       }

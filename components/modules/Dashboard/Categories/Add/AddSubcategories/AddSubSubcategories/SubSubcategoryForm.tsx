@@ -10,10 +10,11 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import UploadImage from '@/components/elements/UploadImage';
 import { useLang } from '@/hooks/useLang';
-import { UploadFileResponse } from 'uploadthing/client';
+
 import { Button } from '@/components/elements/Button';
 import NotificationBar from '@/components/elements/NotificationBar';
 import { TypeNotificationMessage } from '@/types/elements';
+import { UploadFileResponse } from '@/types/uploathing-image/client';
 
 const SubSubcategoryForm: React.FC<ISubSubcategoryFormProps> = ({
   subcategoryId,

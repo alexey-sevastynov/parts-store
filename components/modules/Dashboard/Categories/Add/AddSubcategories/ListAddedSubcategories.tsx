@@ -79,10 +79,11 @@ const ListAddedSubcategories = ({
 
   const handleEditSubmit = async (
     id: string,
-    updatedData: { ua: string; ru: string; en: string }
+    updatedData: { ua: string; ru: string; en: string },
+    imageUrl?: string
   ) => {
     try {
-      await updateSubcategoryNameById(id, updatedData);
+      await updateSubcategoryNameById(id, updatedData, imageUrl);
 
       updateListSubcategories();
     } catch (error) {

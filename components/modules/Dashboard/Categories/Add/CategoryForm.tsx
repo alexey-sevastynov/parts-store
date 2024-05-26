@@ -1,6 +1,5 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
 
-import { UploadFileResponse } from 'uploadthing/client';
 import { useForm } from 'react-hook-form';
 import { ICategoryFormData } from '@/types/category';
 import { createCategory } from '@/actions/categoryActions';
@@ -11,6 +10,7 @@ import UploadImage from '@/components/elements/UploadImage';
 import { Button } from '@/components/elements/Button';
 import { TypeNotificationMessage } from '@/types/elements';
 import NotificationBar from '@/components/elements/NotificationBar';
+import { UploadFileResponse } from '@/types/uploathing-image/client';
 
 const CategoryForm = ({ updateData }: { updateData: () => Promise<void> }) => {
   const { lang, translations } = useLang();

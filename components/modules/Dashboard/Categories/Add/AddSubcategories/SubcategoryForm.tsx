@@ -7,11 +7,12 @@ import { ISubcategoryFormData, ISubcategoryFormProps } from '@/types/category';
 
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { UploadFileResponse } from 'uploadthing/client';
+
 import { useLang } from '@/hooks/useLang';
 import { Button } from '@/components/elements/Button';
 import NotificationBar from '@/components/elements/NotificationBar';
 import { TypeNotificationMessage } from '@/types/elements';
+import { UploadFileResponse } from '@/types/uploathing-image/client';
 
 const SubcategoryForm: React.FC<ISubcategoryFormProps> = ({
   categoryId,

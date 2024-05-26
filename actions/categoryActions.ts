@@ -266,7 +266,8 @@ export async function deleteSelectedSubcategories(
 
 export async function updateCategoryNameById(
   categoryId: string,
-  newName: ILanguageStrings
+  newName: ILanguageStrings,
+  imageUrl?: string
 ): Promise<{ msg: string; status: number }> {
   try {
     // Find the category by its ID
@@ -280,6 +281,10 @@ export async function updateCategoryNameById(
     category.name.en = newName.en;
     category.name.ru = newName.ru;
     category.name.ua = newName.ua;
+
+    if (imageUrl) {
+      category.imageUrl = imageUrl;
+    }
 
     // Save the updated category
     await category.save();
@@ -334,7 +339,8 @@ export async function deleteSelectedSubSubCategories(
 
 export async function updateSubcategoryNameById(
   subcategoryId: string,
-  newName: ILanguageStrings
+  newName: ILanguageStrings,
+  imageUrl?: string
 ): Promise<{ msg: string; status: number }> {
   try {
     // Find the subcategory by its ID
@@ -348,6 +354,9 @@ export async function updateSubcategoryNameById(
     subcategory.name.en = newName.en;
     subcategory.name.ru = newName.ru;
     subcategory.name.ua = newName.ua;
+    if (imageUrl) {
+      subcategory.imageUrl = imageUrl;
+    }
 
     // Save the updated subcategory
     await subcategory.save();
@@ -361,7 +370,8 @@ export async function updateSubcategoryNameById(
 
 export async function updateSubSubcategoryById(
   subSubcategoryId: string,
-  updateData: { ua: string; ru: string; en: string; description?: string }
+  updateData: { ua: string; ru: string; en: string; description?: string },
+  imageUrl?: string
 ): Promise<{ msg: string; status: number }> {
   try {
     // Find the sub-subcategory by its ID
@@ -378,6 +388,9 @@ export async function updateSubSubcategoryById(
     subSubcategory.name.ua = updateData.ua;
 
     subSubcategory.description = updateData.description;
+    if (imageUrl) {
+      subSubcategory.imageUrl = imageUrl;
+    }
 
     // Save the updated sub-subcategory
     await subSubcategory.save();
