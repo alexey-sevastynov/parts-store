@@ -82,7 +82,6 @@
       &_category,
       &_auto,
       &_sale {
-        cursor: pointer;
         @include forbid-select-text;
       }
 
@@ -423,6 +422,41 @@
 
     @media (max-width: $breakpoint_sm) {
       width: calc(100vw - $padding-container-sm - $padding-container-sm);
+    }
+  }
+}
+
+// ________________DROP DOWN CATALOG
+.dropDownCatalog {
+  &__wrapper {
+    position: absolute;
+
+    box-sizing: border-box;
+
+    width: 100%;
+    height: max-content;
+
+    border-bottom-left-radius: $border-radius-drop-down;
+    border-bottom-right-radius: $border-radius-drop-down;
+
+    background-color: $white;
+
+    top: $top-drop-down-language;
+    right: 0px;
+
+    z-index: 10;
+  }
+
+  .dropDownCatalogWrapper {
+    display: flex;
+    padding-top: $padding-top-page;
+    padding-right: $padding-right-aside-panel;
+    &__list_categories {
+      width: $width-aside-panel;
+      display: flex;
+      flex-direction: column;
+
+      gap: 10px;
     }
   }
 }

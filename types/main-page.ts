@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 
-export interface IItemCategoryProps {
+export interface IItemLinkCategoryProps extends HTMLAttributes<HTMLLIElement> {
   title: string;
   icon: string;
   href?: string;

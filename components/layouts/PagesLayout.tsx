@@ -21,6 +21,10 @@ const PagesLayout = ({ children }: { children: React.ReactNode }) => {
   const isOpenDropDownAuth = useAppSelector(
     (state) => state.modals.isOpenDropDownAuth.isOpen
   );
+  const isOpenDropDownCatalog = useAppSelector(
+    (state) => state.modals.isOpenDropCatalog
+  );
+
   const isOpenChangePassword = useAppSelector(
     (state) => state.modals.isOpenChangePassword
   );
@@ -53,6 +57,11 @@ const PagesLayout = ({ children }: { children: React.ReactNode }) => {
       {/* background, when the authorization drop-down window is open */}
       <div
         className={`authorization-popup-overlay ${isOpenDropDownAuth ? 'overlay-active' : ''}`}
+      />
+
+      {/* background, when the catalog drop-down window is open */}
+      <div
+        className={`catalog-popup-overlay ${isOpenDropDownCatalog ? 'overlay-active' : ''}`}
       />
 
       {/* background, when the window popup Change Password is open */}

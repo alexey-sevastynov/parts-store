@@ -36,7 +36,7 @@ const Header = () => {
         </div>
         <Inventory />
         <Search />
-        <HeaderIconPanel />{' '}
+        <HeaderIconPanel />
       </div>
     </header>
   );

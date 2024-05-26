@@ -13,6 +13,7 @@ export interface ModalsState {
   isOpenChangePassword: boolean;
   isOpenDeleteUser: boolean;
   isOpenAsidePanel: boolean;
+  isOpenDropCatalog: boolean;
 }
 
 const initialState: ModalsState = {
@@ -27,6 +28,7 @@ const initialState: ModalsState = {
   isOpenChangePassword: false,
   isOpenDeleteUser: false,
   isOpenAsidePanel: true,
+  isOpenDropCatalog: true,
 };
 
 export const modalsSlice = createSlice({
@@ -104,6 +106,13 @@ export const modalsSlice = createSlice({
     closePopupAsidePanel: (state) => {
       state.isOpenAsidePanel = false;
     },
+
+    openDropDownCatalog: (state) => {
+      state.isOpenDropCatalog = true;
+    },
+    closeDropDownCatalog: (state) => {
+      state.isOpenDropCatalog = false;
+    },
   },
 });
 
@@ -121,6 +130,8 @@ export const {
   closePopupWindowDeleteUser,
   openPopupAsidePanel,
   closePopupAsidePanel,
+  openDropDownCatalog,
+  closeDropDownCatalog,
 } = modalsSlice.actions;
 
 export const modalsReducer = modalsSlice.reducer;

@@ -71,6 +71,24 @@ export async function getSubcategoryById(subcategoryId: string): Promise<{
   }
 }
 
+export async function getSubSubcategoriesByIds(ids: string[]): Promise<{
+  msg: string;
+  status: number;
+  subSubcategories?: ISubSubcategory[];
+}> {
+  try {
+    const subSubcategories = await SubSubcategory.find({ _id: { $in: ids } });
+    return {
+      msg: 'Sub-subcategories fetched successfully!',
+      status: 200,
+      subSubcategories,
+    };
+  } catch (error) {
+    console.error(error);
+    return { msg: 'Failed to fetch sub-subcategories.', status: 500 };
+  }
+}
+
 export async function createSubcategory(
   categoryId: string,
   subcategoryData: Omit<ISubcategory, 'subSubcategories'>
