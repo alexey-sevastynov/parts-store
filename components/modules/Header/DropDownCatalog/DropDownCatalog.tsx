@@ -1,26 +1,22 @@
 import Styles from '@/styles/modules/header/index.module.scss';
+import React from 'react';
 
-import ButtonIconDescription from '@/components/elements/ButtonIconDescription';
-import { withClickOutside } from '@/components/hocs/withClickOutside';
-import { useAppDispatch, useAppSelector } from '@/context/hooks';
-import { useLang } from '@/hooks/useLang';
-import { IWrappedComponentProps } from '@/types/hocs';
-import React, { forwardRef } from 'react';
-import DropDownCatalogWrapper from './DropDownCatalogWrapper';
-import {
-  closeDropDownAuth,
-  closeDropDownCatalog,
-  closeDropDownLang,
-  openDropDownCatalog,
-} from '@/context/features/modals/modals';
+import { SWRResponse } from 'swr';
+
 import { basePropsForMotionDropDown } from '@/constants/motion';
 import { motion } from 'framer-motion';
-import useClickOutside from '@/hooks/useClickOutside';
-import { getAllCategories } from '@/actions/categoryActions';
-import { unstable_cache } from 'next/cache';
-import useSWR from 'swr';
 
-const DropDownCatalog = () => {
+import { useAppSelector } from '@/context/hooks';
+import { useLang } from '@/hooks/useLang';
+import { IDropDownCatalogProps } from '@/types/header';
+
+import DropDownCatalogWrapper from './DropDownCatalogWrapper';
+import ButtonIconDescription from '@/components/elements/ButtonIconDescription';
+
+const DropDownCatalog = ({
+  categories,
+  getCategoryByIdWithFallback,
+}: IDropDownCatalogProps) => {
   const { lang, translations } = useLang();
 
   const isOpenDropCatalog = useAppSelector(
@@ -38,7 +34,10 @@ const DropDownCatalog = () => {
           className={Styles.dropDownCatalog__wrapper}
           {...basePropsForMotionDropDown}
         >
-          <DropDownCatalogWrapper />
+          <DropDownCatalogWrapper
+            categories={categories}
+            getCategoryByIdWithFallback={getCategoryByIdWithFallback}
+          />
         </motion.div>
       )}
     </div>

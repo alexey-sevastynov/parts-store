@@ -11,8 +11,15 @@ import IconWithTitleCounter from '@/components/elements/IconWithTitleCounter';
 import { MdChecklist, MdFavorite } from 'react-icons/md';
 import { PiShoppingCartSimpleFill } from 'react-icons/pi';
 import { useSession } from 'next-auth/react';
+import { useAppDispatch } from '@/context/hooks';
+import {
+  closePopupAsidePanel,
+  openDropDownCatalog,
+} from '@/context/features/modals/modals';
 
-const ListLinks = () => {
+const ListLinks = ({ closeAsidePanel }: { closeAsidePanel: () => void }) => {
+  const dispatch = useAppDispatch();
+
   const { data, status } = useSession();
   const { lang, translations } = useLang();
 
@@ -21,7 +28,12 @@ const ListLinks = () => {
     <ul className={Styles.listLinks}>
       {/* ___________CATALOG */}
       <li className={Styles.listLinks__item}>
-        <Link href={'/catalog'}>
+        <button
+          onClick={() => {
+            closeAsidePanel();
+            dispatch(openDropDownCatalog());
+          }}
+        >
           <IconWithTitleCounter
             image={
               <FaThList
@@ -31,7 +43,7 @@ const ListLinks = () => {
             }
             text={translations[lang].aside_panel_page.product_catalog}
           />
-        </Link>
+        </button>
       </li>
 
       {/* ___________CAR LIST */}

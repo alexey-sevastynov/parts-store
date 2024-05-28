@@ -2,13 +2,14 @@
 import Styles from '@/styles/modules/header/index.module.scss';
 
 import Link from 'next/link';
-import React from 'react';
+import React, { RefObject } from 'react';
+import useSWR from 'swr';
 
 import { useLang } from '@/hooks/useLang';
 
 import LinkIconDescription from '@/components/elements/LinkIconDescription';
 import { useSession } from 'next-auth/react';
-import ButtonIconDescription from '@/components/elements/ButtonIconDescription';
+
 import DropDownCatalog from './DropDownCatalog/DropDownCatalog';
 import useClickOutside from '@/hooks/useClickOutside';
 import {
@@ -18,13 +19,15 @@ import {
   openDropDownCatalog,
 } from '@/context/features/modals/modals';
 import { useAppDispatch, useAppSelector } from '@/context/hooks';
+import PopupWindowCatalog from './DropDownCatalog/PopupWindowCatalog';
+import { getAllCategories, getCategoryById } from '@/actions/categoryActions';
 
 const Inventory = () => {
   const dispatch = useAppDispatch();
 
   const { status } = useSession();
 
-  const ref = React.useRef<HTMLLIElement>(null);
+  const ref = React.useRef<HTMLLIElement | HTMLDivElement>(null);
 
   const isOpenDropCatalog = useAppSelector(
     (state) => state.modals.isOpenDropCatalog
@@ -48,15 +51,57 @@ const Inventory = () => {
     dispatch(closeDropDownAuth());
   };
 
+  // Fetch all categories
+  const { data: categories, error: categoriesError } = useSWR(
+    'categories',
+    () => getAllCategories().then((res) => res.categories),
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
+  );
+
+  // Fetch selected category when selectedCategoryId changes
+  const getCategoryByIdWithFallback = (id: string) => {
+    return useSWR(
+      id ? ['category', id] : null,
+      () =>
+        getCategoryById(id).then((res) => {
+          return res.category;
+        }),
+      {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+      }
+    );
+  };
+
   return (
     <nav className={Styles.header__inventory}>
+      {/*show window popup catalog only if window width < 768px */}
+      {isOpenDropCatalog && categories && (
+        <PopupWindowCatalog
+          ref={ref as RefObject<HTMLDivElement>}
+          categories={categories}
+          getCategoryByIdWithFallback={getCategoryByIdWithFallback}
+        />
+      )}
+
       <ul className={Styles.header__inventory_list}>
         <li
           className={Styles.header__inventory_list_category}
-          ref={ref}
+          ref={ref as RefObject<HTMLLIElement>}
           onClick={handleShowDropCatalog}
         >
-          <DropDownCatalog />
+          {/* show drop down catalog only if window width > 768px */}
+          {categories && (
+            <DropDownCatalog
+              categories={categories}
+              getCategoryByIdWithFallback={getCategoryByIdWithFallback}
+            />
+          )}
         </li>
 
         {isActiveAutoLink && isAuthenticated && (
@@ -78,6 +123,3 @@ const Inventory = () => {
 };
 
 export default Inventory;
-function dispatch(arg0: any) {
-  throw new Error('Function not implemented.');
-}

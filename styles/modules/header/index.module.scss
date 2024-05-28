@@ -446,75 +446,76 @@
     right: 0px;
 
     z-index: 10;
-  }
 
-  .dropDownCatalogWrapper {
-    position: relative;
-    display: flex;
-
-    padding-top: $padding-top-page;
-    padding-bottom: $padding-bottom-page;
-    padding-right: $padding-right-aside-panel;
-
-    &__list_categories {
-      width: 289px;
-
+    .dropDownCatalogWrapper {
+      position: relative;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
 
-    &__close {
-      position: absolute;
-      right: 15px;
-      top: 15px;
-    }
+      padding-top: $padding-top-page;
+      padding-bottom: $padding-bottom-page;
+      padding-right: $padding-right-aside-panel;
 
-    .listSubcategories {
-      padding-left: $padding-left-page;
+      &__list_categories {
+        width: 289px;
 
-      column-count: 3;
-
-      &__item {
-        padding-bottom: 15px;
         display: flex;
         flex-direction: column;
-        flex-wrap: wrap;
         gap: 10px;
-
-        break-inside: avoid;
-        &_link {
-          color: $red;
-          font-size: $font-l;
-
-          @include btn-hover(color);
-
-          &:hover {
-            text-decoration: underline;
-            color: $orange;
-          }
-        }
       }
 
-      .listSubSubcategories {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
+      &__close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+      }
+
+      .listSubcategories {
+        padding-left: $padding-left-page;
+
+        column-count: 3;
+
         &__item {
+          padding-bottom: 15px;
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          gap: 10px;
+
+          break-inside: avoid;
           &_link {
-            font-size: $font-m;
-            color: $black-font;
+            color: $red;
+            font-size: $font-l;
 
             @include btn-hover(color);
+
             &:hover {
               text-decoration: underline;
               color: $orange;
             }
           }
         }
+
+        .listSubSubcategories {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          &__item {
+            &_link {
+              font-size: $font-m;
+              color: $black-font;
+
+              @include btn-hover(color);
+              &:hover {
+                text-decoration: underline;
+                color: $orange;
+              }
+            }
+          }
+        }
       }
     }
   }
+
   @media (max-width: $breakpoint_lg) {
     .dropDownCatalogWrapper {
       .listSubcategories {
@@ -524,6 +525,101 @@
   }
 
   @media (max-width: $breakpoint_md) {
-    display: none;
+  }
+}
+
+//_________________POPUP WINDOW CATALOG FOR MOBILE DiSPLAY
+$popup-window-catalog-top-left: 10px;
+$popup-window-catalog-hight-title: 60px;
+
+$popup-window-catalog-padding: 20px;
+
+.popupWindowCatalog {
+  display: none;
+  position: fixed;
+  top: $popup-window-catalog-top-left;
+  left: $popup-window-catalog-top-left;
+
+  height: calc(100vh - (2 * $popup-window-catalog-top-left));
+  width: calc(100vw - (2 * $popup-window-catalog-top-left));
+
+  border-radius: $border-radius-drop-down;
+
+  background-color: $white;
+
+  z-index: 11;
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $popup-window-catalog-hight-title;
+
+    padding: 0px $popup-window-catalog-padding;
+
+    border-bottom: $border;
+  }
+
+  &__back {
+    padding: 0px $popup-window-catalog-padding;
+    &_btn {
+      padding: $popup-window-catalog-padding 0px;
+
+      svg {
+        margin-right: 10px;
+        color: $black-icon;
+      }
+    }
+  }
+
+  &__list_categories {
+    display: flex;
+    flex-direction: column;
+
+    padding: $popup-window-catalog-padding;
+    gap: 10px;
+
+    overflow-x: auto;
+
+    height: calc(100vh - 121px);
+  }
+
+  &__menu {
+    padding: 0px $popup-window-catalog-padding;
+
+    overflow-x: auto;
+    height: calc(100vh - 140px);
+
+    .listSubcategories {
+      &__item {
+        padding-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 15px;
+
+        &_link {
+          color: $red;
+          font-size: $font-l;
+        }
+      }
+
+      .listSubSubcategories {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        &__item {
+          &_link {
+            margin-left: 10px;
+            font-size: $font-m;
+            color: $black-font;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: $breakpoint_md) {
+    display: block;
   }
 }

@@ -36,6 +36,11 @@ const AsidePanel = () => {
   const lastName = data?.user?.lastName || 'user';
   const photo = data?.user.photo;
 
+  const closeAsidePanel = () => {
+    dispatch(closePopupAsidePanel());
+    removeOverflowHiddenFromBody();
+  };
+
   return (
     <motion.section
       className={Styles.asidePanel}
@@ -45,10 +50,7 @@ const AsidePanel = () => {
         <LogotypeSmall />
         <button
           className={Styles.asidePanel__head_close}
-          onClick={() => {
-            dispatch(closePopupAsidePanel());
-            removeOverflowHiddenFromBody();
-          }}
+          onClick={closeAsidePanel}
         >
           <IoMdClose size={24} color={COLORS.whiteIcon} />
         </button>
@@ -62,7 +64,7 @@ const AsidePanel = () => {
         />
       </div>
       <nav className={Styles.asidePanel__main}>
-        <ListLinks />
+        <ListLinks closeAsidePanel={closeAsidePanel} />
         <LanguagePanel />
         <span className={Styles.asidePanel__main_divider} />
 
