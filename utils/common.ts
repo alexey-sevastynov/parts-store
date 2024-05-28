@@ -65,3 +65,12 @@ export const getWindowWidth = () => {
 
   return { windowWidth };
 };
+
+export function transformStringToAdressLink(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-/, '')
+    .replace(/-$/, '');
+}

@@ -32,7 +32,10 @@ const Header = () => {
           </button>
         </div>
         <div className={Styles.header__logo}>
-          <Logotype className={Styles.header__logo_img} />
+          <Logotype
+            className={Styles.header__logo_img}
+            style={{ zIndex: 11, position: 'relative' }}
+          />
         </div>
         <Inventory />
         <Search />

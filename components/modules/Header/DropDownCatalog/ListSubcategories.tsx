@@ -1,13 +1,11 @@
-import {
-  getCategoryById,
-  getSubSubcategoriesByIds,
-  getSubcategoryById,
-} from '@/actions/categoryActions';
+import Styles from '@/styles/modules/header/index.module.scss';
+
 import { useLang } from '@/hooks/useLang';
-import { ICategory, ISubcategory } from '@/types/category';
+import { ISubcategory } from '@/types/category';
 import React from 'react';
-import useSWR from 'swr';
+
 import ListSubSubCategories from './ListSubSubCategories';
+import Link from 'next/link';
 
 const ListSubcategories = ({
   subcategories,
@@ -16,16 +14,16 @@ const ListSubcategories = ({
 }) => {
   const { lang, translations } = useLang();
 
-  // const {data} = useSWR(listIdSubcategories, () => getSubSubcategoriesByIds(listIdSubcategories)));
-
   return (
-    <ul>
+    <ul className={Styles.listSubcategories}>
       {subcategories.map((subcategory) => {
         console.log(subcategory.subSubcategories);
 
         return (
-          <li key={subcategory._id} style={{ color: 'red' }}>
-            {subcategory.name[lang]}
+          <li key={subcategory._id} className={Styles.listSubcategories__item}>
+            <Link className={Styles.listSubcategories__item_link} href={`/`}>
+              {subcategory.name[lang]}
+            </Link>
 
             <ListSubSubCategories
               subSubcategoryIds={subcategory.subSubcategories}

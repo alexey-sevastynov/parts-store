@@ -28,7 +28,7 @@ const initialState: ModalsState = {
   isOpenChangePassword: false,
   isOpenDeleteUser: false,
   isOpenAsidePanel: true,
-  isOpenDropCatalog: true,
+  isOpenDropCatalog: false,
 };
 
 export const modalsSlice = createSlice({

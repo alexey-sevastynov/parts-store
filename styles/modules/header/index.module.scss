@@ -32,7 +32,7 @@
   height: $height-header;
   background-color: $black;
 
-  z-index: 10;
+  z-index: 11;
 
   &__container {
     position: relative;
@@ -434,6 +434,7 @@
     box-sizing: border-box;
 
     width: 100%;
+
     height: max-content;
 
     border-bottom-left-radius: $border-radius-drop-down;
@@ -448,15 +449,81 @@
   }
 
   .dropDownCatalogWrapper {
+    position: relative;
     display: flex;
+
     padding-top: $padding-top-page;
+    padding-bottom: $padding-bottom-page;
     padding-right: $padding-right-aside-panel;
+
     &__list_categories {
-      width: $width-aside-panel;
+      width: 289px;
+
       display: flex;
       flex-direction: column;
-
       gap: 10px;
     }
+
+    &__close {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+    }
+
+    .listSubcategories {
+      padding-left: $padding-left-page;
+
+      column-count: 3;
+
+      &__item {
+        padding-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        break-inside: avoid;
+        &_link {
+          color: $red;
+          font-size: $font-l;
+
+          @include btn-hover(color);
+
+          &:hover {
+            text-decoration: underline;
+            color: $orange;
+          }
+        }
+      }
+
+      .listSubSubcategories {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        &__item {
+          &_link {
+            font-size: $font-m;
+            color: $black-font;
+
+            @include btn-hover(color);
+            &:hover {
+              text-decoration: underline;
+              color: $orange;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: $breakpoint_lg) {
+    .dropDownCatalogWrapper {
+      .listSubcategories {
+        column-count: 2;
+      }
+    }
+  }
+
+  @media (max-width: $breakpoint_md) {
+    display: none;
   }
 }

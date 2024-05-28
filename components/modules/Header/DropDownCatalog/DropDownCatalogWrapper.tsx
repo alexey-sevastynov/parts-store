@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import Styles from '@/styles/modules/header/index.module.scss';
 import useSWR from 'swr';
-import {
-  getAllCategories,
-  getCategoryById,
-  getSubcategoryById,
-} from '@/actions/categoryActions';
+import { getAllCategories, getCategoryById } from '@/actions/categoryActions';
 import { useLang } from '@/hooks/useLang';
 import ItemLinkCategory from '@/components/elements/ItemLinkCategory';
 import ListSubcategories from './ListSubcategories';
 import { IDropDownCatalogWrapperProps } from '@/types/header';
-import { getSubcategories } from '@/utils/dashboards';
+import { IoMdClose } from 'react-icons/io';
+import { COLORS } from '@/constants/colors';
+import { closeDropDownCatalog } from '@/context/features/modals/modals';
+import { useAppDispatch } from '@/context/hooks';
+import { transformStringToAdressLink } from '@/utils/common';
 
 const DropDownCatalogWrapper = ({ ...props }: IDropDownCatalogWrapperProps) => {
+  const dispatch = useAppDispatch();
+
   const { lang } = useLang();
+
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>('');
 
   // Fetch all categories
@@ -26,6 +29,13 @@ const DropDownCatalogWrapper = ({ ...props }: IDropDownCatalogWrapperProps) => {
       revalidateOnReconnect: false,
     }
   );
+
+  React.useEffect(() => {
+    // Check if categories exist and is not empty
+    if (categories && categories.length > 0) {
+      setSelectedCategoryId(categories[0]._id as string); // Set selectedCategoryId to the id of the first category
+    }
+  }, [categories]);
 
   // Fetch selected category when selectedCategoryId changes
   const { data: category, error: categoryError } = useSWR(
@@ -51,9 +61,13 @@ const DropDownCatalogWrapper = ({ ...props }: IDropDownCatalogWrapperProps) => {
               key={category._id}
               icon={category.imageUrl}
               title={category.name[lang]}
-              href='/'
+              href={`/catalog/${transformStringToAdressLink(category.name.en)}?id=${category._id}`}
               isWithArrow={true}
               onMouseEnter={() => setSelectedCategoryId(category._id as string)}
+              onClick={(e) => {
+                e.stopPropagation();
+                dispatch(closeDropDownCatalog());
+              }}
             />
           ))}
       </ul>
@@ -63,6 +77,17 @@ const DropDownCatalogWrapper = ({ ...props }: IDropDownCatalogWrapperProps) => {
           <ListSubcategories subcategories={category.subcategories} />
         )}
       </div>
+
+      <button
+        className={Styles.dropDownCatalogWrapper__close}
+        onClick={(e) => {
+          e.stopPropagation();
+          dispatch(closeDropDownCatalog());
+          console.log('closeDropDownCatalog');
+        }}
+      >
+        <IoMdClose size={24} color={COLORS.blackFont} />
+      </button>
     </div>
   );
 };
