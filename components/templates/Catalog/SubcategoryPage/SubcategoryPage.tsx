@@ -1,10 +1,12 @@
 'use client';
-import { Breadcrumbs } from '@/components/elements/Breadcrumbs';
-import Subcategory from '@/components/modules/Subcategory/Subcategory';
+import React from 'react';
+
 import { ROUTES } from '@/constants/common';
 import { useLang } from '@/hooks/useLang';
 import { ICategory } from '@/types/category';
-import React from 'react';
+
+import { Breadcrumbs } from '@/components/elements/Breadcrumbs';
+import Subcategory from '@/components/modules/Subcategory/Subcategory';
 
 const SubcategoryPage = ({ data }: { data: ICategory }) => {
   const { lang, translations } = useLang();

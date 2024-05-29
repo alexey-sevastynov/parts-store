@@ -8,10 +8,10 @@ import { IDropDownCatalogWrapperProps } from '@/types/header';
 import { COLORS } from '@/constants/colors';
 import { closeDropDownCatalog } from '@/context/features/modals/modals';
 import { useAppDispatch } from '@/context/hooks';
-import { transformStringToAdressLink } from '@/utils/common';
 
 import ItemLinkCategory from '@/components/elements/ItemLinkCategory';
 import ListSubcategories from './ListSubcategories';
+import { ROUTES } from '@/constants/common';
 
 const DropDownCatalogWrapper = ({
   categories,
@@ -44,7 +44,10 @@ const DropDownCatalogWrapper = ({
               key={category._id}
               icon={category.imageUrl}
               title={category.name[lang]}
-              href={`/catalog/${transformStringToAdressLink(category.name.en)}?id=${category._id}`}
+              href={ROUTES.VIEW_CATEGORY_BY_ID(
+                category.name.en,
+                category._id as string
+              )}
               isWithArrow={true}
               onMouseEnter={() => setSelectedCategoryId(category._id as string)}
               onClick={(e) => {
@@ -57,7 +60,11 @@ const DropDownCatalogWrapper = ({
 
       <div className={Styles.dropDownCatalogWrapper__menu}>
         {category && (
-          <ListSubcategories subcategories={category.subcategories} />
+          <ListSubcategories
+            subcategories={category.subcategories}
+            nameCategory={category.name.en}
+            idCategory={category._id}
+          />
         )}
       </div>
 

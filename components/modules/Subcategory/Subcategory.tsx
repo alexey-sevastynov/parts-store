@@ -1,21 +1,24 @@
-import {
-  getCategoryById,
-  getSubSubcategoriesByIds,
-} from '@/actions/categoryActions';
-import CategoryOverviewCard from '@/components/elements/CategoryOverviewCard';
-import Title from '@/components/elements/Title';
-import { AllowedLangs } from '@/constants/lang';
-import { useLang } from '@/hooks/useLang';
 import Styles from '@/styles/modules/subcategory/index.module.scss';
-import { ILanguageStrings } from '@/types/constants';
-import { ISubcategoryProps } from '@/types/subcategory';
+
 import React from 'react';
 import useSWR, { SWRResponse } from 'swr';
+
+import { useLang } from '@/hooks/useLang';
+import { getSubSubcategoriesByIds } from '@/actions/categoryActions';
+
+import { ROUTES } from '@/constants/common';
+import { AllowedLangs } from '@/constants/lang';
+
+import { ILanguageStrings } from '@/types/constants';
+import { ISubcategoryProps } from '@/types/subcategory';
+
+import CategoryOverviewCard from '@/components/elements/CategoryOverviewCard';
+import Title from '@/components/elements/Title';
 
 const fetchSubSubcategories = (ids: string[]) => getSubSubcategoriesByIds(ids);
 
 const Subcategory = ({ title, data }: ISubcategoryProps) => {
-  const { lang, translations } = useLang();
+  const { lang } = useLang();
 
   const getTranslatedStrings = (
     items: ILanguageStrings[],
@@ -76,7 +79,12 @@ const Subcategory = ({ title, data }: ISubcategoryProps) => {
               title={subcategory.name[lang]}
               description={translationStrSubSubcategories}
               hrefImage={subcategory.imageUrl}
-              hrefLink='/'
+              hrefLink={ROUTES.VIEW_SUBCATEGORY_BY_ID(
+                data.name.en,
+                subcategory.name.en,
+                data._id as string,
+                subcategory._id as string
+              )}
             />
           );
         })}

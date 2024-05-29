@@ -36,8 +36,6 @@ const PopupWindowCatalog = React.forwardRef<
     selectCategory?.id || ''
   );
 
-  console.log(category);
-
   return (
     <motion.div
       className={Styles.popupWindowCatalog}
@@ -72,7 +70,11 @@ const PopupWindowCatalog = React.forwardRef<
           </div>
           <div className={Styles.popupWindowCatalog__menu}>
             {category && (
-              <ListSubcategories subcategories={category.subcategories} />
+              <ListSubcategories
+                subcategories={category.subcategories}
+                nameCategory={category.name.en}
+                idCategory={category._id}
+              />
             )}
           </div>
         </>

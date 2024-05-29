@@ -1,3 +1,5 @@
+import { transformStringToAdressLink } from '@/utils/common';
+
 export const SIZE_ICON = 25;
 export const SIZE_ICON_BIG = 30;
 
@@ -6,6 +8,19 @@ export const MAX_VALUE_ITEMS = 30;
 export const ROUTES = {
   HOME: '/',
   DASHBOARD: '/dashboard',
+  CATALOG: '/catalog',
+  VIEW_CATEGORY_BY_ID: (nameEn: string, id: string) => {
+    return `/catalog/${transformStringToAdressLink(nameEn)}?id=${id}`;
+  },
+
+  VIEW_SUBCATEGORY_BY_ID: (
+    nameSubcategoryEn: string,
+    nameSubSubcategoryEn: string,
+    idCategory: string,
+    idSubcategory: string
+  ) => {
+    return `/catalog/${transformStringToAdressLink(nameSubcategoryEn)}/${transformStringToAdressLink(nameSubSubcategoryEn)}?idCategory=${idCategory}&idSubcategory=${idSubcategory}`;
+  },
 
   CUSTOMERS: '/dashboard/customers',
   VIEW_CUSTOMER_BY_ID: (id: string) => {
