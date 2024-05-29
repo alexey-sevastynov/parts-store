@@ -32,10 +32,6 @@ const DropDownLang = forwardRef<HTMLDivElement, IWrappedComponentProps>(
       (state) => state.modals.isOpenDropDownLang
     );
 
-    // useClickOutside(dropdownRef, () => {
-    //   dispatch(closeDropDownLang());
-    // });
-
     const [selectedOption, setSelectedOption] =
       React.useState<AllowedLangs>(lang);
 

@@ -1,12 +1,22 @@
 import { useEffect, RefObject } from 'react';
 
-function useClickOutside<T extends HTMLElement>(
-  ref: RefObject<T>,
+function useClickOutside(
+  refs: (RefObject<HTMLDivElement> | RefObject<HTMLLIElement>)[],
   callback: () => void
 ): void {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent): void {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
+      // Check that the click was made outside of all passed elements
+      const isClickOutside = refs.every((ref) => {
+        if (ref.current) {
+          if (ref.current.contains(event.target as Node)) {
+            return false;
+          }
+        }
+        return true;
+      });
+
+      if (isClickOutside) {
         callback();
       }
     }
@@ -17,14 +27,7 @@ function useClickOutside<T extends HTMLElement>(
     return () => {
       document.removeEventListener('mousedown', handleMouseDown);
     };
-  }, [ref, callback]);
+  }, [refs, callback]);
 }
 
 export default useClickOutside;
-
-//______template for using to component
-
-// useClickOutside(dropdownRef, () => {
-//   setOpen(false);
-//   dispatch(closeDropDownAuth());
-// });

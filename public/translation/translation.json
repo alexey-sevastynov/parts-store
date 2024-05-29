@@ -282,6 +282,9 @@
       "max_file_png": "Maximum file size .png 2MB",
       "image_is_uploading": "It looks like the image is uploading",
       "checking_what_you_allow": "Checking what you allow"
+    },
+    "main_page": {
+      "main": "Main"
     }
   },
 
@@ -569,6 +572,10 @@
       "max_file_png": "Максимальний розмір файлу .png 2 МБ",
       "image_is_uploading": "Схоже, що зображення завантажується",
       "checking_what_you_allow": "Перевірка того, що ви дозволяєте"
+    },
+
+    "main_page": {
+      "main": "Головна"
     }
   },
 
@@ -854,6 +861,10 @@
       "max_file_png": "Максимальный размер файла .png 2mb",
       "image_is_uploading": "Похоже, что изображение загружается",
       "checking_what_you_allow": "Проверка того, что вы позволяете"
+    },
+
+    "main_page": {
+      "main": "Главная"
     }
   }
 }

@@ -11,6 +11,7 @@
 // pages
 @import './pages/main-page.scss';
 @import './pages/dashboard-pages.scss';
+@import './pages/subcategories-page.scss';
 
 .container {
   max-width: 1800px;
@@ -172,5 +173,16 @@
 .btn-md-transparent {
   &:hover {
     text-decoration: underline;
+  }
+}
+
+.breadcrumbs {
+  padding-top: $padding-top-page;
+  padding-bottom: 40px;
+
+  font-size: $font-l;
+
+  & a {
+    font-size: $font-l;
   }
 }

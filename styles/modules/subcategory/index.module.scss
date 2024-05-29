@@ -1,0 +1,47 @@
+@import '../../../app/globalStyles/variables/colors.scss';
+@import '../../../app/globalStyles/variables/fonts.scss';
+@import '../../../app/globalStyles/variables/blocks.scss';
+@import '../../../app/globalStyles/variables/breakpoints.scss';
+@import '../../../app/globalStyles/base/mixins.scss';
+
+.subcategory {
+  &__title {
+    font-weight: $weight-medium;
+  }
+
+  &__list {
+    margin-top: 58px;
+    margin-bottom: 58px;
+
+    width: 100%;
+
+    display: grid;
+    row-gap: 20px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 1fr;
+  }
+
+  @media (max-width: $breakpoint_xxl) {
+    &__list {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+
+  @media (max-width: $breakpoint_xl) {
+    &__list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (max-width: $breakpoint_lg) {
+    &__list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: $breakpoint_md) {
+    &__list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

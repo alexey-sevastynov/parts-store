@@ -126,3 +126,10 @@ export interface SvgIconUrlProps {
   className?: string;
   size?: number;
 }
+
+export interface ICategoryOverviewCardProps {
+  hrefImage: string;
+  title: string;
+  hrefLink: string;
+  description: string;
+}

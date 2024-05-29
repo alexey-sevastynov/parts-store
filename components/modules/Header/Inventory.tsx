@@ -27,13 +27,14 @@ const Inventory = () => {
 
   const { status } = useSession();
 
-  const ref = React.useRef<HTMLLIElement | HTMLDivElement>(null);
+  const liRef = React.useRef<HTMLLIElement>(null);
+  const divRef = React.useRef<HTMLDivElement>(null);
 
   const isOpenDropCatalog = useAppSelector(
     (state) => state.modals.isOpenDropCatalog
   );
 
-  useClickOutside(ref, () => {
+  useClickOutside([divRef, liRef], () => {
     dispatch(closeDropDownCatalog());
     console.log('close');
   });
@@ -83,7 +84,7 @@ const Inventory = () => {
       {/*show window popup catalog only if window width < 768px */}
       {isOpenDropCatalog && categories && (
         <PopupWindowCatalog
-          ref={ref as RefObject<HTMLDivElement>}
+          ref={divRef}
           categories={categories}
           getCategoryByIdWithFallback={getCategoryByIdWithFallback}
         />
@@ -92,7 +93,7 @@ const Inventory = () => {
       <ul className={Styles.header__inventory_list}>
         <li
           className={Styles.header__inventory_list_category}
-          ref={ref as RefObject<HTMLLIElement>}
+          ref={liRef}
           onClick={handleShowDropCatalog}
         >
           {/* show drop down catalog only if window width > 768px */}
