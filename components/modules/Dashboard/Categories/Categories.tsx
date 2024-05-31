@@ -78,7 +78,12 @@ const Categories = ({ data, status, msg }: ICategoriesProps) => {
         {/* if loaded and status = 200 */}
         {isLoaded && (
           <div className={Styles.categories__search}>
-            <SearchAdmin onSearch={handleSearch} />
+            <SearchAdmin
+              onSearch={handleSearch}
+              placeholder={
+                translations[lang].dashboard_page.search_placeholder_categories
+              }
+            />
           </div>
         )}
       </div>

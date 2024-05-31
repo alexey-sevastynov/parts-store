@@ -9,6 +9,7 @@ import { IUser } from './user';
 import { ICharacteristics } from './characteristic';
 import { ILanguageStrings } from './constants';
 import { ICategory, ISubcategory } from './category';
+import { IBrand } from './brand';
 
 export interface IAdminAsideButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
@@ -68,6 +69,12 @@ export interface IAddSubSubcategoriesProps
 export interface ICustomersTableProps {
   users: IUser[];
   isLoading: boolean;
+}
+
+export interface IBrandsTableProps {
+  brands: IBrand[];
+  isLoading: boolean;
+  updateList: () => void;
 }
 
 export interface ICharacteristicTableProps {

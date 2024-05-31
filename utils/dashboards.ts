@@ -9,6 +9,7 @@ import {
   getAllCharacteristics,
   getCharacteristicById,
 } from '@/actions/characteristicActions';
+import { IBrand } from '@/types/brand';
 import { ICategory, ISubSubcategory, ISubcategory } from '@/types/category';
 import { ICharacteristics } from '@/types/characteristic';
 import { ILanguageStrings } from '@/types/constants';
@@ -38,7 +39,8 @@ export const handleCheckboxChange = (
     | ILanguageStrings[]
     | ICategory[]
     | ISubcategory[]
-    | ISubSubcategory[],
+    | ISubSubcategory[]
+    | IBrand[],
   event: ChangeEvent<HTMLInputElement>,
   checkboxes: { [key: string]: boolean },
   setCheckboxes: React.Dispatch<

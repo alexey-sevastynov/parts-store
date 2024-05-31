@@ -223,7 +223,8 @@ $padding-info-small-panel: 20px;
   .categoryForm,
   .addCharacteristicName,
   .addCharacteristicValue,
-  .listAddedCharacteristics {
+  .listAddedCharacteristics,
+  .listAddedBrands {
     &__line,
     .characteristic__line {
       @include horizon-line;
@@ -352,6 +353,7 @@ $padding-info-small-panel: 20px;
   }
 }
 .customers,
+.brands,
 .customer,
 .goods,
 .characteristic,
@@ -395,10 +397,16 @@ $padding-info-small-panel: 20px;
     }
   }
 
+  &__list {
+  }
+
   &__head,
   & .customersTable__head,
   & .customersTable tbody tr,
   & .customersTable__head_delete,
+  & .brandsTable__head,
+  & .brandsTable tbody tr,
+  & .brandsTable__head_delete,
   & .characteristicTable__head,
   & .characteristicTable tbody tr,
   & .characteristicTable__head_delete,
@@ -414,6 +422,7 @@ $padding-info-small-panel: 20px;
   & .charateristicTableEdit__head_delete,
   & .listAddedCategories__title,
   & .serverErrorMsg,
+  & .listAddedBrands__title,
   .notFoundMsg,
   .listAddedCharacteristics,
   .notification {
@@ -422,6 +431,7 @@ $padding-info-small-panel: 20px;
   }
 
   & .customersTable,
+  & .brandsTable,
   & .characteristicTable,
   & .categoriesTable,
   & .charateristicTableEdit,
@@ -430,8 +440,10 @@ $padding-info-small-panel: 20px;
     display: block;
 
     .customersTable__head,
+    .brandsTable__head,
     .charateristicTableEdit__head,
     .customersTable__body,
+    .brandsTable__body,
     .characteristicTable__head,
     .characteristicTable__body,
     .charateristicTableEdit__body,
@@ -447,8 +459,35 @@ $padding-info-small-panel: 20px;
       }
     }
 
+    .brandsTable__head,
+    .brandsTable__body {
+      &_name_brand,
+      &_website_brand {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &_name_brand {
+        width: 30%;
+      }
+
+      &_website_brand {
+        width: 70%;
+      }
+
+      @media (max-width: $breakpoint_md) {
+        &_name_brand,
+        &_website_brand {
+          width: 50%;
+        }
+      }
+    }
+
     .customersTable__head,
-    .customersTable__body {
+    .brandsTable__head,
+    .customersTable__body,
+    .brandsTable__body {
       &_name,
       &_email {
         width: 23%;
@@ -568,6 +607,7 @@ $padding-info-small-panel: 20px;
       display: flex;
       flex-direction: column;
       .customersTable__head,
+      .brandsTable__head,
       .characteristicTable__head,
       .categoriesTable__head,
       .charateristicTableEdit__head,
@@ -643,18 +683,21 @@ $padding-info-small-panel: 20px;
       flex-direction: column;
 
       .customersTable__body.all,
+      .brandsTable__body.all,
       .characteristicTable__body.all,
       .categoriesTable__body.all {
         background-color: $grey;
       }
 
       .customersTable__body .customersTable__body_checkbox.select,
+      .brandsTable__body .brandsTable__body_checkbox.select,
       .characteristicTable__body .characteristicTable__body_checkbox.select,
       .categoriesTable__body .categoriesTable__body_checkbox.select {
         background-color: $grey;
       }
 
       .customersTable__body,
+      .brandsTable__body,
       .characteristicTable__body,
       .categoriesTable__body,
       .categoriesTableEdit__body,
@@ -1120,6 +1163,62 @@ $padding-info-small-panel: 20px;
 
         &:hover {
           color: $black-icon;
+        }
+      }
+    }
+  }
+}
+
+.add {
+  .brandForm {
+    &__line {
+      display: block;
+      height: 1px;
+      width: 100%;
+      background-color: $grey;
+    }
+    &__wrapper {
+      margin: 20px $padding-left-right-table-admin;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__inputs {
+      display: flex;
+      gap: 20px;
+
+      width: 100%;
+
+      &_item {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 50%;
+        label {
+          @include label;
+        }
+
+        input {
+          @include input;
+        }
+      }
+    }
+
+    &__btn {
+      margin-top: 20px;
+    }
+
+    &__notification {
+      padding: 0 $padding-left-right-table-admin;
+    }
+
+    @media (max-width: $breakpoint_sm) {
+      &__inputs {
+        flex-direction: column;
+
+        &_item {
+          width: 100%;
         }
       }
     }

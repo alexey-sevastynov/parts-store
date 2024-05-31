@@ -29,6 +29,12 @@ export const ROUTES = {
 
   GOODS: '/dashboard/goods',
 
+  BRANDS: '/dashboard/brands',
+  BRANDS_ADD: '/dashboard/brands/add',
+  VIEW_BRANDS_BY_ID: (id: string) => {
+    return `/dashboard/brands/${id}`;
+  },
+
   CHARACTERISTICS: '/dashboard/characteristics',
   CHARACTERISTICS_ADD: '/dashboard/characteristics/add',
   VIEW_CHARACTERISTIC_BY_ID: (id: string) => {

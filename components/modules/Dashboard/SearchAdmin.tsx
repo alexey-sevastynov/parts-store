@@ -9,8 +9,10 @@ import { CiSearch } from 'react-icons/ci';
 
 const SearchAdmin = ({
   onSearch,
+  placeholder = 'Search...',
 }: {
   onSearch: (searchInput: string) => void;
+  placeholder?: string;
 }) => {
   const { lang, translations } = useLang();
 
@@ -28,7 +30,7 @@ const SearchAdmin = ({
       <input
         className={Styles.searchAdmin__input}
         type='text'
-        placeholder={translations[lang].dashboard_page.search_placeholder}
+        placeholder={placeholder}
         value={searchValue}
         onChange={handleInputChange}
       />

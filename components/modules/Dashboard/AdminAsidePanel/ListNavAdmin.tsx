@@ -7,7 +7,7 @@ import { useLang } from '@/hooks/useLang';
 
 import { FaBoxesStacked, FaUsers } from 'react-icons/fa6';
 import { MdDashboard } from 'react-icons/md';
-import { SiHomeassistantcommunitystore } from 'react-icons/si';
+import { SiBrandfolder, SiHomeassistantcommunitystore } from 'react-icons/si';
 import { RiAddBoxFill } from 'react-icons/ri';
 
 import { ROUTES, SIZE_ICON } from '@/constants/common';
@@ -78,6 +78,24 @@ const ListNavAdmin = () => {
               icon={<RiAddBoxFill size={SIZE_ICON} />}
               title={translations[lang].common.add}
               isActive={pathName.startsWith(ROUTES.CATEGORIES_ADD)}
+            />
+          </Link>
+        </div>
+      </AccordionItemAdmin>
+
+      <AccordionItemAdmin
+        className={Styles.listNavAdmin__accordion}
+        icon={<SiBrandfolder size={SIZE_ICON} />}
+        title={translations[lang].dashboard_page.brands}
+        isActive={pathName.startsWith(ROUTES.BRANDS)}
+        href={ROUTES.BRANDS}
+      >
+        <div className={Styles.listNavAdmin__accordion_list}>
+          <Link href={ROUTES.BRANDS_ADD}>
+            <ItemNavAdmin
+              icon={<RiAddBoxFill size={SIZE_ICON} />}
+              title={translations[lang].common.add}
+              isActive={pathName.startsWith(ROUTES.BRANDS_ADD)}
             />
           </Link>
         </div>

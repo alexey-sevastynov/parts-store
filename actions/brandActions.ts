@@ -82,3 +82,25 @@ export async function deleteBrandById(
     return { msg: 'Failed to delete brand.', status: 500 };
   }
 }
+
+// Function to delete selected brands by their IDs
+export async function deleteSelectedBrands(
+  selectedBrandIds: string[]
+): Promise<{ msg: string; status: number }> {
+  try {
+    // Delete each selected brand
+    const deletePromises = selectedBrandIds.map(async (brandId) => {
+      const res = await deleteBrandById(brandId);
+      if (res.status !== 200) {
+        console.log(`Failed to delete brand with ID ${brandId}`);
+      }
+    });
+
+    await Promise.all(deletePromises);
+
+    return { msg: 'Selected brands deleted successfully!', status: 200 };
+  } catch (error) {
+    console.error('Failed to delete selected brands:', error);
+    return { msg: 'Failed to delete selected brands.', status: 500 };
+  }
+}
