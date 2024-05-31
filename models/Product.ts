@@ -11,7 +11,8 @@ const productSchema = new Schema({
     },
     required: true,
   },
-  brand: { type: String, required: true },
+  category: [{ type: Schema.Types.ObjectId, ref: 'SubSubcategory' }],
+  brand: [{ type: Schema.Types.ObjectId, ref: 'Brand' }],
   sku: { type: String, required: true }, // Product code
   price: { type: Number, required: true },
   salePrice: { type: Number }, // Discounted price
@@ -24,17 +25,29 @@ const productSchema = new Schema({
     },
   },
   country: { type: String },
-  manufacturerWebsite: { type: String }, // Manufacturer's website
+
   analogs: [{ type: String }], // Links to product analogs or their names
   reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }], // References to reviews
   compatibleCars: [{ type: String }], // Car models compatible with the product
 
-  availableVolumes: [{ type: Number }], // Available volumes of the product
   availability: { type: Boolean }, // Product availability
   quantityAvailable: { type: Number }, // Quantity of available products
   rating: { type: Number }, // Product rating
   // Other common fields if any
-  characteristics: [], // Dynamic characteristics of the product
+  characteristics: [
+    {
+      name: {
+        en: String,
+        ru: String,
+        ua: String,
+      },
+      value: {
+        en: String,
+        ru: String,
+        ua: String,
+      },
+    },
+  ],
   // Other common fields
 });
 
