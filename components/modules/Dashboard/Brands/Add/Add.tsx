@@ -22,7 +22,7 @@ const Add = ({
 }) => {
   const { lang, translations } = useLang();
 
-  const ADD_CHARACTERISTIC_BREADCRUMBS = [
+  const ADD_BRANDS_BREADCRUMBS = [
     {
       id: 1,
       name: translations[lang].dashboard_page.brands,
@@ -51,7 +51,7 @@ const Add = ({
   return (
     <section className={Styles.add}>
       <div className={Styles.add__head}>
-        <Breadcrumbs items={ADD_CHARACTERISTIC_BREADCRUMBS} />
+        <Breadcrumbs items={ADD_BRANDS_BREADCRUMBS} />
       </div>
 
       <BrandForm updateList={getBrands} />

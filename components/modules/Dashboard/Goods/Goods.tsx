@@ -9,6 +9,9 @@ import { GrUpdate } from 'react-icons/gr';
 
 import SearchAdmin from '../SearchAdmin';
 import Title from '@/components/elements/Title';
+import Link from 'next/link';
+import { ROUTES } from '@/constants/common';
+import { BsPlusCircleFill } from 'react-icons/bs';
 
 const Goods = () => {
   const { lang, translations } = useLang();
@@ -25,10 +28,21 @@ const Goods = () => {
           <button>
             <GrUpdate title={translations[lang].common.update} />
           </button>
+          <Link
+            href={ROUTES.GOODS_ADD}
+            className={Styles.brands__head_title_btn_add}
+          >
+            <BsPlusCircleFill title={translations[lang].common.add} />
+          </Link>
         </div>
 
         <div className={Styles.goods__search}>
-          <SearchAdmin onSearch={handleSearch} />
+          <SearchAdmin
+            onSearch={handleSearch}
+            placeholder={
+              translations[lang].dashboard_page.search_placeholder_products
+            }
+          />
         </div>
       </div>
     </section>

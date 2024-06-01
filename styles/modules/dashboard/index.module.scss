@@ -1436,3 +1436,112 @@ $padding-info-small-panel: 20px;
     font-size: $font-l;
   }
 }
+
+.goods {
+}
+
+.add {
+  .addImages,
+  .detailInfoGoods {
+    padding: 0px $padding-left-right-table-admin;
+
+    &__title {
+      margin-top: 16px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .addImages {
+    &__images {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      &_item {
+        box-sizing: border-box;
+        border: 2px dashed $grey;
+
+        border-radius: $border-radius-admin;
+        padding: 2px;
+        width: 210px;
+        height: 210px;
+      }
+    }
+
+    &__warning {
+      padding: 16px 0px;
+    }
+  }
+
+  .detailInfoGoods {
+    padding-bottom: 16px;
+    &__content {
+      display: flex;
+
+      gap: 50px;
+      width: 100%;
+
+      &_column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        width: 50%;
+      }
+    }
+
+    .inputsNameProduct,
+    .selectBrand,
+    .selectCountry,
+    .inputCodeProduct {
+      &__label {
+        display: block;
+        font-size: $font-m;
+        margin-bottom: 12px;
+      }
+    }
+
+    .inputsNameProduct {
+      &__inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        &_item {
+          &_input {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+
+            & input {
+              @include input;
+            }
+          }
+
+          &_error {
+            margin-left: 40px;
+          }
+        }
+      }
+    }
+
+    .selectBrand {
+    }
+
+    .inputCodeProduct {
+      &__input {
+        @include input;
+      }
+    }
+
+    @media (max-width: $breakpoint_lg) {
+      &__content {
+        flex-direction: column;
+        gap: 20px;
+        &_column {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

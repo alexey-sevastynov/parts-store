@@ -1,7 +1,9 @@
 export enum AllowedLangs {
-  en = 'en',
-  ru = 'ru',
   ua = 'ua',
+  ru = 'ru',
+  en = 'en',
 }
 
 export const defaultLang = AllowedLangs.ua;
+
+export const AllowedLangsArray = Object.values(AllowedLangs) as AllowedLangs[];

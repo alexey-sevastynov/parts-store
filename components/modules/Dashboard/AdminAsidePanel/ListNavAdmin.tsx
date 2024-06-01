@@ -39,13 +39,23 @@ const ListNavAdmin = () => {
         />
       </Link>
 
-      <Link href={ROUTES.GOODS}>
-        <ItemNavAdmin
-          icon={<SiHomeassistantcommunitystore size={SIZE_ICON} />}
-          title={translations[lang].dashboard_page.goods}
-          isActive={pathName === ROUTES.GOODS}
-        />
-      </Link>
+      <AccordionItemAdmin
+        className={Styles.listNavAdmin__accordion}
+        icon={<SiHomeassistantcommunitystore size={SIZE_ICON} />}
+        title={translations[lang].dashboard_page.goods}
+        isActive={pathName.startsWith(ROUTES.GOODS)}
+        href={ROUTES.GOODS}
+      >
+        <div className={Styles.listNavAdmin__accordion_list}>
+          <Link href={ROUTES.GOODS_ADD}>
+            <ItemNavAdmin
+              icon={<RiAddBoxFill size={SIZE_ICON} />}
+              title={translations[lang].common.add}
+              isActive={pathName.startsWith(ROUTES.GOODS_ADD)}
+            />
+          </Link>
+        </div>
+      </AccordionItemAdmin>
 
       <AccordionItemAdmin
         className={Styles.listNavAdmin__accordion}

@@ -21,7 +21,6 @@ const BrandsPage = ({
       )}
 
       {brands && <Brands data={brands} status={status} msg={msg} />}
-      <p>dashboard-pages</p>
     </div>
   );
 };

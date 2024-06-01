@@ -28,6 +28,7 @@ export const ROUTES = {
   },
 
   GOODS: '/dashboard/goods',
+  GOODS_ADD: '/dashboard/goods/add',
 
   BRANDS: '/dashboard/brands',
   BRANDS_ADD: '/dashboard/brands/add',

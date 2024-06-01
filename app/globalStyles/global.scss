@@ -81,6 +81,23 @@
   font-weight: $weight-medium;
 }
 
+// ________________text Weigth
+.weight-light {
+  font-weight: $weight-light;
+}
+.weight-regular {
+  font-weight: $weight-regular;
+}
+.weight-medium {
+  font-weight: $weight-medium;
+}
+.weight-semi-bold {
+  font-weight: $weight-semi-bold;
+}
+.weight-bold {
+  font-weight: $weight-bold;
+}
+
 // ________________text Paragraph
 .text-xl {
   font-size: $font-xl;
@@ -185,4 +202,10 @@
   & a {
     font-size: $font-l;
   }
+}
+
+.input-error {
+  padding-top: 5px;
+  font-size: $font-s;
+  color: $red;
 }

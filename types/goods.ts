@@ -2,7 +2,7 @@ import { IBrand } from './brand';
 import { ILanguageStrings } from './constants';
 
 export interface IProduct {
-  _id: string;
+  _id?: string;
   name: {
     en: string;
     ru: string;
@@ -31,3 +31,36 @@ export interface IProduct {
   characteristics?: { name: ILanguageStrings; value: ILanguageStrings }[]; // Dynamic characteristics of the product
   // Other common fields
 }
+
+export interface IProductInputs {
+  name: {
+    en: string;
+    ru: string;
+    ua: string;
+  };
+  brand: OptionBrandType[];
+  sku: string;
+  price: number;
+  salePrice?: number | null;
+  photos?: string[];
+  description: {
+    en: string;
+    ru: string;
+    ua: string;
+  };
+  country?: OptionBrandType[];
+  analogs?: any;
+  reviews?: any;
+  compatibleCars?: any;
+  availability: boolean;
+  quantityAvailable: number;
+  rating?: number;
+  characteristics?: { name: string; value: string }[];
+}
+
+export type OptionBrandType = { value: IBrand; label: string };
+
+export type OptionCountryType = {
+  value: ILanguageStrings;
+  label: string;
+};

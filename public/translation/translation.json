@@ -99,7 +99,13 @@
       "new_password": "Keep a new password",
       "new_password_repeat": "Keep a repeat new password",
 
-      "password_does_not_match": "The last two passwords do not match!"
+      "password_does_not_match": "The last two passwords do not match!",
+
+      "required_name": "Enter the name",
+      "max_80": "Max 80 characters!",
+
+      "required_brand": "Select a brand",
+      "required_code": "Enter the code product"
     },
     "user_page": {
       "orders": "My orders",
@@ -203,6 +209,7 @@
       "search_placeholder": "Search by name or code",
       "search_placeholder_brands": "Search by brand name",
       "search_placeholder_categories": "Search by category name",
+      "search_placeholder_products": "Search by product name",
 
       "all_users": "All users",
       "first_name": "First name",
@@ -283,7 +290,21 @@
       "brands": "Brands",
       "brand": "Brand",
 
-      "link_website": "Website link"
+      "link_website": "Website link",
+
+      "image_goods": "Goods image",
+      "images_warning_message": "You need no more than 4 images, at least one. Pay attention to the quality of the images you add (this is important)",
+
+      "detail_info_goods": "Detailed information about the goods",
+      "name_product": "Product name",
+      "name_product_info_text": "Respectfully fill in the 'Product Name' form. Respect the language",
+      "code_product": "Product code",
+      "country_factory": "Country of factory",
+
+      "input_name_product": "Enter the name",
+      "input_code_product": "Enter the code",
+      "select_country_factory": "Select the country",
+      "select_brand": "Select a brand"
     },
 
     "uploadthing": {
@@ -401,7 +422,14 @@
       "new_password": "Введіть новий пароль",
       "new_password_repeat": "Повторно введіть новий пароль",
 
-      "password_does_not_match": "Два останні пароля не збігаються!"
+      "password_does_not_match": "Два останні пароля не збігаються!",
+
+      "required_name": "Введіть ім'я!",
+
+      "max_80": "Не більше 80 символів!",
+      "required_brand": "Виберіть бренд",
+
+      "required_code": "Введіть код!"
     },
     "user_page": {
       "orders": "Мої замовлення",
@@ -505,6 +533,7 @@
       "search_placeholder": "Пошук за ім'ям або кодом",
       "search_placeholder_brands": "Пошук за ім'ям бренду",
       "search_placeholder_categories": "Пошук за ім'ям категорії",
+      "search_placeholder_products": "Пошук за ім'ям продукту",
 
       "all_users": "Усі користувачі",
       "first_name": "Ім'я",
@@ -585,7 +614,22 @@
       "brands": "Бренди",
       "brand": "Бренд",
 
-      "link_website": "Посилання на сайт"
+      "link_website": "Посилання на сайт",
+
+      "image_goods": "Зображення товару",
+      "images_warning_message": "Вам потрібно не більше 4 зображення, мінімум одне. Зверніть увагу на якість зображень, які ви додаєте (це важливо)",
+
+      "detail_info_goods": "Детальна інформація про товар",
+
+      "name_product": "Назва продукту",
+      "name_product_info_text": "Зробіть заповнення форми 'Назва продукту'. Зробіть правильну мову",
+      "code_product": "Код продукту",
+      "country_factory": "Країна виробник",
+
+      "input_name_product": "Введіть назву",
+      "input_code_product": "Введіть код",
+      "select_country_factory": "Виберіть країну",
+      "select_brand": "Виберіть бренд"
     },
 
     "uploadthing": {
@@ -703,7 +747,15 @@
       "new_password": "Введите новый пароль",
       "new_password_repeat": "Повторно введите новый пароль",
 
-      "password_does_not_match": "Два последних пароля не совпадают!"
+      "password_does_not_match": "Два последних пароля не совпадают!",
+
+      "required_name": "Введите имя!",
+
+      "max_80": "Не более 80 символов!",
+
+      "required_brand": "Выберите бренд!",
+
+      "required_code": "Введите код!"
     },
     "user_page": {
       "orders": "Мои заказы",
@@ -807,6 +859,7 @@
       "search_placeholder": "Поиск по имени или коду",
       "search_placeholder_brands": "Поиск по названию производителя",
       "search_placeholder_categories": "Поиск по названию категории",
+      "search_placeholder_products": "Поиск по названию продукта",
 
       "all_users": "Все пользователи",
       "first_name": "Имя",
@@ -886,7 +939,22 @@
 
       "brands": "Бренды",
       "brand": "Бренд",
-      "link_website": "Ссылка на сайт"
+      "link_website": "Ссылка на сайт",
+
+      "image_goods": "Изображение товара",
+      "images_warning_message": "Вам нужно не более 4 изображений, минимум одно. Обратите внимание на качество изображений, которые вы добавляете (это важно)",
+
+      "detail_info_goods": "Детальная информация о товаре",
+
+      "name_product": "Название продукта",
+      "name_product_info_text": "Заполните форму «Название продукта», правильно выберите язык",
+      "code_product": "Код продукта",
+      "country_factory": "Страна производства",
+
+      "input_name_product": "Введите название",
+      "input_code_product": "Введите код",
+      "select_country_factory": "Выберите страну",
+      "select_brand": "Выберите бренд"
     },
 
     "uploadthing": {

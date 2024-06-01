@@ -31,7 +31,15 @@ export interface ILogotypeSmallProps {
 }
 
 export type ParagraphSize = 'xl' | 'lg' | 'md' | 'sm';
+export type ParagraphWeight =
+  | 'bold'
+  | 'semiBold'
+  | 'medium'
+  | 'light'
+  | 'regular';
+
 export type TitleSize = ParagraphSize;
+export type TitleWeight = ParagraphWeight;
 export type ThemeType = 'light' | 'dark';
 
 export interface IUserCardProps

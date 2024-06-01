@@ -1,15 +1,14 @@
 'use client';
 import Styles from '@/styles/elements/index.module.scss';
 
-import { SIZE_ICON, SIZE_ICON_BIG } from '@/constants/common';
+import { SIZE_ICON_BIG } from '@/constants/common';
 import { useLang } from '@/hooks/useLang';
 
 import Image from 'next/image';
-import Paragraph from './Paragraph';
+
 import React, { HTMLAttributes } from 'react';
 import '@uploadthing/react/styles.css';
 
-import Link from 'next/link';
 import { UploadButton } from '@/utils/uploadthing';
 import { COLORS } from '@/constants/colors';
 import { RotatingLines } from 'react-loader-spinner';
