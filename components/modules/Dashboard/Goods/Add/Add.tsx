@@ -16,6 +16,7 @@ import DetailInfoGoods from './DetailInfoGoods/DetailInfoGoods';
 import AddImages from './AddImages';
 import GoodsCharacteristics from './GoodsCharacteristics/GoodsCharacteristics';
 import { ICharacteristicState } from '@/types/dashboard';
+import PriceAndAvailability from './PriceAndAvailability/PriceAndAvailability';
 
 const Add = ({
   brands,
@@ -85,6 +86,12 @@ const Add = ({
           control={control}
           addedCharacteristics={addedCharacteristics}
           setAddedCharacteristics={setAddedCharacteristics}
+        />
+
+        <span className={Styles.add__line} />
+        <PriceAndAvailability
+          register={register}
+          errors={errors as Partial<FieldErrorsImpl<IProductInputs>>}
         />
 
         <Button className={Styles.add__btn} type='submit'>

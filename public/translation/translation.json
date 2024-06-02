@@ -312,7 +312,19 @@
       "delete_characteristic": "Delete characteristic",
       "characteristic_goods": "Characteristic of goods",
       "select_name_characteristic": "Select the name of the characteristic",
-      "select_description_characteristic": "Select the description of the characteristic"
+      "select_description_characteristic": "Select the description of the characteristic",
+
+      "price_and_available": "Price and availability",
+
+      "price_product": "Product price",
+      "sale_product": "Sale price",
+      "number_available": "Number available",
+      "is_there_available": "Is there available",
+      "input_price_product": "Enter the price",
+      "input_sale_product": "Enter the sale price",
+      "input_number_available": "Enter the number available",
+      "required_price": "The price is required",
+      "required_quantity_available": "The quantity is required"
     },
 
     "uploadthing": {
@@ -639,13 +651,26 @@
       "select_country_factory": "Виберіть країну",
       "select_brand": "Виберіть бренд",
 
+      "price_and_available": "Ціна та наявність",
+
       "characteristic_name": "Ім'я характеристики",
       "description_characteristic": "Опис характеристики",
       "add_characteristic": "Додати характеристику",
       "delete_characteristic": "Видалити характеристику",
       "characteristic_goods": "Характеристика товару",
       "select_name_characteristic": "Виберіть ім'я характеристики",
-      "select_description_characteristic": "Виберіть опис характеристики"
+      "select_description_characteristic": "Виберіть опис характеристики",
+
+      "price_product": "Ціна продукту",
+      "sale_product": "Акційна ціна",
+      "number_available": "Кількість на складі",
+      "is_there_available": "Чи є в наявності",
+      "input_price_product": "Введіть ціну",
+      "input_sale_product": "Введіть акційну ціну",
+      "input_number_available": "Введіть кількість на складі",
+      "required_price": "Ціна обов'язкова",
+
+      "required_quantity_available": "Кількість на складі обов'язкова"
     },
 
     "uploadthing": {
@@ -972,13 +997,24 @@
       "select_country_factory": "Выберите страну",
       "select_brand": "Выберите бренд",
 
+      "price_and_available": "Цена товара и наличие",
       "characteristic_name": "Имя характеристики",
       "description_characteristic": "Описание характеристики",
       "add_characteristic": "Добавить характеристику",
       "delete_characteristic": "Удалить характеристику",
       "characteristic_goods": "Характеристика товара",
       "select_name_characteristic": "Выберите имя характеристики",
-      "select_description_characteristic": "Выберите описание характеристики"
+      "select_description_characteristic": "Выберите описание характеристики",
+
+      "price_product": "Цена продукта",
+      "sale_product": "Акционная цена",
+      "number_available": "Количество на складе",
+      "is_there_available": "Есть ли в наличии",
+      "input_price_product": "Введите цену",
+      "input_sale_product": "Введите акционную цену",
+      "input_number_available": "Введите количество на складе",
+      "required_price": "Цена обязательная",
+      "required_quantity_available": "Количество на складе обязательное"
     },
 
     "uploadthing": {

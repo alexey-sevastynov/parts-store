@@ -24,6 +24,17 @@ export const codeProductValidationRules = (requireMessage?: string) => ({
   validate: (sku: string) => sku.length > 0 || 'Please select a code product',
 });
 
+export const priceProductValidationRules = (requireMessage?: string) => ({
+  required: requireMessage || 'Please select a price product',
+  validate: (price: number) => price > 0 || 'Please select a price product',
+});
+
+export const quantityAvailableValidationRules = (requireMessage?: string) => ({
+  required: requireMessage || 'Please input a quantity available',
+  validate: (quantityAvailable: number) =>
+    quantityAvailable > 0 || 'Please input a quantity available',
+});
+
 export async function getCountries() {
   try {
     const response = await fetch('https://restcountries.com/v3.1/all');
