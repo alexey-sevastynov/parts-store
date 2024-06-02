@@ -304,7 +304,15 @@
       "input_name_product": "Enter the name",
       "input_code_product": "Enter the code",
       "select_country_factory": "Select the country",
-      "select_brand": "Select a brand"
+      "select_brand": "Select a brand",
+
+      "characteristic_name": "Characteristic name",
+      "description_characteristic": "Characteristic description",
+      "add_characteristic": "Add characteristic",
+      "delete_characteristic": "Delete characteristic",
+      "characteristic_goods": "Characteristic of goods",
+      "select_name_characteristic": "Select the name of the characteristic",
+      "select_description_characteristic": "Select the description of the characteristic"
     },
 
     "uploadthing": {
@@ -629,7 +637,15 @@
       "input_name_product": "Введіть назву",
       "input_code_product": "Введіть код",
       "select_country_factory": "Виберіть країну",
-      "select_brand": "Виберіть бренд"
+      "select_brand": "Виберіть бренд",
+
+      "characteristic_name": "Ім'я характеристики",
+      "description_characteristic": "Опис характеристики",
+      "add_characteristic": "Додати характеристику",
+      "delete_characteristic": "Видалити характеристику",
+      "characteristic_goods": "Характеристика товару",
+      "select_name_characteristic": "Виберіть ім'я характеристики",
+      "select_description_characteristic": "Виберіть опис характеристики"
     },
 
     "uploadthing": {
@@ -954,7 +970,15 @@
       "input_name_product": "Введите название",
       "input_code_product": "Введите код",
       "select_country_factory": "Выберите страну",
-      "select_brand": "Выберите бренд"
+      "select_brand": "Выберите бренд",
+
+      "characteristic_name": "Имя характеристики",
+      "description_characteristic": "Описание характеристики",
+      "add_characteristic": "Добавить характеристику",
+      "delete_characteristic": "Удалить характеристику",
+      "characteristic_goods": "Характеристика товара",
+      "select_name_characteristic": "Выберите имя характеристики",
+      "select_description_characteristic": "Выберите описание характеристики"
     },
 
     "uploadthing": {

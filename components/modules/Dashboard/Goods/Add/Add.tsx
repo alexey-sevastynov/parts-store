@@ -3,7 +3,7 @@ import Styles from '@/styles/modules/dashboard/index.module.scss';
 import React from 'react';
 import { FieldErrorsImpl, SubmitHandler, useForm } from 'react-hook-form';
 
-import { IProduct, IProductInputs } from '@/types/goods';
+import { IProductInputs } from '@/types/goods';
 import { IBrand } from '@/types/brand';
 
 import { ROUTES } from '@/constants/common';
@@ -14,6 +14,8 @@ import { Breadcrumbs } from '@/components/elements/Breadcrumbs';
 import DetailInfoGoods from './DetailInfoGoods/DetailInfoGoods';
 
 import AddImages from './AddImages';
+import GoodsCharacteristics from './GoodsCharacteristics/GoodsCharacteristics';
+import { ICharacteristicState } from '@/types/dashboard';
 
 const Add = ({
   brands,
@@ -27,6 +29,10 @@ const Add = ({
   const { lang, translations } = useLang();
 
   const [brandsList, setBrandsList] = React.useState<IBrand[]>(brands);
+
+  const [addedCharacteristics, setAddedCharacteristics] = React.useState<
+    ICharacteristicState[]
+  >([]);
 
   const {
     register,
@@ -52,6 +58,7 @@ const Add = ({
   ];
 
   const onSubmit: SubmitHandler<IProductInputs> = async (data) => {
+    data.characteristics = addedCharacteristics;
     console.log(data);
   };
 
@@ -71,6 +78,13 @@ const Add = ({
           control={control}
           errors={errors as Partial<FieldErrorsImpl<IProductInputs>>}
           brandsList={brandsList}
+        />
+
+        <span className={Styles.add__line} />
+        <GoodsCharacteristics
+          control={control}
+          addedCharacteristics={addedCharacteristics}
+          setAddedCharacteristics={setAddedCharacteristics}
         />
 
         <Button className={Styles.add__btn} type='submit'>

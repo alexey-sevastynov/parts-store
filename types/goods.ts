@@ -55,10 +55,32 @@ export interface IProductInputs {
   availability: boolean;
   quantityAvailable: number;
   rating?: number;
-  characteristics?: { name: string; value: string }[];
+  characteristics: {
+    name: OptionChatacteristicNameType;
+    value: OptionCharacteristicValueType;
+  };
 }
 
 export type OptionBrandType = { value: IBrand; label: string };
+export type OptionChatacteristicNameType = {
+  value: {
+    en: string;
+    ru: string;
+    ua: string;
+    _id: string;
+  };
+  label: string;
+};
+
+export type OptionCharacteristicValueType = {
+  value: {
+    en: string;
+    ru: string;
+    ua: string;
+    _id: string;
+  };
+  label: string;
+};
 
 export type OptionCountryType = {
   value: ILanguageStrings;

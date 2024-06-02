@@ -161,3 +161,19 @@ export interface CharacteristicRowProps {
   isChecked: boolean;
   handleCheckboxChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
+
+export interface ICharacteristicState {
+  _id: string;
+  name: {
+    _id: string;
+    en: string;
+    ru: string;
+    ua: string;
+  };
+  value: {
+    _id: string;
+    en: string;
+    ru: string;
+    ua: string;
+  };
+}

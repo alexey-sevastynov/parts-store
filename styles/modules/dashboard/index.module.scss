@@ -1442,7 +1442,8 @@ $padding-info-small-panel: 20px;
 
 .add {
   .addImages,
-  .detailInfoGoods {
+  .detailInfoGoods,
+  .goodsCharacteristics {
     padding: 0px $padding-left-right-table-admin;
 
     &__title {
@@ -1541,6 +1542,66 @@ $padding-info-small-panel: 20px;
         &_column {
           width: 100%;
         }
+      }
+    }
+  }
+
+  .goodsCharacteristics {
+    display: flex;
+    flex-direction: column;
+    &__btn {
+      display: flex;
+      align-self: flex-end;
+      max-width: 200px;
+    }
+    &__add {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+
+      margin-bottom: 16px;
+
+      .selectNameCharacteristic,
+      .selectValueCharacteristic {
+        &__label {
+          font-size: $font-m;
+          display: block;
+          margin-bottom: 12px;
+
+          white-space: nowrap;
+        }
+      }
+    }
+    .listCharacteristics {
+      margin-top: 16px;
+      &__list {
+        &_item {
+          display: grid;
+          gap: 20px;
+          padding: 8px 0px;
+
+          grid-template-columns: 1fr 1fr 1fr;
+
+          & button {
+            color: $red;
+          }
+
+          &_column {
+            display: flex;
+
+            flex-direction: column;
+          }
+        }
+      }
+
+      &__no_characteristics {
+        margin: 8px 0px 16px;
+      }
+    }
+
+    @media (max-width: $breakpoint_lg) {
+      &__add {
+        grid-template-columns: 1fr;
       }
     }
   }
