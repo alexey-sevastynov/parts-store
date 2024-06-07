@@ -33,7 +33,7 @@ const SelectCountry = ({ control }: { control: Control<IProductInputs> }) => {
 
   return (
     <div className={Styles.selectCountry}>
-      <label className={Styles.selectCountry__label} htmlFor='brand'>
+      <label className={Styles.selectCountry__label} htmlFor='country'>
         {translations[lang].dashboard_page.select_country_factory}
       </label>
 
@@ -56,7 +56,7 @@ const SelectCountry = ({ control }: { control: Control<IProductInputs> }) => {
               },
             })}
             styles={customSelectStyles}
-            id='brand'
+            id='country'
             placeholder={
               translations[lang].dashboard_page.select_country_factory
             }

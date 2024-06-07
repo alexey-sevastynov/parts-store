@@ -14,6 +14,7 @@ import InputCodeProduct from './InputCodeProduct';
 import SelectCountry from './SelectCountry';
 import InputsNameProduct from './InputsNameProduct';
 import SelectBrand from './SelectBrand';
+import SelectCategory from './SelectCategory';
 
 const DetailInfoGoods = ({
   register,
@@ -48,6 +49,8 @@ const DetailInfoGoods = ({
         </div>
 
         <div className={Styles.detailInfoGoods__content_column}>
+          <SelectCategory control={control} errors={errors} />
+
           <SelectBrand
             errors={errors}
             brandsList={brandsList}

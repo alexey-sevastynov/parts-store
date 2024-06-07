@@ -2,54 +2,59 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const productSchema = new Schema({
-  name: {
-    type: {
-      en: String, // English
-      ru: String, // Russian
-      ua: String, // Ukrainian
-    },
-    required: true,
-  },
-  category: [{ type: Schema.Types.ObjectId, ref: 'SubSubcategory' }],
-  brand: [{ type: Schema.Types.ObjectId, ref: 'Brand' }],
-  sku: { type: String, required: true }, // Product code
-  price: { type: Number, required: true },
-  salePrice: { type: Number }, // Discounted price
-  photos: [{ type: String }], // Links to product photos
-  description: {
-    type: {
-      en: String, // English
-      ru: String, // Russian
-      ua: String, // Ukrainian
-    },
-  },
-  country: { type: String },
-
-  analogs: [{ type: String }], // Links to product analogs or their names
-  reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }], // References to reviews
-  compatibleCars: [{ type: String }], // Car models compatible with the product
-
-  availability: { type: Boolean }, // Product availability
-  quantityAvailable: { type: Number }, // Quantity of available products
-  rating: { type: Number }, // Product rating
-  // Other common fields if any
-  characteristics: [
-    {
-      name: {
-        en: String,
-        ru: String,
-        ua: String,
-      },
-      value: {
-        en: String,
-        ru: String,
-        ua: String,
-      },
-    },
-  ],
-  // Other common fields
+// Схема для многоязычных строк
+const multiLanguageSchema = new Schema({
+  en: String,
+  ru: String,
+  ua: String,
 });
 
+// Схема для бренда
+const brandSchema = new Schema({
+  name: String,
+  website: String,
+});
+
+// Схема для характеристик продукта
+const characteristicSchema = new Schema({
+  name: multiLanguageSchema,
+  value: multiLanguageSchema,
+});
+
+// Основная схема продукта
+const productSchema = new Schema({
+  name: {
+    type: multiLanguageSchema,
+    required: true,
+  },
+  category: {
+    type: multiLanguageSchema,
+    required: true,
+  },
+  brand: {
+    type: brandSchema,
+    required: true,
+  },
+  sku: { type: String, required: true }, // Код продукта
+  price: { type: Number, required: true },
+  salePrice: { type: Number }, // Цена со скидкой
+  photos: [{ type: String }], // Ссылки на фото продукта
+  description: {
+    type: multiLanguageSchema,
+  },
+  country: {
+    type: multiLanguageSchema,
+  },
+  analogs: [{ type: String }], // Ссылки на аналоги продукта или их имена
+  reviews: [{ type: String }], // Ссылки на отзывы
+  compatibleCars: [{ type: String }], // Модели автомобилей, совместимые с продуктом
+  availability: { type: Boolean }, // Наличие продукта
+  quantityAvailable: { type: Number }, // Количество доступных продуктов
+  rating: { type: Number }, // Рейтинг продукта
+  characteristics: [characteristicSchema], // Характеристики продукта
+  // // Другие общие поля при необходимости
+});
+
+// Экспорт модели
 export default mongoose.models.Product ||
   mongoose.model('Product', productSchema);

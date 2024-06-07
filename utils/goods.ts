@@ -1,4 +1,11 @@
 import { IBrand } from '@/types/brand';
+import { ILanguageStrings } from '@/types/constants';
+import {
+  IProductInputs,
+  OptionBrandType,
+  OptionCategoryType,
+} from '@/types/goods';
+import { RegisterOptions } from 'react-hook-form';
 
 export const nameValidationRules = (
   messageMinLength: string,
@@ -10,8 +17,21 @@ export const nameValidationRules = (
   maxLength: { value: 80, message: messageMaxLength },
 });
 
-export const brandValidationRules = (requireMessage?: string) => ({
-  validate: (value: IBrand | { value: IBrand; label: string }[]) => {
+export const brandValidationRules = (
+  requireMessage?: string
+): RegisterOptions<IProductInputs, 'brand'> => ({
+  validate: (value: OptionBrandType | { value: IBrand; label: string }[]) => {
+    if (Array.isArray(value)) {
+      return value.length > 0 || requireMessage || 'Please select a brand';
+    }
+    return !!value || requireMessage || 'Please select a brand';
+  },
+});
+
+export const categoryValidationRules = (
+  requireMessage?: string
+): RegisterOptions<IProductInputs, 'category'> => ({
+  validate: (value: OptionCategoryType | OptionCategoryType[]) => {
     if (Array.isArray(value)) {
       return value.length > 0 || requireMessage || 'Please select a brand';
     }

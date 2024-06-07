@@ -1,5 +1,8 @@
+'use server';
+
 import Product from '@/models/Product';
 import { IProduct } from '@/types/goods';
+import mongoose from 'mongoose';
 
 // Функция для получения всех товаров
 export async function getAllProducts(): Promise<{

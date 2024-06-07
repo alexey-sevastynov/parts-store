@@ -1494,7 +1494,8 @@ $padding-info-small-panel: 20px;
     .inputsNameProduct,
     .selectBrand,
     .selectCountry,
-    .inputCodeProduct {
+    .inputCodeProduct,
+    .selectCategory {
       &__label {
         display: block;
         font-size: $font-m;

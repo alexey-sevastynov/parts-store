@@ -11,10 +11,14 @@ import UploadImage from '@/components/elements/UploadImage';
 import Title from '@/components/elements/Title';
 import InfoIconWithHint from '@/components/elements/InfoIconWithHint';
 
-const AddImages = () => {
+const AddImages = ({
+  image,
+  setImage,
+}: {
+  image: UploadFileResponse[];
+  setImage: React.Dispatch<React.SetStateAction<UploadFileResponse[]>>;
+}) => {
   const { lang, translations } = useLang();
-
-  const [image, setImage] = React.useState<UploadFileResponse[]>([]);
 
   return (
     <div className={Styles.addImages}>

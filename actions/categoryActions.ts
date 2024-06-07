@@ -401,3 +401,24 @@ export async function updateSubSubcategoryById(
     return { msg: 'Failed to update subSubcategory.', status: 500 };
   }
 }
+
+export async function getSubSubCategories(): Promise<{
+  msg: string;
+  status: number;
+  subSubCategories?: ISubSubcategory[];
+}> {
+  try {
+    const subSubCategories = await SubSubcategory.find();
+    return {
+      msg: 'All sub-subcategories fetched successfully!',
+      status: 200,
+      subSubCategories,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      msg: 'Failed to fetch sub-subcategories.',
+      status: 500,
+    };
+  }
+}

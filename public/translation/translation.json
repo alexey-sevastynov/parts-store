@@ -105,7 +105,8 @@
       "max_80": "Max 80 characters!",
 
       "required_brand": "Select a brand",
-      "required_code": "Enter the code product"
+      "required_code": "Enter the code product",
+      "required_category": "Select a category!"
     },
     "user_page": {
       "orders": "My orders",
@@ -305,6 +306,7 @@
       "input_code_product": "Enter the code",
       "select_country_factory": "Select the country",
       "select_brand": "Select a brand",
+      "select_category": "Select a category",
 
       "characteristic_name": "Characteristic name",
       "description_characteristic": "Characteristic description",
@@ -324,7 +326,14 @@
       "input_sale_product": "Enter the sale price",
       "input_number_available": "Enter the number available",
       "required_price": "The price is required",
-      "required_quantity_available": "The quantity is required"
+      "required_quantity_available": "The quantity is required",
+
+      "description_product": "Product description",
+      "description_english": "English description",
+      "description_ukraine": "Ukrainian description",
+      "description_russian": "Russian description",
+
+      "description_info": "Fill in the description in the column on different languages"
     },
 
     "uploadthing": {
@@ -449,7 +458,8 @@
       "max_80": "Не більше 80 символів!",
       "required_brand": "Виберіть бренд",
 
-      "required_code": "Введіть код!"
+      "required_code": "Введіть код!",
+      "required_category": "Виберіть категорію!"
     },
     "user_page": {
       "orders": "Мої замовлення",
@@ -650,6 +660,7 @@
       "input_code_product": "Введіть код",
       "select_country_factory": "Виберіть країну",
       "select_brand": "Виберіть бренд",
+      "select_category": "Виберіть категорію",
 
       "price_and_available": "Ціна та наявність",
 
@@ -670,7 +681,14 @@
       "input_number_available": "Введіть кількість на складі",
       "required_price": "Ціна обов'язкова",
 
-      "required_quantity_available": "Кількість на складі обов'язкова"
+      "required_quantity_available": "Кількість на складі обов'язкова",
+
+      "description_product": "Опис продукту",
+      "description_ukraine": "Опис украинською мовою",
+      "description_english": "Опис англійською мовою",
+      "description_russian": "Опис російською мовою",
+
+      "description_info": "Будь ласка, заповніть опис різними мовами, будь дуже уважний."
     },
 
     "uploadthing": {
@@ -796,7 +814,9 @@
 
       "required_brand": "Выберите бренд!",
 
-      "required_code": "Введите код!"
+      "required_code": "Введите код!",
+
+      "required_category": "Выберите категорию!"
     },
     "user_page": {
       "orders": "Мои заказы",
@@ -996,6 +1016,7 @@
       "input_code_product": "Введите код",
       "select_country_factory": "Выберите страну",
       "select_brand": "Выберите бренд",
+      "select_category": "Выберите категорию",
 
       "price_and_available": "Цена товара и наличие",
       "characteristic_name": "Имя характеристики",
@@ -1014,7 +1035,14 @@
       "input_sale_product": "Введите акционную цену",
       "input_number_available": "Введите количество на складе",
       "required_price": "Цена обязательная",
-      "required_quantity_available": "Количество на складе обязательное"
+      "required_quantity_available": "Количество на складе обязательное",
+
+      "description_product": "Описание продукта",
+      "description_ukraine": "Описания украиским языком",
+      "description_english": "Описания английским языком",
+      "description_russian": "Описания русским языком",
+
+      "description_info": "Будь очень внимательным заполняя описания в колонку на разных языках."
     },
 
     "uploadthing": {

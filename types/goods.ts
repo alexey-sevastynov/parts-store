@@ -3,12 +3,9 @@ import { ILanguageStrings } from './constants';
 
 export interface IProduct {
   _id?: string;
-  name: {
-    en: string;
-    ru: string;
-    ua: string;
-  };
-  brand: IBrand[];
+  category: ILanguageStrings;
+  name: ILanguageStrings;
+  brand: IBrand;
   sku: string;
   price: number;
   salePrice?: number | null; // Discounted price
@@ -18,13 +15,16 @@ export interface IProduct {
     ru: string;
     ua: string;
   };
-  country?: string;
+  country?: {
+    en: string;
+    ru: string;
+    ua: string;
+  };
 
   analogs?: any; // Links to product analogs or their names
   reviews?: any; // References to reviews
   compatibleCars?: any; // Car models compatible with the product
 
-  availability: boolean; // Product availability
   quantityAvailable: number; // Quantity of available products
   rating?: number;
   // Other common fields if any
@@ -38,30 +38,32 @@ export interface IProductInputs {
     ru: string;
     ua: string;
   };
-  brand: OptionBrandType[];
+  category: OptionCategoryType;
+  brand: OptionBrandType;
   sku: string;
   price: number;
-  salePrice?: number | null;
-  photos?: string[];
-  description: {
-    en: string;
-    ru: string;
-    ua: string;
-  };
-  country?: OptionBrandType[];
-  analogs?: any;
-  reviews?: any;
-  compatibleCars?: any;
-  availability: boolean;
+  description: ILanguageStrings;
   quantityAvailable: number;
-  rating?: number;
-  characteristics: {
+  characteristics?: {
     name: OptionChatacteristicNameType;
     value: OptionCharacteristicValueType;
   };
+  salePrice?: number | null;
+  photos?: string[];
+
+  country?: OptionCountryType;
+  analogs?: any;
+  reviews?: any;
+  compatibleCars?: any;
+
+  rating?: number;
 }
 
+export type OptionCategoryType = { value: ILanguageStrings; label: string };
+
 export type OptionBrandType = { value: IBrand; label: string };
+
+export type OptionCountryType = { value: ILanguageStrings; label: string };
 export type OptionChatacteristicNameType = {
   value: {
     en: string;
@@ -79,10 +81,5 @@ export type OptionCharacteristicValueType = {
     ua: string;
     _id: string;
   };
-  label: string;
-};
-
-export type OptionCountryType = {
-  value: ILanguageStrings;
   label: string;
 };
