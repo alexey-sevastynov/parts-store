@@ -166,12 +166,15 @@ export interface ICharacteristicState {
   _id: string;
   name: {
     _id: string;
+
     en: string;
     ru: string;
     ua: string;
   };
   value: {
-    _id: string;
+    _idCharacteristic: string;
+    _idValueCharacteristic: string;
+
     en: string;
     ru: string;
     ua: string;

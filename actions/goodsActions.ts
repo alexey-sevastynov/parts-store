@@ -1,8 +1,15 @@
 'use server';
 
+import Brand from '@/models/Brand';
+import Characteristic from '@/models/Characteristic';
+import CharacteristicValue from '@/models/CharacteristicValue';
 import Product from '@/models/Product';
-import { IProduct } from '@/types/goods';
-import mongoose from 'mongoose';
+import SubSubcategory from '@/models/SubSubcategory';
+import Subcategory from '@/models/Subcategory';
+import Test from '@/models/Test';
+import { ICharacteristics } from '@/types/characteristic';
+import { IProduct, ITest } from '@/types/goods';
+import { chain } from 'lodash';
 
 // Функция для получения всех товаров
 export async function getAllProducts(): Promise<{
@@ -11,8 +18,49 @@ export async function getAllProducts(): Promise<{
   products?: IProduct[];
 }> {
   try {
-    const products = await Product.find({});
-    return { msg: 'Products fetched successfully!', status: 200, products };
+    const products = await Product.find();
+
+    const populatedProducts = await Promise.all(
+      products.map(async (product) => {
+        console.log('product:', product);
+
+        const brand = await Brand.findById(product.brand);
+        const category = await SubSubcategory.findById(product.category);
+        const characteristics = await Promise.all(
+          product.characteristics.map(async (char) => {
+            const nameCharacteristic = await Characteristic.findById(char.name);
+            const valueCharacteristic = await CharacteristicValue.findById(
+              char.value
+            );
+            return {
+              name: nameCharacteristic
+                ? nameCharacteristic.toObject()
+                : 'unknown',
+              value: valueCharacteristic
+                ? valueCharacteristic.toObject()
+                : 'unknown',
+            };
+          })
+        );
+
+        console.log('characteristics:', characteristics);
+        const res = {
+          ...product.toObject(),
+          category,
+          brand,
+          characteristics,
+        };
+        console.log('res:', res);
+
+        return res;
+      })
+    );
+    console.log('Products fetched:', populatedProducts);
+    return {
+      msg: 'Products fetched successfully!',
+      status: 200,
+      products: populatedProducts,
+    };
   } catch (error) {
     console.error(error);
     return { msg: 'Failed to fetch products.', status: 500 };
@@ -41,6 +89,21 @@ export async function createProduct(
 ): Promise<{ msg: string; status: number; product?: IProduct }> {
   try {
     const product = new Product(productData);
+    console.log('Product fetched:', product);
+    await product.save();
+    return { msg: 'Product created successfully!', status: 200, product };
+  } catch (error) {
+    console.error(error);
+    return { msg: 'Failed to create product.', status: 500 };
+  }
+}
+
+export async function createTestProduct(
+  productData: Omit<ITest, '_id'>
+): Promise<{ msg: string; status: number; product?: ITest }> {
+  try {
+    const product = await new Test(productData);
+    console.log('Product fetched:', product);
     await product.save();
     return { msg: 'Product created successfully!', status: 200, product };
   } catch (error) {

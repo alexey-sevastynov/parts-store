@@ -9,6 +9,7 @@ import {
   getAllCharacteristics,
   getCharacteristicById,
 } from '@/actions/characteristicActions';
+import { getAllProducts } from '@/actions/goodsActions';
 import { IBrand } from '@/types/brand';
 import { ICategory, ISubSubcategory, ISubcategory } from '@/types/category';
 import { ICharacteristics } from '@/types/characteristic';
@@ -110,4 +111,9 @@ export const getSubcategories = async (categoryId: string) => {
   }
 
   return [];
+};
+
+export const getProducts = async () => {
+  const res = await getAllProducts();
+  return res;
 };

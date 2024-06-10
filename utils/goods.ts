@@ -52,7 +52,7 @@ export const priceProductValidationRules = (requireMessage?: string) => ({
 export const quantityAvailableValidationRules = (requireMessage?: string) => ({
   required: requireMessage || 'Please input a quantity available',
   validate: (quantityAvailable: number) =>
-    quantityAvailable > 0 || 'Please input a quantity available',
+    quantityAvailable >= 0 || 'Please input a quantity available',
 });
 
 export async function getCountries() {

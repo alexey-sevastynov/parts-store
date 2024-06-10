@@ -8,6 +8,7 @@ import { useLang } from '@/hooks/useLang';
 import Link from 'next/link';
 import { FaArrowDownLong } from 'react-icons/fa6';
 import { motion } from 'framer-motion';
+import { IProduct } from '@/types/goods';
 
 const ProductsItem = ({
   item,
@@ -15,32 +16,20 @@ const ProductsItem = ({
   showMoreItem,
   setShowMoreItem,
 }: {
-  item: IItemProduct;
+  item: IProduct;
   lengthItems: number;
   showMoreItem: boolean;
   setShowMoreItem: (showMoreItem: boolean) => void;
 }) => {
-  const {
-    photos,
-    brand,
-    name,
-    price,
-    salePrice,
-    availability,
-    quantityAvailable,
-  } = item;
+  const { photos, brand, name, price, salePrice, quantityAvailable } = item;
 
   const { lang, translations } = useLang();
 
   const [isFavorite, setIsFavorite] = React.useState<boolean>(false);
 
-  const image = photos?.[0] ?? '/img/no-image.png';
+  const image = photos?.split(', ')?.[0] ?? '/img/no-image.png';
 
-  const availabilityItem = (
-    availability: boolean,
-    quantityAvailable: number
-  ) => {
-    if (!availability) return 'Закінчився';
+  const availabilityItem = (quantityAvailable: number) => {
     if (quantityAvailable === 0) return 'Немає в наявності';
   };
 
@@ -71,19 +60,19 @@ const ProductsItem = ({
       </button>
 
       <Link className={Styles.productsItem__image} href={'/'}>
-        <Image src={image} alt={name[lang]} fill />
+        <Image src={image} alt={name[lang]} fill sizes='100%' priority />
       </Link>
 
       <Link className={Styles.productsItem__name} href={'/'}>
         {name[lang]}
       </Link>
 
-      <p className={Styles.productsItem__brand}>{brand}</p>
+      <p className={Styles.productsItem__brand}>{brand?.name || ''}</p>
 
       <div className={Styles.productsItem__price}>{priceBlock}</div>
 
       <div className={Styles.productsItem__availability}>
-        <p>{availabilityItem(availability, quantityAvailable)}</p>
+        <p>{availabilityItem(quantityAvailable)}</p>
       </div>
 
       {!showMoreItem && (

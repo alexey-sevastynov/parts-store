@@ -7,7 +7,11 @@ import useSWR from 'swr';
 
 import { useLang } from '@/hooks/useLang';
 
-import { IProductInputs, OptionCountryType } from '@/types/goods';
+import {
+  IProductInputs,
+  OptionCategoryType,
+  OptionCountryType,
+} from '@/types/goods';
 
 import { COLORS } from '@/constants/colors';
 import { customSelectStyles } from '@/constants/react-select';
@@ -17,6 +21,7 @@ import {
   getCountries,
 } from '@/utils/goods';
 import { getSubSubCategories } from '@/actions/categoryActions';
+import { ISubSubcategory } from '@/types/category';
 
 const SelectCategory = ({
   control,
@@ -38,17 +43,11 @@ const SelectCategory = ({
   );
 
   const options = data?.subSubCategories
-    ?.map(
-      (subSubCategory: { name: { ua: string; en: string; ru: string } }) => ({
-        value: {
-          ua: subSubCategory.name.ua,
-          en: subSubCategory.name.en,
-          ru: subSubCategory.name.ru,
-        },
-        label: subSubCategory.name[lang],
-      })
-    )
-    ?.sort((a: OptionCountryType, b: OptionCountryType) =>
+    ?.map((subSubCategory: ISubSubcategory) => ({
+      value: subSubCategory._id,
+      label: subSubCategory.name[lang],
+    }))
+    ?.sort((a: OptionCategoryType, b: OptionCategoryType) =>
       a.label.localeCompare(b.label)
     );
 

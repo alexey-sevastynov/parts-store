@@ -3,57 +3,64 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 // Схема для многоязычных строк
-const multiLanguageSchema = new Schema({
+const multiLanguage = {
   en: String,
   ru: String,
   ua: String,
-});
-
-// Схема для бренда
-const brandSchema = new Schema({
-  name: String,
-  website: String,
-});
+};
 
 // Схема для характеристик продукта
-const characteristicSchema = new Schema({
-  name: multiLanguageSchema,
-  value: multiLanguageSchema,
+
+const CharacteristicProductSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  value: {
+    type: String,
+    required: true,
+  },
 });
 
 // Основная схема продукта
-const productSchema = new Schema({
-  name: {
-    type: multiLanguageSchema,
-    required: true,
+const productSchema = new Schema(
+  {
+    name: multiLanguage,
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Category',
+    },
+    brand: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Brand',
+    },
+
+    sku: { type: String, required: true }, // Код продукта
+    price: { type: Number, required: true },
+    salePrice: Number, // Цена со скидкой
+    photos: { type: String, required: true },
+
+    // Ссылки на фото продукта
+    description: {
+      en: String,
+      ru: String,
+      ua: String,
+    },
+    country: multiLanguage,
+    analogs: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Product',
+    }, // Ссылки на аналоги продукта или их имена
+    reviews: String, // Ссылки на отзывы
+    compatibleCars: String, // Модели автомобилей, совместимые с продуктом
+
+    quantityAvailable: Number, // Количество доступных продуктов
+    // rating: { type: Number }, // Рейтинг продукта
+
+    characteristics: [CharacteristicProductSchema],
   },
-  category: {
-    type: multiLanguageSchema,
-    required: true,
-  },
-  brand: {
-    type: brandSchema,
-    required: true,
-  },
-  sku: { type: String, required: true }, // Код продукта
-  price: { type: Number, required: true },
-  salePrice: { type: Number }, // Цена со скидкой
-  photos: [{ type: String }], // Ссылки на фото продукта
-  description: {
-    type: multiLanguageSchema,
-  },
-  country: {
-    type: multiLanguageSchema,
-  },
-  analogs: [{ type: String }], // Ссылки на аналоги продукта или их имена
-  reviews: [{ type: String }], // Ссылки на отзывы
-  compatibleCars: [{ type: String }], // Модели автомобилей, совместимые с продуктом
-  availability: { type: Boolean }, // Наличие продукта
-  quantityAvailable: { type: Number }, // Количество доступных продуктов
-  rating: { type: Number }, // Рейтинг продукта
-  characteristics: [characteristicSchema], // Характеристики продукта
-  // // Другие общие поля при необходимости
-});
+  { timestamps: true }
+);
 
 // Экспорт модели
 export default mongoose.models.Product ||

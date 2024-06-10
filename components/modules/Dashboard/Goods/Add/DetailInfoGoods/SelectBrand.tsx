@@ -26,7 +26,7 @@ const SelectBrand = ({
 
   const options = brandsList
     .map((brand: IBrand) => ({
-      value: { name: brand.name, website: brand.website },
+      value: brand._id,
       label: brand.name,
     }))
     ?.sort((a: OptionBrandType, b: OptionBrandType) =>

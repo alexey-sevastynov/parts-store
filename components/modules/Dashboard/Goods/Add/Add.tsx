@@ -1,10 +1,12 @@
+'use client';
+
 import Styles from '@/styles/modules/dashboard/index.module.scss';
 import 'react-quill/dist/quill.snow.css';
 
 import React from 'react';
 import { FieldErrorsImpl, SubmitHandler, useForm } from 'react-hook-form';
 
-import { IProduct, IProductInputs } from '@/types/goods';
+import { IProduct, IProductInputs, ITest } from '@/types/goods';
 import { IBrand } from '@/types/brand';
 
 import { ROUTES } from '@/constants/common';
@@ -19,7 +21,7 @@ import GoodsCharacteristics from './GoodsCharacteristics/GoodsCharacteristics';
 import { ICharacteristicState } from '@/types/dashboard';
 import PriceAndAvailability from './PriceAndAvailability/PriceAndAvailability';
 import DescriptonProduct from './DescriptionProduct/DescriptionProduct';
-import { createProduct } from '@/actions/goodsActions';
+import { createProduct, createTestProduct } from '@/actions/goodsActions';
 import { UploadFileResponse } from '@/types/uploathing-image/client';
 
 const Add = ({
@@ -67,24 +69,52 @@ const Add = ({
     },
   ];
 
+  // const onSubmit: SubmitHandler<IProductInputs> = async (data) => {
+  //   console.log('Entering onSubmit');
+  //   const newProduct: ITest = {
+  //     name: data.name,
+  //   };
+
+  //   console.log('newProduct:', newProduct);
+  //   console.log('data:', data);
+
+  //   try {
+  //     const res = await createTestProduct(newProduct);
+  //     console.log('result:', res);
+
+  //     if (!product) {
+  //       // setProduct(newProduct);
+  //       console.log('Setting product...');
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  //   console.log('Leaving onSubmit');
+  // };
+
   const onSubmit: SubmitHandler<IProductInputs> = async (data) => {
+    const arrayImages = image.map((item) => item.url).join(', ');
     console.log('Entering onSubmit');
     const newProduct: IProduct = {
       name: data.name,
-      category: data.category.value,
-      brand: data.brand.value,
+      category: data.category.value || 'unknown category',
+      brand: data.brand.value || 'unknown brand',
       sku: data.sku,
       price: data.price,
       salePrice: data.salePrice || null,
-      photos: image.map((item) => item.url),
+      photos: arrayImages,
 
       description: data.description,
       country: data.country?.value,
       quantityAvailable: data.quantityAvailable,
-      characteristics: addedCharacteristics.map((characteristic) => ({
-        name: characteristic.name,
-        value: characteristic.value,
-      })),
+      characteristics: addedCharacteristics.map((characteristic) => {
+        console.log('characteristic:', characteristic);
+
+        return {
+          name: characteristic.value._idCharacteristic,
+          value: characteristic.value._idValueCharacteristic,
+        };
+      }),
 
       analogs: undefined,
       reviews: undefined,
@@ -92,8 +122,8 @@ const Add = ({
       rating: undefined,
     };
 
-    // console.log('newProduct:', newProduct);
-    // console.log('data:', data);
+    console.log('newProduct:', newProduct);
+    console.log('data:', data);
 
     try {
       const res = await createProduct(newProduct);

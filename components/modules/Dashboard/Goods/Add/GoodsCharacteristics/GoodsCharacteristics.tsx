@@ -88,7 +88,7 @@ const GoodsCharacteristics = ({
         type='button'
         onClick={() =>
           handleAddCharacteristic({
-            _id: v4(),
+            _id: selectCharacteristicValue.value._idValueCharacteristic,
             name: selectedCharacteristicName.value,
             value: selectCharacteristicValue.value,
           })

@@ -6,6 +6,7 @@ const connect = async () => {
 
   try {
     await mongoose.connect(process.env.NEXT_PUBLIC_DB_URL as string);
+
     console.log('mongoDB successfully');
   } catch (error) {
     throw new Error(`Error conecting to Mongoose: ${error}`);

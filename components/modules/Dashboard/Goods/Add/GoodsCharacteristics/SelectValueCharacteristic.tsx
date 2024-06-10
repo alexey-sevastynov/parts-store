@@ -9,7 +9,11 @@ import { useLang } from '@/hooks/useLang';
 import { COLORS } from '@/constants/colors';
 import { customSelectStyles } from '@/constants/react-select';
 
-import { IProductInputs, OptionCharacteristicValueType } from '@/types/goods';
+import {
+  IProductInputs,
+  OptionCharacteristicValueType,
+  OptionChatacteristicNameType,
+} from '@/types/goods';
 import { ICharacteristics } from '@/types/characteristic';
 
 const SelectValueCharacteristic = ({
@@ -20,7 +24,7 @@ const SelectValueCharacteristic = ({
   characteristics: ICharacteristics[];
 }) => {
   const { lang, translations } = useLang();
-  const selectedCharacteristicName: OptionCharacteristicValueType = useWatch({
+  const selectedCharacteristicName: OptionChatacteristicNameType = useWatch({
     control,
     name: 'characteristics.name',
   });
@@ -36,7 +40,8 @@ const SelectValueCharacteristic = ({
       en: value.en,
       ru: value.ru,
       ua: value.ua,
-      _id: value._id,
+      _idValueCharacteristic: value._id,
+      _idCharacteristic: selectedCharacteristic?._id,
     },
     label: value[lang],
   }));

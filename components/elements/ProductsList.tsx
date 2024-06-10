@@ -5,12 +5,13 @@ import React from 'react';
 import { BREAKPOINTS } from '@/constants/breakpoints';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { MAX_VALUE_ITEMS } from '@/constants/common';
+import { IProduct } from '@/types/goods';
 
 const ProductsList = ({
   items,
   numberItems = 6,
 }: {
-  items: TypeListProducts;
+  items: IProduct[];
   numberItems?: number;
 }) => {
   const [showMoreItem, setShowMoreItem] = React.useState<boolean>(false);
@@ -25,6 +26,8 @@ const ProductsList = ({
     if (items.length < 7) setShowMoreItem(true);
   });
 
+  if (items.length === 0) return <p>Nothing</p>;
+
   return (
     <ul
       className={`${Styles.productsList} ${showMoreItem || items.length < 7 ? Styles.wrap : ''}`}
@@ -32,7 +35,7 @@ const ProductsList = ({
       {_items.map((product) => {
         return (
           <ProductsItem
-            key={product.id}
+            key={product._id}
             item={product}
             lengthItems={items.length}
             showMoreItem={showMoreItem}
