@@ -1,13 +1,16 @@
 'use server';
 
+import { getAllProducts } from '@/actions/goodsActions';
 import GoodsPage from '@/components/templates/Dashboard/GoodsPage/GoodsPage';
 import { getUsers } from '@/utils/dashboards';
 
 const Goods = async () => {
   const fetchedUsers = await getUsers();
+
+  const fetchedProducts = await getAllProducts();
   try {
     if (fetchedUsers.users) {
-      return <GoodsPage data={fetchedUsers} />;
+      return <GoodsPage users={fetchedUsers} data={fetchedProducts} />;
     } else {
       return <div>Loading...</div>;
     }

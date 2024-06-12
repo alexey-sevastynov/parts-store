@@ -14,7 +14,7 @@ const DateTranslation = ({ date }: { date: string | undefined }) => {
   // Date formatting using dayjs
   const formattedDate = dayjs(date).format('MMM DD, YYYY');
 
-  return formattedDate;
+  return <p>{formattedDate}</p>;
 };
 
 export default DateTranslation;

@@ -206,6 +206,7 @@
 
       "users": "Users",
       "admins": "Admins",
+      "rating": "Rating",
 
       "search_placeholder": "Search by name or code",
       "search_placeholder_brands": "Search by brand name",
@@ -280,6 +281,7 @@
       "list_added_categories": "List of added categories",
       "list_added_subcategories": "List of added subcategories",
       "list_added_brands": "List of added brands",
+      "list_added_products": "List of added products",
 
       "name_characteristic_different_language": "The name of the characterization is in different languages",
 
@@ -559,6 +561,7 @@
 
       "users": "Користувачів",
       "admins": "Адміністратори",
+      "rating": "Рейтинг",
 
       "search_placeholder": "Пошук за ім'ям або кодом",
       "search_placeholder_brands": "Пошук за ім'ям бренду",
@@ -633,6 +636,7 @@
       "list_added_categories": "Список добавленных категорий",
       "list_added_subcategories": "Список добавленных подкатегорий",
       "list_added_brands": "Список доданних брендів",
+      "list_added_products": "Список доданих продуктів",
 
       "name_characteristic_different_language": "Ім'я характеристики різними мовами",
 
@@ -916,6 +920,7 @@
 
       "users": "Пользователи",
       "admins": "Администраторы",
+      "rating": "Рейтинг",
 
       "search_placeholder": "Поиск по имени или коду",
       "search_placeholder_brands": "Поиск по названию производителя",
@@ -990,6 +995,7 @@
       "list_added_categories": "Список доданих категорій",
       "list_added_subcategories": "Список доданих підкатегорій",
       "list_added_brands": "Список добавленных брендов",
+      "list_added_products": "Список добавленных продуктов",
 
       "name_characteristic_different_language": "Имя характеристики на разних языках",
 

@@ -15,12 +15,12 @@ import { deleteUsers, handleCheckboxChange } from '@/utils/dashboards';
 
 import { IUser } from '@/types/user';
 
-import DateTranslation from './DateTranslation';
 import Link from 'next/link';
 import { ICustomersTableProps } from '@/types/dashboard';
 
 import CustomerRowLoader from './CustomerRowLoader';
 import NotFoundMsg from '../NotFoundMsg';
+import DateTranslation from '@/components/elements/DateTranslation';
 
 const CustomersTable = ({ users, isLoading }: ICustomersTableProps) => {
   const { lang, translations } = useLang();

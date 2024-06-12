@@ -1,4 +1,5 @@
 import { IPromiseResponse } from './dashboard';
+import { IProduct } from './goods';
 
 export interface IBrand {
   _id?: string;
@@ -7,3 +8,4 @@ export interface IBrand {
 }
 
 export interface IBrandsProps extends IPromiseResponse<IBrand[]> {}
+export interface IGoodsProps extends IPromiseResponse<IProduct[]> {}

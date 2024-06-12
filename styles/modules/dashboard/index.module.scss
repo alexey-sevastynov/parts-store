@@ -224,7 +224,8 @@ $padding-info-small-panel: 20px;
   .addCharacteristicName,
   .addCharacteristicValue,
   .listAddedCharacteristics,
-  .listAddedBrands {
+  .listAddedBrands,
+  .listAddedProducts {
     &__line,
     .characteristic__line {
       @include horizon-line;
@@ -407,6 +408,9 @@ $padding-info-small-panel: 20px;
   & .brandsTable__head,
   & .brandsTable tbody tr,
   & .brandsTable__head_delete,
+  & .productsTable__head,
+  & .productsTable tbody tr,
+  & .productsTable__head_delete,
   & .characteristicTable__head,
   & .characteristicTable tbody tr,
   & .characteristicTable__head_delete,
@@ -423,6 +427,7 @@ $padding-info-small-panel: 20px;
   & .listAddedCategories__title,
   & .serverErrorMsg,
   & .listAddedBrands__title,
+  & .listAddedProducts__title,
   .notFoundMsg,
   .listAddedCharacteristics,
   .notification {
@@ -432,6 +437,7 @@ $padding-info-small-panel: 20px;
 
   & .customersTable,
   & .brandsTable,
+  & .productsTable,
   & .characteristicTable,
   & .categoriesTable,
   & .charateristicTableEdit,
@@ -441,9 +447,11 @@ $padding-info-small-panel: 20px;
 
     .customersTable__head,
     .brandsTable__head,
+    .productsTable__head,
     .charateristicTableEdit__head,
     .customersTable__body,
     .brandsTable__body,
+    .productsTable__body,
     .characteristicTable__head,
     .characteristicTable__body,
     .charateristicTableEdit__body,
@@ -484,10 +492,161 @@ $padding-info-small-panel: 20px;
       }
     }
 
+    .productsTable__head,
+    .productsTable__body {
+      &_image_product,
+      &_code_product,
+      &_name_product,
+      &_brand_product,
+      &_category_product,
+      &_country_product,
+      &_created_product,
+      &_rating_product,
+      &_quantity_product,
+      &_price_product,
+      &_price_sale_product {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &_image_product {
+        width: 10%;
+      }
+
+      &_code_product {
+        width: 12%;
+      }
+
+      &_name_product {
+        width: 18%;
+      }
+
+      &_brand_product {
+        width: 10%;
+      }
+
+      &_category_product {
+        width: 13%;
+      }
+      &_country_product,
+      &_created_product {
+        width: 10%;
+      }
+
+      &_rating_product {
+        width: 5%;
+      }
+
+      &_quantity_product {
+        width: 8%;
+      }
+
+      &_price_product {
+        width: 7%;
+      }
+
+      &_price_sale_product {
+        width: 7%;
+      }
+
+      @media (max-width: $breakpoint_xxxl) {
+        .productsTable__head,
+        .productsTable__body {
+          &_country_product,
+          &_created_product {
+            display: none;
+          }
+
+          &_rating_product {
+            display: none;
+          }
+          &_image_product {
+            width: 20%;
+          }
+
+          &_quantity_product {
+            width: 17%;
+          }
+
+          &_price_product {
+            width: 12%;
+          }
+
+          &_price_sale_product {
+            width: 12%;
+          }
+        }
+      }
+
+      @media (max-width: $breakpoint_xxl) {
+        .productsTable__head,
+        .productsTable__body {
+          &_brand_product {
+            display: none;
+          }
+
+          &_category_product {
+            display: none;
+          }
+
+          &_image_product {
+            width: 23%;
+          }
+
+          &_quantity_product {
+            width: 13%;
+          }
+
+          &_name_product {
+            width: 23%;
+          }
+        }
+      }
+
+      @media (max-width: $breakpoint_xl) {
+        .productsTable__head,
+        .productsTable__body {
+          &_quantity_product {
+            display: none;
+          }
+
+          &_price_product {
+            display: none;
+          }
+
+          &_price_sale_product {
+            display: none;
+          }
+
+          &_image_product {
+            width: 30%;
+          }
+
+          &_code_product {
+            width: 30%;
+          }
+
+          &_name_product {
+            width: 40%;
+          }
+        }
+      }
+    }
+
+    .productsTable__body {
+      &_image_product {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 10px;
+      }
+    }
+
     .customersTable__head,
-    .brandsTable__head,
+    .listAddedProducts__head,
     .customersTable__body,
-    .brandsTable__body {
+    .listAddedProducts__body {
       &_name,
       &_email {
         width: 23%;
@@ -608,6 +767,7 @@ $padding-info-small-panel: 20px;
       flex-direction: column;
       .customersTable__head,
       .brandsTable__head,
+      .productsTable__head,
       .characteristicTable__head,
       .categoriesTable__head,
       .charateristicTableEdit__head,
@@ -684,6 +844,7 @@ $padding-info-small-panel: 20px;
 
       .customersTable__body.all,
       .brandsTable__body.all,
+      .productsTable__body.all,
       .characteristicTable__body.all,
       .categoriesTable__body.all {
         background-color: $grey;
@@ -691,6 +852,7 @@ $padding-info-small-panel: 20px;
 
       .customersTable__body .customersTable__body_checkbox.select,
       .brandsTable__body .brandsTable__body_checkbox.select,
+      .productsTable__body .productsTable__body_checkbox.select,
       .characteristicTable__body .characteristicTable__body_checkbox.select,
       .categoriesTable__body .categoriesTable__body_checkbox.select {
         background-color: $grey;
@@ -698,6 +860,7 @@ $padding-info-small-panel: 20px;
 
       .customersTable__body,
       .brandsTable__body,
+      .productsTable__body,
       .characteristicTable__body,
       .categoriesTable__body,
       .categoriesTableEdit__body,

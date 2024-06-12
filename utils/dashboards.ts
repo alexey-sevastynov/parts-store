@@ -14,6 +14,7 @@ import { IBrand } from '@/types/brand';
 import { ICategory, ISubSubcategory, ISubcategory } from '@/types/category';
 import { ICharacteristics } from '@/types/characteristic';
 import { ILanguageStrings } from '@/types/constants';
+import { IProduct } from '@/types/goods';
 import { IUser } from '@/types/user';
 import { ChangeEvent } from 'react';
 
@@ -41,7 +42,8 @@ export const handleCheckboxChange = (
     | ICategory[]
     | ISubcategory[]
     | ISubSubcategory[]
-    | IBrand[],
+    | IBrand[]
+    | IProduct[],
   event: ChangeEvent<HTMLInputElement>,
   checkboxes: { [key: string]: boolean },
   setCheckboxes: React.Dispatch<

@@ -10,6 +10,7 @@ import { ICharacteristics } from './characteristic';
 import { ILanguageStrings } from './constants';
 import { ICategory, ISubcategory } from './category';
 import { IBrand } from './brand';
+import { IProduct } from './goods';
 
 export interface IAdminAsideButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
@@ -75,6 +76,14 @@ export interface IBrandsTableProps {
   brands: IBrand[];
   isLoading: boolean;
   updateList: () => void;
+}
+
+export interface IGoodsTableProps {
+  goods: IProduct[];
+  isLoading: boolean;
+  updateList: () => void;
+  isEmptyProducts: boolean;
+  isEmptySearchResulProducts: boolean;
 }
 
 export interface ICharacteristicTableProps {

@@ -1,5 +1,5 @@
 import { IBrand } from './brand';
-import { ICategory } from './category';
+import { ICategory, ISubSubcategory } from './category';
 import { ILanguageStrings } from './constants';
 
 export interface ITest {
@@ -8,7 +8,7 @@ export interface ITest {
 
 export interface IProduct {
   _id?: string;
-  category: ICategory;
+  category: ISubSubcategory;
   name: ILanguageStrings;
   brand: IBrand;
   sku: string;
@@ -35,6 +35,8 @@ export interface IProduct {
   // Other common fields if any
   characteristics?: { name: string; value: string }[]; // Dynamic characteristics of the product
   // Other common fields
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface IProductInputs {

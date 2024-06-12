@@ -14,9 +14,10 @@ import { extractLastFiveCharacters } from '@/utils/common';
 import { ROUTES, SIZE_ICON } from '@/constants/common';
 
 import PhotoUser from '../PhotoUser';
-import DateTranslation from '../DateTranslation';
+
 import ContentLoader, { IContentLoaderProps } from 'react-content-loader';
 import Link from 'next/link';
+import DateTranslation from '@/components/elements/DateTranslation';
 
 const CustomersItem = ({
   firstName,
