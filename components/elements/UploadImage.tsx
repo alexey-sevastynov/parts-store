@@ -7,7 +7,6 @@ import { useLang } from '@/hooks/useLang';
 import Image from 'next/image';
 
 import React, { HTMLAttributes } from 'react';
-import '@uploadthing/react/styles.css';
 
 import { UploadButton } from '@/utils/uploadthing';
 import { COLORS } from '@/constants/colors';

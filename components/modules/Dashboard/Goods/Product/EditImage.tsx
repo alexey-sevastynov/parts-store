@@ -1,17 +1,16 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
-import React from 'react';
 
 import Image from 'next/image';
-
-import { UploadFileResponse } from '@/types/uploathing-image/client';
 import { useLang } from '@/hooks/useLang';
+import { UploadFileResponse } from '@/types/uploathing-image/client';
+import React from 'react';
 import Title from '@/components/elements/Title';
-import InfoIconWithHint from '@/components/elements/InfoIconWithHint';
 import { Reorder } from 'framer-motion';
-import ImageItem from './ImageItem';
-import ImageUploadButton from './ImageUploadButton';
+import ImageItem from '../Add/ImageItem';
+import ImageUploadButton from '../Add/ImageUploadButton';
+import InfoIconWithHint from '@/components/elements/InfoIconWithHint';
 
-const AddImages = ({
+const EditImage = ({
   images = [],
   setImages,
 }: {
@@ -26,16 +25,18 @@ const AddImages = ({
     setImages((prevImages) => [...prevImages, ...newImages].slice(0, 4));
   };
 
-  const handleRemoveImage = async (img: UploadFileResponse, index: number) => {
+  const handleRemoveImage = async (img: string, index: number) => {
     const fetchRes = await fetch('/api/uploadthing', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ url: img.url }),
+      body: JSON.stringify({ url: img }),
     });
 
     const fetchResult = await fetchRes.json();
+
+    console.log('fetchResult:', fetchResult);
 
     if (fetchRes.ok) {
       setImages((prevImages) => prevImages.filter((_, i) => i !== index));
@@ -75,7 +76,7 @@ const AddImages = ({
                   img={img.url}
                   index={index}
                   handleRotateImage={handleRotateImage}
-                  handleRemoveImage={handleRemoveImage}
+                  handleRemoveImage={() => handleRemoveImage(img.url, index)}
                 />
               </Reorder.Item>
             ) : index === images.length ? (
@@ -108,4 +109,4 @@ const AddImages = ({
   );
 };
 
-export default AddImages;
+export default EditImage;

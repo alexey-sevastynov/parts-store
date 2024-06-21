@@ -25,8 +25,6 @@ const ListAddedGoods = ({
   isEmptyProducts,
   isEmptySearchResulProducts,
 }: IGoodsTableProps) => {
-  console.log(goods);
-
   const { lang, translations } = useLang();
 
   const [checkboxes, setCheckboxes] = React.useState<{
@@ -156,8 +154,6 @@ const ListAddedGoods = ({
       const selectedUrl = selectedProducts.flatMap(
         (item) => item.photos?.split(', ') || []
       );
-
-      console.log(selectedUrl);
 
       const res = await deleteSelectedProducts(selectedIds);
       if (res.status === 200) {
@@ -401,6 +397,7 @@ const ListAddedGoods = ({
                         ?.split(',')
                         .map((photo) => (
                           <Image
+                            key={photo}
                             src={photo}
                             alt={item.name[lang]}
                             height={SIZE_ICON_BIG}
@@ -414,7 +411,7 @@ const ListAddedGoods = ({
                     </td>
                     {/* ______name */}
                     <td className={Styles.productsTable__body_name_product}>
-                      <Link href={ROUTES.VIEW_BRANDS_BY_ID(item._id as string)}>
+                      <Link href={ROUTES.VIEW_GOODS_BY_ID(item._id as string)}>
                         <p>{item?.name[lang]}</p>
                       </Link>
                     </td>

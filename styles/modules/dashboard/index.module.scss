@@ -210,6 +210,7 @@ $padding-info-small-panel: 20px;
 }
 
 .customer,
+.product,
 .characteristicForm,
 .categoryForm,
 .add,
@@ -356,6 +357,7 @@ $padding-info-small-panel: 20px;
 .customers,
 .brands,
 .customer,
+.product,
 .goods,
 .characteristic,
 .categories,
@@ -1603,7 +1605,8 @@ $padding-info-small-panel: 20px;
 .goods {
 }
 
-.add {
+.add,
+.product {
   .addImages,
   .detailInfoGoods,
   .goodsCharacteristics,
@@ -1620,8 +1623,81 @@ $padding-info-small-panel: 20px;
     &__images {
       display: flex;
       gap: 20px;
-      flex-wrap: wrap;
+      overflow-x: auto;
+
+      padding-bottom: 20px;
+
       &_item {
+        box-sizing: border-box;
+        border: 2px dashed $grey;
+
+        border-radius: $border-radius-admin;
+        padding: 2px;
+        width: 210px;
+        height: 210px;
+
+        &_image {
+          position: relative;
+          cursor: grab;
+          &_first {
+            position: absolute;
+            bottom: 2px;
+            left: 0px;
+            border-top-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+
+            background-color: $red;
+            padding: 10px;
+
+            & p {
+              color: $white-font;
+            }
+          }
+          &_btns {
+            display: none;
+          }
+        }
+
+        &:hover {
+          .addImages__images_item_image {
+            position: relative;
+            &_btns_wrap {
+              position: absolute;
+
+              top: 0;
+
+              background-color: rgba($black, 0.2);
+              height: 100%;
+              width: 100%;
+            }
+            &_btns {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              gap: 20px;
+              height: 100%;
+
+              &_remove,
+              &_rotate {
+                background-color: $white;
+
+                border-radius: 100%;
+
+                padding: 10px;
+              }
+            }
+          }
+        }
+
+        &_image {
+        }
+      }
+
+      &_placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         box-sizing: border-box;
         border: 2px dashed $grey;
 

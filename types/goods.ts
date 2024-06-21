@@ -33,7 +33,10 @@ export interface IProduct {
   quantityAvailable: number; // Quantity of available products
   rating?: number;
   // Other common fields if any
-  characteristics?: { name: string; value: string }[]; // Dynamic characteristics of the product
+  characteristics?: {
+    name: { name: ILanguageStrings; values: string[] };
+    value: ILanguageStrings;
+  }[]; // Dynamic characteristics of the product
   // Other common fields
   createdAt?: string;
   updatedAt?: string;
@@ -66,7 +69,7 @@ export interface IProductInputs {
   rating?: number;
 }
 
-export type OptionCategoryType = { value?: string; label: string };
+export type OptionCategoryType = { value?: ILanguageStrings; label: string };
 
 export type OptionBrandType = { value: string | undefined; label: string };
 

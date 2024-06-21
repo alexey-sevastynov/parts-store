@@ -9,8 +9,6 @@ export default async function SubSubcategory(props: {
 }) {
   const id = props.searchParams.idSubcategory;
 
-  console.log(props);
-
   try {
     const fetchedSubcategories = await getSubcategoryById(id);
 

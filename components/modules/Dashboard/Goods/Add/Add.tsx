@@ -1,7 +1,6 @@
 'use client';
 
 import Styles from '@/styles/modules/dashboard/index.module.scss';
-import 'react-quill/dist/quill.snow.css';
 
 import React from 'react';
 import { FieldErrorsImpl, SubmitHandler, useForm } from 'react-hook-form';
@@ -23,6 +22,7 @@ import PriceAndAvailability from './PriceAndAvailability/PriceAndAvailability';
 import DescriptonProduct from './DescriptionProduct/DescriptionProduct';
 import { createProduct, createTestProduct } from '@/actions/goodsActions';
 import { UploadFileResponse } from '@/types/uploathing-image/client';
+import { usePathname } from 'next/navigation';
 
 const Add = ({
   brands,
@@ -35,6 +35,8 @@ const Add = ({
 }) => {
   const { lang, translations } = useLang();
 
+  const [isFormDirty, setIsFormDirty] = React.useState(false);
+
   const [brandsList, setBrandsList] = React.useState<IBrand[]>(brands);
 
   const [addedCharacteristics, setAddedCharacteristics] = React.useState<
@@ -44,7 +46,6 @@ const Add = ({
   const [product, setProduct] = React.useState<IProduct>();
 
   const [image, setImage] = React.useState<UploadFileResponse[]>([]);
-  console.log(image);
 
   const {
     register,
@@ -69,29 +70,6 @@ const Add = ({
     },
   ];
 
-  // const onSubmit: SubmitHandler<IProductInputs> = async (data) => {
-  //   console.log('Entering onSubmit');
-  //   const newProduct: ITest = {
-  //     name: data.name,
-  //   };
-
-  //   console.log('newProduct:', newProduct);
-  //   console.log('data:', data);
-
-  //   try {
-  //     const res = await createTestProduct(newProduct);
-  //     console.log('result:', res);
-
-  //     if (!product) {
-  //       // setProduct(newProduct);
-  //       console.log('Setting product...');
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  //   console.log('Leaving onSubmit');
-  // };
-
   const onSubmit: SubmitHandler<IProductInputs> = async (data) => {
     const arrayImages = image.map((item) => item.url).join(', ');
     console.log('Entering onSubmit');
@@ -108,8 +86,6 @@ const Add = ({
       country: data.country?.value,
       quantityAvailable: data.quantityAvailable,
       characteristics: addedCharacteristics.map((characteristic) => {
-        console.log('characteristic:', characteristic);
-
         return {
           name: characteristic.value._idCharacteristic,
           value: characteristic.value._idValueCharacteristic,
@@ -127,6 +103,8 @@ const Add = ({
 
     try {
       const res = await createProduct(newProduct);
+
+      setIsFormDirty(false);
       console.log('result:', res);
 
       if (!product) {
@@ -147,7 +125,7 @@ const Add = ({
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <span className={Styles.add__line} />
-        <AddImages image={image} setImage={setImage} />
+        <AddImages images={image} setImages={setImage} />
 
         <span className={Styles.add__line} />
         <DetailInfoGoods

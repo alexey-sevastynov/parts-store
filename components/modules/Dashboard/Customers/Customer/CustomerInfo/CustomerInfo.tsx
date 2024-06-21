@@ -10,13 +10,14 @@ import { Oval } from 'react-loader-spinner';
 import { SIZE_ICON } from '@/constants/common';
 import { COLORS } from '@/constants/colors';
 import { IUser } from '@/types/user';
-import DateTranslation from '../../DateTranslation';
+
 import PhotoUser from '../../PhotoUser';
 import { extractLastFiveCharacters } from '@/utils/common';
 import { Role } from '@/constants/user';
 import { changeUserBlockStatus, changeUserRole } from '@/actions/authActions';
 import { getRoleFromString } from '@/utils/user';
 import CustomerInfoLoading from './CustomerInfoLoading';
+import DateTranslation from '@/components/elements/DateTranslation';
 
 const CustomerInfo = ({
   user,

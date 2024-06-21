@@ -341,6 +341,7 @@
     "uploadthing": {
       "upload_icon": "Upload Icon",
       "upload_image": "Upload Image",
+      "add_image": "Add Image",
       "uploading": "Uploading",
       "max_file_image": "Maximum file size .svg 2MB",
       "max_file_png": "Maximum file size .png 2MB",
@@ -698,6 +699,7 @@
     "uploadthing": {
       "upload_icon": "Завантажити іконку",
       "upload_image": "Завантажити зображення",
+      "add_image": "Додати зображення",
       "uploading": "Завантаження",
       "max_file_image": "Максимальний розмір файлу .svg 2 МБ",
       "max_file_png": "Максимальний розмір файлу .png 2 МБ",
@@ -1054,6 +1056,7 @@
     "uploadthing": {
       "upload_icon": "Загрузить иконку",
       "upload_image": "Загрузить изображение",
+      "add_image": "Добавить изображение",
       "uploading": "Загрузка",
       "max_file_image": "Максимальный размер файла .svg 2mb",
       "max_file_png": "Максимальный размер файла .png 2mb",

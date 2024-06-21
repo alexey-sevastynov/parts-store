@@ -67,6 +67,7 @@ const ListCharacteristics = ({
                   <p>{characteristic.value[lang]}</p>
                 </div>
                 <button
+                  type='button'
                   onClick={() => handleRemoveCharacteristic(characteristic._id)}
                 >
                   {translations[lang].common.delete}

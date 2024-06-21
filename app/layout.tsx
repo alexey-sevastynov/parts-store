@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 
 import './globalStyles/global.scss';
+import '@uploadthing/react/styles.css';
+import 'react-quill/dist/quill.snow.css';
+
 import PagesLayout from '@/components/layouts/PagesLayout';
 import Providers from '@/components/layouts/Providers';
 import { Montserrat } from '@/utils/customFonts';

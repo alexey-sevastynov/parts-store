@@ -22,12 +22,10 @@ export async function getAllProducts(): Promise<{
 
     const populatedProducts = await Promise.all(
       products.map(async (product) => {
-        console.log('product:', product);
-
         const brand = await Brand.findById(product.brand);
         const category = await SubSubcategory.findById(product.category);
         const characteristics = await Promise.all(
-          product.characteristics.map(async (char) => {
+          product.characteristics.map(async (char: any) => {
             const nameCharacteristic = await Characteristic.findById(char.name);
             const valueCharacteristic = await CharacteristicValue.findById(
               char.value
@@ -35,22 +33,20 @@ export async function getAllProducts(): Promise<{
             return {
               name: nameCharacteristic
                 ? nameCharacteristic.toObject()
-                : 'unknown',
+                : `unknown getAllProducts, char.name: ${char.name}, char.value: ${char.value}, nameCharacteristic: ${nameCharacteristic}, valueCharacteristic: ${valueCharacteristic}, char: ${char}`,
               value: valueCharacteristic
                 ? valueCharacteristic.toObject()
-                : 'unknown',
+                : 'unknown getAllProducts',
             };
           })
         );
 
-        console.log('characteristics:', characteristics);
         const res = {
           ...product.toObject(),
           category,
           brand,
           characteristics,
         };
-        console.log('res:', res);
 
         return res;
       })
@@ -76,7 +72,38 @@ export async function getProductById(
     if (!product) {
       return { msg: 'Product not found', status: 404 };
     }
-    return { msg: 'Product fetched successfully!', status: 200, product };
+
+    const brand = await Brand.findById(product.brand);
+    const category = await SubSubcategory.findById(product.category);
+    const characteristics = await Promise.all(
+      product.characteristics.map(async (char: any) => {
+        const nameCharacteristic = await Characteristic.findById(char.name);
+        const valueCharacteristic = await CharacteristicValue.findById(
+          char.value
+        );
+        return {
+          name: nameCharacteristic
+            ? nameCharacteristic.toObject()
+            : 'unknown getProductById',
+          value: valueCharacteristic
+            ? valueCharacteristic.toObject()
+            : 'unknown getProductById',
+        };
+      })
+    );
+
+    const populatedProduct = {
+      ...product.toObject(),
+      category,
+      brand,
+      characteristics,
+    };
+
+    return {
+      msg: 'Product fetched successfully!',
+      status: 200,
+      product: populatedProduct,
+    };
   } catch (error) {
     console.error(error);
     return { msg: 'Failed to fetch product.', status: 500 };
@@ -111,20 +138,49 @@ export async function createTestProduct(
     return { msg: 'Failed to create product.', status: 500 };
   }
 }
-
 // Функция для редактирования товара по ID
 export async function updateProductById(
   productId: string,
   updateData: Partial<IProduct>
 ): Promise<{ msg: string; status: number; product?: IProduct }> {
   try {
-    const product = await Product.findByIdAndUpdate(productId, updateData, {
-      new: true,
-    });
+    const product = await Product.findByIdAndUpdate(productId, updateData);
+
     if (!product) {
       return { msg: 'Product not found', status: 404 };
     }
-    return { msg: 'Product updated successfully!', status: 200, product };
+
+    const brand = await Brand.findById(product.brand);
+    const category = await SubSubcategory.findById(product.category);
+    const characteristics = await Promise.all(
+      product.characteristics.map(async (char: any) => {
+        const nameCharacteristic = await Characteristic.findById(char.name);
+        const valueCharacteristic = await CharacteristicValue.findById(
+          char.value
+        );
+        return {
+          name: nameCharacteristic
+            ? nameCharacteristic.toObject()
+            : 'unknown updateProductById',
+          value: valueCharacteristic
+            ? valueCharacteristic.toObject()
+            : 'unknown updateProductById',
+        };
+      })
+    );
+
+    const populatedProduct = {
+      ...product.toObject(),
+      category,
+      brand,
+      characteristics,
+    };
+
+    return {
+      msg: 'Product updated successfully!',
+      status: 200,
+      product: populatedProduct,
+    };
   } catch (error) {
     console.error(error);
     return { msg: 'Failed to update product.', status: 500 };

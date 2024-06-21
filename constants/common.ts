@@ -29,6 +29,9 @@ export const ROUTES = {
 
   GOODS: '/dashboard/goods',
   GOODS_ADD: '/dashboard/goods/add',
+  VIEW_GOODS_BY_ID: (id: string) => {
+    return `goods/${id}`;
+  },
 
   BRANDS: '/dashboard/brands',
   BRANDS_ADD: '/dashboard/brands/add',

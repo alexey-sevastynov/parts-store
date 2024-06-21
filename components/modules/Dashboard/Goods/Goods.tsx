@@ -64,7 +64,10 @@ const Goods = ({ data, status, msg }: IGoodsProps) => {
       <div className={Styles.goods__head}>
         <div className={Styles.goods__head_title}>
           <Title size='md'>{translations[lang].dashboard_page.goods}</Title>
-          <button onClick={getProducts}>
+          <button
+            onClick={getProducts}
+            className={Styles.goods__head_title_btn_update}
+          >
             <GrUpdate title={translations[lang].common.update} />
           </button>
           <Link
