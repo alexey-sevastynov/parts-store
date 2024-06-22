@@ -1,9 +1,8 @@
 import Styles from '@/styles/elements/index.module.scss';
 import ProductsItem from './ProductsItem';
-import { TypeListProducts } from '@/types/elements';
+
 import React from 'react';
-import { BREAKPOINTS } from '@/constants/breakpoints';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
+
 import { MAX_VALUE_ITEMS } from '@/constants/common';
 import { IProduct } from '@/types/goods';
 
@@ -35,7 +34,6 @@ const ProductsList = ({
       {_items.map((product) => {
         return (
           <ProductsItem
-            key={product._id}
             item={product}
             lengthItems={items.length}
             showMoreItem={showMoreItem}

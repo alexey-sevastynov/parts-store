@@ -13,6 +13,10 @@ export const ROUTES = {
     return `/catalog/${transformStringToAdressLink(nameEn)}?id=${id}`;
   },
 
+  ITEM_PRODUCT: (id: string) => {
+    return `/${id}`;
+  },
+
   VIEW_SUBCATEGORY_BY_ID: (
     nameSubcategoryEn: string,
     nameSubSubcategoryEn: string,

@@ -1,4 +1,4 @@
-import { SIZE_ICON } from '@/constants/common';
+import { ROUTES, SIZE_ICON } from '@/constants/common';
 import Image from 'next/image';
 import Styles from '@/styles/elements/index.module.scss';
 import { IItemProduct } from '@/types/elements';
@@ -59,11 +59,17 @@ const ProductsItem = ({
         )}
       </button>
 
-      <Link className={Styles.productsItem__image} href={'/'}>
+      <Link
+        className={Styles.productsItem__image}
+        href={ROUTES.ITEM_PRODUCT(item._id as string)}
+      >
         <Image src={image} alt={name[lang]} fill sizes='100%' priority />
       </Link>
 
-      <Link className={Styles.productsItem__name} href={'/'}>
+      <Link
+        className={Styles.productsItem__name}
+        href={ROUTES.ITEM_PRODUCT(item._id as string)}
+      >
         {name[lang]}
       </Link>
 
