@@ -2,16 +2,20 @@
 
 import { getProductById } from '@/actions/goodsActions';
 import ItemProductLayout from '@/components/layouts/ItemProductLayout';
-import ProductPage from '@/components/templates/ProductPage/ProductPage';
+import CharacterisicsPage from '@/components/templates/ProductPage/CharacteristicsPage/CharacteristicsPage';
 
-export default async function Item({ params }: { params: { item: string } }) {
+export default async function Characteristics({
+  params,
+}: {
+  params: { item: string };
+}) {
   const requiredItem = await getProductById(params.item);
 
   return (
     <>
       {requiredItem && (
         <ItemProductLayout data={requiredItem}>
-          <ProductPage data={requiredItem} />
+          <CharacterisicsPage data={requiredItem} />
         </ItemProductLayout>
       )}
     </>

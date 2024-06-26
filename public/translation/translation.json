@@ -350,6 +350,13 @@
     },
     "main_page": {
       "main": "Main"
+    },
+
+    "product_page": {
+      "all_about_product": "All about product",
+      "characteristics": "Characteristics",
+      "reviews": "Reviews",
+      "analogs": "Analogs"
     }
   },
 
@@ -709,6 +716,13 @@
 
     "main_page": {
       "main": "Головна"
+    },
+
+    "product_page": {
+      "all_about_product": "Усе про товар",
+      "characteristics": "Характеристики",
+      "reviews": "Відгуки",
+      "analogs": "Аналоги"
     }
   },
 
@@ -1066,6 +1080,13 @@
 
     "main_page": {
       "main": "Главная"
+    },
+
+    "product_page": {
+      "all_about_product": "Все о продукте",
+      "characteristics": "Характеристики",
+      "reviews": "Отзывы",
+      "analogs": "Аналоги"
     }
   }
 }

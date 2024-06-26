@@ -1,17 +1,16 @@
 'use client';
-
 import { useLang } from '@/hooks/useLang';
-
 import { IProduct } from '@/types/goods';
+import React from 'react';
 
-const ProductPage = ({
+const ReviewsPage = ({
   data,
 }: {
   data: { msg: string; status: number; product?: IProduct };
 }) => {
   const { lang, translations } = useLang();
 
-  return <section className='product-page'>all about product</section>;
+  return <main className=''>rewites </main>;
 };
 
-export default ProductPage;
+export default ReviewsPage;

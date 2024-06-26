@@ -3,7 +3,7 @@ import { getProductById } from '@/actions/goodsActions';
 import ProductPage from '@/components/templates/Dashboard/GoodsPage/ProductPage/ProductPage';
 import { getUsers } from '@/utils/dashboards';
 
-const Product = async ({ params }: { params: { id: string } }) => {
+const Characteristics = async ({ params }: { params: { id: string } }) => {
   try {
     const fetchedProduct = await getProductById(params.id);
     const fetchedUsers = await getUsers();
