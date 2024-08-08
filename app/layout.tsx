@@ -10,7 +10,7 @@ import { Montserrat } from '@/utils/customFonts';
 
 export const metadata: Metadata = {
   title: 'Parts Wave',
-  description: 'Auto parts store',
+  description: 'Auto parts store...',
 };
 
 export default function RootLayout({
