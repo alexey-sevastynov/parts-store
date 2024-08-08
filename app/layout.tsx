@@ -9,8 +9,8 @@ import Providers from '@/components/layouts/Providers';
 import { Montserrat } from '@/utils/customFonts';
 
 export const metadata: Metadata = {
-  title: 'Parts-Wave',
-  description: 'Auto parts store...',
+  title: 'parts-wave',
+  description: 'Auto parts store.',
 };
 
 export default function RootLayout({
