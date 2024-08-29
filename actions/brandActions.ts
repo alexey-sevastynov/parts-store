@@ -7,30 +7,30 @@ import { IBrand } from '@/types/brand';
 export async function getAllBrands(): Promise<{
   msg: string;
   status: number;
-  brands?: IBrand[];
+  data: IBrand[];
 }> {
   try {
     const brands = await Brand.find({});
-    return { msg: 'Brands fetched successfully!', status: 200, brands };
+    return { msg: 'Brands fetched successfully!', status: 200, data: brands };
   } catch (error) {
     console.error(error);
-    return { msg: 'Failed to fetch brands.', status: 500 };
+    return { msg: 'Failed to fetch brands.', status: 500 , data: [] };
   }
 }
 
 // Function to get brand by ID
 export async function getBrandById(
   brandId: string
-): Promise<{ msg: string; status: number; brand?: IBrand }> {
+): Promise<{ msg: string; status: number; data: IBrand }> {
   try {
     const brand = await Brand.findById(brandId);
     if (!brand) {
-      return { msg: 'Brand not found', status: 404 };
+      return { msg: 'Brand not found', status: 404, data: {} as IBrand};
     }
-    return { msg: 'Brand fetched successfully!', status: 200, brand };
+    return { msg: 'Brand fetched successfully!', status: 200, data: brand };
   } catch (error) {
     console.error(error);
-    return { msg: 'Failed to fetch brand.', status: 500 };
+    return { msg: 'Failed to fetch brand.', status: 500, data: {} as IBrand };
   }
 }
 

@@ -5,17 +5,16 @@ import Characteristic from '@/models/Characteristic';
 import CharacteristicValue from '@/models/CharacteristicValue';
 import Product from '@/models/Product';
 import SubSubcategory from '@/models/SubSubcategory';
-import Subcategory from '@/models/Subcategory';
 import Test from '@/models/Test';
 import { ICharacteristics } from '@/types/characteristic';
+import { ICharacteristicState } from '@/types/dashboard';
 import { IProduct, ITest } from '@/types/goods';
-import { chain } from 'lodash';
 
 // Функция для получения всех товаров
 export async function getAllProducts(): Promise<{
   msg: string;
   status: number;
-  products?: IProduct[];
+  data: IProduct[];
 }> {
   try {
     const products = await Product.find();
@@ -43,25 +42,38 @@ export async function getAllProducts(): Promise<{
 
         const res = {
           ...product.toObject(),
-          category,
-          brand,
+          category: category.toObject(),
+          brand: brand.toObject(),
           characteristics,
         };
+
+          // Преобразование ObjectId в строки
+          res._id = res._id.toString();
+          res.category._id = res.category._id.toString();
+          res.brand._id = res.brand._id.toString();
+  
+          // Обработка характеристик
+          res.characteristics = res.characteristics.map((char: ICharacteristicState) => ({
+            ...char,
+            name: char.name._id.toString(),
+            value: char.value._id.toString(),
+          }));
 
         return res;
       })
     );
-    console.log('Products fetched:', populatedProducts);
+
     return {
       msg: 'Products fetched successfully!',
       status: 200,
-      products: populatedProducts,
+      data: populatedProducts,
     };
   } catch (error) {
     console.error(error);
-    return { msg: 'Failed to fetch products.', status: 500 };
+    return { msg: 'Failed to fetch products.', status: 500, data: [] };
   }
 }
+
 
 // Функция для получения товара по ID
 export async function getProductById(

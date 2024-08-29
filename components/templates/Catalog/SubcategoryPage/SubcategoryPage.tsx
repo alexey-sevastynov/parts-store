@@ -13,7 +13,6 @@ const SubcategoryPage = ({ data }: { data: ICategory }) => {
 
   const [category, setCategory] = React.useState<ICategory>(data);
 
-  console.log(category);
   const ADD_CATEGORIES_BREADCRUMBS = [
     {
       id: 1,

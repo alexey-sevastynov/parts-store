@@ -9,11 +9,11 @@ import Characteristics from '@/components/modules/Dashboard/Characteristics/Char
 import HeaderAdmin from '@/components/modules/Dashboard/Header/HeaderAdmin';
 
 const CharacteristicsPage = ({
-  users: { msg: msgUsers, status: statusUsers, users },
-  data: { msg, status, characteristics },
+  users: { msg: msgUsers, status: statusUsers, data: users },
+  data: { msg, status, data: characteristics },
 }: {
-  users: { msg: string; status: number; users: IUser[] };
-  data: { msg: string; status: number; characteristics: ICharacteristics[] };
+  users: { msg: string; status: number; data: IUser[] };
+  data: { msg: string; status: number; data: ICharacteristics[] };
 }) => {
   return (
     <main className='dashboard-pages'>

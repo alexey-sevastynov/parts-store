@@ -7,11 +7,11 @@ import { IBrand } from '@/types/brand';
 import Brand from '@/components/modules/Dashboard/Brands/Brand/Brand';
 
 const BrandPage = ({
-  users: { msg: msgUsers, status: statusUsers, users },
-  data: { msg, status, brand: data },
+  users: { msg: msgUsers, status: statusUsers, data: users },
+  data: { msg, status, data: brand },
 }: {
-  users: { msg: string; status: number; users: IUser[] };
-  data: { msg: string; status: number; brand?: IBrand };
+  users: { msg: string; status: number; data: IUser[] };
+  data: { msg: string; status: number; data: IBrand };
 }) => {
   return (
     <main className='dashboard-pages'>
@@ -21,7 +21,7 @@ const BrandPage = ({
         dataUsers={users}
       />
 
-      {data && <Brand data={data} />}
+      {brand && <Brand data={brand} />}
     </main>
   );
 };

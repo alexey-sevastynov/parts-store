@@ -5,11 +5,11 @@ import { IUser } from '@/types/user';
 import React from 'react';
 
 const CategoriesPage = ({
-  users: { msg: msgUsers, status: statusUsers, users },
-  data: { msg, status, categories },
+  users: { msg: msgUsers, status: statusUsers, data: users },
+  data: { msg, status, data: categories },
 }: {
-  users: { msg: string; status: number; users?: IUser[] };
-  data: { msg: string; status: number; categories?: ICategory[] };
+  users: { msg: string; status: number; data: IUser[] };
+  data: { msg: string; status: number; data: ICategory[] };
 }) => {
   return (
     <div className='dashboard-pages'>

@@ -29,8 +29,8 @@ const Customers = ({ data, status, msg }: ICustomersProps) => {
 
   const getUsers = async () => {
     const res = await getAllUsers();
-    setUsers(res.users);
-    setSearchResults(res.users as IUser[]);
+    setUsers(res.data);
+    setSearchResults(res.data as IUser[]);
   };
 
   React.useEffect(() => {

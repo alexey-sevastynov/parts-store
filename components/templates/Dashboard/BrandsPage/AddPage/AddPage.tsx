@@ -7,11 +7,11 @@ import HeaderAdmin from '@/components/modules/Dashboard/Header/HeaderAdmin';
 import { IBrand } from '@/types/brand';
 
 const AddPage = ({
-  users: { msg: msgUsers, status: statusUsers, users },
-  brands: { msg: msgBrands, status: statusBrands, brands },
+  users: { msg: msgUsers, status: statusUsers, data: users },
+  brands: { msg: msgBrands, status: statusBrands, data: brands },
 }: {
-  users: { msg: string; status: number; users: IUser[] };
-  brands: { msg: string; status: number; brands: IBrand[] };
+  users: { msg: string; status: number; data: IUser[] };
+  brands: { msg: string; status: number; data: IBrand[] };
 }) => {
   return (
     <main className='dashboard-pages'>

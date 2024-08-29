@@ -3,6 +3,7 @@
 import { getAllCategories, getCategoryById } from '@/actions/categoryActions';
 import SubcategoryPage from '@/components/templates/Catalog/SubcategoryPage/SubcategoryPage';
 import MainPage from '@/components/templates/MainPage/MainPage';
+import { getCategory } from '@/utils/dashboards';
 
 export default async function Subcategory(props: {
   params: { subcategory: string };
@@ -13,10 +14,10 @@ export default async function Subcategory(props: {
   const id = props.searchParams.id;
 
   try {
-    const fetchedCategories = await getCategoryById(id);
+    const fetchedCategories = await getCategory(id);
 
-    if (fetchedCategories.category) {
-      return <SubcategoryPage data={fetchedCategories.category} />;
+    if (fetchedCategories.data) {
+      return <SubcategoryPage data={fetchedCategories.data} />;
     }
   } catch (error) {}
 }

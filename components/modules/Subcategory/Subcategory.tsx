@@ -4,7 +4,7 @@ import React from 'react';
 import useSWR, { SWRResponse } from 'swr';
 
 import { useLang } from '@/hooks/useLang';
-import { getSubSubcategoriesByIds } from '@/actions/categoryActions';
+import { getAllSubSubCategoriesByIds } from '@/utils/dashboards';
 
 import { ROUTES } from '@/constants/common';
 import { AllowedLangs } from '@/constants/lang';
@@ -15,7 +15,7 @@ import { ISubcategoryProps } from '@/types/subcategory';
 import CategoryOverviewCard from '@/components/elements/CategoryOverviewCard';
 import Title from '@/components/elements/Title';
 
-const fetchSubSubcategories = (ids: string[]) => getSubSubcategoriesByIds(ids);
+
 
 const Subcategory = ({ title, data }: ISubcategoryProps) => {
   const { lang } = useLang();
@@ -41,14 +41,14 @@ const Subcategory = ({ title, data }: ISubcategoryProps) => {
           );
 
           const {
-            data: subSubCategories,
+            data: [subSubCategories],
             error,
             isLoading,
           }: SWRResponse = useSWR(
             subSubcategoryIds.length > 0
               ? ['subSubcategories', subSubcategoryIds]
               : null,
-            () => fetchSubSubcategories(subSubcategoryIds),
+            () => getAllSubSubCategoriesByIds(subSubcategoryIds),
             {
               revalidateIfStale: false,
               revalidateOnFocus: false,

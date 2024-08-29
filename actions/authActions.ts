@@ -8,6 +8,9 @@ import { redirect } from 'next/navigation';
 import { IInputs } from '@/types/authorization';
 import sendEmail from '@/utils/sendEmail';
 import { authOptions } from '@/utils/authOption';
+import dayjs from 'dayjs';
+import { Role } from '@/constants/user';
+import { IUser } from '@/types/user';
 
 const BASE_URL = process.env.NEXTAUTH_URL;
 
@@ -206,13 +209,13 @@ export async function getAllUsers() {
       _id: user._id.toString(), // Convert ObjectId to string
     }));
     return {
-      users: modifiedUsers,
+      data: modifiedUsers,
       msg: 'Users retrieved successfully!',
       status: 200,
     };
   } catch (error) {
     console.error(error);
-    return { msg: 'Failed to retrieve users.', status: 500 };
+    return { msg: 'Failed to retrieve users.', status: 500, data: [] };
   }
 }
 
@@ -221,13 +224,13 @@ export async function findUserById(id: string) {
     const user = await User.findById(id).select('-password');
 
     if (!user) {
-      return { msg: 'User not found', status: 404 };
+      return { msg: 'User not found', status: 404, data: {} };
     }
 
-    return { user, msg: 'User retrieved successfully!', status: 200 };
+    return { data: user, msg: 'User retrieved successfully!', status: 200 };
   } catch (error) {
     console.error(error);
-    return { msg: 'Failed to retrieve user.', status: 500 };
+    return { msg: 'Failed to retrieve user.', status: 500, data: {} };
   }
 }
 
@@ -306,26 +309,28 @@ export async function changeUserBlockStatus({
 
 export async function changeUserRole({
   id,
-  role,
+  role
 }: {
   id: string;
-  role: 'admin' | 'user';
+  role: Role.admin | Role.user;
 }) {
   try {
     const session = await getServerSession(authOptions);
     if (!session) throw new Error('Unauthorized!');
 
-    const updatedUser = await User.findByIdAndUpdate(
+    const updatedUser: IUser | null = await User.findByIdAndUpdate(
       id,
       { role },
       { new: true }
     );
 
-    if (!updatedUser) throw new Error('User not found!');
+    if (!updatedUser) {
+      return { msg: 'User not found!', status: 404, data: null }; 
+    };
 
-    return { msg: 'User role updated successfully!', status: 200 };
+    return { msg: 'User role updated successfully!', status: 200, data: updatedUser.role as Role };
   } catch (error: any) {
     console.error(error);
-    return { msg: 'Failed to update user role.', status: 500 };
+    return { msg: 'Failed to update user role.', status: 500, data: null };
   }
 }

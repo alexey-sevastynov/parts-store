@@ -8,9 +8,7 @@ import Title from '@/components/elements/Title';
 import { ICategory } from '@/types/category';
 import {
   deleteSelectedCategories,
-  getAllCategories,
   updateCategoryNameById,
-  updateSubcategoryNameById,
 } from '@/actions/categoryActions';
 
 import CategoriesTableEdit from '../CategoriesTableEdit';
@@ -26,7 +24,7 @@ const ListAddedCategories = ({
   isLoading,
 }: {
   data: ICategory[];
-  updateData: () => void;
+  updateData?: () => void;
   isLoading?: boolean;
 }) => {
   const { lang, translations } = useLang();

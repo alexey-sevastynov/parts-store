@@ -6,11 +6,11 @@ import { IProduct } from '@/types/goods';
 import { IUser } from '@/types/user';
 
 const GoodsPage = ({
-  users: { msg: msgUsers, status: statusUsers, users },
-  data: { msg, status, products },
+  users: { msg: msgUsers, status: statusUsers, data: users },
+  data: { msg, status, data: products },
 }: {
-  users: { msg: string; status: number; users?: IUser[] };
-  data: { msg: string; status: number; products?: IProduct[] };
+  users: { msg: string; status: number; data: IUser[] };
+  data: { msg: string; status: number; data: IProduct[] };
 }) => {
   return (
     <main className='dashboard-pages'>

@@ -22,38 +22,44 @@ export async function createCategory(
 export async function getCategoryById(categoryId: string): Promise<{
   msg: string;
   status: number;
-  category?: ICategory;
+  data: ICategory;
 }> {
   try {
-    const category = await Category.findById(categoryId);
+    const category: ICategory | null = await Category.findById(categoryId);
     if (!category) {
-      return { msg: 'Category not found', status: 404 };
+      return { msg: 'Category not found', status: 404, data: {} as ICategory };
     }
 
     const subcategories = await Subcategory.find({
       _id: { $in: category.subcategories },
     });
-
+  
     return {
       msg: 'Category fetched successfully!',
       status: 200,
-      category: { ...category.toObject(), subcategories },
+      data: { 
+        ...category, 
+        subcategories: subcategories.map((subcategory) => subcategory.toObject()) 
+      },
     };
+
+
+
   } catch (error) {
     console.error(error);
-    return { msg: 'Failed to fetch category.', status: 500 };
+    return { msg: 'Failed to fetch category.', status: 500, data: {} as ICategory };
   }
 }
 
 export async function getSubcategoryById(subcategoryId: string): Promise<{
   msg: string;
   status: number;
-  subcategory?: ISubcategory;
+  data: ISubcategory;
 }> {
   try {
     const subcategory = await Subcategory.findById(subcategoryId);
     if (!subcategory) {
-      return { msg: 'Subcategory not found', status: 404 };
+      return { msg: 'Subcategory not found', status: 404, data: {} as ISubcategory };
     }
 
     const subSubcategories = await SubSubcategory.find({
@@ -63,29 +69,29 @@ export async function getSubcategoryById(subcategoryId: string): Promise<{
     return {
       msg: 'Subcategory fetched successfully!',
       status: 200,
-      subcategory: { ...subcategory.toObject(), subSubcategories },
+      data: { ...subcategory.toObject(), subSubcategories: subSubcategories.map((subSubcategory) => subSubcategory.toObject()) },
     };
   } catch (error) {
     console.error(error);
-    return { msg: 'Failed to fetch subcategory.', status: 500 };
+    return { msg: 'Failed to fetch subcategory.', status: 500, data: {} as ISubcategory };
   }
 }
 
 export async function getSubSubcategoriesByIds(ids: string[]): Promise<{
   msg: string;
   status: number;
-  subSubcategories?: ISubSubcategory[];
+  data: ISubSubcategory[];
 }> {
   try {
     const subSubcategories = await SubSubcategory.find({ _id: { $in: ids } });
     return {
       msg: 'Sub-subcategories fetched successfully!',
       status: 200,
-      subSubcategories,
+      data: subSubcategories,
     };
   } catch (error) {
     console.error(error);
-    return { msg: 'Failed to fetch sub-subcategories.', status: 500 };
+    return { msg: 'Failed to fetch sub-subcategories.', status: 500, data: [] };
   }
 }
 
@@ -146,7 +152,7 @@ export async function createSubSubcategory(
 export async function getAllCategories(): Promise<{
   msg: string;
   status: number;
-  categories?: ICategory[];
+  data: ICategory[];
 }> {
   try {
     const categoriesFound = await Category.find();
@@ -157,19 +163,25 @@ export async function getAllCategories(): Promise<{
           _id: { $in: category.subcategories },
         });
 
-        return { ...category.toObject(), subcategories };
+        return {
+          _id: category._id.toString(), // Convert _id to string
+          name: category.name.toObject(),
+          imageUrl: category.imageUrl.toString(),
+          subcategories: subcategories.map((subcategory) => subcategory._id.toString()) // Convert each subcategory _id to string
+        };
       })
     );
     return {
       msg: 'All categories fetched successfully!',
       status: 200,
-      categories: populatedCategories,
+      data: [...populatedCategories],
     };
   } catch (error) {
     console.error(error);
     return {
       msg: 'Failed to fetch all categories.',
       status: 500,
+      data: [],
     };
   }
 }
@@ -405,20 +417,21 @@ export async function updateSubSubcategoryById(
 export async function getSubSubCategories(): Promise<{
   msg: string;
   status: number;
-  subSubCategories?: ISubSubcategory[];
+  data: ISubSubcategory[];
 }> {
   try {
     const subSubCategories = await SubSubcategory.find();
     return {
       msg: 'All sub-subcategories fetched successfully!',
       status: 200,
-      subSubCategories,
+      data: subSubCategories.map((subSubcategory) => subSubcategory.toObject()),
     };
   } catch (error) {
     console.error(error);
     return {
       msg: 'Failed to fetch sub-subcategories.',
       status: 500,
+      data: [],
     };
   }
 }

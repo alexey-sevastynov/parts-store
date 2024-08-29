@@ -14,12 +14,11 @@ import { ROUTES } from '@/constants/common';
 import { ICategory } from '@/types/category';
 import { ICategoriesProps } from '@/types/dashboard';
 
-import { getAllCategories } from '@/actions/categoryActions';
-
 import Title from '@/components/elements/Title';
 import SearchAdmin from '../SearchAdmin';
 import ServerErrorMsg from '../ServerErrorMsg';
 import CategoriesTable from './CategoriesTable';
+import { getCategories } from '@/utils/dashboards';
 
 const Categories = ({ data, status, msg }: ICategoriesProps) => {
   const { lang, translations } = useLang();
@@ -30,12 +29,12 @@ const Categories = ({ data, status, msg }: ICategoriesProps) => {
   const [categories, setСategories] = React.useState<ICategory[]>(data);
   const [searchResults, setSearchResults] = React.useState<ICategory[]>(data);
 
-  const getCategories = async () => {
+  const updateGetCategories = async () => {
     try {
-      const res = await getAllCategories();
+      const res = await getCategories();
 
-      setСategories(res.categories as ICategory[]);
-      setSearchResults(res.categories as ICategory[]);
+      setСategories(res.data);
+      setSearchResults(res.data);
     } catch (error) {
       console.error('Failed to fetch categories:', error);
     }
@@ -64,7 +63,7 @@ const Categories = ({ data, status, msg }: ICategoriesProps) => {
           <button className={Styles.categories__head_title_btn_update}>
             <GrUpdate
               title={translations[lang].common.update}
-              onClick={getCategories}
+              onClick={updateGetCategories}
             />
           </button>
           <Link
@@ -96,7 +95,7 @@ const Categories = ({ data, status, msg }: ICategoriesProps) => {
           categories={categories}
           searchResultsCategory={searchResults}
           isLoading={isLoading}
-          getCategories={getCategories}
+          getCategories={updateGetCategories}
         />
       )}
     </section>

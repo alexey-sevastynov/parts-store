@@ -1,13 +1,12 @@
-import { getCategoryById } from '@/actions/categoryActions';
 import AddSubcategoriesPage from '@/components/templates/Dashboard/CategoriesPage/AddPage/AddSubcategoriesPage/AddSubcategoriesPage';
-import { getUsers } from '@/utils/dashboards';
+import { getCategory, getUsers } from '@/utils/dashboards';
 
 const Add = async ({ params }: { params: { id: string } }) => {
-  const fetchedCategory = await getCategoryById(params.id);
-
   const fetchedUsers = await getUsers();
+  const fetchedCategory = await getCategory(params.id);
+
   try {
-    if (fetchedUsers.users) {
+    if (fetchedUsers.data) {
       return (
         <AddSubcategoriesPage users={fetchedUsers} data={fetchedCategory} />
       );
@@ -16,7 +15,7 @@ const Add = async ({ params }: { params: { id: string } }) => {
       return <div>Loading...</div>;
     }
   } catch (error) {
-    if (fetchedUsers.users) {
+    if (fetchedUsers.data) {
       console.error(error);
       // Handling data retrieval error
       return (
@@ -25,6 +24,7 @@ const Add = async ({ params }: { params: { id: string } }) => {
             ...fetchedUsers,
             msg: 'Failed to fetch users.',
             status: 500,
+            data: [],
           }}
           data={fetchedCategory}
         />

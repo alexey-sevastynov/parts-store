@@ -20,7 +20,7 @@ import {
 } from '@/context/features/modals/modals';
 import { useAppDispatch, useAppSelector } from '@/context/hooks';
 import PopupWindowCatalog from './DropDownCatalog/PopupWindowCatalog';
-import { getAllCategories, getCategoryById } from '@/actions/categoryActions';
+import { getCategories, getCategory } from '@/utils/dashboards';
 
 const Inventory = () => {
   const dispatch = useAppDispatch();
@@ -55,7 +55,7 @@ const Inventory = () => {
   // Fetch all categories
   const { data: categories, error: categoriesError } = useSWR(
     'categories',
-    () => getAllCategories().then((res) => res.categories),
+    () => getCategories().then((res) => res.data),
     {
       revalidateIfStale: false,
       revalidateOnFocus: false,
@@ -68,8 +68,8 @@ const Inventory = () => {
     return useSWR(
       id ? ['category', id] : null,
       () =>
-        getCategoryById(id).then((res) => {
-          return res.category;
+        getCategory(id).then((res) => {
+          return res.data;
         }),
       {
         revalidateIfStale: false,

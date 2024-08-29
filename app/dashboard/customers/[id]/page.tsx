@@ -8,7 +8,7 @@ const Customer = async ({ params }: { params: { id: string } }) => {
     const fetchedUsers = await getUsers();
 
     // Проверяем, есть ли данные о пользователе и список всех пользователей
-    if (fetchedUser && fetchedUsers && fetchedUsers.users) {
+    if (fetchedUser && fetchedUsers && fetchedUsers.data) {
       return <CustomerPage users={fetchedUsers} user={fetchedUser} />;
     } else {
       // Обработка случаев, когда данные отсутствуют или неполные

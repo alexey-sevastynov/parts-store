@@ -1,16 +1,14 @@
 'use server';
 
-import { getAllBrands } from '@/actions/brandActions';
 import BrandsPage from '@/components/templates/Dashboard/BrandsPage/BrandsPage';
-import { getUsers } from '@/utils/dashboards';
+import {  getBrands, getUsers } from '@/utils/dashboards';
 
 const Brands = async () => {
   try {
-    const fetchedBrands = await getAllBrands();
-
     const fetchedUsers = await getUsers();
+    const fetchedBrands = await getBrands();
 
-    if (fetchedUsers.users) {
+    if (fetchedUsers.data) {
       return <BrandsPage users={fetchedUsers} data={fetchedBrands} />;
     } else {
       return <div>Loading...</div>;

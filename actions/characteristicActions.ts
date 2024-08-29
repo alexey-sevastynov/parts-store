@@ -36,13 +36,13 @@ export async function getAllCharacteristics() {
     );
 
     return {
-      characteristics: populatedCharacteristics,
+      data: populatedCharacteristics,
       msg: 'Characteristics get all successfully!',
       status: 200,
     };
   } catch (error) {
     console.error(error);
-    return { msg: 'Failed to retrieve characteristics.', status: 500 };
+    return { msg: 'Failed to retrieve characteristics.', status: 500 , data: []};
   }
 }
 
@@ -51,7 +51,7 @@ export async function getCharacteristicById(characteristicId: string) {
     const characteristic = await Characteristic.findById(characteristicId);
 
     if (!characteristic) {
-      return { msg: 'Characteristic not found.', status: 404 };
+      return { msg: 'Characteristic not found.', status: 404, data: null };
     }
 
     // Get the associated values of the characteristic
@@ -60,13 +60,13 @@ export async function getCharacteristicById(characteristicId: string) {
     });
 
     return {
-      characteristic: { ...characteristic.toObject(), values },
+      data: { ...characteristic.toObject(), values },
       msg: 'Characteristic found successfully!',
       status: 200,
     };
   } catch (error) {
     console.error(error);
-    return { msg: 'Failed to retrieve characteristic.', status: 500 };
+    return { msg: 'Failed to retrieve characteristic.', status: 500, data: null };
   }
 }
 
@@ -173,7 +173,7 @@ export async function deleteSelectedCharacteristics(
 export async function deleteAllCharacteristics() {
   try {
     // Получаем список всех характеристик
-    const { characteristics } = await getAllCharacteristics();
+    const { data: characteristics } = await getAllCharacteristics();
 
     if (characteristics) {
       if (characteristics.length === 0) {
