@@ -7,13 +7,12 @@ import Add from '@/components/modules/Dashboard/Categories/Add/Add';
 import { ICategory } from '@/types/category';
 
 const AddPage = ({
-  users: { msg: msgUsers, status: statusUsers, users },
-  data: { msg, status, categories: data },
+  users: { msg: msgUsers, status: statusUsers, data: users },
+  data: { msg, status, data: categories },
 }: {
-  users: { msg: string; status: number; users: IUser[] };
-  data: { msg: string; status: number; categories?: ICategory[] };
+  users: { msg: string; status: number; data: IUser[] };
+  data: { msg: string; status: number; data: ICategory[] };
 }) => {
-  console.log(data);
 
   return (
     <main className='dashboard-pages'>
@@ -23,7 +22,7 @@ const AddPage = ({
         dataUsers={users}
       />
 
-      {data && <Add msg={msg} status={status} data={data} />}
+      {categories && <Add msg={msg} status={status} data={categories} />}
     </main>
   );
 };

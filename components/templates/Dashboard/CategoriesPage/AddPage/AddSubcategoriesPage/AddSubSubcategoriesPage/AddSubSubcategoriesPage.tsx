@@ -3,17 +3,16 @@
 import { IUser } from '@/types/user';
 
 import HeaderAdmin from '@/components/modules/Dashboard/Header/HeaderAdmin';
-import { ICategory, ISubcategory } from '@/types/category';
-import AddSubcategories from '@/components/modules/Dashboard/Categories/Add/AddSubcategories/AddSubcategories';
+import { ISubcategory } from '@/types/category';
 import AddSubSubcategories from '@/components/modules/Dashboard/Categories/Add/AddSubcategories/AddSubSubcategories/AddSubSubcategories';
 
 const AddSubSubcategoriesPage = ({
-  users: { msg: msgUsers, status: statusUsers, users },
-  data: { msg, status, subcategory: data },
+  users: { msg: msgUsers, status: statusUsers, data: users },
+  data: { msg, status, data: subcategory },
   idCategory,
 }: {
-  users: { msg: string; status: number; users: IUser[] };
-  data: { msg: string; status: number; subcategory?: ISubcategory };
+  users: { msg: string; status: number; data: IUser[] };
+  data: { msg: string; status: number; data: ISubcategory };
   idCategory: string;
 }) => {
   return (
@@ -24,11 +23,11 @@ const AddSubSubcategoriesPage = ({
         dataUsers={users}
       />
 
-      {data && (
+      {subcategory && (
         <AddSubSubcategories
           msg={msg}
           status={status}
-          data={data}
+          data={subcategory}
           idCategory={idCategory}
         />
       )}

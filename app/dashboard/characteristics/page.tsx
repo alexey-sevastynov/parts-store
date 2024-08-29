@@ -1,19 +1,21 @@
 'use server';
 
 import CharacteristicsPage from '@/components/templates/Dashboard/CharacteristicsPage/CharacteristicsPage';
-import { getCharacteristics, getUsers } from '@/utils/dashboards';
+import { ICharacteristics } from '@/types/characteristic';
+import { IPromiseResponse } from '@/types/dashboard';
+import { fetchAndCopyData, getCharacteristics, getUsers } from '@/utils/dashboards';
 
 const Characteristics = async () => {
   try {
-    const fetchedCharactristic = await getCharacteristics();
     const fetchedUsers = await getUsers();
+    const fetchedCharactristic = await fetchAndCopyData<IPromiseResponse<ICharacteristics[]>>(getCharacteristics);
 
     // Check if there is data about characteristics and users
     if (
       fetchedCharactristic &&
       fetchedUsers &&
-      fetchedCharactristic.characteristics &&
-      fetchedUsers.users
+      fetchedCharactristic.data &&
+      fetchedUsers.data
     ) {
       return (
         <CharacteristicsPage data={fetchedCharactristic} users={fetchedUsers} />

@@ -17,7 +17,7 @@ export interface IUser extends IUserParams {
   cars?: string[];
   orders?: string[];
   provider?: string;
-  role?: TypeRole;
+  role: TypeRole;
   createdAt?: string;
   updatedAt?: string;
   isBlocked: boolean;

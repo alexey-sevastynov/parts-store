@@ -16,15 +16,13 @@ const RecentlyViewedProducts = () => {
     }
   );
 
-  console.log(products);
-
   return (
     <section className={Styles.recentlyViewedProducts}>
       <h4 className={Styles.recentlyViewedProducts__title}>
         Останні переглянуті товари
       </h4>
 
-      {products?.products && <ProductsList items={products.products} />}
+      {products?.data && <ProductsList items={products.data} />}
     </section>
   );
 };

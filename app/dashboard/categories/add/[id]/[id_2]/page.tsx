@@ -1,14 +1,14 @@
 import { getSubcategoryById } from '@/actions/categoryActions';
 import AddSubSubcategoriesPage from '@/components/templates/Dashboard/CategoriesPage/AddPage/AddSubcategoriesPage/AddSubSubcategoriesPage/AddSubSubcategoriesPage';
 import AddSubcategoriesPage from '@/components/templates/Dashboard/CategoriesPage/AddPage/AddSubcategoriesPage/AddSubcategoriesPage';
-import { getUsers } from '@/utils/dashboards';
+import { getSubcategory, getUsers } from '@/utils/dashboards';
 
 const Add = async ({ params }: { params: { id: string; id_2: string } }) => {
-  const fetchedSubcategory = await getSubcategoryById(params.id_2);
+  const fetchedSubcategory = await getSubcategory(params.id_2);
 
   const fetchedUsers = await getUsers();
   try {
-    if (fetchedUsers.users) {
+    if (fetchedUsers.data) {
       return (
         <AddSubSubcategoriesPage
           users={fetchedUsers}
@@ -21,7 +21,7 @@ const Add = async ({ params }: { params: { id: string; id_2: string } }) => {
       return <div>Loading...</div>;
     }
   } catch (error) {
-    if (fetchedUsers.users) {
+    if (fetchedUsers.data) {
       console.error(error);
       // Handling data retrieval error
       return (

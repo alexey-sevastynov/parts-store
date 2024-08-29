@@ -23,6 +23,8 @@ const SubSubcategoryPage = ({
 
   const [subcategory, setSubcategory] = React.useState<ISubcategory>(data);
 
+  console.log("subcategory", subcategory);
+
   console.log(subcategory);
   const ADD_CATEGORIES_BREADCRUMBS = [
     {

@@ -4,11 +4,11 @@ import { IBrand } from '@/types/brand';
 import { IUser } from '@/types/user';
 
 const BrandsPage = ({
-  users: { msg: msgUsers, status: statusUsers, users },
-  data: { msg, status, brands },
+  users: { msg: msgUsers, status: statusUsers, data: users },
+  data: { msg, status, data: brands },
 }: {
-  users: { msg: string; status: number; users?: IUser[] };
-  data: { msg: string; status: number; brands?: IBrand[] };
+  users: { msg: string; status: number; data: IUser[] };
+  data: { msg: string; status: number; data: IBrand[] };
 }) => {
   return (
     <div className='dashboard-pages'>

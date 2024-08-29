@@ -10,15 +10,15 @@ import { useLang } from '@/hooks/useLang';
 import { useParams } from 'next/navigation';
 import CustomerInfo from './CustomerInfo/CustomerInfo';
 import React from 'react';
-import { findUserById } from '@/actions/authActions';
 import { extractLastFiveCharacters } from '@/utils/common';
 import { IUser } from '@/types/user';
+import { getUser } from '@/utils/dashboards';
 
 const Customer = ({ data }: { data: IUser }) => {
   const params = useParams();
 
   const { lang, translations } = useLang();
-  const [user, setUser] = React.useState<IUser>();
+  const [user, setUser] = React.useState<IUser>(data);
 
   const id = Array.isArray(params.id) ? params.id.join(', ') : params.id;
 
@@ -34,15 +34,13 @@ const Customer = ({ data }: { data: IUser }) => {
     },
   ];
 
-  const getUser = async (id: string) => {
-    const res = await findUserById(id);
-    setUser(res.user);
+  const findUserById = async (id: string) => {
+    const res = await getUser(id);
+    setUser(res.data);
   };
 
   React.useEffect(() => {
     setUser(data);
-
-    // getUser(id);
   }, []);
 
   return (
@@ -51,7 +49,7 @@ const Customer = ({ data }: { data: IUser }) => {
         <Breadcrumbs items={CUSTOMER_BREADCRUMBS} />
       </div>
 
-      <CustomerInfo user={user} getUser={getUser} />
+      <CustomerInfo user={user} getUser={findUserById} />
     </div>
   );
 };

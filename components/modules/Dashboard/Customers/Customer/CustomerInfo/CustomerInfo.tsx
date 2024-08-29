@@ -18,6 +18,7 @@ import { changeUserBlockStatus, changeUserRole } from '@/actions/authActions';
 import { getRoleFromString } from '@/utils/user';
 import CustomerInfoLoading from './CustomerInfoLoading';
 import DateTranslation from '@/components/elements/DateTranslation';
+import { setUserRole } from '@/utils/dashboards';
 
 const CustomerInfo = ({
   user,
@@ -33,9 +34,7 @@ const CustomerInfo = ({
   const [isValueChanged, setIsValueChanged] = React.useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
 
-  const [selectedRole, setSelectedRole] = React.useState<Role>(
-    (user?.role || Role.user) as Role
-  );
+  const [selectedRole, setSelectedRole] = React.useState<Role>(user?.role as Role || Role.user);
   const [selectedBlocked, setSelectedBlocked] = React.useState<boolean>(
     user?.isBlocked || false
   );
@@ -67,8 +66,10 @@ const CustomerInfo = ({
     setIsSubmitting(true);
     try {
       // Change user role
-      await changeUserRole({ id: user?._id, role: selectedRole });
-
+      const { data: currentRole } = await setUserRole(user?._id, selectedRole);
+      console.log('currentRole', currentRole)
+      currentRole && setSelectedRole(currentRole);
+   
       // Change user block status
       await changeUserBlockStatus({
         id: user?._id,
@@ -79,12 +80,11 @@ const CustomerInfo = ({
       setIsSubmitting(false);
       setIsActiveEdit(false);
       setIsValueChanged(false);
-
-      getUser(user?._id);
+      // getUser(user?._id);
     } catch (error) {
       console.error('Error occurred during form submission:', error);
       setIsSubmitting(false);
-    }
+    } 
   };
 
   return (
@@ -149,7 +149,7 @@ const CustomerInfo = ({
                   <option value={Role.admin}>{Role.admin}</option>
                 </select>
               ) : (
-                <p>{user?.role}</p>
+                <p>{selectedRole}</p>
               )}
             </li>
 

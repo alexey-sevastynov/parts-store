@@ -10,8 +10,8 @@ import CategoryForm from './CategoryForm';
 import ListAddedCategories from './ListAddedCategories';
 import { ICategoriesProps } from '@/types/dashboard';
 import { ICategory } from '@/types/category';
-import { getAllCategories } from '@/actions/categoryActions';
 import ServerErrorMsg from '../../ServerErrorMsg';
+import { getCategories } from '@/utils/dashboards';
 
 const Add = ({ data, msg, status }: ICategoriesProps) => {
   const { lang, translations } = useLang();
@@ -23,10 +23,10 @@ const Add = ({ data, msg, status }: ICategoriesProps) => {
 
   const updateListCategories = async (): Promise<void> => {
     try {
-      const res = await getAllCategories();
+      const res = await getCategories();
 
-      if (res.categories) {
-        setListCategories(res.categories);
+      if (res.data) {
+        setListCategories(res.data);
       }
     } catch (error: unknown) {
       if (error instanceof Error) {

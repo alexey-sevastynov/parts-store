@@ -20,8 +20,8 @@ import {
   categoryValidationRules,
   getCountries,
 } from '@/utils/goods';
-import { getSubSubCategories } from '@/actions/categoryActions';
 import { ISubSubcategory } from '@/types/category';
+import { getAllSubSubCategories } from '@/utils/dashboards';
 
 const SelectCategory = ({
   control,
@@ -34,7 +34,7 @@ const SelectCategory = ({
 
   const { data, error, isLoading } = useSWR(
     'subsubcategories',
-    getSubSubCategories,
+    getAllSubSubCategories,
     {
       revalidateIfStale: false,
       revalidateOnFocus: false,

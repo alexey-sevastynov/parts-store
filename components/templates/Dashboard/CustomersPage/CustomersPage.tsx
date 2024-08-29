@@ -6,9 +6,9 @@ import Customers from '@/components/modules/Dashboard/Customers/Customers';
 import HeaderAdmin from '@/components/modules/Dashboard/Header/HeaderAdmin';
 
 const CustomersPage = ({
-  data: { msg, status, users },
+  data: { msg, status, data: users },
 }: {
-  data: { msg: string; status: number; users: IUser[] };
+  data: { msg: string; status: number; data: IUser[] };
 }) => {
   return (
     <main className='dashboard-pages'>
@@ -24,3 +24,4 @@ const CustomersPage = ({
 };
 
 export default CustomersPage;
+``

@@ -1,14 +1,14 @@
 'use server';
 
-import { getAllCategories } from '@/actions/categoryActions';
 import MainPage from '@/components/templates/MainPage/MainPage';
+import { getCategories } from '@/utils/dashboards';
 
 export default async function Home() {
   try {
-    const fetchedCategories = await getAllCategories();
+    const fetchedCategories = await getCategories();
 
-    if (fetchedCategories.categories) {
-      return <MainPage categories={fetchedCategories.categories} />;
+    if (fetchedCategories.data) {
+      return <MainPage categories={fetchedCategories.data} />;
     } else {
       return <div>Loading...</div>;
     }

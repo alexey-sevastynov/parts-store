@@ -1,29 +1,29 @@
-import { getAllBrands } from '@/actions/brandActions';
 import AddPage from '@/components/templates/Dashboard/BrandsPage/AddPage/AddPage';
-import { getUsers } from '@/utils/dashboards';
+import { getBrands, getUsers } from '@/utils/dashboards';
 
 const Add = async () => {
   const fetchedUsers = await getUsers();
-
-  const fetchedBrands = await getAllBrands();
+  const fetchedBrands = await getBrands();
 
   try {
-    if (fetchedUsers.users) {
+    if (fetchedUsers.data) {
       return <AddPage users={fetchedUsers} brands={fetchedBrands} />;
     } else {
       // Handling cases where data is missing or incomplete
       return <div>Loading...</div>;
     }
   } catch (error) {
-    if (fetchedUsers.users) {
+    if (fetchedUsers.data) {
       console.error(error);
       // Handling data retrieval error
       return (
         <AddPage
+          brands={fetchedBrands}
           users={{
             ...fetchedUsers,
             msg: 'Failed to fetch users.',
             status: 500,
+            data: [],
           }}
         />
       );
