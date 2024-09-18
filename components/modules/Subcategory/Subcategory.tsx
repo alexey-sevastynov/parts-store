@@ -15,8 +15,6 @@ import { ISubcategoryProps } from '@/types/subcategory';
 import CategoryOverviewCard from '@/components/elements/CategoryOverviewCard';
 import Title from '@/components/elements/Title';
 
-
-
 const Subcategory = ({ title, data }: ISubcategoryProps) => {
   const { lang } = useLang();
 
@@ -41,7 +39,7 @@ const Subcategory = ({ title, data }: ISubcategoryProps) => {
           );
 
           const {
-            data: [subSubCategories],
+            data: subSubCategories,
             error,
             isLoading,
           }: SWRResponse = useSWR(

@@ -1,8 +1,7 @@
 'use server';
 
-import { getCategoryById, getSubcategoryById } from '@/actions/categoryActions';
 import SubSubcategoryPage from '@/components/templates/Catalog/SubcategoryPage/SubSubcategoryPage/SubSubcategoryPage';
-import { getCategory, getSubcategories } from '@/utils/dashboards';
+import { getCategory, getSubcategory } from '@/utils/dashboards';
 
 export default async function SubSubcategory(props: {
   params: { subcategory: string; subsubcategory: string };
@@ -11,16 +10,14 @@ export default async function SubSubcategory(props: {
   const id = props.searchParams.idSubcategory;
 
   try {
-    const fetchedSubcategories = await getSubcategories(id);
+    const fetchedSubcategories = await getSubcategory(id);
 
-    const fetchedCategories = await getCategory(
-      props.searchParams.idCategory
-    );
+    const fetchedCategories = await getCategory(props.searchParams.idCategory);
 
     if (fetchedSubcategories && fetchedCategories.data) {
       return (
         <SubSubcategoryPage
-          data={fetchedSubcategories}
+          data={fetchedSubcategories.data}
           idCategory={props.searchParams.idCategory}
           nameCategory={fetchedCategories.data.name}
         />
