@@ -33,21 +33,24 @@ export async function getCategoryById(categoryId: string): Promise<{
     const subcategories = await Subcategory.find({
       _id: { $in: category.subcategories },
     });
-  
+
     return {
       msg: 'Category fetched successfully!',
       status: 200,
-      data: { 
-        ...category, 
-        subcategories: subcategories.map((subcategory) => subcategory.toObject()) 
+      data: {
+        ...category.toObject(),
+        subcategories: subcategories.map((subcategory) =>
+          subcategory.toObject()
+        ),
       },
     };
-
-
-
   } catch (error) {
     console.error(error);
-    return { msg: 'Failed to fetch category.', status: 500, data: {} as ICategory };
+    return {
+      msg: 'Failed to fetch category.',
+      status: 500,
+      data: {} as ICategory,
+    };
   }
 }
 
@@ -59,7 +62,11 @@ export async function getSubcategoryById(subcategoryId: string): Promise<{
   try {
     const subcategory = await Subcategory.findById(subcategoryId);
     if (!subcategory) {
-      return { msg: 'Subcategory not found', status: 404, data: {} as ISubcategory };
+      return {
+        msg: 'Subcategory not found',
+        status: 404,
+        data: {} as ISubcategory,
+      };
     }
 
     const subSubcategories = await SubSubcategory.find({
@@ -69,11 +76,20 @@ export async function getSubcategoryById(subcategoryId: string): Promise<{
     return {
       msg: 'Subcategory fetched successfully!',
       status: 200,
-      data: { ...subcategory.toObject(), subSubcategories: subSubcategories.map((subSubcategory) => subSubcategory.toObject()) },
+      data: {
+        ...subcategory.toObject(),
+        subSubcategories: subSubcategories.map((subSubcategory) =>
+          subSubcategory.toObject()
+        ),
+      },
     };
   } catch (error) {
     console.error(error);
-    return { msg: 'Failed to fetch subcategory.', status: 500, data: {} as ISubcategory };
+    return {
+      msg: 'Failed to fetch subcategory.',
+      status: 500,
+      data: {} as ISubcategory,
+    };
   }
 }
 
@@ -167,7 +183,9 @@ export async function getAllCategories(): Promise<{
           _id: category._id.toString(), // Convert _id to string
           name: category.name.toObject(),
           imageUrl: category.imageUrl.toString(),
-          subcategories: subcategories.map((subcategory) => subcategory._id.toString()) // Convert each subcategory _id to string
+          subcategories: subcategories.map((subcategory) =>
+            subcategory._id.toString()
+          ), // Convert each subcategory _id to string
         };
       })
     );

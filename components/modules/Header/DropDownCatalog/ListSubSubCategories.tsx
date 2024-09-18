@@ -33,9 +33,9 @@ const ListSubSubCategories = ({
 
   return (
     <ul className={Styles.listSubSubcategories}>
-      {data.subSubcategories &&
+      {data.data &&
         subSubcategoryIds &&
-        data.subSubcategories.map((subSubcategory: ISubSubcategory) => {
+        data.data.map((subSubcategory: ISubSubcategory) => {
           return (
             <li
               key={subSubcategory._id}
