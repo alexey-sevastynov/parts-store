@@ -183,9 +183,7 @@ export async function getAllCategories(): Promise<{
           _id: category._id.toString(), // Convert _id to string
           name: category.name.toObject(),
           imageUrl: category.imageUrl.toString(),
-          subcategories: subcategories.map((subcategory) =>
-            subcategory._id.toString()
-          ), // Convert each subcategory _id to string
+          subcategories: subcategories,
         };
       })
     );
