@@ -1,16 +1,12 @@
 'use server';
-
 import Brand from '@/models/Brand';
 import Characteristic from '@/models/Characteristic';
 import CharacteristicValue from '@/models/CharacteristicValue';
 import Product from '@/models/Product';
 import SubSubcategory from '@/models/SubSubcategory';
 import Test from '@/models/Test';
-import { ICharacteristics } from '@/types/characteristic';
-import { ICharacteristicState } from '@/types/dashboard';
-import { IProduct, ITest } from '@/types/goods';
+import { IProduct, IProductForCreation, ITest } from '@/types/goods';
 
-// Функция для получения всех товаров
 export async function getAllProducts(): Promise<{
   msg: string;
   status: number;
@@ -61,7 +57,6 @@ export async function getAllProducts(): Promise<{
   }
 }
 
-// Функция для получения товара по ID
 export async function getProductById(
   productId: string
 ): Promise<{ msg: string; status: number; product?: IProduct }> {
@@ -107,9 +102,8 @@ export async function getProductById(
   }
 }
 
-// Функция для создания нового товара
 export async function createProduct(
-  productData: Omit<IProduct, '_id'>
+  productData: Omit<IProductForCreation, '_id'>
 ): Promise<{ msg: string; status: number; product?: IProduct }> {
   try {
     const product = new Product(productData);
@@ -131,7 +125,7 @@ export async function createTestProduct(
     return { msg: 'Failed to create product.', status: 500 };
   }
 }
-// Функция для редактирования товара по ID
+
 export async function updateProductById(
   productId: string,
   updateData: Partial<IProduct>
@@ -179,7 +173,6 @@ export async function updateProductById(
   }
 }
 
-// Функция для удаления товара по ID
 export async function deleteProductById(
   productId: string
 ): Promise<{ msg: string; status: number }> {
@@ -194,12 +187,10 @@ export async function deleteProductById(
   }
 }
 
-// Функция для удаления выбранных товаров по их ID
 export async function deleteSelectedProducts(
   selectedProductIds: string[]
 ): Promise<{ msg: string; status: number }> {
   try {
-    // Удаление каждого выбранного товара
     const deletePromises = selectedProductIds.map(async (productId) => {
       const res = await deleteProductById(productId);
       if (res.status !== 200) {

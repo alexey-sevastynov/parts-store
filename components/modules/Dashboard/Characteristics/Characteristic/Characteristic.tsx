@@ -1,28 +1,22 @@
 'use client';
-
 import Styles from '@/styles/modules/dashboard/index.module.scss';
-
 import React, { ChangeEvent } from 'react';
 import { useParams } from 'next/navigation';
-
 import { ROUTES } from '@/constants/common';
 import { useLang } from '@/hooks/useLang';
-
 import {
   addOrUpdateCharacteristicValue,
   deleteSelectedCharacteristicValues,
 } from '@/actions/characteristicActions';
-
+import { ILanguageStrings } from '@/types/constants';
+import { getCharacteristic } from '@/utils/dashboards';
 import { ICharacteristicProps } from '@/types/dashboard';
-
 import { Breadcrumbs } from '@/components/elements/Breadcrumbs';
 import CharacteristicInfoList from './CharacteristicInfoList';
 import AddCharacteristicValue from '../Add/AddCharacteristicValue';
 import CharacteristicInfoName from './CharacteristicInfoName';
-import { getCharacteristic } from '@/utils/dashboards';
-import { ILanguageStrings } from '@/types/constants';
 
-const Characteristic = ({ data, status, msg }: ICharacteristicProps) => {
+const Characteristic = ({ data }: ICharacteristicProps) => {
   const params = useParams();
   const { lang, translations } = useLang();
 
@@ -56,7 +50,7 @@ const Characteristic = ({ data, status, msg }: ICharacteristicProps) => {
   const updateCharacteristic = async (id: string) => {
     const newCharacteristic = await getCharacteristic(id);
 
-    setValuesCharacteristic(newCharacteristic.characteristic.values);
+    setValuesCharacteristic(newCharacteristic.data.values);
   };
 
   const CHARACTRERISTIC_BREADCRUMBS = [

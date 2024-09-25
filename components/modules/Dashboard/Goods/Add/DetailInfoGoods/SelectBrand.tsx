@@ -3,13 +3,10 @@ import Styles from '@/styles/modules/dashboard/index.module.scss';
 import React from 'react';
 import Select from 'react-select';
 import { Control, Controller, FieldErrorsImpl } from 'react-hook-form';
-
 import { useLang } from '@/hooks/useLang';
 import { brandValidationRules } from '@/utils/goods';
-
 import { IBrand } from '@/types/brand';
-import { IProductInputs, OptionBrandType } from '@/types/goods';
-
+import { IProductInputs, OptionLabelType } from '@/types/goods';
 import { COLORS } from '@/constants/colors';
 import { customSelectStyles } from '@/constants/react-select';
 
@@ -29,7 +26,7 @@ const SelectBrand = ({
       value: brand._id,
       label: brand.name,
     }))
-    ?.sort((a: OptionBrandType, b: OptionBrandType) =>
+    ?.sort((a: OptionLabelType, b: OptionLabelType) =>
       a.label.localeCompare(b.label)
     );
 

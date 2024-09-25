@@ -1,33 +1,25 @@
 'use client';
 
 import Styles from '@/styles/modules/dashboard/index.module.scss';
-
 import React from 'react';
 import { FieldErrorsImpl, SubmitHandler, useForm } from 'react-hook-form';
-
-import { IProduct, IProductInputs, ITest } from '@/types/goods';
+import { IProduct, IProductForCreation, IProductInputs } from '@/types/goods';
 import { IBrand } from '@/types/brand';
-
+import { ICharacteristicState } from '@/types/dashboard';
 import { ROUTES } from '@/constants/common';
 import { useLang } from '@/hooks/useLang';
-
 import { Button } from '@/components/elements/Button';
 import { Breadcrumbs } from '@/components/elements/Breadcrumbs';
 import DetailInfoGoods from './DetailInfoGoods/DetailInfoGoods';
-
 import AddImages from './AddImages';
 import GoodsCharacteristics from './GoodsCharacteristics/GoodsCharacteristics';
-import { ICharacteristicState } from '@/types/dashboard';
 import PriceAndAvailability from './PriceAndAvailability/PriceAndAvailability';
 import DescriptonProduct from './DescriptionProduct/DescriptionProduct';
-import { createProduct, createTestProduct } from '@/actions/goodsActions';
+import { createProduct } from '@/actions/goodsActions';
 import { UploadFileResponse } from '@/types/uploathing-image/client';
-import { usePathname } from 'next/navigation';
 
 const Add = ({
   brands,
-  brandsStatus,
-  brandsMsg,
 }: {
   brands: IBrand[];
   brandsStatus: number;
@@ -35,24 +27,18 @@ const Add = ({
 }) => {
   const { lang, translations } = useLang();
 
-  const [isFormDirty, setIsFormDirty] = React.useState(false);
-
-  const [brandsList, setBrandsList] = React.useState<IBrand[]>(brands);
-
+  const [brandsList] = React.useState<IBrand[]>(brands);
   const [addedCharacteristics, setAddedCharacteristics] = React.useState<
     ICharacteristicState[]
   >([]);
-
-  const [product, setProduct] = React.useState<IProduct>();
-
+  const [product, setProduct] = React.useState<IProductForCreation>();
   const [image, setImage] = React.useState<UploadFileResponse[]>([]);
 
   const {
     register,
     handleSubmit,
-    reset,
     control,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<IProductInputs>({
     mode: 'onBlur',
     defaultValues: {},
@@ -72,16 +58,15 @@ const Add = ({
 
   const onSubmit: SubmitHandler<IProductInputs> = async (data) => {
     const arrayImages = image.map((item) => item.url).join(', ');
-    console.log('Entering onSubmit');
-    const newProduct: IProduct = {
+
+    const newProduct: IProductForCreation = {
       name: data.name,
-      category: data.category.value || 'unknown category',
-      brand: data.brand.value || 'unknown brand',
+      category: data.category.value,
+      brand: data.brand.value,
       sku: data.sku,
       price: data.price,
       salePrice: data.salePrice || null,
       photos: arrayImages,
-
       description: data.description,
       country: data.country?.value,
       quantityAvailable: data.quantityAvailable,
@@ -91,30 +76,21 @@ const Add = ({
           value: characteristic.value._idValueCharacteristic,
         };
       }),
-
       analogs: undefined,
       reviews: undefined,
       compatibleCars: undefined,
       rating: undefined,
     };
 
-    console.log('newProduct:', newProduct);
-    console.log('data:', data);
-
     try {
-      const res = await createProduct(newProduct);
-
-      setIsFormDirty(false);
-      console.log('result:', res);
+      await createProduct(newProduct);
 
       if (!product) {
         setProduct(newProduct);
-        console.log('Setting product...');
       }
     } catch (error) {
       console.error(error);
     }
-    console.log('Leaving onSubmit');
   };
 
   return (
@@ -160,13 +136,10 @@ const Add = ({
           <p>{product.name[lang]}</p>
           <p>{product.price}</p>
           <p>{product.salePrice}</p>
-          _____
+
           <div
             dangerouslySetInnerHTML={{ __html: product.description[lang] }}
           />
-          _____s
-          {/* <pre>{product.description.en}</pre>
-          <pre></pre> */}
         </>
       )}
     </section>

@@ -10,10 +10,10 @@ import Link from 'next/link';
 import React from 'react';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import { GrUpdate } from 'react-icons/gr';
-import SearchAdmin from '../SearchAdmin';
-import ListAddedBrands from './Add/ListAddedBrands';
+import SearchAdmin from '@/components/modules/Dashboard/SearchAdmin';
+import ListAddedBrands from '@/components/modules/Dashboard/Brands/Add/ListAddedBrands';
 
-const Brands = ({ data, status, msg }: IBrandsProps) => {
+const Brands = ({ data, status }: IBrandsProps) => {
   const { lang, translations } = useLang();
 
   const [brands, setBrands] = React.useState<IBrand[]>(data);
@@ -23,21 +23,17 @@ const Brands = ({ data, status, msg }: IBrandsProps) => {
   const isLoading: boolean = !Object.assign(data);
 
   const getBrands = async () => {
-    try {
-      const res = await getAllBrands();
+    const res = await getAllBrands();
 
-      setBrands(res.brands as IBrand[]);
-      setSearchResults(res.brands as IBrand[]);
-    } catch (error) {
-      console.error('Failed to fetch categories:', error);
-    }
+    setBrands(res.data as IBrand[]);
+    setSearchResults(res.data as IBrand[]);
   };
 
   const handleSearch = (query: string) => {
     if (!brands) return [];
 
     if (!query) {
-      setSearchResults(brands); // If the query is empty, show all categories
+      setSearchResults(brands);
     } else {
       const filteredBrands = brands.filter((category) => {
         return category.name.toLowerCase().includes(query.toLowerCase());

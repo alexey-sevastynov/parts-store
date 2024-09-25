@@ -1,7 +1,5 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
-
 import { useLang } from '@/hooks/useLang';
-
 import SelectNameCharacteristic from './SelectNameCharacteristic';
 import SelectValueCharacteristic from './SelectValueCharacteristic';
 import Title from '@/components/elements/Title';
@@ -15,8 +13,6 @@ import { getCharacteristics } from '@/utils/dashboards';
 import useSWR from 'swr';
 import { Button } from '@/components/elements/Button';
 import React from 'react';
-import { v4 } from 'uuid';
-import { ICharacteristics } from '@/types/characteristic';
 import { ICharacteristicState } from '@/types/dashboard';
 import ListCharacteristics from './ListCharacteristics';
 
@@ -41,15 +37,13 @@ const GoodsCharacteristics = ({
     name: 'characteristics.value',
   });
 
-  const { data, error, isLoading } = useSWR(
-    'characteristics',
-    getCharacteristics,
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    }
-  );
+  const { data } = useSWR('characteristics', getCharacteristics, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+
+  const characteristics = data?.data;
 
   const handleAddCharacteristic = (characteristic: ICharacteristicState) => {
     setAddedCharacteristics([...addedCharacteristics, characteristic]);
@@ -70,15 +64,15 @@ const GoodsCharacteristics = ({
       >
         {translations[lang].dashboard_page.characteristic_goods}
       </Title>
-      {data?.characteristics && (
+      {characteristics && (
         <div className={Styles.goodsCharacteristics__add}>
           <SelectNameCharacteristic
             control={control}
-            characteristics={data?.characteristics}
+            characteristics={characteristics}
           />
           <SelectValueCharacteristic
             control={control}
-            characteristics={data?.characteristics}
+            characteristics={characteristics}
           />
         </div>
       )}

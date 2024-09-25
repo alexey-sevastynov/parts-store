@@ -1,11 +1,12 @@
 import { IBrand } from './brand';
-import { ICategory, ISubSubcategory } from './category';
+import { ISubSubcategory } from './category';
 import { ILanguageStrings } from './constants';
 
 export interface ITest {
   name: ILanguageStrings;
 }
 
+// TODO: [ interfaces `IProduct`, `IProductInputs`, `IProductForCreation` - fix duplicate code ]
 export interface IProduct {
   _id?: string;
   category: ISubSubcategory;
@@ -33,10 +34,12 @@ export interface IProduct {
   quantityAvailable: number; // Quantity of available products
   rating?: number;
   // Other common fields if any
-  characteristics?: {
-    name: { name: ILanguageStrings; values: string[] };
-    value: ILanguageStrings;
-  }[]; // Dynamic characteristics of the product
+  characteristics?:
+    | {
+        name: { name: ILanguageStrings; values: string[] };
+        value: ILanguageStrings;
+      }[]
+    | { name: string; value: string }[];
   // Other common fields
   createdAt?: string;
   updatedAt?: string;
@@ -69,9 +72,49 @@ export interface IProductInputs {
   rating?: number;
 }
 
-export type OptionCategoryType = { value?: ILanguageStrings; label: string };
+export interface IProductForCreation {
+  _id?: string;
+  category: string;
+  name: ILanguageStrings;
+  brand: string;
+  sku: string;
+  price: number;
+  salePrice?: number | null; // Discounted price
+  photos?: string; // Links to product photos
+  description: {
+    en: string;
+    ru: string;
+    ua: string;
+  };
+  country?: {
+    en: string;
+    ru: string;
+    ua: string;
+  };
 
-export type OptionBrandType = { value: string | undefined; label: string };
+  analogs?: any; // Links to product analogs or their names
+  reviews?: any; // References to reviews
+  compatibleCars?: any; // Car models compatible with the product
+
+  quantityAvailable: number; // Quantity of available products
+  rating?: number;
+  // Other common fields if any
+  characteristics?: { name: string; value: string }[];
+  // Other common fields
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export type OptionType = {
+  value: string;
+  label: string;
+};
+export type OptionLabelType = {
+  label: string;
+};
+
+export type OptionCategoryType = OptionType;
+export type OptionBrandType = OptionType;
 
 export type OptionCountryType = { value: ILanguageStrings; label: string };
 export type OptionChatacteristicNameType = {
