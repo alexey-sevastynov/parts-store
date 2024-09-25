@@ -10,9 +10,6 @@ import { useLang } from '@/hooks/useLang';
 import { useParams } from 'next/navigation';
 import React from 'react';
 
-import { findUserById } from '@/actions/authActions';
-import { extractLastFiveCharacters } from '@/utils/common';
-import { IUser } from '@/types/user';
 import { IBrand } from '@/types/brand';
 import { getBrandById } from '@/actions/brandActions';
 import BrandInfo from './BrandInfo';
@@ -39,7 +36,7 @@ const Brand = ({ data }: { data: IBrand }) => {
 
   const getBrand = async (id: string) => {
     const res = await getBrandById(id);
-    setBrand(res?.brand as IBrand);
+    setBrand(res?.data as IBrand);
   };
 
   return (

@@ -42,22 +42,10 @@ export async function getAllProducts(): Promise<{
 
         const res = {
           ...product.toObject(),
-          category: category.toObject(),
-          brand: brand.toObject(),
+          category,
+          brand,
           characteristics,
         };
-
-          // Преобразование ObjectId в строки
-          res._id = res._id.toString();
-          res.category._id = res.category._id.toString();
-          res.brand._id = res.brand._id.toString();
-  
-          // Обработка характеристик
-          res.characteristics = res.characteristics.map((char: ICharacteristicState) => ({
-            ...char,
-            name: char.name._id.toString(),
-            value: char.value._id.toString(),
-          }));
 
         return res;
       })
@@ -69,11 +57,9 @@ export async function getAllProducts(): Promise<{
       data: populatedProducts,
     };
   } catch (error) {
-    console.error(error);
     return { msg: 'Failed to fetch products.', status: 500, data: [] };
   }
 }
-
 
 // Функция для получения товара по ID
 export async function getProductById(
@@ -117,7 +103,6 @@ export async function getProductById(
       product: populatedProduct,
     };
   } catch (error) {
-    console.error(error);
     return { msg: 'Failed to fetch product.', status: 500 };
   }
 }
@@ -128,11 +113,9 @@ export async function createProduct(
 ): Promise<{ msg: string; status: number; product?: IProduct }> {
   try {
     const product = new Product(productData);
-    console.log('Product fetched:', product);
     await product.save();
     return { msg: 'Product created successfully!', status: 200, product };
   } catch (error) {
-    console.error(error);
     return { msg: 'Failed to create product.', status: 500 };
   }
 }
@@ -142,11 +125,9 @@ export async function createTestProduct(
 ): Promise<{ msg: string; status: number; product?: ITest }> {
   try {
     const product = await new Test(productData);
-    console.log('Product fetched:', product);
     await product.save();
     return { msg: 'Product created successfully!', status: 200, product };
   } catch (error) {
-    console.error(error);
     return { msg: 'Failed to create product.', status: 500 };
   }
 }
@@ -194,7 +175,6 @@ export async function updateProductById(
       product: populatedProduct,
     };
   } catch (error) {
-    console.error(error);
     return { msg: 'Failed to update product.', status: 500 };
   }
 }
@@ -210,7 +190,6 @@ export async function deleteProductById(
     }
     return { msg: 'Product deleted successfully!', status: 200 };
   } catch (error) {
-    console.error(error);
     return { msg: 'Failed to delete product.', status: 500 };
   }
 }
@@ -224,7 +203,6 @@ export async function deleteSelectedProducts(
     const deletePromises = selectedProductIds.map(async (productId) => {
       const res = await deleteProductById(productId);
       if (res.status !== 200) {
-        console.log(`Failed to delete product with ID ${productId}`);
       }
     });
 
@@ -232,7 +210,6 @@ export async function deleteSelectedProducts(
 
     return { msg: 'Selected products deleted successfully!', status: 200 };
   } catch (error) {
-    console.error('Failed to delete selected products:', error);
     return { msg: 'Failed to delete selected products.', status: 500 };
   }
 }

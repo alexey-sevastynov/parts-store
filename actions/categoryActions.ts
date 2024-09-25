@@ -25,7 +25,8 @@ export async function getCategoryById(categoryId: string): Promise<{
   data: ICategory;
 }> {
   try {
-    const category: ICategory | null = await Category.findById(categoryId);
+    const category: ICategory | null =
+      await Category.findById(categoryId).lean();
     if (!category) {
       return { msg: 'Category not found', status: 404, data: {} as ICategory };
     }
@@ -38,14 +39,13 @@ export async function getCategoryById(categoryId: string): Promise<{
       msg: 'Category fetched successfully!',
       status: 200,
       data: {
-        ...category.toObject(),
+        ...category,
         subcategories: subcategories.map((subcategory) =>
           subcategory.toObject()
         ),
       },
     };
   } catch (error) {
-    console.error(error);
     return {
       msg: 'Failed to fetch category.',
       status: 500,
@@ -84,7 +84,6 @@ export async function getSubcategoryById(subcategoryId: string): Promise<{
       },
     };
   } catch (error) {
-    console.error(error);
     return {
       msg: 'Failed to fetch subcategory.',
       status: 500,
@@ -106,7 +105,6 @@ export async function getSubSubcategoriesByIds(ids: string[]): Promise<{
       data: subSubcategories,
     };
   } catch (error) {
-    console.error(error);
     return { msg: 'Failed to fetch sub-subcategories.', status: 500, data: [] };
   }
 }
@@ -133,7 +131,6 @@ export async function createSubcategory(
       subcategory,
     };
   } catch (error) {
-    console.error(error);
     return { msg: 'Failed to create subcategory.', status: 500 };
   }
 }
@@ -160,7 +157,6 @@ export async function createSubSubcategory(
       subSubcategory,
     };
   } catch (error) {
-    console.error(error);
     return { msg: 'Failed to create sub-subcategory.', status: 500 };
   }
 }
@@ -193,7 +189,6 @@ export async function getAllCategories(): Promise<{
       data: [...populatedCategories],
     };
   } catch (error) {
-    console.error(error);
     return {
       msg: 'Failed to fetch all categories.',
       status: 500,
@@ -212,7 +207,6 @@ export async function deleteSelectedCategories(
       const category = await Category.findById(categoryId);
 
       if (!category) {
-        console.log(`Category with ID ${categoryId} not found.`);
         return;
       }
 
@@ -234,8 +228,6 @@ export async function deleteSelectedCategories(
 
       // Finally, delete the category
       await Category.findByIdAndDelete(categoryId);
-
-      console.log(`Category with ID ${categoryId} deleted successfully.`);
     });
 
     await Promise.all(deletePromises);
@@ -245,7 +237,6 @@ export async function deleteSelectedCategories(
       status: 200,
     };
   } catch (error) {
-    console.error(error);
     return { msg: 'Failed to delete selected categories.', status: 500 };
   }
 }
@@ -260,7 +251,6 @@ export async function deleteSelectedSubcategories(
       const subcategory = await Subcategory.findById(subcategoryId);
 
       if (!subcategory) {
-        console.log(`Subcategory with ID ${subcategoryId} not found.`);
         return;
       }
 
@@ -276,8 +266,6 @@ export async function deleteSelectedSubcategories(
       await Category.findByIdAndUpdate(subcategory.category, {
         $pull: { subcategories: subcategoryId },
       });
-
-      console.log(`Subcategory with ID ${subcategoryId} deleted successfully.`);
     });
 
     await Promise.all(deletePromises);
@@ -287,7 +275,6 @@ export async function deleteSelectedSubcategories(
       status: 200,
     };
   } catch (error) {
-    console.error(error);
     return { msg: 'Failed to delete selected subcategories.', status: 500 };
   }
 }
@@ -319,7 +306,6 @@ export async function updateCategoryNameById(
 
     return { msg: 'Category name updated successfully!', status: 200 };
   } catch (error) {
-    console.error(error);
     return { msg: 'Failed to update category name.', status: 500 };
   }
 }
@@ -335,7 +321,6 @@ export async function deleteSelectedSubSubCategories(
         const subSubcategory = await SubSubcategory.findById(subSubcategoryId);
 
         if (!subSubcategory) {
-          console.log(`SubSubcategory with ID ${subSubcategoryId} not found.`);
           return;
         }
 
@@ -346,10 +331,6 @@ export async function deleteSelectedSubSubCategories(
         await Subcategory.findByIdAndUpdate(subSubcategory.subcategory, {
           $pull: { subSubcategories: subSubcategoryId },
         });
-
-        console.log(
-          `SubSubcategory with ID ${subSubcategoryId} deleted successfully.`
-        );
       }
     );
 
@@ -360,7 +341,6 @@ export async function deleteSelectedSubSubCategories(
       status: 200,
     };
   } catch (error) {
-    console.error(error);
     return { msg: 'Failed to delete selected sub-subcategories.', status: 500 };
   }
 }
@@ -391,7 +371,6 @@ export async function updateSubcategoryNameById(
 
     return { msg: 'Subcategory name updated successfully!', status: 200 };
   } catch (error) {
-    console.error(error);
     return { msg: 'Failed to update subcategory name.', status: 500 };
   }
 }
@@ -404,7 +383,6 @@ export async function updateSubSubcategoryById(
   try {
     // Find the sub-subcategory by its ID
     const subSubcategory = await SubSubcategory.findById(subSubcategoryId);
-    console.log('updateData-backend:', updateData);
 
     if (!subSubcategory) {
       return { msg: 'SubSubcategory not found.', status: 404 };
@@ -425,7 +403,6 @@ export async function updateSubSubcategoryById(
 
     return { msg: 'SubSubcategory updated successfully!', status: 200 };
   } catch (error) {
-    console.error(error);
     return { msg: 'Failed to update subSubcategory.', status: 500 };
   }
 }
@@ -443,7 +420,6 @@ export async function getSubSubCategories(): Promise<{
       data: subSubCategories.map((subSubcategory) => subSubcategory.toObject()),
     };
   } catch (error) {
-    console.error(error);
     return {
       msg: 'Failed to fetch sub-subcategories.',
       status: 500,
