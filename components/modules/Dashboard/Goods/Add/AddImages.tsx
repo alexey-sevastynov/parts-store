@@ -1,8 +1,6 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
 import React from 'react';
-
 import Image from 'next/image';
-
 import { UploadFileResponse } from '@/types/uploathing-image/client';
 import { useLang } from '@/hooks/useLang';
 import Title from '@/components/elements/Title';
@@ -45,7 +43,7 @@ const AddImages = ({
   };
 
   const handleRotateImage = (index: number) => {
-    // Implement rotation functionality if needed
+    // TODO: [ Implement rotation functionality if needed or removed functionality ]
   };
 
   const onReorder = (reorderedItems: UploadFileResponse[]) => {
@@ -72,7 +70,7 @@ const AddImages = ({
                 value={img}
               >
                 <ImageItem
-                  img={img.url}
+                  img={img}
                   index={index}
                   handleRotateImage={handleRotateImage}
                   handleRemoveImage={handleRemoveImage}

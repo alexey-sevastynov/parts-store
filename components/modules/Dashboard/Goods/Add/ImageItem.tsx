@@ -1,18 +1,14 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
-
 import React from 'react';
 import Image from 'next/image';
-
 import { AiOutlineRotateRight } from 'react-icons/ai';
 import { MdRemoveCircleOutline } from 'react-icons/md';
-
-import { UploadFileResponse } from '@/types/uploathing-image/client';
-
 import { COLORS } from '@/constants/colors';
 import { SIZE_ICON } from '@/constants/common';
+import { UploadFileResponse } from '@/types/uploathing-image/client';
 
 interface ImageItemProps {
-  img: string;
+  img: UploadFileResponse;
   index: number;
   handleRotateImage: (index: number) => void;
   handleRemoveImage: (img: UploadFileResponse, index: number) => void;
@@ -28,7 +24,7 @@ const ImageItem: React.FC<ImageItemProps> = ({
     <div className={Styles.addImages__images_item}>
       <div className={Styles.addImages__images_item_image}>
         <Image
-          src={img}
+          src={img.url}
           alt='image'
           width={200}
           height={200}

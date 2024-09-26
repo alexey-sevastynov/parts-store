@@ -59,11 +59,11 @@ export async function getAllProducts(): Promise<{
 
 export async function getProductById(
   productId: string
-): Promise<{ msg: string; status: number; product?: IProduct }> {
+): Promise<{ msg: string; status: number; data: IProduct | null }> {
   try {
     const product = await Product.findById(productId);
     if (!product) {
-      return { msg: 'Product not found', status: 404 };
+      return { msg: 'Product not found', status: 404, data: null };
     }
 
     const brand = await Brand.findById(product.brand);
@@ -95,10 +95,10 @@ export async function getProductById(
     return {
       msg: 'Product fetched successfully!',
       status: 200,
-      product: populatedProduct,
+      data: populatedProduct,
     };
   } catch (error) {
-    return { msg: 'Failed to fetch product.', status: 500 };
+    return { msg: 'Failed to fetch product.', status: 500, data: null };
   }
 }
 
@@ -128,7 +128,7 @@ export async function createTestProduct(
 
 export async function updateProductById(
   productId: string,
-  updateData: Partial<IProduct>
+  updateData: Partial<IProductForCreation>
 ): Promise<{ msg: string; status: number; product?: IProduct }> {
   try {
     const product = await Product.findByIdAndUpdate(productId, updateData);

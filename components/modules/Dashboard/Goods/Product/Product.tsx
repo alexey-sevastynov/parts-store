@@ -1,30 +1,25 @@
-import { Breadcrumbs } from '@/components/elements/Breadcrumbs';
-import { ROUTES } from '@/constants/common';
-import { useLang } from '@/hooks/useLang';
 import Styles from '@/styles/modules/dashboard/index.module.scss';
-import { IProduct, IProductInputs } from '@/types/goods';
-
 import React from 'react';
+import { useParams } from 'next/navigation';
+import { FieldErrorsImpl, SubmitHandler, useForm } from 'react-hook-form';
+import { updateProductById } from '@/actions/goodsActions';
+import { useLang } from '@/hooks/useLang';
+import { UploadFileResponse } from '@/types/uploathing-image/client';
+import { ICharacteristicState } from '@/types/dashboard';
+import { IBrand } from '@/types/brand';
+import { IProduct, IProductForCreation, IProductInputs } from '@/types/goods';
+import { ROUTES } from '@/constants/common';
+import { Button } from '@/components/elements/Button';
+import { Breadcrumbs } from '@/components/elements/Breadcrumbs';
 import EditImage from './EditImage';
 import DetailInfoGoods from '../Add/DetailInfoGoods/DetailInfoGoods';
-import { FieldErrorsImpl, SubmitHandler, useForm } from 'react-hook-form';
-import { IBrand } from '@/types/brand';
 import GoodsCharacteristics from '../Add/GoodsCharacteristics/GoodsCharacteristics';
-import { ICharacteristicState } from '@/types/dashboard';
 import PriceAndAvailability from '../Add/PriceAndAvailability/PriceAndAvailability';
 import DescriptonProduct from '../Add/DescriptionProduct/DescriptionProduct';
-import { Button } from '@/components/elements/Button';
-import { UploadFileResponse } from '@/types/uploathing-image/client';
-import { createProduct, updateProductById } from '@/actions/goodsActions';
-import { useParams, usePathname } from 'next/navigation';
 
 const Product = ({
   data,
-  status,
-  msg,
   brands,
-  brandsStatus,
-  brandsMsg,
 }: {
   data: IProduct;
   status: number;
@@ -38,7 +33,6 @@ const Product = ({
   const { id } = useParams();
 
   const [images, setImages] = React.useState<UploadFileResponse[]>([]);
-  const [brandsList, setBrandsList] = React.useState<IBrand[]>(brands);
   const [addedCharacteristics, setAddedCharacteristics] = React.useState<
     ICharacteristicState[]
   >(
@@ -65,9 +59,8 @@ const Product = ({
   const {
     register,
     handleSubmit,
-    reset,
     control,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<IProductInputs>({
     mode: 'onBlur',
     defaultValues: {
@@ -77,12 +70,7 @@ const Product = ({
         en: data?.name?.en,
       },
       category: {
-        value: {
-          _id: data?.category?._id,
-          ua: data?.category?.name?.ua,
-          ru: data?.category?.name?.ru,
-          en: data?.category?.name?.en,
-        },
+        value: data?.category?._id,
         label: data?.category?.name?.[lang] || '',
       },
       brand: {
@@ -139,10 +127,8 @@ const Product = ({
   }, [data.photos]); // <-- Add data.photos as dependency
 
   const onSubmit: SubmitHandler<IProductInputs> = async (data) => {
-    console.log('Entering onSubmit: ', data);
-
     const arrayImages = images.map((item) => item.url).join(', ');
-    const newProduct: IProduct = {
+    const newProduct: IProductForCreation = {
       name: data.name,
       category: data.category.value,
       brand: data.brand.value,
@@ -161,16 +147,11 @@ const Product = ({
       }),
     };
 
-    console.log('newProduct:', newProduct);
-
     try {
       const res = await updateProductById(id as string, newProduct);
-
-      console.log('result:', res);
     } catch (error) {
       console.error(error);
     }
-    console.log('Leaving onSubmit');
   };
 
   return (
@@ -187,7 +168,7 @@ const Product = ({
           register={register}
           control={control}
           errors={errors as Partial<FieldErrorsImpl<IProductInputs>>}
-          brandsList={brandsList}
+          brandsList={brands}
         />
 
         <span className={Styles.add__line} />
@@ -214,5 +195,3 @@ const Product = ({
 };
 
 export default Product;
-
-// {"_id":{"$oid":"6673c97087f1f77e97b678e3"},"name":{"en":"CARr","ru":"CARr","ua":"CARr"},"category":{"$oid":"6654777c0fd81e1320d5a65d"},"brand":{"$oid":"665b0a81fc8b56a22e035e34"},"sku":"CAR","price":{"$numberInt":"1112"},"salePrice":{"$numberInt":"1111"},"photos":"https://utfs.io/f/ce46deed-be0f-45e7-be5e-25d2402ffbd1-360gn5.png","description":{"en":"<p>3</p>","ru":"<p>2</p>","ua":"<p>1</p>"},"country":{"en":"Austria","ru":"Австрия","ua":"Австрия"},"quantityAvailable":{"$numberInt":"12"},"characteristics":[{"name":"6640f6126bbd3b9cc35e531b","value":"6640f6126bbd3b9cc35e5317","_id":{"$oid":"6673c97087f1f77e97b678e4"}},{"name":"6640f7e26bbd3b9cc35e533b","value":"6640f7e26bbd3b9cc35e5337","_id":{"$oid":"6673c97087f1f77e97b678e5"}}],"createdAt":{"$date":{"$numberLong":"1718864240586"}},"updatedAt":{"$date":{"$numberLong":"1718864240586"}},"__v":{"$numberInt":"0"}}

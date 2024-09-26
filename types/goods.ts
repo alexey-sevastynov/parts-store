@@ -34,12 +34,11 @@ export interface IProduct {
   quantityAvailable: number; // Quantity of available products
   rating?: number;
   // Other common fields if any
-  characteristics?:
-    | {
-        name: { name: ILanguageStrings; values: string[] };
-        value: ILanguageStrings;
-      }[]
-    | { name: string; value: string }[];
+  characteristics?: {
+    name: { _id: string; name: ILanguageStrings; values: string[] };
+    value: ILanguageStrings;
+  }[];
+
   // Other common fields
   createdAt?: string;
   updatedAt?: string;
@@ -113,17 +112,22 @@ export type OptionLabelType = {
   label: string;
 };
 
-export type OptionCategoryType = OptionType;
+export type OptionWithLanguages = {
+  en: string;
+  ru: string;
+  ua: string;
+  _id: string;
+};
+
 export type OptionBrandType = OptionType;
+export type OptionCategoryType = {
+  value: string;
+  label: string;
+};
 
 export type OptionCountryType = { value: ILanguageStrings; label: string };
 export type OptionChatacteristicNameType = {
-  value: {
-    en: string;
-    ru: string;
-    ua: string;
-    _id: string;
-  };
+  value: OptionWithLanguages;
   label: string;
 };
 

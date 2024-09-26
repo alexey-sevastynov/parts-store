@@ -1,5 +1,4 @@
 'use client';
-
 import Product from '@/components/modules/Dashboard/Goods/Product/Product';
 import HeaderAdmin from '@/components/modules/Dashboard/Header/HeaderAdmin';
 import { IBrand } from '@/types/brand';
@@ -8,19 +7,17 @@ import { IUser } from '@/types/user';
 
 const ProductPage = ({
   users: { msg: msgUsers, status: statusUsers, users },
-  data: { msg, status, product },
+  data: { msg, status, data: product },
   brands,
   brandsStatus,
   brandsMsg,
 }: {
   users: { msg: string; status: number; users?: IUser[] };
-  data: { msg: string; status: number; product?: IProduct };
+  data: { msg: string; status: number; data: IProduct | null };
   brands: IBrand[];
   brandsStatus: number;
   brandsMsg: string;
 }) => {
-  console.log('product:', product);
-
   return (
     <main className='dashboard-pages'>
       {users && (

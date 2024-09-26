@@ -14,6 +14,13 @@ export interface ISubcategory {
   subSubcategories: ISubSubcategory[];
 }
 
+export interface ISubcategoryWithIds {
+  _id?: string;
+  name: ILanguageStrings;
+  imageUrl: string;
+  subSubcategories: string[];
+}
+
 export interface ICategory {
   _id?: string;
   imageUrl: string;

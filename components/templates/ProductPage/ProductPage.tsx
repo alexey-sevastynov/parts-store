@@ -1,18 +1,13 @@
 'use client';
-
 import ProductImageSlider from '@/components/modules/ItemProduct/ProductImageSlider/ProductImageSlider';
-import { useLang } from '@/hooks/useLang';
-
 import { IProduct } from '@/types/goods';
 
 const ProductPage = ({
   data,
 }: {
-  data: { msg: string; status: number; product?: IProduct };
+  data: { msg: string; status: number; data: IProduct | null };
 }) => {
-  const { lang, translations } = useLang();
-
-  const images = data.product?.photos?.split(',');
+  const images = data.data?.photos?.split(',');
 
   return (
     <section className='product-page'>

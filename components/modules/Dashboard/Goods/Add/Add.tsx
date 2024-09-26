@@ -1,9 +1,8 @@
 'use client';
-
 import Styles from '@/styles/modules/dashboard/index.module.scss';
 import React from 'react';
 import { FieldErrorsImpl, SubmitHandler, useForm } from 'react-hook-form';
-import { IProduct, IProductForCreation, IProductInputs } from '@/types/goods';
+import { IProductForCreation, IProductInputs } from '@/types/goods';
 import { IBrand } from '@/types/brand';
 import { ICharacteristicState } from '@/types/dashboard';
 import { ROUTES } from '@/constants/common';
