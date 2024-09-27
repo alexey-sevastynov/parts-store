@@ -1,47 +1,184 @@
 {
+  "root": true,
+  "ignorePatterns": ["*.ico"],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint/eslint-plugin", "react", "jsx-a11y", "react-hooks", "next", "import", "jsx-a11y", "prettier"],
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
-    "plugin:react/recommended",
-    "plugin:jsx-a11y/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript"
-  ],
-  "rules": {
-    "prettier/prettier": ["error", { "endOfLine": "auto" }],
-    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-    "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
-    "no-trailing-spaces": ["error", { "skipBlankLines": false }],
-    "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 1 }],
-    "object-curly-spacing": ["error", "always"],
-    "comma-spacing": ["error", { "before": false, "after": true }],
-    "arrow-spacing": ["error", { "before": false, "after": true }],
-    "space-infix-ops": ["error", { "int32Hint": false }],
-    "keyword-spacing": ["error", { "before": true, "after": true }],
-    "react/jsx-indent": ["error", 2, { "indentLogicalExpressions": true }],
-    "arrow-body-style": ["error", "as-needed"],
-    "padded-blocks": ["error", "never"],
-    "semi": ["error", "never"],
-    "max-len": ["error", { "code": 120 }],
-    "indent": ["error", 2],
-    "react/self-closing-comp": ["error", { "component": true, "html": true }],
-    "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }],
-    "react-hooks/exhaustive-deps": "off",
-    "react/prop-types": "off",
-    "react/react-in-jsx-scope": "off",
-    "jsx-a11y/alt-text": ["error", { "elements": ["img"], "img": ["Image"] }],
-    "jsx-a11y/no-onchange": "off",
-    "import/no-unresolved": "off",
-    "import/named": "off",
-    "import/namespace": "off",
-    "import/default": "off",
-    "import/export": "off",
-    "import/order": ["error", { "alphabetize": { "order": "asc", "caseInsensitive": true } }]
-  }
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "plugins": [
+        "@typescript-eslint/tslint",
+        "react-hooks",
+        "react",
+        "react-refresh"
+      ],
+      "parserOptions": {
+        "project": "tsconfig.json",
+        "createDefaultProgram": true,
+        "ecmaFeatures": {
+          "jsx": true
+        }
+      },
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended",
+        "plugin:react/jsx-runtime",
+        "plugin:react-hooks/recommended",
+        "prettier",
+        "next/core-web-vitals"
+      ],
+      "rules": {
+        "@typescript-eslint/no-unsafe-return": "error",
+        "@typescript-eslint/no-unsafe-assignment": "error",
+        "@typescript-eslint/no-unused-vars": "off",
+
+        "@typescript-eslint/array-type": [
+          "error",
+          {
+            "default": "array"
+          }
+        ],
+        "@typescript-eslint/await-thenable": "error",
+        "@typescript-eslint/ban-types": [
+          "error",
+          {
+            "types": {
+              "Object": "Use {} instead.",
+              "Function": "Avoid using the `Function` type. Use a specific function type, like `() => void`.",
+              "Boolean": "Use `boolean` instead.",
+              "Number": "Use `number` instead.",
+              "String": "Use `string` instead.",
+              "Symbol": "Use `symbol` instead."
+            }
+          }
+        ],
+        "@typescript-eslint/consistent-type-definitions": "error",
+        "@typescript-eslint/explicit-member-accessibility": [
+          "error",
+          {
+            "accessibility": "no-public"
+          }
+        ],
+        "@typescript-eslint/member-ordering": "error",
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "import",
+            "format": ["camelCase", "PascalCase"]
+          },
+          {
+            "selector": "variable",
+            "format": ["camelCase", "PascalCase"]
+          },
+          {
+            "selector": "typeLike",
+            "format": ["camelCase", "PascalCase"]
+          },
+          {
+            "selector": "enumMember",
+            "format": ["camelCase", "PascalCase"]
+          },
+          {
+            "selector": "function",
+            "format": ["PascalCase"],
+            "filter": {
+              "regex": "^.*\\.tsx?$",
+              "match": true
+            }
+          },
+          {
+            "selector": "function",
+            "format": ["camelCase"],
+            "filter": {
+              "regex": "^.*\\.ts?$",
+              "match": true
+            }
+          }
+        ],
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/no-for-in-array": "error",
+        "@typescript-eslint/no-inferrable-types": "error",
+        "@typescript-eslint/no-require-imports": "error",
+        "@typescript-eslint/no-this-alias": "error",
+        "@typescript-eslint/no-unused-expressions": [
+          "error",
+          {
+            "allowShortCircuit": true
+          }
+        ],
+        "@typescript-eslint/no-var-requires": "error",
+        "@typescript-eslint/unbound-method": "error",
+        "@typescript-eslint/no-shadow": "error",
+        "@typescript-eslint/prefer-for-of": "error",
+        "complexity": [
+          "error",
+          {
+            "max": 10
+          }
+        ],
+        "default-case": "error",
+        "eqeqeq": ["error", "always"],
+        "import/no-default-export": "off",
+        "import/no-deprecated": "error",
+        "import/no-cycle": ["warn", { "maxDepth": 1 }],
+        "import/no-extraneous-dependencies": [
+          "error",
+          {
+            "devDependencies": false
+          }
+        ],
+        "max-classes-per-file": ["error", 2],
+        "max-len": [
+          "error",
+          {
+            "code": 120,
+            "ignorePattern": "^import\\s.+\\sfrom\\s.+;$"
+          }
+        ],
+        "max-lines": ["error", 400],
+        "max-lines-per-function": ["error", 60],
+        "no-constant-condition": "error",
+        "prefer-const": "off",
+        "no-control-regex": "error",
+        "no-debugger": "error",
+        "no-duplicate-case": "error",
+        "no-duplicate-imports": "error",
+        "no-empty": "error",
+        "no-eval": "error",
+        "no-extra-semi": "error",
+        "no-invalid-regexp": "error",
+        "no-irregular-whitespace": "error",
+        "no-multiple-empty-lines": "error",
+        "no-return-await": "error",
+        "no-sequences": "error",
+        "no-sparse-arrays": "error",
+        "no-template-curly-in-string": "error",
+        "no-undef-init": "error",
+        "no-param-reassign": "error",
+        "space-in-parens": ["error", "never"],
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
+      }
+    },
+    {
+      "files": ["*.tsx"],
+      "rules": {
+        "complexity": "off",
+        "max-lines-per-function": ["error", 300],
+        "max-len": [
+          "error",
+          {
+            "code": 500
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts"],
+      "rules": {
+        "max-lines-per-function": ["error", 60]
+      }
+    }
+  ]
 }
