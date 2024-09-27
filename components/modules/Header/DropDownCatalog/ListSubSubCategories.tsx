@@ -1,11 +1,10 @@
 import Styles from '@/styles/modules/header/index.module.scss';
-
-import { getSubSubcategoriesByIds } from '@/actions/categoryActions';
-import { useLang } from '@/hooks/useLang';
-import { ISubcategory, ISubSubcategory } from '@/types/category';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import useSWR from 'swr';
 import Link from 'next/link';
+import { getSubSubcategoriesByIds } from '@/actions/categoryActions';
+import { useLang } from '@/hooks/useLang';
+import { ISubSubcategory } from '@/types/category';
 
 const fetchSubSubcategories = (ids: string[]) => getSubSubcategoriesByIds(ids);
 
@@ -14,7 +13,7 @@ const ListSubSubCategories = ({
 }: {
   subSubcategoryIds: string[];
 }) => {
-  const { lang, translations } = useLang();
+  const { lang } = useLang();
 
   const { data, error } = useSWR(
     subSubcategoryIds.length > 0

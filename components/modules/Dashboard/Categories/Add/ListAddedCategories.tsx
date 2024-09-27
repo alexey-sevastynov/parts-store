@@ -1,22 +1,18 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
-
 import React from 'react';
-
+import { GrUpdate } from 'react-icons/gr';
 import { useLang } from '@/hooks/useLang';
-
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import Title from '@/components/elements/Title';
+import NotFoundMsg from '@/components/modules/Dashboard/NotFoundMsg';
 import { ICategory } from '@/types/category';
 import {
   deleteSelectedCategories,
   updateCategoryNameById,
 } from '@/actions/categoryActions';
-
-import CategoriesTableEdit from '../CategoriesTableEdit';
-import { GrUpdate } from 'react-icons/gr';
-import CategoriesList from '../CategoriesList';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { BREAKPOINTS } from '@/constants/breakpoints';
-import NotFoundMsg from '../../NotFoundMsg';
+import CategoriesList from '../CategoriesList';
+import CategoriesTableEdit from '../CategoriesTableEdit';
 
 const ListAddedCategories = ({
   data,
@@ -24,7 +20,7 @@ const ListAddedCategories = ({
   isLoading,
 }: {
   data: ICategory[];
-  updateData?: () => void;
+  updateData: () => void;
   isLoading?: boolean;
 }) => {
   const { lang, translations } = useLang();
@@ -88,13 +84,9 @@ const ListAddedCategories = ({
     updatedData: { ua: string; ru: string; en: string },
     imageUrl?: string
   ) => {
-    try {
-      await updateCategoryNameById(id, updatedData, imageUrl);
+    await updateCategoryNameById(id, updatedData, imageUrl);
 
-      updateData();
-    } catch (error) {
-      console.error('Failed to update category:', error);
-    }
+    updateData();
   };
 
   return (

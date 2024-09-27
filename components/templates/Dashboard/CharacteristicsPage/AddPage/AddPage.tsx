@@ -6,9 +6,9 @@ import Add from '@/components/modules/Dashboard/Characteristics/Add/Add';
 import HeaderAdmin from '@/components/modules/Dashboard/Header/HeaderAdmin';
 
 const AddPage = ({
-  users: { msg: msgUsers, status: statusUsers, users },
+  users: { msg: msgUsers, status: statusUsers, data: users },
 }: {
-  users: { msg: string; status: number; users: IUser[] };
+  users: { msg: string; status: number; data: IUser[] };
 }) => {
   return (
     <main className='dashboard-pages'>

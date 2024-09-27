@@ -1,23 +1,19 @@
 'use client';
-
 import Styles from '@/styles/modules/dashboard/index.module.scss';
-
-import { useLang } from '@/hooks/useLang';
-import React from 'react';
-
-import { GrUpdate } from 'react-icons/gr';
-
-import SearchAdmin from '../SearchAdmin';
-import Title from '@/components/elements/Title';
 import Link from 'next/link';
-import { ROUTES } from '@/constants/common';
+import React from 'react';
 import { BsPlusCircleFill } from 'react-icons/bs';
-import ListAddedGoods from './ListAddedGoods';
+import { GrUpdate } from 'react-icons/gr';
+import { getAllProducts } from '@/actions/goodsActions';
+import { useLang } from '@/hooks/useLang';
+import Title from '@/components/elements/Title';
+import { ROUTES } from '@/constants/common';
 import { IGoodsProps } from '@/types/brand';
 import { IProduct } from '@/types/goods';
-import { getAllProducts } from '@/actions/goodsActions';
+import SearchAdmin from '../SearchAdmin';
+import ListAddedGoods from './ListAddedGoods';
 
-const Goods = ({ data, status, msg }: IGoodsProps) => {
+const Goods = ({ data }: IGoodsProps) => {
   const { lang, translations } = useLang();
 
   const [products, setProducts] = React.useState<IProduct[]>(data);
@@ -26,7 +22,6 @@ const Goods = ({ data, status, msg }: IGoodsProps) => {
   const isEmptyProducts = data.length === 0;
   const isEmptySearchResulProducts = searchResults.length === 0;
 
-  const isLoaded = status === 200;
   const isLoading: boolean = !Object.assign(data);
 
   const handleSearch = (query: string) => {
@@ -52,8 +47,8 @@ const Goods = ({ data, status, msg }: IGoodsProps) => {
     try {
       const res = await getAllProducts();
 
-      setProducts(res.products as IProduct[]);
-      setSearchResults(res.products as IProduct[]);
+      setProducts(res.data as IProduct[]);
+      setSearchResults(res.data as IProduct[]);
     } catch (error) {
       console.error('Failed to fetch products:', error);
     }

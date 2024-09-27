@@ -1,25 +1,13 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
-
 import React from 'react';
 import Select from 'react-select';
 import { Control, Controller, FieldErrorsImpl } from 'react-hook-form';
 import useSWR from 'swr';
-
 import { useLang } from '@/hooks/useLang';
-
-import {
-  IProductInputs,
-  OptionCategoryType,
-  OptionCountryType,
-} from '@/types/goods';
-
+import { IProductInputs, OptionLabelType } from '@/types/goods';
 import { COLORS } from '@/constants/colors';
 import { customSelectStyles } from '@/constants/react-select';
-import {
-  brandValidationRules,
-  categoryValidationRules,
-  getCountries,
-} from '@/utils/goods';
+import { categoryValidationRules } from '@/utils/goods';
 import { ISubSubcategory } from '@/types/category';
 import { getAllSubSubCategories } from '@/utils/dashboards';
 
@@ -32,22 +20,18 @@ const SelectCategory = ({
 }) => {
   const { lang, translations } = useLang();
 
-  const { data, error, isLoading } = useSWR(
-    'subsubcategories',
-    getAllSubSubCategories,
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    }
-  );
+  const { data } = useSWR('subsubcategories', getAllSubSubCategories, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 
-  const options = data?.subSubCategories
+  const options = data?.data
     ?.map((subSubCategory: ISubSubcategory) => ({
       value: subSubCategory._id,
       label: subSubCategory.name[lang],
     }))
-    ?.sort((a: OptionCategoryType, b: OptionCategoryType) =>
+    ?.sort((a: OptionLabelType, b: OptionLabelType) =>
       a.label.localeCompare(b.label)
     );
 

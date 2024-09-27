@@ -1,21 +1,15 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
-
+import React from 'react';
+import { getCategoryById, getSubcategoryById } from '@/actions/categoryActions';
 import { ROUTES } from '@/constants/common';
 import { useLang } from '@/hooks/useLang';
-
 import { Breadcrumbs } from '@/components/elements/Breadcrumbs';
 import { IAddSubSubcategoriesProps } from '@/types/dashboard';
-
+import { ISubSubcategory } from '@/types/category';
 import SubSubcategoryForm from './SubSubcategoryForm';
 import ListAddedSubSubcategories from './ListAddedSubSubcategories';
-import { getCategoryById, getSubcategoryById } from '@/actions/categoryActions';
-import React from 'react';
-import { ISubSubcategory } from '@/types/category';
-import { getSubcategories } from '@/utils/dashboards';
 
 const AddSubSubcategories = ({
-  msg,
-  status,
   data,
   idCategory,
 }: IAddSubSubcategoriesProps) => {
@@ -28,18 +22,13 @@ const AddSubSubcategories = ({
     ISubSubcategory[]
   >(data?.subSubcategories);
 
-  const isLoaded = status === 200;
   const isLoading: boolean = !Object.assign(data);
 
   const updateListSubSubcategories = async () => {
-    try {
-      const res = await getSubcategoryById(data._id as string);
+    const res = await getSubcategoryById(data._id as string);
 
-      if (res.subcategory) {
-        setSubSubcategoryList(res.subcategory.subSubcategories);
-      }
-    } catch (error) {
-      console.error('Error fetching subcategory:', error);
+    if (res.data) {
+      setSubSubcategoryList(res.data.subSubcategories);
     }
   };
 
@@ -47,7 +36,7 @@ const AddSubSubcategories = ({
     const fetchSubcategoryName = async () => {
       const res = await getCategoryById(idCategory);
 
-      if (res.category) setSubcategoryName(res?.category.name[lang]);
+      if (res.data) setSubcategoryName(res?.data.name[lang]);
     };
 
     fetchSubcategoryName();

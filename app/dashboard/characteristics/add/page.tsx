@@ -4,16 +4,13 @@ import { getUsers } from '@/utils/dashboards';
 const Add = async () => {
   const fetchedUsers = await getUsers();
   try {
-    if (fetchedUsers.users) {
+    if (fetchedUsers.data) {
       return <AddPage users={fetchedUsers} />;
     } else {
-      // Handling cases where data is missing or incomplete
       return <div>Loading...</div>;
     }
   } catch (error) {
-    if (fetchedUsers.users) {
-      console.error(error);
-      // Handling data retrieval error
+    if (fetchedUsers.data) {
       return (
         <AddPage
           users={{
@@ -24,7 +21,6 @@ const Add = async () => {
         />
       );
     } else {
-      console.error(error);
       return <div>Error fetching data.</div>;
     }
   }

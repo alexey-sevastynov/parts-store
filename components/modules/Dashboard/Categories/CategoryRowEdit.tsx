@@ -1,17 +1,13 @@
 import Styles from '@/styles/modules/dashboard/index.module.scss';
-
 import Image from 'next/image';
 import React, { ChangeEvent } from 'react';
 import Link from 'next/link';
-
 import { COLORS } from '@/constants/colors';
 import { AllowedLangs } from '@/constants/lang';
 import { ROUTES, SIZE_ICON, SIZE_ICON_BIG } from '@/constants/common';
-
 import { motion } from 'framer-motion';
 import { deleteItemsTableMotion } from '@/constants/motion';
-import { ICategory, ISubSubcategory, ISubcategory } from '@/types/category';
-
+import { ICategory, ISubcategory } from '@/types/category';
 import SvgIconUrl from '@/components/elements/SvgIconUrl';
 import { Button } from '@/components/elements/Button';
 import { Oval } from 'react-loader-spinner';
@@ -48,11 +44,10 @@ const CategoryRowEdit: React.FC<ICategoryRowEditProps> = ({
   handleEditSubmit,
 }) => {
   if (!data || !data._id) {
-    console.error('Invalid category object:', data);
     return null;
   }
 
-  const { name, _id, imageUrl } = data;
+  const { name, _id } = data;
 
   const { translations } = useLang();
 
@@ -63,11 +58,11 @@ const CategoryRowEdit: React.FC<ICategoryRowEditProps> = ({
   const [ruName, setRuName] = React.useState(name.ru);
   const [enName, setEnName] = React.useState(name.en);
 
-  const updateName = async (id: string): Promise<void> => {
+  const updateName = async (id: string) => {
     // Retrieve the category or subcategory object based on the provided id
     const categoryOrSubcategory = idCategory
-      ? (await getSubcategoryById(id)).subcategory
-      : (await getCategoryById(id)).category;
+      ? (await getSubcategoryById(id)).data
+      : (await getCategoryById(id)).data;
 
     // Extract the name property from the category or subcategory object
     const { name = { ua: '', ru: '', en: '' } } = categoryOrSubcategory || {};
@@ -135,7 +130,6 @@ const CategoryRowEdit: React.FC<ICategoryRowEditProps> = ({
 
         setIsActiveEdit(false);
       } catch (error) {
-        console.error('Failed to update characteristic value:', error);
         setIsSubmitting(false);
       }
     } else {
@@ -143,6 +137,7 @@ const CategoryRowEdit: React.FC<ICategoryRowEditProps> = ({
     }
   };
 
+  // TODO: [ the `handleSubmit` function is not used anywhere, but it should be ? ]
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
@@ -162,8 +157,6 @@ const CategoryRowEdit: React.FC<ICategoryRowEditProps> = ({
           });
 
         updateName(_id);
-
-        // getUsers();
 
         setIsSubmitting(false);
         setIsActiveEdit(false);

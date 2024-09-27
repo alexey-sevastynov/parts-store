@@ -9,12 +9,12 @@ const AddPage = ({
   brands,
   brandsStatus,
   brandsMsg,
-  data: { msg, status, users },
+  data: { msg, status, data: users },
 }: {
   brands: IBrand[];
   brandsStatus: number;
   brandsMsg: string;
-  data: { msg: string; status: number; users: IUser[] };
+  data: { msg: string; status: number; data: IUser[] };
 }) => {
   return (
     <main className='dashboard-pages'>

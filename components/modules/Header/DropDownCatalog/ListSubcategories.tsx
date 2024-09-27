@@ -1,21 +1,19 @@
 import Styles from '@/styles/modules/header/index.module.scss';
-
-import { useLang } from '@/hooks/useLang';
-import { ISubcategory } from '@/types/category';
 import React from 'react';
-
-import ListSubSubCategories from './ListSubSubCategories';
 import Link from 'next/link';
-import { ROUTES } from '@/constants/common';
 import { useDispatch } from 'react-redux';
+import { useLang } from '@/hooks/useLang';
+import { ISubcategoryWithIds } from '@/types/category';
+import { ROUTES } from '@/constants/common';
 import { closeDropDownCatalog } from '@/context/features/modals/modals';
+import ListSubSubCategories from './ListSubSubCategories';
 
 const ListSubcategories = ({
   subcategories,
   nameCategory,
   idCategory,
 }: {
-  subcategories: ISubcategory[];
+  subcategories: ISubcategoryWithIds[];
   nameCategory: string;
   idCategory: string;
 }) => {
@@ -25,8 +23,6 @@ const ListSubcategories = ({
   return (
     <ul className={Styles.listSubcategories}>
       {subcategories.map((subcategory) => {
-        console.log(subcategory.subSubcategories);
-
         return (
           <li key={subcategory._id} className={Styles.listSubcategories__item}>
             <Link

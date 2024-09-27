@@ -7,12 +7,12 @@ const Add = async () => {
     const requiredBrands = await getAllBrands();
     const fetchedUsers = await getUsers();
 
-    if (requiredBrands.brands && fetchedUsers.users)
+    if (requiredBrands.data && fetchedUsers.data)
       return (
         <AddPage
-          brands={requiredBrands.brands}
-          statusBrands={requiredBrands.status}
-          msgBrands={requiredBrands.msg}
+          brands={requiredBrands.data}
+          brandsStatus={requiredBrands.status}
+          brandsMsg={requiredBrands.msg}
           data={fetchedUsers}
         />
       );
@@ -20,7 +20,6 @@ const Add = async () => {
       return <div>Loading...</div>;
     }
   } catch (error) {
-    console.error(error);
     return <div>Error fetching data.</div>;
   }
 };

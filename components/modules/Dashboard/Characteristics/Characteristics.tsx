@@ -1,22 +1,14 @@
 'use client';
-
 import Styles from '@/styles/modules/dashboard/index.module.scss';
-
 import React from 'react';
 import Link from 'next/link';
-
 import { useLang } from '@/hooks/useLang';
-
 import { GrUpdate } from 'react-icons/gr';
 import { BsPlusCircleFill } from 'react-icons/bs';
-
 import { ICharacteristics } from '@/types/characteristic';
 import { ICharacteristicsProps } from '@/types/dashboard';
-
 import { getAllCharacteristics } from '@/actions/characteristicActions';
-
 import { ROUTES } from '@/constants/common';
-
 import Title from '@/components/elements/Title';
 import CharacteristicsTable from './CharacteristicsTable';
 import ServerErrorMsg from '../ServerErrorMsg';
@@ -38,8 +30,8 @@ const Characteristics = ({ data, status, msg }: ICharacteristicsProps) => {
       const res = await getAllCharacteristics();
       res;
 
-      setCharacteristics(res.characteristics as ICharacteristics[]);
-      setSearchResults(res.characteristics as ICharacteristics[]);
+      setCharacteristics(res.data as ICharacteristics[]);
+      setSearchResults(res.data as ICharacteristics[]);
     } catch (error) {
       console.error('Failed to fetch characteristics:', error);
     }
@@ -49,7 +41,7 @@ const Characteristics = ({ data, status, msg }: ICharacteristicsProps) => {
     if (!characteristics) return [];
 
     if (!query) {
-      setSearchResults(characteristics); // If the query is empty, show all characteristics
+      setSearchResults(characteristics);
     } else {
       const filteredCharacteristics = characteristics.filter(
         (characteristic) => {

@@ -14,15 +14,15 @@ import { RotatingLines } from 'react-loader-spinner';
 import { UploadFileResponse } from '@/types/uploathing-image/client';
 
 export interface IUploadImageProps extends HTMLAttributes<HTMLDivElement> {
-  image: UploadFileResponse[];
-  setImage: (images: UploadFileResponse[]) => void;
+  image?: UploadFileResponse[];
+  setImage?: (images: UploadFileResponse[]) => void;
   buttonText?: string;
   msgMaxSize?: string;
 }
 
 const UploadImage = ({
-  image,
-  setImage,
+  image = [],
+  setImage = () => {},
 
   buttonText,
   msgMaxSize,

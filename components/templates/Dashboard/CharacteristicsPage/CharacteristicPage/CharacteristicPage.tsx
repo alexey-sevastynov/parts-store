@@ -8,11 +8,11 @@ import { IUser } from '@/types/user';
 import React from 'react';
 
 const CharacteristicPage = ({
-  users: { msg: msgUsers, status: statusUsers, users },
-  data: { msg, status, characteristic: data },
+  users: { msg: msgUsers, status: statusUsers, data: users },
+  data: { msg, status, data: characteristic },
 }: {
-  users: { msg: string; status: number; users: IUser[] };
-  data: { msg: string; status: number; characteristic?: ICharacteristics };
+  users: { msg: string; status: number; data: IUser[] };
+  data: { msg: string; status: number; data?: ICharacteristics };
 }) => {
   return (
     <main className='dashboard-pages'>
@@ -21,7 +21,9 @@ const CharacteristicPage = ({
         msgDataUsers={msgUsers}
         dataUsers={users}
       />
-      {data && <Characteristic msg={msg} status={status} data={data} />}
+      {characteristic && (
+        <Characteristic msg={msg} status={status} data={characteristic} />
+      )}
     </main>
   );
 };
