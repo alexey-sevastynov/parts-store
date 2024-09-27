@@ -11,9 +11,7 @@ import Link from 'next/link';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { BREAKPOINTS } from '@/constants/breakpoints';
 
-const CartNotificationBar = ({
-  items = FAKE_ITEMS_BASKET_NOTIFICATON,
-}: ICartNotificationBarProps) => {
+const CartNotificationBar = ({ items }: ICartNotificationBarProps) => {
   const isMedia768 = useMediaQuery(BREAKPOINTS.md);
 
   return (
