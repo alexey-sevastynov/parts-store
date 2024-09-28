@@ -1,7 +1,6 @@
 import { ROUTES, SIZE_ICON } from '@/constants/common';
 import Image from 'next/image';
 import Styles from '@/styles/elements/index.module.scss';
-import { IItemProduct } from '@/types/elements';
 import React from 'react';
 import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
 import { useLang } from '@/hooks/useLang';
@@ -12,7 +11,6 @@ import { IProduct } from '@/types/goods';
 
 const ProductsItem = ({
   item,
-  lengthItems,
   showMoreItem,
   setShowMoreItem,
 }: {
@@ -23,7 +21,7 @@ const ProductsItem = ({
 }) => {
   const { photos, brand, name, price, salePrice, quantityAvailable } = item;
 
-  const { lang, translations } = useLang();
+  const { lang } = useLang();
 
   const [isFavorite, setIsFavorite] = React.useState<boolean>(false);
 
