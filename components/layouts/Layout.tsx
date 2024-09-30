@@ -1,19 +1,15 @@
 'use client';
-
-import Header from '../modules/Header/Header';
-
 import { useAppDispatch, useAppSelector } from '@/context/hooks';
-
-import PopupWindow from '../elements/PopupWindow';
 import {
   closePopupWindowChangePassword,
   closePopupWindowDeleteUser,
 } from '@/context/features/modals/modals';
 import { useLang } from '@/hooks/useLang';
-import PasswordChange from '../modules/UserProfilePage/AccountSettings/PasswordChange/PasswordChange';
-import DeleteUser from '../modules/UserProfilePage/AccountSettings/DeleteUser';
-import AsidePanel from '../modules/AsidePanel/AsidePanel';
-import Footer from '../modules/Footer/Footer';
+import PasswordChange from '@/components/modules/UserProfilePage/AccountSettings/PasswordChange/PasswordChange';
+import DeleteUser from '@/components/modules/UserProfilePage/AccountSettings/DeleteUser';
+import AsidePanel from '@/components/modules/AsidePanel/AsidePanel';
+import Header from '@/components/modules/Header/Header';
+import PopupWindow from '@/components/elements/PopupWindow';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();

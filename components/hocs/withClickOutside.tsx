@@ -37,7 +37,7 @@ export function withClickOutside(
       return () => {
         document.removeEventListener('mousedown', handleClickOutside);
       };
-    }, []);
+    }, [dispatch]);
 
     return (
       <WrappedComponent open={open} setOpen={setOpen} ref={componentRef} />
