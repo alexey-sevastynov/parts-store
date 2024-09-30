@@ -12,13 +12,9 @@ const PARAGRAPH_SIZE_STYLES_MAP: {
   lg: 'text-lg',
   md: 'text-md',
   sm: 'text-sm',
-};
+} as const;
 
-export const Paragraph = ({
-  size = 'md',
-  className,
-  ...props
-}: ParagraphProps) => {
+export const Paragraph = ({ size = 'md', ...props }: ParagraphProps) => {
   return <p className={`${PARAGRAPH_SIZE_STYLES_MAP[size]}`} {...props} />;
 };
 

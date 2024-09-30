@@ -10,10 +10,12 @@ import { motion } from 'framer-motion';
 import { IProduct } from '@/types/goods';
 
 const ProductsItem = ({
+  key,
   item,
   showMoreItem,
   setShowMoreItem,
 }: {
+  key: string;
   item: IProduct;
   lengthItems: number;
   showMoreItem: boolean;
@@ -27,8 +29,8 @@ const ProductsItem = ({
 
   const image = photos?.split(', ')?.[0] ?? '/img/no-image.png';
 
-  const availabilityItem = (quantityAvailable: number) => {
-    if (quantityAvailable === 0) return 'Немає в наявності';
+  const availabilityItem = (availableQuantity: number) => {
+    if (availableQuantity === 0) return 'Немає в наявності';
   };
 
   const priceBlock = salePrice ? (
@@ -44,6 +46,7 @@ const ProductsItem = ({
 
   return (
     <motion.li
+      key={key}
       className={`${Styles.productsItem} ${showMoreItem ? Styles.wrap : ''}`}
     >
       <button

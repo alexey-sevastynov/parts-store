@@ -1,10 +1,6 @@
 import Styles from '@/styles/elements/index.module.scss';
-
-import Link from 'next/link';
 import Image from 'next/image';
-
 import { COLORS } from '@/constants/colors';
-
 import { IButtonIconDescriptionProps } from '@/types/elements';
 
 const ButtonIconDescription = ({

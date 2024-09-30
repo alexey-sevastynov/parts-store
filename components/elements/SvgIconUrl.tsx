@@ -1,11 +1,8 @@
 import Styles from '@/styles/elements/index.module.scss';
-
 import React from 'react';
 import { RotatingLines } from 'react-loader-spinner';
 import { FaTools } from 'react-icons/fa';
-
 import { COLORS } from '@/constants/colors';
-import { SIZE_ICON_BIG } from '@/constants/common';
 import { SvgIconUrlProps } from '@/types/elements';
 
 const SvgIconUrl = ({
@@ -17,7 +14,6 @@ const SvgIconUrl = ({
   const [svgContent, setSvgContent] = React.useState<string>('');
   const [isSvg, setIsSvg] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(true);
-  const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     const fetchSvg = async () => {
@@ -37,8 +33,7 @@ const SvgIconUrl = ({
           setIsSvg(false);
           throw new Error('The resulting content is not SVG.');
         }
-      } catch (error: any) {
-        setError(error.message);
+      } catch (error) {
         setIsSvg(false);
       } finally {
         setLoading(false);
