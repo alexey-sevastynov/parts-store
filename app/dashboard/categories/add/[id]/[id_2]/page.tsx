@@ -1,6 +1,4 @@
-import { getSubcategoryById } from '@/actions/categoryActions';
 import AddSubSubcategoriesPage from '@/components/templates/Dashboard/CategoriesPage/AddPage/AddSubcategoriesPage/AddSubSubcategoriesPage/AddSubSubcategoriesPage';
-import AddSubcategoriesPage from '@/components/templates/Dashboard/CategoriesPage/AddPage/AddSubcategoriesPage/AddSubcategoriesPage';
 import { getSubcategory, getUsers } from '@/utils/dashboards';
 
 const Add = async ({ params }: { params: { id: string; id_2: string } }) => {

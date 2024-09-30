@@ -1,9 +1,8 @@
 'use client';
-
 import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const errMsg = searchParams.get('error');
@@ -17,4 +16,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

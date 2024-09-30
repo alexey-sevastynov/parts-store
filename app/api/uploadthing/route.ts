@@ -1,16 +1,15 @@
 import { createNextRouteHandler } from 'uploadthing/next';
-
 import { ourFileRouter } from './core';
 import { UTApi } from 'uploadthing/server';
+import { DeleteRequestData } from '@/types/authorization';
 
 export const { GET, POST } = createNextRouteHandler({
   router: ourFileRouter,
 });
 
 export async function DELETE(request: Request) {
-  const data = await request.json();
+  const data: DeleteRequestData = (await request.json()) as DeleteRequestData;
   const urls = Array.isArray(data.url) ? data.url : [data.url];
-
   const utapi = new UTApi();
 
   for (const url of urls) {

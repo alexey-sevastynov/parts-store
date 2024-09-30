@@ -9,19 +9,17 @@ export default async function SubSubcategory(props: {
 }) {
   const id = props.searchParams.idSubcategory;
 
-  try {
-    const fetchedSubcategories = await getSubcategory(id);
+  const fetchedSubcategories = await getSubcategory(id);
 
-    const fetchedCategories = await getCategory(props.searchParams.idCategory);
+  const fetchedCategories = await getCategory(props.searchParams.idCategory);
 
-    if (fetchedSubcategories && fetchedCategories.data) {
-      return (
-        <SubSubcategoryPage
-          data={fetchedSubcategories.data}
-          idCategory={props.searchParams.idCategory}
-          nameCategory={fetchedCategories.data.name}
-        />
-      );
-    }
-  } catch (error) {}
+  if (fetchedSubcategories && fetchedCategories.data) {
+    return (
+      <SubSubcategoryPage
+        data={fetchedSubcategories.data}
+        idCategory={props.searchParams.idCategory}
+        nameCategory={fetchedCategories.data.name}
+      />
+    );
+  }
 }
