@@ -35,3 +35,13 @@ export type messageErrorType =
   | 'Old password does not match!'
   | 'Changed Password Succussefully!'
   | 'A confirmation has been sent to the specified email address, please confirm it.';
+
+export interface DeleteRequestData {
+  url: string | string[];
+}
+
+export interface ResetPasswordProps {
+  searchParams: {
+    token: string;
+  };
+}
