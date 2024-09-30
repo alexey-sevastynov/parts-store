@@ -1,10 +1,9 @@
 import Styles from '@/styles/elements/index.module.scss';
-
-import React, { useRef } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import 'swiper/css/navigation'; // Import Swiper styles for navigation
+import 'swiper/css/navigation';
 import { FreeMode, Navigation } from 'swiper/modules';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 import { SIZE_ICON } from '@/constants/common';
@@ -118,14 +117,6 @@ const Slider = ({ images }: { images: string[] }) => {
           </div>
         ))}
       </div>
-
-      {/* <div
-        className={`swiper-button-prev ${Styles.slider__button_prev}`}
-        onClick={prevElementSwiper}
-      >
-        <FaAngleLeft size={SIZE_ICON} color='black' />
-      </div>
-      <div className='swiper-button-next' onClick={nextElementSwiper}></div> */}
     </div>
   );
 };

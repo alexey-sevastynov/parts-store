@@ -3,21 +3,24 @@ import {
   INotificationBarProps,
   TypeNotificationMessage,
 } from '@/types/elements';
+import { NotificationStatus } from '@/constants/notification-status';
 
 const NotificationBar = ({
-  type = 'success',
+  type = NotificationStatus.success,
   className,
   children,
   ...props
 }: INotificationBarProps) => {
-  const wrapStyle = (type: TypeNotificationMessage) => {
-    switch (type) {
-      case 'success':
+  const wrapStyle = (notificationType: TypeNotificationMessage) => {
+    switch (notificationType) {
+      case NotificationStatus.success:
         return `${Styles.notificationBar} ${Styles.success}`;
-      case 'warning':
+      case NotificationStatus.warning:
         return `${Styles.notificationBar} ${Styles.warning}`;
-      case 'error':
+      case NotificationStatus.error:
         return `${Styles.notificationBar} ${Styles.error}`;
+      default:
+        throw new Error(`Unknown notification type: ${type}`);
     }
   };
 

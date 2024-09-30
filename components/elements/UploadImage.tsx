@@ -1,13 +1,9 @@
 'use client';
 import Styles from '@/styles/elements/index.module.scss';
-
+import Image from 'next/image';
+import React, { HTMLAttributes } from 'react';
 import { SIZE_ICON_BIG } from '@/constants/common';
 import { useLang } from '@/hooks/useLang';
-
-import Image from 'next/image';
-
-import React, { HTMLAttributes } from 'react';
-
 import { UploadButton } from '@/utils/uploadthing';
 import { COLORS } from '@/constants/colors';
 import { RotatingLines } from 'react-loader-spinner';
@@ -23,19 +19,18 @@ export interface IUploadImageProps extends HTMLAttributes<HTMLDivElement> {
 const UploadImage = ({
   image = [],
   setImage = () => {},
-
   buttonText,
   msgMaxSize,
   ...props
 }: IUploadImageProps) => {
   const { lang, translations } = useLang();
 
-  const [isUploading, setIsUploading] = React.useState(false);
+  const [isCurrentlyUploading, setIsCurrentlyUploading] = React.useState(false);
 
   return (
     <div className={Styles.uploadImage} {...props}>
       <div className={Styles.uploadImage__header}>
-        {isUploading ? (
+        {isCurrentlyUploading ? (
           <RotatingLines
             visible={true}
             width={SIZE_ICON_BIG.toString()}
@@ -80,7 +75,7 @@ const UploadImage = ({
 
               return <p>{translations[lang].uploadthing.uploading}</p>;
             },
-            allowedContent({ ready, fileTypes, isUploading }) {
+            allowedContent({ ready, isUploading }) {
               if (!ready)
                 return translations[lang].uploadthing.checking_what_you_allow;
               if (isUploading)
@@ -90,19 +85,17 @@ const UploadImage = ({
               );
             },
           }}
-          onClientUploadComplete={(res: any) => {
-            setIsUploading(false);
+          onClientUploadComplete={(res) => {
+            setIsCurrentlyUploading(false);
             if (res) {
               setImage(res);
-              const json = JSON.stringify(res);
-
-              console.log(json);
+              JSON.stringify(res);
             }
           }}
           onUploadError={(error: Error) => {
             alert(`ERROR! ${error.message}`);
           }}
-          onUploadBegin={() => setIsUploading(true)}
+          onUploadBegin={() => setIsCurrentlyUploading(true)}
         />
       </div>
     </div>

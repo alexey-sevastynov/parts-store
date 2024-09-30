@@ -1,10 +1,8 @@
 import Styles from '@/styles/elements/index.module.scss';
-import ProductsItem from './ProductsItem';
-
 import React from 'react';
-
 import { MAX_VALUE_ITEMS } from '@/constants/common';
 import { IProduct } from '@/types/goods';
+import ProductsItem from './ProductsItem';
 
 const ProductsList = ({
   items,
@@ -14,16 +12,14 @@ const ProductsList = ({
   numberItems?: number;
 }) => {
   const [showMoreItem, setShowMoreItem] = React.useState<boolean>(false);
-  const [visibleItemCount, setVisibleItemCount] =
-    React.useState<number>(numberItems);
 
-  const _items = showMoreItem
+  const products = showMoreItem
     ? items.slice(0, MAX_VALUE_ITEMS)
-    : items.slice(0, visibleItemCount);
+    : items.slice(0, numberItems);
 
   React.useEffect(() => {
     if (items.length < 7) setShowMoreItem(true);
-  });
+  }, [items, items.length]);
 
   if (items.length === 0) return <p>Nothing</p>;
 
@@ -31,9 +27,10 @@ const ProductsList = ({
     <ul
       className={`${Styles.productsList} ${showMoreItem || items.length < 7 ? Styles.wrap : ''}`}
     >
-      {_items.map((product) => {
+      {products.map((product) => {
         return (
           <ProductsItem
+            key={product._id!}
             item={product}
             lengthItems={items.length}
             showMoreItem={showMoreItem}
