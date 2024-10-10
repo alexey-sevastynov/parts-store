@@ -1,6 +1,4 @@
 import Styles from '@/styles/modules/main-page/index.module.scss';
-
-import { useAppDispatch } from '@/context/hooks';
 import { useLang } from '@/hooks/useLang';
 import { signOut, useSession } from 'next-auth/react';
 import UserCard from '@/components/elements/UserCard';
@@ -8,7 +6,6 @@ import Link from 'next/link';
 
 const AuthUser = () => {
   const { data, status } = useSession();
-  const dispatch = useAppDispatch();
 
   const isAuthenticated = status === 'authenticated';
 

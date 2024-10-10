@@ -1,12 +1,9 @@
 'use client';
 import Styles from '@/styles/modules/header/index.module.scss';
-
 import Link from 'next/link';
-import React, { RefObject } from 'react';
+import React from 'react';
 import useSWR from 'swr';
-
 import { useLang } from '@/hooks/useLang';
-
 import LinkIconDescription from '@/components/elements/LinkIconDescription';
 import { useSession } from 'next-auth/react';
 
@@ -43,9 +40,6 @@ const Inventory = () => {
 
   const isAuthenticated = status === 'authenticated';
 
-  const [isActiveAutoLink, setIsActiveAutoLink] = React.useState<boolean>(true);
-  const [isActiveSaleLink, setIsActiveSaleLink] = React.useState<boolean>(true);
-
   const handleShowDropCatalog = (): void => {
     dispatch(openDropDownCatalog());
     dispatch(closeDropDownLang());
@@ -53,7 +47,7 @@ const Inventory = () => {
   };
 
   // Fetch all categories
-  const { data: categories, error: categoriesError } = useSWR(
+  const { data: categories } = useSWR(
     'categories',
     () => getCategories().then((res) => res.data),
     {
@@ -105,7 +99,7 @@ const Inventory = () => {
           )}
         </li>
 
-        {isActiveAutoLink && isAuthenticated && (
+        {isAuthenticated && (
           <li className={Styles.header__inventory_list_auto}>
             <LinkIconDescription imageName='auto' href={'/auto'} color='light'>
               {translations[lang].header.auto}
@@ -113,11 +107,9 @@ const Inventory = () => {
           </li>
         )}
 
-        {isActiveSaleLink && (
-          <li className={Styles.header__inventory_list_sale}>
-            <Link href={'/sale'}> {translations[lang].header.sale}</Link>
-          </li>
-        )}
+        <li className={Styles.header__inventory_list_sale}>
+          <Link href={'/sale'}> {translations[lang].header.sale}</Link>
+        </li>
       </ul>
     </nav>
   );

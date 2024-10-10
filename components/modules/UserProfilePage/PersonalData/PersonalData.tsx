@@ -24,7 +24,7 @@ import { Oval } from 'react-loader-spinner';
 import { COLORS } from '@/constants/colors';
 
 const PersonalData = () => {
-  const { data, status, update } = useSession();
+  const { data, update } = useSession();
 
   const { lang, translations } = useLang();
 
@@ -46,7 +46,6 @@ const PersonalData = () => {
     register,
     handleSubmit,
     setValue,
-    setFocus,
     watch,
     formState: { errors, isSubmitting },
   } = useForm<IInputs>({
@@ -56,14 +55,13 @@ const PersonalData = () => {
 
   React.useEffect(() => {
     if (data?.user) {
-      const { firstName, lastName, phone } = data.user;
-      setValue('firstName', firstName || 'Unknown');
-      setValue('lastName', lastName || 'user');
+      setValue('firstName', firstName);
+      setValue('lastName', lastName);
       setValue('phone', phone || '+38');
 
       setPrevData({ firstName, lastName, phone: phone || '+38' });
     }
-  }, [data?.user, setValue]);
+  }, [data?.user, setValue, firstName, lastName, phone]);
 
   React.useEffect(() => {
     if (
@@ -75,7 +73,7 @@ const PersonalData = () => {
     } else {
       setIsValueChanged(false);
     }
-  }, [watch()]);
+  }, [watch, prevData]);
 
   const handleEdit = () => {
     setIsActiveEdit(true);
@@ -89,9 +87,12 @@ const PersonalData = () => {
     setValue('phone', phone === '-' ? '+38' : phone);
   };
 
-  const onSubmit: SubmitHandler<IInputs> = async (data) => {
-    const { firstName, lastName, phone } = data;
-    const res = await updateUser({ firstName, lastName, phone });
+  const onSubmit: SubmitHandler<IInputs> = async (formData) => {
+    const res = await updateUser({
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phone: formData.phone,
+    });
 
     if (update) update({ firstName, lastName, phone });
 

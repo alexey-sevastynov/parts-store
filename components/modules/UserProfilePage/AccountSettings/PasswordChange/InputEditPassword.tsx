@@ -1,14 +1,13 @@
 import Styles from '@/styles/modules/user-profile-page/index.module.scss';
-
 import React from 'react';
-
+import Image from 'next/image';
 import { useLang } from '@/hooks/useLang';
-
 import { IAuthInput } from '@/types/authorization';
 import { passwordValidationRules } from '@/utils/authorization';
+import { PasswordType } from '@/constants/auth/password-type';
 
 const InputEditPassword = ({
-  name = 'password',
+  name = PasswordType.password,
   register,
   errors,
   labalText,
@@ -17,26 +16,13 @@ const InputEditPassword = ({
 
   const [showPassword, setShowPassword] = React.useState(false);
 
-  // props for Image icon visible/hide
-  const propsIcon = {
-    className: `${
-      showPassword
-        ? Styles.inputEditPassword__input_button_visible
-        : Styles.inputEditPassword__input_button_hide
-    }`,
-    src: `${showPassword ? '/img/visible.svg' : '/img/hide.svg'}`,
-    alt: `${showPassword ? 'show password' : 'hide password'}`,
-  };
-
-  const requiredMessage = (
-    name: 'password' | 'passwordOld' | 'passwordNew'
-  ) => {
-    switch (name) {
-      case 'password':
+  const requiredMessage = (passwordType: PasswordType) => {
+    switch (passwordType) {
+      case PasswordType.password:
         return translations[lang].validation.new_password_repeat;
-      case 'passwordNew':
+      case PasswordType.passwordNew:
         return translations[lang].validation.new_password;
-      case 'passwordOld':
+      case PasswordType.passwordOld:
         return translations[lang].validation.current_password;
       default:
         break;
@@ -58,7 +44,7 @@ const InputEditPassword = ({
             passwordValidationRules(
               translations[lang].validation.min_4,
               translations[lang].validation.max_20,
-              requiredMessage(name)
+              requiredMessage(name as PasswordType)
             )
           )}
         />
@@ -67,7 +53,15 @@ const InputEditPassword = ({
           type='button'
           onClick={() => setShowPassword(!showPassword)}
         >
-          <img {...propsIcon} />
+          <Image
+            className={
+              showPassword
+                ? Styles.inputEditPassword__input_button_visible
+                : Styles.inputEditPassword__input_button_hide
+            }
+            src={`${showPassword ? '/img/visible.svg' : '/img/hide.svg'}`}
+            alt={`${showPassword ? 'show password' : 'hide password'}`}
+          />
         </button>
       </div>
 
