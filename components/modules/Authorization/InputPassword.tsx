@@ -1,9 +1,7 @@
 import Styles from '@/styles/modules/authorization/index.module.scss';
-
 import React from 'react';
-
+import Image from 'next/image';
 import { useLang } from '@/hooks/useLang';
-
 import { IAuthInput } from '@/types/authorization';
 import { passwordValidationRules } from '@/utils/authorization';
 
@@ -47,7 +45,11 @@ const InputPassword = ({ register, errors }: IAuthInput) => {
           type='button'
           onClick={() => setShowPassword(!showPassword)}
         >
-          <img {...propsIcon} />
+          <Image
+            src={propsIcon.src}
+            className={propsIcon.className}
+            alt={propsIcon.alt}
+          />
         </button>
       </div>
 
