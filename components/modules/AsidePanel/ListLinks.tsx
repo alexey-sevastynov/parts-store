@@ -12,15 +12,12 @@ import { MdChecklist, MdFavorite } from 'react-icons/md';
 import { PiShoppingCartSimpleFill } from 'react-icons/pi';
 import { useSession } from 'next-auth/react';
 import { useAppDispatch } from '@/context/hooks';
-import {
-  closePopupAsidePanel,
-  openDropDownCatalog,
-} from '@/context/features/modals/modals';
+import { openDropDownCatalog } from '@/context/features/modals/modals';
 
 const ListLinks = ({ closeAsidePanel }: { closeAsidePanel: () => void }) => {
   const dispatch = useAppDispatch();
 
-  const { data, status } = useSession();
+  const { status } = useSession();
   const { lang, translations } = useLang();
 
   const isAuthenticated = status === 'authenticated';

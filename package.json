@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo -p 4000",
+    "dev": "next dev --turbo -p 3000",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint -c .eslintrc.json --ext .ts --ext .tsx ./app"
+    "lint": "eslint -c .eslintrc.json --ext .ts --ext .tsx ./components/modules"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",

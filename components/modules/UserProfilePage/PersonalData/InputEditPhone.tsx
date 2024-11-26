@@ -1,12 +1,7 @@
 import Styles from '@/styles/modules/user-profile-page/index.module.scss';
-
 import { useLang } from '@/hooks/useLang';
-
 import { IAuthInput } from '@/types/authorization';
-import {
-  nameValidationRules,
-  phoneValidationRules,
-} from '@/utils/authorization';
+import { phoneValidationRules } from '@/utils/authorization';
 
 const InputEditPhone = ({ register, errors }: IAuthInput) => {
   const { lang, translations } = useLang();

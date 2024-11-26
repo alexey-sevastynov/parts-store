@@ -28,6 +28,13 @@ export interface ICategory {
   subcategories: ISubcategory[];
 }
 
+export interface ICategoryWithIds {
+  _id?: string;
+  imageUrl: string;
+  name: ILanguageStrings;
+  subcategories: string[];
+}
+
 export interface ICategoryFormData {
   nameEn: string;
   nameUa: string;

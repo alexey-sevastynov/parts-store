@@ -28,7 +28,7 @@ const DeleteUser = () => {
 
   const deleteUserAccount = async (id: string | undefined) => {
     if (id && isConfirm) {
-      const res = await deleteUser({ id }).finally(() => {
+      await deleteUser({ id }).finally(() => {
         signOut({ redirect: false });
         router.push('/');
         dispatch(closePopupWindowDeleteUser());

@@ -1,19 +1,15 @@
 import Styles from '@/styles/modules/subcategory/index.module.scss';
-
 import React from 'react';
 import useSWR, { SWRResponse } from 'swr';
-
 import { useLang } from '@/hooks/useLang';
 import { getAllSubSubCategoriesByIds } from '@/utils/dashboards';
-
 import { ROUTES } from '@/constants/common';
 import { AllowedLangs } from '@/constants/lang';
-
 import { ILanguageStrings } from '@/types/constants';
 import { ISubcategoryProps } from '@/types/subcategory';
-
 import CategoryOverviewCard from '@/components/elements/CategoryOverviewCard';
 import Title from '@/components/elements/Title';
+import { ISubSubcategory } from '@/types/category';
 
 const Subcategory = ({ title, data }: ISubcategoryProps) => {
   const { lang } = useLang();
@@ -34,9 +30,10 @@ const Subcategory = ({ title, data }: ISubcategoryProps) => {
 
       <div className={Styles.subcategory__list}>
         {data.subcategories.map((subcategory) => {
-          const subSubcategoryIds: any = subcategory.subSubcategories.map(
-            (subcategory) => subcategory
-          );
+          const subSubcategoryIds: ISubSubcategory[] =
+            subcategory.subSubcategories.map(
+              (subSubcategory: ISubSubcategory) => subSubcategory
+            );
 
           const {
             data: subSubCategories,

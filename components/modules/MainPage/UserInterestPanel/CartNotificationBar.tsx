@@ -1,8 +1,6 @@
 import Styles from '@/styles/modules/main-page/index.module.scss';
-
 import Image from 'next/image';
 import { SIZE_ICON } from '@/constants/common';
-
 import { BsCartCheckFill } from 'react-icons/bs';
 import { ICartNotificationBarProps } from '@/types/main-page';
 import { FAKE_ITEMS_BASKET_NOTIFICATON } from '@/constants/main-page';
@@ -24,7 +22,7 @@ const CartNotificationBar = ({
 
       <div className={Styles.cartNotificationBar__total}>
         <p className='text-md'>
-          У кошику <b>3</b> товари  на суму <b>255 ₴</b>
+          У кошику <b>3</b> товари на суму <b>255 ₴</b>
         </p>
       </div>
 

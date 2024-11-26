@@ -14,7 +14,7 @@ import { useAppDispatch } from '@/context/hooks';
 import { closePopupWindowChangePassword } from '@/context/features/modals/modals';
 import React from 'react';
 import NotificationBar from '@/components/elements/NotificationBar';
-import { log } from 'console';
+import { isStringInObject } from '@/utils/translation';
 
 const PasswordChange = () => {
   const dispatch = useAppDispatch();
@@ -86,12 +86,13 @@ const PasswordChange = () => {
           </NotificationBar>
         )}
 
-        {messageError && isSubmitted && (
-          <NotificationBar type={typeMessageError}>
-            {/* @ts-ignore */}
-            {translations[lang].authorization[messageError]}
-          </NotificationBar>
-        )}
+        {messageError &&
+          isSubmitted &&
+          isStringInObject(messageError, translations[lang].authorization) && (
+            <NotificationBar type={typeMessageError}>
+              {translations[lang].authorization[messageError]}
+            </NotificationBar>
+          )}
       </div>
 
       <div className={Styles.passwordChange__btns}>

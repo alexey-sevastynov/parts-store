@@ -11,9 +11,9 @@ const NavProduct = ({
   const pathName = usePathname();
   const { lang, translations } = useLang();
 
-  const linkCharacteristics: string = `${linkAllAboutProduct}/characteristics`;
-  const linkReviews: string = `${linkAllAboutProduct}/reviews`;
-  const linkAnalogs: string = `${linkAllAboutProduct}/analogs`;
+  const linkCharacteristics = `${linkAllAboutProduct}/characteristics`;
+  const linkReviews = `${linkAllAboutProduct}/reviews`;
+  const linkAnalogs = `${linkAllAboutProduct}/analogs`;
 
   const isPageAllAboutProduct: boolean = pathName === linkAllAboutProduct;
   const isPageCharacteristics: boolean = pathName === linkCharacteristics;
